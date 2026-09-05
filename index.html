@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>idvorkin-ai-tools — explainers and field maps</title>
+<meta name="description" content="Every explainer, field map and interactive built by Igor Dvorkin's AI tools: AI safety, CS336, Steve Yegge, Arthur Brooks, guideways, clowns, capital gains and more." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{--paper:#0e0f12;--panel:#15171c;--ink:#e6e3da;--ink-dim:#8d8a80;--line:#2a2d35;--line-soft:#1e2027;--def:#5fd3e6;--off:#f0b34a;--pink:#f08ab8}
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',system-ui,-apple-system,sans-serif;font-size:16px;line-height:1.6}
+  .mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+  a{color:var(--def);text-decoration:none}
+  a:hover{text-decoration:underline;text-underline-offset:3px}
+  .bar{position:sticky;top:0;background:rgba(14,15,18,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:5}
+  .bar-in{max-width:1080px;margin:0 auto;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+  .brand{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;color:var(--ink-dim);display:flex;align-items:center;gap:10px}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--def);box-shadow:0 0 12px var(--def)}
+  .bar a.home{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-dim)}
+  main{max-width:1080px;margin:0 auto;padding:56px 20px 80px}
+  h1{font-size:clamp(30px,5vw,46px);line-height:1.1;margin:0 0 14px;letter-spacing:-.01em}
+  .lead{font-size:18px;color:var(--ink-dim);max-width:720px;margin:0 0 44px}
+  .lead a{color:var(--ink)}
+  section{margin:0 0 56px;scroll-margin-top:64px}
+  h2{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim);margin:0 0 16px;padding-bottom:8px;border-bottom:1px solid var(--line-soft);display:flex;justify-content:space-between;align-items:baseline}
+  h2 span{font-weight:400;letter-spacing:.06em;text-transform:none}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+  .card{display:block;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:18px 18px 16px;color:var(--ink);position:relative;transition:border-color .15s,transform .15s}
+  .card:hover{border-color:var(--def);text-decoration:none;transform:translateY(-1px)}
+  .card.off:hover{border-color:var(--off)}
+  .card.pink:hover{border-color:var(--pink)}
+  .card .t{font-weight:600;font-size:17px;line-height:1.3;margin:0 0 6px;display:block}
+  .card .d{color:var(--ink-dim);font-size:14px;line-height:1.5;display:block}
+  .card .m{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--ink-dim);margin-top:12px;display:flex;justify-content:space-between}
+  .card .m b{font-weight:500;color:var(--def)}
+  .card.off .m b{color:var(--off)}
+  .card.pink .m b{color:var(--pink)}
+  .note{font-size:13.5px;color:var(--ink-dim);border-left:2px solid var(--line);padding:6px 14px;margin:0 0 40px}
+  footer{max-width:1080px;margin:0 auto;padding:24px 20px 48px;border-top:1px solid var(--line-soft);font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-dim)}
+  footer a{color:var(--ink-dim);text-decoration:underline;text-underline-offset:3px}
+</style>
+</head>
+<body>
+<header class="bar"><div class="bar-in">
+  <div class="brand"><span class="dot"></span>IDVORKIN-AI-TOOLS</div>
+  <a class="home" href="https://idvork.in" target="_blank" rel="noopener">idvork.in ↗</a>
+</div></header>
+<main>
+  <h1>Explainers, field maps, and a few toys</h1>
+  <p class="lead">Everything with a live page in this org, in one place. Field maps take a course, an author or a subject and lay it out page by page with the sources pinned; explainers take one question and answer it properly. Built by <a href="https://idvork.in" target="_blank" rel="noopener">Igor Dvorkin</a>'s AI tools, reviewed by Igor. Cards say when each site was last touched.</p>
+
+  <section id="ai">
+    <h2>AI, models and safety <span>5 maps</span></h2>
+    <div class="grid">
+      <a class="card" href="https://idvorkin-ai-tools.github.io/cs336-field-map/"><span class="t">CS336, Mapped — Language Modeling from Scratch</span><span class="d">Stanford's Spring 2025 course: seventeen lectures, each with a deep dive linked into the video by timestamp, a cleaned transcript, the slides and assignment, and verified supporting materials.</span><span class="m"><b>FIELD MAP</b><span>2025-09</span></span></a>
+      <a class="card" href="https://idvorkin-ai-tools.github.io/technical-ai-safety-field-map/"><span class="t">Technical AI Safety, Mapped</span><span class="d">BlueDot Impact's course: six units, twenty-seven chapters, every reading linked back, every exercise written out. Original explanations, not a copy of the course.</span><span class="m"><b>FIELD MAP</b><span>2026-09</span></span></a>
+      <a class="card" href="https://idvorkin-ai-tools.github.io/ai-safety-field-map/"><span class="t">AI Safety — A Field Map</span><span class="d">A technical explainer for engineers entering alignment, interpretability, evals and governance: what the subfields are, who works on what, where to start.</span><span class="m"><b>FIELD MAP</b><span>2026-07</span></span></a>
+      <a class="card" href="https://idvorkin-ai-tools.github.io/red-teaming-ramp-up/"><span class="t">Red Teaming Models — A Ramp-Up Map</span><span class="d">A self-contained guide for security professionals moving into adversarial AI testing: threat models, attack families, evals, and how the field is organised.</span><span class="m"><b>FIELD MAP</b><span>2026-06</span></span></a>
+      <a class="card" href="https://idvorkin-ai-tools.github.io/airpods-mic-explainer/"><span class="t">When AirPods Eat Your Words</span><span class="d">A real speech-recognition debugging case study: how a Bluetooth AirPods microphone destroyed on-device ASR, shown with the actual audio evidence.</span><span class="m"><b>EXPLAINER</b><span>2026-07</span></span></a>
+    </div>
+  </section>
+
+  <section id="people">
+    <h2>People, mapped <span>2 maps</span></h2>
+    <div class="grid">
+      <a class="card off" href="https://idvorkin-ai-tools.github.io/yegge-field-map/"><span class="t">Stevey, Mapped — A Field Map of Steve Yegge</span><span class="d">From the Google Platforms Rant and the Kingdom of Nouns to Cheating Is All You Need and the Flat Curve Society. One page per essay, the source pinned at the top, the best lines quoted.</span><span class="m"><b>FIELD MAP</b><span>2026-07</span></span></a>
+      <a class="card off" href="https://idvorkin-ai-tools.github.io/arthur-brooks-field-map/"><span class="t">Arthur Brooks, Mapped — The Science of Happiness</span><span class="d">From the phone-addiction protocol and the three macronutrients of happiness to From Strength to Strength, Build the Life You Want, and the reverse bucket list. One page per idea.</span><span class="m"><b>FIELD MAP</b><span>2026-07</span></span></a>
+    </div>
+  </section>
+
+  <section id="world">
+    <h2>The world, explained <span>3 pages</span></h2>
+    <div class="grid">
+      <a class="card off" href="https://idvorkin-ai-tools.github.io/guideway-field-map/"><span class="t">Rails, Ropes &amp; Rack — A Fixed-Guideway Field Map</span><span class="d">Everything that runs on a cable, a rail, or a rack: gondolas, funiculars, cable cars, high-speed rail and maglev. How each works, how to spot it, where to ride the famous ones.</span><span class="m"><b>FIELD MAP</b><span>2026-07</span></span></a>
+      <a class="card off" href="https://idvorkin-ai-tools.github.io/clowns-explainer/"><span class="t">Why We Invented Clowns</span><span class="d">Almost every human culture invented a clown. The licensed pressure valve, the near-universal lineage (jester, commedia, circus, sacred clown, trickster), the hospital-clown evidence, and the shadow.</span><span class="m"><b>EXPLAINER</b><span>2026-07</span></span></a>
+      <a class="card off" href="https://idvorkin-ai-tools.github.io/cap-gains-explainer/"><span class="t">Sell now or sell later — the capital-gains timing question</span><span class="d">What an extra capital-gains realization costs during a working year versus a no-wage year. Washington State, 2026 federal, sources cited, unit tested.</span><span class="m"><b>EXPLAINER</b><span>2026-08</span></span></a>
+    </div>
+  </section>
+
+  <section id="tools">
+    <h2>Tooling and engineering notes <span>2 pages</span></h2>
+    <div class="grid">
+      <a class="card" href="https://idvorkin-ai-tools.github.io/dolt-explainer/"><span class="t">Beads + Git sync — why task state needs Dolt</span><span class="d">How a task database (refs/dolt/data) and a code repo (refs/heads/main) share one fork, and why the blog's fork-and-PR workflow doesn't and shouldn't apply to task state.</span><span class="m"><b>EXPLAINER</b><span>2026-04</span></span></a>
+      <a class="card" href="https://idvorkin-ai-tools.github.io/chroma-key-explainer/"><span class="t">Chroma-key hill-climbing</span><span class="d">Getting clean transparent backgrounds out of generated illustrations by treating the chroma key as an eval: alpha-mask scoring, then climb.</span><span class="m"><b>EXPLAINER</b><span>2026-04</span></span></a>
+    </div>
+  </section>
+
+  <section id="toys">
+    <h2>Trips, toys and samples <span>3 pages</span></h2>
+    <div class="grid">
+      <a class="card pink" href="https://idvorkin-ai-tools.github.io/scandinavia-2026/"><span class="t">Scandinavian Whirlwind 2026 — Trip Map</span><span class="d">A city-by-city guide for the Dvorkins' June–July 2026 tour: Iceland, Denmark, Sweden, Norway, the Netherlands.</span><span class="m"><b>TRIP MAP</b><span>2026-07</span></span></a>
+      <a class="card pink" href="https://idvorkin-ai-tools.github.io/quack-track/"><span class="t">Quack Track — Leave a duck. Watch it travel.</span><span class="d">Duck Duck Jeep, but for any car. Leave a tagged rubber duck on a parked car, a stranger scans the QR, and its journey grows on a map. Tracks ducks, never cars or people.</span><span class="m"><b>INTERACTIVE</b><span>2026-06</span></span></a>
+      <a class="card pink" href="https://idvorkin-ai-tools.github.io/larry-voice-samples/"><span class="t">Larry Voice Catalog</span><span class="d">Gemini 3.1 Flash TTS preview samples for Larry, the AI life coach: one page of candidate voices, side by side.</span><span class="m"><b>SAMPLES</b><span>2026-04</span></span></a>
+    </div>
+  </section>
+
+  <p class="note">Every site here is its own repo under <a href="https://github.com/idvorkin-ai-tools" target="_blank" rel="noopener">github.com/idvorkin-ai-tools</a>; the source, the build notes and the PR discussion are one click from any page. Missing something? Open an issue on this index's repo.</p>
+</main>
+<footer>idvorkin-ai-tools · index generated 2026-09-05 · <a href="https://github.com/idvorkin-ai-tools/idvorkin-ai-tools.github.io">source</a></footer>
+</body>
+</html>
