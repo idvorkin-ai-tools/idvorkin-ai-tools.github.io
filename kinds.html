@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kinds of explainer — idvorkin-ai-tools</title>
+<meta name="description" content="A spine of the kinds of explainer we build and collect: field maps, one-question explainers, post-mortems, case studies, close readings, atlases, illustrated parables and bake-offs. Each kind with its signature moves and the examples we like, and what makes them good." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{--paper:#0e0f12;--panel:#15171c;--ink:#e6e3da;--ink-dim:#8d8a80;--line:#2a2d35;--line-soft:#1e2027;--def:#5fd3e6;--off:#f0b34a;--pink:#f08ab8}
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',system-ui,-apple-system,sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden}
+  .mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+  a{color:var(--def);text-decoration:none}
+  a:hover{text-decoration:underline;text-underline-offset:3px}
+  .bar{position:sticky;top:0;background:rgba(14,15,18,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:5}
+  .bar-in{max-width:1080px;margin:0 auto;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+  .brand{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;color:var(--ink-dim);display:flex;align-items:center;gap:10px}
+  .brand a{color:var(--ink-dim)}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--def);box-shadow:0 0 12px var(--def)}
+  .bar nav{display:flex;gap:16px;font-family:'IBM Plex Mono',monospace;font-size:12px}
+  .bar nav a{color:var(--ink-dim)}
+  main{max-width:1080px;margin:0 auto;padding:56px 20px 80px}
+  h1{font-size:clamp(30px,5vw,46px);line-height:1.1;margin:0 0 14px;letter-spacing:-.01em}
+  .lead{font-size:18px;color:var(--ink-dim);max-width:720px;margin:0 0 36px}
+  .lead a{color:var(--ink)}
+
+  /* spine */
+  .spine{list-style:none;margin:0 0 64px;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:10px;counter-reset:kind}
+  .spine li a{display:block;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px 14px;color:var(--ink);transition:border-color .15s}
+  .spine li a:hover{border-color:var(--def);text-decoration:none}
+  .spine .n{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--def);display:block;margin-bottom:2px}
+  .spine .k{font-weight:600;font-size:15px;line-height:1.3;display:block}
+  .spine .s{color:var(--ink-dim);font-size:13px;line-height:1.45;display:block;margin-top:4px}
+
+  section.kind{margin:0 0 64px;scroll-margin-top:64px;padding-top:8px}
+  h2{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim);margin:0 0 6px;padding-bottom:8px;border-bottom:1px solid var(--line-soft);display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+  h2 span{font-weight:400;letter-spacing:.06em;text-transform:none}
+  .kind h3.name{font-size:clamp(22px,3.4vw,30px);line-height:1.15;margin:12px 0 6px;letter-spacing:-.01em}
+  .kind .def{font-size:17px;color:var(--ink);max-width:760px;margin:0 0 18px}
+  .kv{display:grid;grid-template-columns:1fr;gap:12px 24px;margin:0 0 22px;max-width:760px}
+  @media(min-width:700px){.kv{grid-template-columns:1fr 1fr}}
+  .kv h4{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);margin:0 0 6px}
+  .kv p{margin:0;color:var(--ink);font-size:15px}
+  .kv ul{margin:0;padding-left:18px;font-size:15px}
+  .kv li{margin:0 0 4px}
+  .kv li::marker{color:var(--ink-dim)}
+
+  h4.ex{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);margin:22px 0 10px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:14px}
+  .card{display:block;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:18px 18px 16px;color:var(--ink);position:relative;transition:border-color .15s,transform .15s}
+  a.card:hover{border-color:var(--def);text-decoration:none;transform:translateY(-1px)}
+  a.card.off:hover{border-color:var(--off)}
+  .card .t{font-weight:600;font-size:17px;line-height:1.3;margin:0 0 6px;display:block}
+  .card .d{color:var(--ink-dim);font-size:14px;line-height:1.5;display:block}
+  .card .m{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--ink-dim);margin-top:12px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+  .card .m b{font-weight:500;color:var(--def)}
+  .card.off .m b{color:var(--off)}
+
+  /* the exemplar card with analysis */
+  .exemplar{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:20px 20px 18px;margin:0 0 14px;border-left:3px solid var(--off)}
+  .exemplar .head{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;margin:0 0 4px}
+  .exemplar .head a{font-weight:600;font-size:19px;line-height:1.3;color:var(--ink)}
+  .exemplar .head a:hover{color:var(--def)}
+  .exemplar .by{color:var(--ink-dim);font-size:14px}
+  .exemplar .label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--off);margin:0 0 12px}
+  .exemplar .why{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);margin:14px 0 6px}
+  .exemplar ul{margin:0;padding-left:18px}
+  .exemplar li{margin:0 0 8px;font-size:15px;line-height:1.55}
+  .exemplar li::marker{color:var(--off)}
+  .exemplar q{font-style:italic;color:var(--ink)}
+  .exemplar q::before,.exemplar q::after{color:var(--ink-dim)}
+  .exemplar .chain{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--def);display:inline;overflow-wrap:anywhere}
+  .exemplar .gap{color:var(--ink-dim);font-size:14px;margin:12px 0 0;max-width:760px}
+  .exemplar .gap b{color:var(--ink);font-weight:500}
+
+  .wanted{border:1px dashed var(--line);border-radius:8px;padding:14px 18px;color:var(--ink-dim);font-size:14px;background:transparent}
+  .wanted b{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;color:var(--ink-dim);display:block;margin-bottom:2px}
+
+  .note{font-size:13.5px;color:var(--ink-dim);border-left:2px solid var(--line);padding:6px 14px;margin:0 0 40px}
+  footer{max-width:1080px;margin:0 auto;padding:24px 20px 48px;border-top:1px solid var(--line-soft);font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-dim)}
+  footer a{color:var(--ink-dim);text-decoration:underline;text-underline-offset:3px}
+</style>
+</head>
+<body>
+<header class="bar"><div class="bar-in">
+  <div class="brand"><span class="dot"></span><a href="./">IDVORKIN-AI-TOOLS</a></div>
+  <nav><a href="./">index</a><a href="https://idvork.in" target="_blank" rel="noopener">idvork.in ↗</a></nav>
+</div></header>
+<main>
+  <h1>Kinds of explainer</h1>
+  <p class="lead">Not every good explanation is the same shape. This is the spine we build against: eight kinds, what each one is for, the moves that make it work, and an example of each that we think is good, with the reasons spelled out. Our own sites are mapped onto it; the kinds we have not yet built or found a great example of say so. <a href="./">Back to the index.</a></p>
+
+  <ol class="spine">
+    <li><a href="#field-map"><span class="n">01</span><span class="k">The field map</span><span class="s">A whole subject, laid out unit by unit, sources pinned.</span></a></li>
+    <li><a href="#one-question"><span class="n">02</span><span class="k">The one-question explainer</span><span class="s">One question, answered properly, working shown.</span></a></li>
+    <li><a href="#post-mortem"><span class="n">03</span><span class="k">The post-mortem</span><span class="s">I believed it, I built it, it died. Here is why.</span></a></li>
+    <li><a href="#case-study"><span class="n">04</span><span class="k">The case study</span><span class="s">One real incident, the evidence, the fix, the lesson.</span></a></li>
+    <li><a href="#close-reading"><span class="n">05</span><span class="k">The close reading</span><span class="s">One short text everyone quotes, read line by line.</span></a></li>
+    <li><a href="#atlas"><span class="n">06</span><span class="k">The atlas</span><span class="s">A subject on a map or a clock you can scrub.</span></a></li>
+    <li><a href="#parable"><span class="n">07</span><span class="k">The illustrated parable</span><span class="s">A story that carries the model; a page per idea after.</span></a></li>
+    <li><a href="#bake-off"><span class="n">08</span><span class="k">The bake-off</span><span class="s">Same input through N tools, side by side, real costs.</span></a></li>
+  </ol>
+
+  <section class="kind" id="field-map">
+    <h2>Kind 01 <span>11 of ours</span></h2>
+    <h3 class="name">The field map</h3>
+    <p class="def">Take a course, an author or a subject and lay it out page by page, every page linked back to the source it came from. The reader is entering a field and wants the territory, not one trail.</p>
+    <div class="kv">
+      <div><h4>For</h4><p>Working through a course or a body of writing in order; coming back to one unit months later and finding it where you left it.</p></div>
+      <div><h4>Signature moves</h4><ul><li>A spine: arcs of units, each a row, with a progress log.</li><li>One page per unit, original prose, not a paraphrase of the source.</li><li>Every claim linked to a timestamp, a page or a line.</li><li>The cleaned transcript or full text shipped alongside.</li><li>Links swept before shipping; discrepancies with the source shown, not hidden.</li></ul></div>
+    </div>
+    <h4 class="ex">Ours</h4>
+    <div class="grid">
+      <a class="card" href="https://idvorkin-ai-tools.github.io/cs336-field-map/"><span class="t">CS336, Mapped</span><span class="d">Seventeen lectures, deep dive per lecture, transcripts, assignments.</span><span class="m"><b>FIELD MAP</b><span>course</span></span></a>
+      <a class="card" href="https://idvorkin-ai-tools.github.io/technical-ai-safety-field-map/"><span class="t">Technical AI Safety, Mapped</span><span class="d">Six units, twenty-seven chapters, every reading linked back.</span><span class="m"><b>FIELD MAP</b><span>course</span></span></a>
+      <a class="card" href="https://idvorkin-ai-tools.github.io/3b1b-entropy-field-map/"><span class="t">Entropy, Mapped</span><span class="d">3Blue1Brown's compression series in twenty pages, formulas reconstructed.</span><span class="m"><b>FIELD MAP</b><span>video series</span></span></a>
+      <a class="card" href="https://idvorkin-ai-tools.github.io/build-gpt-field-map/"><span class="t">Let's build GPT, Mapped</span><span class="d">One two-hour lecture as eight parts, code annotated line by line.</span><span class="m"><b>FIELD MAP</b><span>single video</span></span></a>
+      <a class="card" href="https://idvorkin-ai-tools.github.io/micrograd-field-map/"><span class="t">micrograd, Mapped</span><span class="d">Backprop from scratch, eight parts, the notebook annotated.</span><span class="m"><b>FIELD MAP</b><span>single video</span></span></a>
+      <a class="card" href="https://idvorkin-ai-tools.github.io/harmbench-field-map/"><span class="t">HarmBench, Mapped</span><span class="d">A benchmark browsed by harm category, 510 behaviors permalinked.</span><span class="m"><b>FIELD MAP</b><span>dataset</span></span></a>
+      <a class="card off" href="https://idvorkin-ai-tools.github.io/yegge-field-map/"><span class="t">Stevey, Mapped</span><span class="d">One page per Yegge essay, the source pinned, the best lines quoted.</span><span class="m"><b>FIELD MAP</b><span>author</span></span></a>
+      <a class="card off" href="https://idvorkin-ai-tools.github.io/arthur-brooks-field-map/"><span class="t">Arthur Brooks, Mapped</span><span class="d">One page per idea from the happiness-science podcasts and books.</span><span class="m"><b>FIELD MAP</b><span>author</span></span></a>
+      <a class="card" href="https://idvorkin-ai-tools.github.io/ai-safety-field-map/"><span class="t">AI Safety — A Field Map</span><span class="d">Subfields, who works on what, where to start.</span><span class="m"><b>FIELD MAP</b><span>subject</span></span></a>
+      <a class="card" href="https://idvorkin-ai-tools.github.io/red-teaming-ramp-up/"><span class="t">Red Teaming Models</span><span class="d">Threat models, attack families, evals, how the field is organised.</span><span class="m"><b>FIELD MAP</b><span>subject</span></span></a>
+      <a class="card off" href="https://idvorkin-ai-tools.github.io/guideway-field-map/"><span class="t">Rails, Ropes &amp; Rack</span><span class="d">Everything that runs on a cable, a rail or a rack.</span><span class="m"><b>FIELD MAP</b><span>subject</span></span></a>
+    </div>
+    <h4 class="ex">In the wild</h4>
+    <p class="wanted"><b>Exemplar wanted</b>A field map by someone else that we think is done right. None picked yet.</p>
+  </section>
+
+  <section class="kind" id="one-question">
+    <h2>Kind 02 <span>4 of ours</span></h2>
+    <h3 class="name">The one-question explainer</h3>
+    <p class="def">One question in the title, one answer, and the working shown so the reader can check it. The reader has this exact question and wants to stop having it.</p>
+    <div class="kv">
+      <div><h4>For</h4><p>Questions you will ask again: a tax timing choice, why a tool needs a database, how to get a clean alpha mask, why every culture invented a clown.</p></div>
+      <div><h4>Signature moves</h4><ul><li>The question is the title; the answer is in the first screen.</li><li>The evidence is shown: numbers, sources, unit tests, the actual artifact.</li><li>The assumptions are listed so the reader can swap theirs in.</li><li>Short. One page, no spine.</li></ul></div>
+    </div>
+    <h4 class="ex">Ours</h4>
+    <div class="grid">
+      <a class="card off" href="https://idvorkin-ai-tools.github.io/cap-gains-explainer/"><span class="t">Sell now or sell later</span><span class="d">The capital-gains timing question, sources cited, unit tested.</span><span class="m"><b>EXPLAINER</b><span>2026-08</span></span></a>
+      <a class="card off" href="https://idvorkin-ai-tools.github.io/clowns-explainer/"><span class="t">Why We Invented Clowns</span><span class="d">The licensed pressure valve, the lineage, the evidence, the shadow.</span><span class="m"><b>EXPLAINER</b><span>2026-07</span></span></a>
+      <a class="card" href="https://idvorkin-ai-tools.github.io/dolt-explainer/"><span class="t">Why task state needs Dolt</span><span class="d">How a task database and a code repo share one fork.</span><span class="m"><b>EXPLAINER</b><span>2026-04</span></span></a>
+      <a class="card" href="https://idvorkin-ai-tools.github.io/chroma-key-explainer/"><span class="t">Chroma-key hill-climbing</span><span class="d">Treating the chroma key as an eval: score the mask, then climb.</span><span class="m"><b>EXPLAINER</b><span>2026-04</span></span></a>
+    </div>
+    <h4 class="ex">In the wild</h4>
+    <p class="wanted"><b>Exemplar wanted</b>A one-question explainer by someone else that we think is done right. None picked yet.</p>
+  </section>
+
+  <section class="kind" id="post-mortem">
+    <h2>Kind 03 <span>1 in the wild</span></h2>
+    <h3 class="name">The post-mortem</h3>
+    <p class="def">The writer believed something hard enough to build on it. It failed. The essay autopsies the specific failure to earn a general claim, and is honest about the part that is still unsolved. It is an argument disguised as an obituary.</p>
+    <div class="kv">
+      <div><h4>For</h4><p>Learning from someone else's expensive mistake before making it yourself. The reader gets the conclusion and, more valuable, the reasoning that was wrong.</p></div>
+      <div><h4>Signature moves</h4><ul><li>Open on the belief, with the stakes attached, not on the topic.</li><li>Split the thesis: what died and what still matters.</li><li>List the reasons up front, then one section per reason with the same heading.</li><li>Before-and-after in the fewest possible symbols: an arrow chain, a diagram.</li><li>Name the mistake in one sentence. End on the open problem, not a pitch.</li></ul></div>
+    </div>
+    <h4 class="ex">In the wild</h4>
+    <article class="exemplar">
+      <div class="head"><a href="https://www.aymannadeem.com/artificial/intelligence,/developer/tools/2026/09/24/plan-mode-is-dead.html" target="_blank" rel="noopener">Plan mode is dead ↗</a><span class="by">Ayman Nadeem, September 24, 2026, about 1,900 words</span></div>
+      <p class="label">Kind 03 · The post-mortem</p>
+      <p class="def" style="font-size:15px;margin:0">Nadeem built Nuanced, a desktop coding app whose whole premise was a persistent plan produced before implementation. Users did not want the spec, models stopped needing it, and the plan-then-build split broke the way people actually think. The post says why, and what is left.</p>
+      <p class="why">What is good about it</p>
+      <ul>
+        <li><b>It opens on a belief with stakes, not a topic.</b> First sentence: <q>Earlier this year, I believed planning was going to become the most important part of building software with AI.</q> Second paragraph: he built and launched a whole app on it. The title already gave away the ending, so the reader reads for the why.</li>
+        <li><b>The thesis is a split, which keeps “dead” from being clickbait.</b> Plan modes did two jobs, precise instructions for the agent and understanding for the human; <q>#1 is rapidly becoming obsolete as models get better. I think #2 matters more than ever, but plan modes are the wrong abstraction for it.</q> Every later section serves one side of that split.</li>
+        <li><b>The skeleton is readable in ten seconds.</b> “Why I was wrong” lists four reasons as bullets (conflated planning with a plan; models got really good; no one wants to read AI-generated text; separated planning from building), and then each bullet becomes a section with that heading. Skim the headings and you have the argument.</li>
+        <li><b>Arrows do the work of paragraphs.</b> The old loop <span class="chain">chat → disambiguate → generate spec → review spec → revise spec → approve → implement → review code</span> against the new one <span class="chain">understand → act → inspect → clarify → adjust → act again</span>. The contrast is the argument; the prose around it only annotates.</li>
+        <li><b>Every abstract point gets a drawing that carries the metaphor.</b> Seven hand-drawn cartoons: fishing from a boat labelled “chat” above submerged code and assumptions, tumbling down a waterfall of sequential steps, mourners at a gravestone reading “Plan Mode, 2025–2026”. They argue rather than decorate, and each one has a full-sentence alt text.</li>
+        <li><b>It names the mistake in one line and ends on what is unsolved.</b> <q>The biggest mistake I made was turning the plan into an artifact instead of designing a process for improved human understanding.</q> The last section is titled “We still haven’t solved the understanding problem”, and it means it: no pitch, no five tips, a hard question left standing.</li>
+      </ul>
+      <p class="gap"><b>What it leaves out, on purpose.</b> No usage numbers, no screenshots of Nuanced, no case for when a plan still pays (large irreversible changes, an unfamiliar codebase), and Claude Code's plan mode is a name-drop, not a comparison. The kind trades breadth for one confessed mistake; that is the trade.</p>
+    </article>
+    <h4 class="ex">Ours</h4>
+    <p class="wanted"><b>Exemplar wanted</b>We have not written one of these yet. When a thing we built dies, this is the shape to write it in.</p>
+  </section>
+
+  <section class="kind" id="case-study">
+    <h2>Kind 04 <span>1 of ours</span></h2>
+    <h3 class="name">The case study</h3>
+    <p class="def">One real incident, told with the evidence: the symptom, the wrong guesses, the measurement that settled it, the fix, and the one general lesson. Where the post-mortem is about a belief failing, the case study is about a system failing.</p>
+    <div class="kv">
+      <div><h4>For</h4><p>The reader who will hit the same bug next month and search for the symptom.</p></div>
+      <div><h4>Signature moves</h4><ul><li>The symptom first, in the words you would search for.</li><li>The evidence shown, not described: the audio, the log, the diff, the plot.</li><li>The hypotheses that were wrong, and what ruled them out.</li><li>One lesson that survives the specifics.</li></ul></div>
+    </div>
+    <h4 class="ex">Ours</h4>
+    <div class="grid">
+      <a class="card" href="https://idvorkin-ai-tools.github.io/airpods-mic-explainer/"><span class="t">When AirPods Eat Your Words</span><span class="d">How a Bluetooth AirPods microphone destroyed on-device ASR, shown with the actual audio.</span><span class="m"><b>EXPLAINER</b><span>2026-07</span></span></a>
+    </div>
+    <h4 class="ex">In the wild</h4>
+    <p class="wanted"><b>Exemplar wanted</b>A debugging case study by someone else that we think is done right. None picked yet.</p>
+  </section>
+
+  <section class="kind" id="close-reading">
+    <h2>Kind 05 <span>1 of ours</span></h2>
+    <h3 class="name">The close reading</h3>
+    <p class="def">One short text that everyone quotes and nobody has read, put back in its context and read clause by clause, with its afterlife and its misattributions checked.</p>
+    <div class="kv">
+      <div><h4>For</h4><p>A speech, an essay, a poem, a paragraph that has become a slogan; the reader wants to know what it actually says.</p></div>
+      <div><h4>Signature moves</h4><ul><li>The full text shipped, with the famous part marked.</li><li>Clause-by-clause annotation of the quoted passage.</li><li>The afterlife: who quoted it, for what, and whether they read it.</li><li>Every quotation checked against the original printing; the folklore tested and, where it fails, said so.</li></ul></div>
+    </div>
+    <h4 class="ex">Ours</h4>
+    <div class="grid">
+      <a class="card off" href="https://idvorkin-ai-tools.github.io/man-in-the-arena/"><span class="t">The Man in the Arena, Mapped</span><span class="d">Roosevelt's 1910 speech around its most-quoted paragraph; every quote checked against the 1910 printing; the Mandela story found wanting.</span><span class="m"><b>FIELD MAP</b><span>filed as a map; reads as a close reading</span></span></a>
+    </div>
+    <h4 class="ex">In the wild</h4>
+    <p class="wanted"><b>Exemplar wanted</b>A close reading by someone else that we think is done right. None picked yet.</p>
+  </section>
+
+  <section class="kind" id="atlas">
+    <h2>Kind 06 <span>1 of ours</span></h2>
+    <h3 class="name">The atlas</h3>
+    <p class="def">A subject laid out on a map or a timeline the reader can scrub. Where and when at once, with a card behind every mark.</p>
+    <div class="kv">
+      <div><h4>For</h4><p>Anything whose story is really a story of place and sequence: a career, a city, a network, a war.</p></div>
+      <div><h4>Signature moves</h4><ul><li>One scrub control that drives everything on screen.</li><li>Every mark opens a sourced card.</li><li>Chapters that set the scrubber for you, so the map still reads as an essay.</li><li>What it cost shown next to what it built.</li></ul></div>
+    </div>
+    <h4 class="ex">Ours</h4>
+    <div class="grid">
+      <a class="card" href="https://idvorkin-ai-tools.github.io/robert-moses-atlas/"><span class="t">Robert Moses Atlas</span><span class="d">Scrub from 1924 to 1968 and watch the parkways, bridges and expressways appear, with the offices he stacked and the neighborhoods it cost. Six chapters, every card sourced.</span><span class="m"><b>ATLAS</b><span>2026-09</span></span></a>
+    </div>
+    <h4 class="ex">In the wild</h4>
+    <p class="wanted"><b>Exemplar wanted</b>An atlas or scrubbable timeline by someone else that we think is done right. None picked yet.</p>
+  </section>
+
+  <section class="kind" id="parable">
+    <h2>Kind 07 <span>1 of ours</span></h2>
+    <h3 class="name">The illustrated parable</h3>
+    <p class="def">A story that smuggles the model in: characters, a village, a problem, and each turn of the plot introduces one concept. The concept pages come after and point back into the story.</p>
+    <div class="kv">
+      <div><h4>For</h4><p>Systems with several interlocking ideas that are dull as definitions and obvious once you have watched them happen to someone.</p></div>
+      <div><h4>Signature moves</h4><ul><li>The story first, illustrated, in the source's own wording where it has one.</li><li>One page per idea the story introduced, in the order the story introduced it.</li><li>Every concept page links back to the panel where it happened.</li><li>A cast that stays consistent across every drawing.</li></ul></div>
+    </div>
+    <h4 class="ex">Ours</h4>
+    <div class="grid">
+      <a class="card off" href="https://idvorkin-ai-tools.github.io/hierarchy-of-money-field-map/"><span class="t">The Hierarchy of Money, Mapped</span><span class="d">Gregory Gundersen's village parable, his wording, our animals, then a page for each idea: stones, bank money, reserves, reserve currency, fiat.</span><span class="m"><b>FIELD MAP</b><span>filed as a map; the story is the spine</span></span></a>
+    </div>
+    <h4 class="ex">In the wild</h4>
+    <p class="wanted"><b>Exemplar wanted</b>An illustrated parable by someone else that we think is done right. None picked yet.</p>
+  </section>
+
+  <section class="kind" id="bake-off">
+    <h2>Kind 08 <span>2 of ours</span></h2>
+    <h3 class="name">The bake-off</h3>
+    <p class="def">The same fixed input through N tools or models, side by side, with what each one cost and how long it took. The reader is choosing.</p>
+    <div class="kv">
+      <div><h4>For</h4><p>Picking a model, a voice, a renderer, a library, without trusting anyone's benchmark table.</p></div>
+      <div><h4>Signature moves</h4><ul><li>One input, frozen, so the only variable is the tool.</li><li>Outputs side by side at the same size.</li><li>A canon check: the details the output must get right, scored.</li><li>Real cost and latency per item, not list prices.</li></ul></div>
+    </div>
+    <h4 class="ex">Ours</h4>
+    <div class="grid">
+      <a class="card off" href="https://idvorkin-ai-tools.github.io/gutter-model-playground/"><span class="t">Gutter Model Playground</span><span class="d">Nine image models draw one scene; per-image cost, latency and a canon check.</span><span class="m"><b>PLAYGROUND</b><span>2026-09</span></span></a>
+      <a class="card off" href="https://idvorkin-ai-tools.github.io/larry-voice-samples/"><span class="t">Larry Voice Catalog</span><span class="d">Candidate TTS voices for Larry, side by side.</span><span class="m"><b>SAMPLES</b><span>2026-04</span></span></a>
+    </div>
+    <h4 class="ex">In the wild</h4>
+    <p class="wanted"><b>Exemplar wanted</b>A bake-off by someone else that we think is done right. None picked yet.</p>
+  </section>
+
+  <p class="note">The spine is a working taxonomy, not a law. A site can be filed under one kind on the index and belong to another here; two of ours are. When a new kind earns a slot, or an exemplar in the wild is found for an empty one, it goes here. Suggest one by opening an issue on this index's repo.</p>
+</main>
+<footer>idvorkin-ai-tools · kinds page added 2026-09-26 · <a href="https://github.com/idvorkin-ai-tools/idvorkin-ai-tools.github.io">source</a></footer>
+</body>
+</html>
