@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Production strategies — idvorkin-ai-tools</title>
+<meta name="description" content="The craft moves behind the explainers we build and collect, pulled out of their sites so they can be mixed and matched with any kind: metaphor cartoons, arrow chains, receipts, timestamped sources, bake-off sheets, scrubbable timelines and more. Each with what it costs to make, where it is live, and a kinds-by-strategies grid of what has and has not been tried." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{--paper:#0e0f12;--panel:#15171c;--ink:#e6e3da;--ink-dim:#8d8a80;--line:#2a2d35;--line-soft:#1e2027;--def:#5fd3e6;--off:#f0b34a;--pink:#f08ab8}
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',system-ui,-apple-system,sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden}
+  a{color:var(--def);text-decoration:none}
+  a:hover{text-decoration:underline;text-underline-offset:3px}
+  .bar{position:sticky;top:0;background:rgba(14,15,18,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:5}
+  .bar-in{max-width:1080px;margin:0 auto;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+  .brand{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;color:var(--ink-dim);display:flex;align-items:center;gap:10px}
+  .brand a{color:var(--ink-dim)}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--def);box-shadow:0 0 12px var(--def)}
+  .bar nav{display:flex;gap:16px;font-family:'IBM Plex Mono',monospace;font-size:12px}
+  .bar nav a{color:var(--ink-dim)}
+  @media(max-width:420px){.bar-in{padding:12px 16px}.bar nav{gap:10px;font-size:11px}.brand{letter-spacing:.08em}}
+  main{max-width:1080px;margin:0 auto;padding:56px 20px 80px}
+  h1{font-size:clamp(30px,5vw,46px);line-height:1.1;margin:0 0 14px;letter-spacing:-.01em}
+  .lead{font-size:18px;color:var(--ink-dim);max-width:720px;margin:0 0 20px}
+  .lead a{color:var(--ink)}
+  h2{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim);margin:0 0 16px;padding-bottom:8px;border-bottom:1px solid var(--line-soft);display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+  h2 span{font-weight:400;letter-spacing:.06em;text-transform:none}
+  section.block{margin:0 0 56px;scroll-margin-top:64px}
+
+  /* strategy spine */
+  .fam{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--off);margin:18px 0 8px}
+  .spine{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:8px}
+  .spine a{display:block;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 12px;color:var(--ink);transition:border-color .15s}
+  .spine a:hover{border-color:var(--def);text-decoration:none}
+  .spine .n{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--def);margin-right:6px}
+  .spine .k{font-weight:600;font-size:14.5px}
+
+  /* mix-and-match grid */
+  .mixwrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--panel);max-width:100%}
+  table.mix{border-collapse:collapse;width:100%;font-size:13px}
+  table.mix th,table.mix td{border-bottom:1px solid var(--line-soft);padding:6px 1px;text-align:center}
+  table.mix thead th{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;color:var(--ink-dim);font-weight:500;vertical-align:bottom}
+  table.mix thead th a{color:var(--ink-dim)}
+  table.mix thead th .full{display:none}
+  table.mix th.row{text-align:left;font-weight:500;padding-left:8px;white-space:normal;min-width:78px;font-size:12px;line-height:1.3}
+  table.mix th.row a{color:var(--ink)}
+  table.mix th.row .n{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--def);margin-right:4px;display:block}
+  table.mix td{width:9%;font-size:15px;line-height:1}
+  table.mix td a{text-decoration:none;display:inline-block;padding:2px 3px}
+  .p{color:var(--def)}
+  .g{color:var(--off)}
+  .x{color:#5a5750}
+  .z{color:#3a3c43}
+  @media(min-width:760px){
+    table.mix thead th .short{display:none}
+    table.mix thead th .full{display:inline}
+    table.mix{font-size:14px}
+    table.mix th.row{min-width:220px;font-size:14px;padding-left:12px}
+    table.mix th.row .n{display:inline}
+    table.mix th,table.mix td{padding:7px 4px}
+  }
+  .legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:var(--ink-dim);margin:10px 0 0}
+  .legend b{font-weight:400;font-size:15px;margin-right:4px}
+
+  .ideas{list-style:none;margin:18px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:12px}
+  .ideas li{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--off);border-radius:8px;padding:14px 16px;font-size:14.5px}
+  .ideas li b{display:block;font-size:15.5px;margin-bottom:4px}
+  .ideas li .cell{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--off);display:block;margin-bottom:6px}
+
+  /* strategy cards */
+  .strat{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:18px 20px 16px;margin:0 0 14px;scroll-margin-top:64px}
+  .strat .head{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;margin:0 0 4px}
+  .strat .n{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--def)}
+  .strat h3{font-size:clamp(19px,2.6vw,23px);line-height:1.2;margin:0}
+  .strat .one{font-size:16px;margin:4px 0 12px;max-width:780px}
+  .strat dl{display:grid;grid-template-columns:1fr;gap:10px 24px;margin:0}
+  @media(min-width:760px){.strat dl{grid-template-columns:1fr 1fr}}
+  .strat dt{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);margin:0 0 2px}
+  .strat dd{margin:0;font-size:14.5px;line-height:1.55;overflow-wrap:anywhere}
+  .strat dd .chain{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--def)}
+  .pairs span{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.04em;border:1px solid var(--line);border-radius:4px;padding:1px 6px;margin:0 4px 4px 0;display:inline-block}
+  .pairs .ok{color:var(--def);border-color:#24515a}
+  .pairs .no{color:var(--ink-dim);text-decoration:line-through}
+
+  .note{font-size:13.5px;color:var(--ink-dim);border-left:2px solid var(--line);padding:6px 14px;margin:0 0 40px}
+  footer{max-width:1080px;margin:0 auto;padding:24px 20px 48px;border-top:1px solid var(--line-soft);font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-dim)}
+  footer a{color:var(--ink-dim);text-decoration:underline;text-underline-offset:3px}
+</style>
+</head>
+<body>
+<header class="bar"><div class="bar-in">
+  <div class="brand"><span class="dot"></span><a href="./">IDVORKIN-AI-TOOLS</a></div>
+  <nav><a href="./">index</a><a href="kinds.html">kinds</a></nav>
+</div></header>
+<main>
+  <h1>Production strategies</h1>
+  <p class="lead">The <a href="kinds.html">kinds</a> are the structure of an explainer. These are the craft moves, and they are a second axis: any of them can go with any kind. Each one below was pulled out of a site on the kinds page or the index, and every one has a live example. Nothing here is hypothetical except the cells in the grid marked as untried.</p>
+  <p class="lead" style="font-size:15.5px;margin-bottom:36px">The finding that jumps out: <b style="color:var(--ink)">our eleven field maps contain no pictures at all.</b> No illustrations, no diagrams, no charts; neither does the Man in the Arena. Every visual strategy we have proven lives in the one-page explainers, the parable, the atlas and the bake-offs.</p>
+
+  <section class="block" id="list">
+    <h2>Nineteen strategies <span>in five families</span></h2>
+    <p class="fam">Drawing</p>
+    <ul class="spine">
+      <li><a href="#metaphor-cartoons"><span class="n">S01</span><span class="k">Metaphor cartoons that argue</span></a></li>
+      <li><a href="#cast"><span class="n">S02</span><span class="k">A recurring cast</span></a></li>
+      <li><a href="#alt-text"><span class="n">S03</span><span class="k">Full-sentence alt text</span></a></li>
+      <li><a href="#arrow-chains"><span class="n">S04</span><span class="k">Arrow chains instead of paragraphs</span></a></li>
+      <li><a href="#mechanism-diagrams"><span class="n">S05</span><span class="k">Mechanism diagrams</span></a></li>
+    </ul>
+    <p class="fam">Shape</p>
+    <ul class="spine">
+      <li><a href="#skeleton"><span class="n">S06</span><span class="k">The ten-second skeleton</span></a></li>
+      <li><a href="#before-after"><span class="n">S07</span><span class="k">Before and after, paired</span></a></li>
+      <li><a href="#objection"><span class="n">S08</span><span class="k">The honest objection</span></a></li>
+      <li><a href="#best-lines"><span class="n">S09</span><span class="k">Best lines, cited</span></a></li>
+    </ul>
+    <p class="fam">Evidence</p>
+    <ul class="spine">
+      <li><a href="#receipts"><span class="n">S10</span><span class="k">Receipts under the joke</span></a></li>
+      <li><a href="#exhibits"><span class="n">S11</span><span class="k">Playable exhibits</span></a></li>
+      <li><a href="#timestamps"><span class="n">S12</span><span class="k">Timestamped source links</span></a></li>
+      <li><a href="#transcript"><span class="n">S13</span><span class="k">The transcript as its own page</span></a></li>
+      <li><a href="#line-links"><span class="n">S14</span><span class="k">Line-linked code and data</span></a></li>
+      <li><a href="#checked"><span class="n">S15</span><span class="k">Checked against the original</span></a></li>
+    </ul>
+    <p class="fam">Comparison</p>
+    <ul class="spine">
+      <li><a href="#bake-off-sheet"><span class="n">S16</span><span class="k">The bake-off sheet</span></a></li>
+      <li><a href="#scorecard"><span class="n">S17</span><span class="k">A score you can climb</span></a></li>
+    </ul>
+    <p class="fam">Interaction</p>
+    <ul class="spine">
+      <li><a href="#scrub"><span class="n">S18</span><span class="k">A scrub control</span></a></li>
+      <li><a href="#calculator"><span class="n">S19</span><span class="k">A tested calculator</span></a></li>
+    </ul>
+  </section>
+
+  <section class="block" id="grid">
+    <h2>Mix and match <span>kinds × strategies</span></h2>
+    <div class="mixwrap">
+    <table class="mix">
+      <thead><tr>
+        <th class="row"></th>
+        <th><a href="kinds.html#field-map" title="The field map"><span class="short">01</span><span class="full">Field map</span></a></th>
+        <th><a href="kinds.html#one-question" title="The one-question explainer"><span class="short">02</span><span class="full">One question</span></a></th>
+        <th><a href="kinds.html#post-mortem" title="The post-mortem"><span class="short">03</span><span class="full">Post-mortem</span></a></th>
+        <th><a href="kinds.html#case-study" title="The case study"><span class="short">04</span><span class="full">Case study</span></a></th>
+        <th><a href="kinds.html#close-reading" title="The close reading"><span class="short">05</span><span class="full">Close reading</span></a></th>
+        <th><a href="kinds.html#atlas" title="The atlas"><span class="short">06</span><span class="full">Atlas</span></a></th>
+        <th><a href="kinds.html#parable" title="The illustrated parable"><span class="short">07</span><span class="full">Parable</span></a></th>
+        <th><a href="kinds.html#bake-off" title="The bake-off"><span class="short">08</span><span class="full">Bake-off</span></a></th>
+      </tr></thead>
+      <tbody>
+        <tr><th class="row"><a href="#metaphor-cartoons"><span class="n">S01</span>Metaphor cartoons</a></th><td class="g" title="Untried, good fit">○</td><td class="g" title="Untried, good fit">○</td><td class="p"><a class="p" href="https://www.aymannadeem.com/artificial/intelligence,/developer/tools/2026/09/24/plan-mode-is-dead.html" title="Proven: Plan mode is dead">●</a></td><td class="g" title="Untried, good fit">○</td><td class="z">·</td><td class="z">·</td><td class="p"><a class="p" href="https://idvorkin-ai-tools.github.io/hierarchy-of-money-field-map/story/fiat.html" title="Proven: Hierarchy of Money">●</a></td><td class="x" title="Poor fit">×</td></tr>
+        <tr><th class="row"><a href="#cast"><span class="n">S02</span>Recurring cast</a></th><td class="z">·</td><td class="z">·</td><td class="g" title="Untried, good fit">○</td><td class="g" title="Untried, good fit">○</td><td class="x" title="Poor fit">×</td><td class="x" title="Poor fit">×</td><td class="p"><a class="p" href="https://idvorkin-ai-tools.github.io/hierarchy-of-money-field-map/story/cast.html" title="Proven: Hierarchy of Money cast">●</a></td><td class="p"><a class="p" href="https://idvorkin-ai-tools.github.io/gutter-model-playground/" title="Proven: Gutter Model Playground">●</a></td></tr>
+        <tr><th class="row"><a href="#alt-text"><span class="n">S03</span>Full-sentence alt</a></th><td class="g" title="Untried, good fit">○</td><td class="p"><a class="p" href="https://idvorkin-ai-tools.github.io/dolt-explainer/" title="Proven: Dolt explainer">●</a></td><td class="p"><a class="p" href="https://www.aymannadeem.com/artificial/intelligence,/developer/tools/2026/09/24/plan-mode-is-dead.html" title="Proven: Plan mode is dead">●</a></td><td class="g" title="Untried, good fit">○</td><td class="z">·</td><td class="g" title="Untried, good fit">○</td><td class="p"><a class="p" href="https://idvorkin-ai-tools.github.io/hierarchy-of-money-field-map/story/intermediation.html" title="Proven: Hierarchy of Money scenes">●</a></td><td class="p"><a class="p" href="https://idvorkin-ai-tools.github.io/gutter-model-playground/" title="Proven: Gutter Model Playground">●</a></td></tr>
+        <tr><th class="row"><a href="#arrow-chains"><span class="n">S04</span>Arrow chains</a></th><td class="g" title="Untried, good fit">○</td><td class="g" title="Untried, good fit">○</td><td class="p"><a class="p" href="https://www.aymannadeem.com/artificial/intelligence,/developer/tools/2026/09/24/plan-mode-is-dead.html" title="Proven: Plan mode is dead">●</a></td><td class="g" title="Untried, good fit">○</td><td class="x" title="Poor fit">×</td><td class="x" title="Poor fit">×</td><td class="z">·</td><td class="x" title="Poor fit">×</td></tr>
+        <tr><th class="row"><a href="#mechanism-diagrams"><span class="n">S05</span>Mechanism diagrams</a></th><td class="g" title="Untried, good fit">○</td><td class="p"><a class="p" href="https://idvorkin-ai-tools.github.io/dolt-explainer/" title="Proven: Dolt explainer">●</a></td><td class="g" title="Untried, good fit">○</td><td class="g" title="Untried, good fit">○</td><td class="x" title="Poor fit">×</td><td class="z">·</td><td class="z">·</td><td class="x" title="Poor fit">×</td></tr>
+        <tr><th class="row"><a href="#skeleton"><span class="n">S06</span>Ten-second skeleton</a></th><td class="p"><a class="p" href="https://idvorkin-ai-tools.github.io/yegge-field-map/classic/platforms-rant.html" title="Proven: TL;DR on every Yegge page">●</a></td><td class="g" title="Untried, good fit">○</td><td class="p"><a class="p" href="https://www.aymannadeem.com/artificial/intelligence,/developer/tools/2026/09/24/plan-mode-is-dead.html" title="Proven: Plan mode is dead">●</a></td><td class="g" title="Untried, good fit">○</td><td class="p"><a class="p" href="https://idvorkin-ai-tools.github.io/man-in-the-arena/pages/close-reading.html" title="Proven: Man in the Arena">●</a></td><td class="z">·</td><td class="z">·</td><td class="z">·</td></tr>
+        <tr><th class="row"><a href="#before-after"><span class="n">S07</span>Before / after</a></th><td class="p"><a class="p" href="https://idvorkin-ai-tools.github.io/build-gpt-field-map/parts/p06.html" title="Proven: build-GPT, here versus the finished script">●</a></td><td class="p"><a class="p" href="https://idvorkin-ai-tools.github.io/chroma-key-explainer/" title="Proven: Chroma-key">●</a></td><td class="p"><a class="p" href="https://www.aymannadeem.com/artificial/intelligence,/developer/tools/2026/09/24/plan-mode-is-dead.html" title="Proven: the two loops">●</a></td><td class="p"><a class="p" href="https://idvorkin-ai-tools.github.io/airpods-mic-explainer/" title="Proven: AirPods, Exhibit A and B">●</a></td><td class="z">·</td><td class="g" title="Untried, good fit">○</td><td class="z">·</td><td class="z">·</td></tr>
+        <tr><th class="row"><a href="#objection"><span class="n">S08</span>Honest objection</a></th><td class="p"><a class="p" href="https://idvorkin-ai-tools.github.io/yegge-field-map/classic/platforms-rant.html" title="Proven: the one honest caveat">●</a></td><td class="p"><a class="p" href="https://idvorkin-ai-tools.github.io/clowns-explainer/" title="Proven: Clowns, the shadow">●</a></td><td class="g" title="Untried, good fit">○</td><td class="z">·</td><td class="p"><a class="p" href="https://idvorkin-ai-tools.github.io/man-in-the-arena/pages/critiques.html" title="Proven: Man in the Arena critiques">●</a></td><td class="g" title="Untried, good fit">○</td><td class="g" title="Untried, good fit">○</td><td class="x" title="Poor fit">×</td></tr>
+        <tr><th class="row"><a href="#best-lines"><span class="n">S09</span>Best lines, cited</a></th><td class="p"><a class="p" href="https://idvorkin-ai-tools.github.io/yegge-field-map/quotes.html" title="Proven: Yegge quotes">●</a></td><td class="z">·</td><td class="z">·</td><td class="z">·</td><td class="p"><a class="p" href="https://idvorkin-ai-tools.github.io/man-in-the-arena/pages/close-reading.html" title="Proven: Man in the Arena">●</a></td><td class="z">·</td><td class="g" title="Untried, good fit">○</td><td class="x" title="Poor fit">×</td></tr>
+        <tr><th class="row"><a href="#receipts"><span class="n">S10</span>Receipts under joke</a></th><td class="z">·</td><td class="z">·</td><td class="g" title="Untried, good fit">○</td><td class="g" title="Untried, good fit">○</td><td class="x" title="Poor fit">×</td><td class="z">·</td><td class="g" title="Untried, good fit">○</td><td class="z">·</td></tr>
+        <tr><th class="row"><a href="#exhibits"><span class="n">S11</span>Playable exhibits</a></th><td class="g" title="Untried, good fit">○</td><td class="z">·</td><td class="g" title="Untried, good fit">○</td><td class="p"><a class="p" href="https://idvorkin-ai-tools.github.io/airpods-mic-explainer/" title="Proven: AirPods audio">●</a></td><td class="z">·</td><td class="z">·</td><td class="z">·</td><td class="p"><a class="p" href="https://idvorkin-ai-tools.github.io/larry-voice-samples/" title="Proven: Larry Voice Catalog">●</a></td></tr>
+        <tr><th class="row"><a href="#timestamps"><span class="n">S12</span>Timestamped links</a></th><td class="p"><a class="p" href="https://idvorkin-ai-tools.github.io/cs336-field-map/lectures/lec01.html" title="Proven: CS336">●</a></td><td class="z">·</td><td class="z">·</td><td class="z">·</td><td class="g" title="Untried, good fit when the text was spoken on video">○</td><td class="x" title="Poor fit">×</td><td class="z">·</td><td class="x" title="Poor fit">×</td></tr>
+        <tr><th class="row"><a href="#transcript"><span class="n">S13</span>Transcript page</a></th><td class="p"><a class="p" href="https://idvorkin-ai-tools.github.io/cs336-field-map/transcripts/lec01.html" title="Proven: CS336 transcripts">●</a></td><td class="x" title="Poor fit">×</td><td class="z">·</td><td class="g" title="Untried, good fit: the session log">○</td><td class="p"><a class="p" href="https://idvorkin-ai-tools.github.io/man-in-the-arena/transcript.html" title="Proven: the full 1910 speech">●</a></td><td class="z">·</td><td class="g" title="Untried, good fit: the source story whole">○</td><td class="z">·</td></tr>
+        <tr><th class="row"><a href="#line-links"><span class="n">S14</span>Line-linked code/data</a></th><td class="p"><a class="p" href="https://idvorkin-ai-tools.github.io/harmbench-field-map/data/behaviors.html" title="Proven: HarmBench behaviors">●</a></td><td class="g" title="Untried, good fit">○</td><td class="z">·</td><td class="g" title="Untried, good fit: the diff">○</td><td class="z">·</td><td class="z">·</td><td class="x" title="Poor fit">×</td><td class="z">·</td></tr>
+        <tr><th class="row"><a href="#checked"><span class="n">S15</span>Checked vs original</a></th><td class="p"><a class="p" href="https://idvorkin-ai-tools.github.io/harmbench-field-map/sources.html" title="Proven: HarmBench discrepancies">●</a></td><td class="g" title="Untried, good fit">○</td><td class="z">·</td><td class="z">·</td><td class="p"><a class="p" href="https://idvorkin-ai-tools.github.io/man-in-the-arena/pages/close-reading.html" title="Proven: the 1910 printing">●</a></td><td class="p"><a class="p" href="https://idvorkin-ai-tools.github.io/robert-moses-atlas/" title="Proven: Moses disputed claims">●</a></td><td class="g" title="Untried, good fit">○</td><td class="z">·</td></tr>
+        <tr><th class="row"><a href="#bake-off-sheet"><span class="n">S16</span>Bake-off sheet</a></th><td class="z">·</td><td class="p"><a class="p" href="https://idvorkin-ai-tools.github.io/chroma-key-explainer/" title="Proven: Chroma-key approaches side by side">●</a></td><td class="z">·</td><td class="z">·</td><td class="x" title="Poor fit">×</td><td class="x" title="Poor fit">×</td><td class="g" title="Untried, good fit: one scene in three styles">○</td><td class="p"><a class="p" href="https://idvorkin-ai-tools.github.io/gutter-model-playground/" title="Proven: Gutter Model Playground">●</a></td></tr>
+        <tr><th class="row"><a href="#scorecard"><span class="n">S17</span>Score you can climb</a></th><td class="z">·</td><td class="p"><a class="p" href="https://idvorkin-ai-tools.github.io/chroma-key-explainer/" title="Proven: Chroma-key score">●</a></td><td class="z">·</td><td class="g" title="Untried, good fit">○</td><td class="x" title="Poor fit">×</td><td class="z">·</td><td class="x" title="Poor fit">×</td><td class="p"><a class="p" href="https://idvorkin-ai-tools.github.io/gutter-model-playground/" title="Proven: canon check">●</a></td></tr>
+        <tr><th class="row"><a href="#scrub"><span class="n">S18</span>Scrub control</a></th><td class="z">·</td><td class="z">·</td><td class="g" title="Untried, good fit">○</td><td class="g" title="Untried, good fit">○</td><td class="x" title="Poor fit">×</td><td class="p"><a class="p" href="https://idvorkin-ai-tools.github.io/robert-moses-atlas/" title="Proven: Robert Moses Atlas">●</a></td><td class="p"><a class="p" href="https://idvorkin-ai-tools.github.io/hierarchy-of-money-field-map/explainers/walkthrough.html" title="Proven: Hierarchy of Money step slider">●</a></td><td class="z">·</td></tr>
+        <tr><th class="row"><a href="#calculator"><span class="n">S19</span>Tested calculator</a></th><td class="g" title="Untried, good fit">○</td><td class="p"><a class="p" href="https://idvorkin-ai-tools.github.io/cap-gains-explainer/" title="Proven: Sell now or sell later">●</a></td><td class="z">·</td><td class="z">·</td><td class="x" title="Poor fit">×</td><td class="z">·</td><td class="g" title="Untried, good fit">○</td><td class="g" title="Untried, good fit: cost at your volume">○</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="legend"><span><b class="p">●</b>proven, links to the example</span><span><b class="g">○</b>untried, should pair well</span><span><b class="x">×</b>poor fit</span><span><b class="z">·</b>neutral</span></p>
+    <p class="legend" style="margin-top:4px;display:block">Column numbers match the <a href="kinds.html">kinds</a>: 01 field map, 02 one question, 03 post-mortem, 04 case study, 05 close reading, 06 atlas, 07 parable, 08 bake-off.</p>
+
+    <ul class="ideas">
+      <li><span class="cell">01 × S01, S05</span><b>Field map with metaphor cartoons</b>Eleven field maps, zero pictures. One cartoon per unit that argues the unit's point (what cross-entropy is paying for, why attention needs a mask) would add the thing Nadeem does best to our most-built kind. At about a cent an image through Muse, a twenty-page map costs twenty cents to illustrate; the cost is the drawing brief, not the render.</li>
+      <li><span class="cell">03 × S10</span><b>A post-mortem with receipts</b>Nadeem's post has no numbers: "little appetite" is never measured. Our Den rule, no strip without the transcript, is the fix. When a thing we built dies, write it up with the session logs, the usage and the dead PR linked under every claim.</li>
+      <li><span class="cell">04 × S18</span><b>A case study you can scrub</b>An incident is a timeline. Put the symptom, each wrong guess and the fix on the atlas's scrubber, and the reader watches the diagnosis happen instead of reading about it.</li>
+      <li><span class="cell">07 × S16</span><b>A parable in three styles</b>The Den already ran <a href="https://idvork.in/the-den-styles">one script through three models</a>. Doing that to a parable chapter would show whether the story or the drawing carries the idea.</li>
+    </ul>
+  </section>
+
+  <section class="block" id="drawing">
+    <h2>Drawing <span>S01–S05</span></h2>
+
+    <article class="strat" id="metaphor-cartoons">
+      <div class="head"><span class="n">S01</span><h3>Metaphor cartoons that argue</h3></div>
+      <p class="one">Each abstract point gets one drawing that makes the point as a picture, so the drawing could replace the paragraph.</p>
+      <dl>
+        <div><dt>Why it works</dt><dd>A metaphor is an argument the reader can check at a glance: a developer fishing from a boat labelled “chat” above submerged assumptions says what the section says, faster, and it sticks. Decoration can be deleted without loss; these cannot. Nadeem even borrows a meme format (the midwit bell curve) when the argument is that shape.</dd></div>
+        <div><dt>What it costs</dt><dd>The expensive part is the brief: one sentence naming the metaphor, the labels and what the reader should conclude. Rendering is cheap. Gutter owns the house raccoon style (gen-image, Gemini 3 Pro, about $0.13 and 40 s an image); Muse Image is about $0.01 and 26 s; GPT Image 2.5 runs $0.10 to $0.26. magick cuts the background to transparent. Expect two or three renders per keeper.</dd></div>
+        <div><dt>Live examples</dt><dd><a href="https://www.aymannadeem.com/artificial/intelligence,/developer/tools/2026/09/24/plan-mode-is-dead.html" target="_blank" rel="noopener">Plan mode is dead ↗</a> (seven cartoons, from the waterfall to the gravestone); <a href="https://idvorkin-ai-tools.github.io/hierarchy-of-money-field-map/story/fiat.html">Hierarchy of Money, fiat chapter</a> (“claims for black money pile up; the stones do not”).</dd></div>
+        <div><dt>Pairs with</dt><dd class="pairs"><span class="ok">post-mortem</span><span class="ok">parable</span><span class="ok">field map</span><span class="ok">one question</span><span class="ok">case study</span><span class="no">bake-off</span></dd></div>
+      </dl>
+    </article>
+
+    <article class="strat" id="cast">
+      <div class="head"><span class="n">S02</span><h3>A recurring cast</h3></div>
+      <p class="one">The same characters, drawn the same way, in every picture, with a cast page that introduces them once.</p>
+      <dl>
+        <div><dt>Why it works</dt><dd>The reader learns who stands for what once (the raccoon is the bank, the tortoise the central bank) and then every later panel reads instantly. A cast also turns drift into a checkable defect: one red claw, the right shirt.</dd></div>
+        <div><dt>What it costs</dt><dd>A reference sheet per character and a written canon, then every render is conditioned on it. Gutter and gen-image take the reference images; cheaper models drift (the Playground scores Muse and Recraft as “drifted” on style). Budget a re-render pass and a canon check per image.</dd></div>
+        <div><dt>Live examples</dt><dd><a href="https://idvorkin-ai-tools.github.io/hierarchy-of-money-field-map/story/cast.html">Hierarchy of Money, the cast</a>; <a href="https://idvork.in/the-den">The Den</a> (Larry, Igor and the attic, every week); <a href="https://idvorkin-ai-tools.github.io/gutter-model-playground/">Gutter Model Playground</a>.</dd></div>
+        <div><dt>Pairs with</dt><dd class="pairs"><span class="ok">parable</span><span class="ok">bake-off</span><span class="ok">post-mortem</span><span class="ok">case study</span><span class="no">close reading</span><span class="no">atlas</span></dd></div>
+      </dl>
+    </article>
+
+    <article class="strat" id="alt-text">
+      <div class="head"><span class="n">S03</span><h3>Full-sentence alt text</h3></div>
+      <p class="one">Every image's alt text is a sentence, or a paragraph, that says what the picture argues, not what it depicts.</p>
+      <dl>
+        <div><dt>Why it works</dt><dd>Read the alt texts alone and you should have the argument; that is the test that the pictures are doing work. It serves screen readers, search, and the next model that reads the page. Writing it also exposes cartoons that do not actually argue anything.</dd></div>
+        <div><dt>What it costs</dt><dd>Minutes per image, no tools. The Den writes panel-by-panel alt with every speech balloon quoted. Our weak spot: the chroma-key page and the Hierarchy of Money cast portraits use short labels.</dd></div>
+        <div><dt>Live examples</dt><dd><a href="https://idvorkin-ai-tools.github.io/dolt-explainer/">Why task state needs Dolt</a> (six diagrams, paragraph alts); <a href="https://idvorkin-ai-tools.github.io/hierarchy-of-money-field-map/story/intermediation.html">Hierarchy of Money scenes</a>; <a href="https://idvorkin-ai-tools.github.io/gutter-model-playground/">Gutter Model Playground</a>; Nadeem's seven cartoons.</dd></div>
+        <div><dt>Pairs with</dt><dd class="pairs"><span class="ok">anything with a picture</span></dd></div>
+      </dl>
+    </article>
+
+    <article class="strat" id="arrow-chains">
+      <div class="head"><span class="n">S04</span><h3>Arrow chains instead of paragraphs</h3></div>
+      <p class="one">A process written as one line of arrows, set against a second chain, so the shape of the contrast is the argument.</p>
+      <dl>
+        <div><dt>Why it works</dt><dd><span class="chain">chat → disambiguate → generate spec → review spec → revise spec → approve → implement → review code</span> against <span class="chain">understand → act → inspect → clarify → adjust → act again</span>. One is a waterfall and one is a loop, and you see it before you read it. The prose around it only annotates.</dd></div>
+        <div><dt>What it costs</dt><dd>Nothing but discipline: finding the fewest steps that are still true. Monospace in the page; optionally redrawn as a cartoon, which Nadeem also does.</dd></div>
+        <div><dt>Live examples</dt><dd><a href="https://www.aymannadeem.com/artificial/intelligence,/developer/tools/2026/09/24/plan-mode-is-dead.html" target="_blank" rel="noopener">Plan mode is dead ↗</a>, the two loops. Our sites use arrows only inside prose.</dd></div>
+        <div><dt>Pairs with</dt><dd class="pairs"><span class="ok">post-mortem</span><span class="ok">case study</span><span class="ok">one question</span><span class="ok">field map</span><span class="no">atlas</span><span class="no">close reading</span></dd></div>
+      </dl>
+    </article>
+
+    <article class="strat" id="mechanism-diagrams">
+      <div class="head"><span class="n">S05</span><h3>Mechanism diagrams</h3></div>
+      <p class="one">A hand-built diagram of the moving parts: which ref points where, what gets merged, where it breaks.</p>
+      <dl>
+        <div><dt>Why it works</dt><dd>Some explanations are topological. “Two agents commit the same SQLite file and git cannot merge it” is one picture and three confusing paragraphs.</dd></div>
+        <div><dt>What it costs</dt><dd>Inline SVG written by hand or by an agent, then checked in Playwright at phone width. Free to render, slow to get right; image models are bad at labelled diagrams, so this is not a job for Gutter.</dd></div>
+        <div><dt>Live examples</dt><dd><a href="https://idvorkin-ai-tools.github.io/dolt-explainer/">Why task state needs Dolt</a> (rollback, dual sync, refs topology).</dd></div>
+        <div><dt>Pairs with</dt><dd class="pairs"><span class="ok">one question</span><span class="ok">field map</span><span class="ok">case study</span><span class="ok">post-mortem</span><span class="no">close reading</span><span class="no">bake-off</span></dd></div>
+      </dl>
+    </article>
+  </section>
+
+  <section class="block" id="shape">
+    <h2>Shape <span>S06–S09</span></h2>
+
+    <article class="strat" id="skeleton">
+      <div class="head"><span class="n">S06</span><h3>The ten-second skeleton</h3></div>
+      <p class="one">The whole argument is readable from the top of the page: a TL;DR, or a list of reasons whose items reappear as the section headings.</p>
+      <dl>
+        <div><dt>Why it works</dt><dd>The skimmer gets the conclusion and the reader who stays gets a map of where each claim is defended. Nadeem lists four reasons he was wrong, then gives each one a section with the same heading; skim the headings and you have the post.</dd></div>
+        <div><dt>What it costs</dt><dd>An editing pass, no tools. The risk is a TL;DR that summarises the topic instead of stating the claim.</dd></div>
+        <div><dt>Live examples</dt><dd><a href="https://www.aymannadeem.com/artificial/intelligence,/developer/tools/2026/09/24/plan-mode-is-dead.html" target="_blank" rel="noopener">Plan mode is dead ↗</a>; the TL;DR box on every page of <a href="https://idvorkin-ai-tools.github.io/yegge-field-map/classic/platforms-rant.html">Stevey, Mapped</a> and <a href="https://idvorkin-ai-tools.github.io/man-in-the-arena/pages/close-reading.html">The Man in the Arena</a>.</dd></div>
+        <div><dt>Pairs with</dt><dd class="pairs"><span class="ok">every kind</span><span class="ok">strongest on post-mortem and field map</span></dd></div>
+      </dl>
+    </article>
+
+    <article class="strat" id="before-after">
+      <div class="head"><span class="n">S07</span><h3>Before and after, paired</h3></div>
+      <p class="one">Two things that differ in exactly one way, shown next to each other, so the difference is the lesson.</p>
+      <dl>
+        <div><dt>Why it works</dt><dd>A controlled comparison is the cheapest proof there is. Same person, same app, same silence gate: through AirPods only 0.35 s of a spoken “six” survives and the recogniser hears “Sex”; through a USB mic every word comes through whole. The reader draws the conclusion before you state it.</dd></div>
+        <div><dt>What it costs</dt><dd>Holding everything else fixed, which is the hard part. Then the capture: ffmpeg for audio, Playwright for screenshots, magick to lay two images side by side at the same size.</dd></div>
+        <div><dt>Live examples</dt><dd><a href="https://idvorkin-ai-tools.github.io/airpods-mic-explainer/">When AirPods Eat Your Words</a> (Exhibit A, Exhibit B); <a href="https://idvorkin-ai-tools.github.io/chroma-key-explainer/">Chroma-key hill-climbing</a> (on white against the alpha mask); <a href="https://idvorkin-ai-tools.github.io/build-gpt-field-map/parts/p06.html">Let's build GPT, part 6</a> (the numbers here against the finished script); Nadeem's two loops.</dd></div>
+        <div><dt>Pairs with</dt><dd class="pairs"><span class="ok">case study</span><span class="ok">post-mortem</span><span class="ok">one question</span><span class="ok">field map</span><span class="ok">atlas</span></dd></div>
+      </dl>
+    </article>
+
+    <article class="strat" id="objection">
+      <div class="head"><span class="n">S08</span><h3>The honest objection</h3></div>
+      <p class="one">A section, near the end, that argues against the page: the one caveat, the critiques, the shadow side.</p>
+      <dl>
+        <div><dt>Why it works</dt><dd>It is what makes the rest trustworthy. A page that names its best counter-argument has shown it looked for one. Nadeem's post is the counter-example: it never makes the case for when a plan still pays, and that is its main gap.</dd></div>
+        <div><dt>What it costs</dt><dd>Research time, and a writer brief that demands it; left to themselves, writers skip it.</dd></div>
+        <div><dt>Live examples</dt><dd><a href="https://idvorkin-ai-tools.github.io/yegge-field-map/classic/platforms-rant.html">“The one honest caveat”</a> on every Yegge page; <a href="https://idvorkin-ai-tools.github.io/arthur-brooks-field-map/books/strength-to-strength.html">“The one honest objection”</a> on Brooks; <a href="https://idvorkin-ai-tools.github.io/man-in-the-arena/pages/critiques.html">six critiques of the Arena</a>; the shadow section of <a href="https://idvorkin-ai-tools.github.io/clowns-explainer/">Why We Invented Clowns</a>.</dd></div>
+        <div><dt>Pairs with</dt><dd class="pairs"><span class="ok">field map</span><span class="ok">close reading</span><span class="ok">one question</span><span class="ok">post-mortem</span><span class="ok">atlas</span><span class="no">bake-off</span></dd></div>
+      </dl>
+    </article>
+
+    <article class="strat" id="best-lines">
+      <div class="head"><span class="n">S09</span><h3>Best lines, cited</h3></div>
+      <p class="one">The source's own sharpest sentences, quoted verbatim and linked to where they appear, collected so they can be found again.</p>
+      <dl>
+        <div><dt>Why it works</dt><dd>Our prose explains, and the author's lines are what the reader remembers and repeats. A cite link on every quote keeps it honest and sends traffic back.</dd></div>
+        <div><dt>What it costs</dt><dd>Checking each quote against the original or an archive mirror. Auto-captions mangle names, so quotes from video need a listen.</dd></div>
+        <div><dt>Live examples</dt><dd><a href="https://idvorkin-ai-tools.github.io/yegge-field-map/quotes.html">Stevey, Mapped: quotes</a> (176 blockquotes, each cited); <a href="https://idvorkin-ai-tools.github.io/arthur-brooks-field-map/books/strength-to-strength.html">“The lines worth keeping”</a>.</dd></div>
+        <div><dt>Pairs with</dt><dd class="pairs"><span class="ok">field map</span><span class="ok">close reading</span><span class="ok">parable</span><span class="no">bake-off</span></dd></div>
+      </dl>
+    </article>
+  </section>
+
+  <section class="block" id="evidence">
+    <h2>Evidence <span>S10–S15</span></h2>
+
+    <article class="strat" id="receipts">
+      <div class="head"><span class="n">S10</span><h3>Receipts under the joke</h3></div>
+      <p class="one">Every funny or pointed claim links to the real transcript it came from, one click down.</p>
+      <dl>
+        <div><dt>Why it works</dt><dd>The rule is Steve Yegge's and the Den keeps it: “If I can't produce the transcript, I don't get to draw the strip.” The joke lands harder because it happened, and the reader can check.</dd></div>
+        <div><dt>What it costs</dt><dd>A cleaned, public-safe transcript per claim, usually a gist, and a privacy pass before it ships. The receipts also have to exist before the drawing, which rules out anything made up.</dd></div>
+        <div><dt>Live examples</dt><dd><a href="https://idvork.in/the-den">The Den</a> (every strip carries a receipts block); <a href="https://idvork.in/ai-yegge-comics">Yegge's comic strip ships its receipts</a>. Not yet used on any kind on the spine.</dd></div>
+        <div><dt>Pairs with</dt><dd class="pairs"><span class="ok">post-mortem</span><span class="ok">case study</span><span class="ok">parable</span><span class="no">close reading</span></dd></div>
+      </dl>
+    </article>
+
+    <article class="strat" id="exhibits">
+      <div class="head"><span class="n">S11</span><h3>Playable exhibits</h3></div>
+      <p class="one">The evidence itself, in the page, one tap to play: the audio clip, not a description of it.</p>
+      <dl>
+        <div><dt>Why it works</dt><dd>Hearing “six” arrive as a 0.35-second sliver settles an argument a waveform chart cannot. The reader stops taking your word for it.</dd></div>
+        <div><dt>What it costs</dt><dd>ffmpeg to cut clips, embedded as WAV (Playwright's Chromium cannot decode AAC, so test with WAV). TTS samples cost about $0.02 for five seconds of speech.</dd></div>
+        <div><dt>Live examples</dt><dd><a href="https://idvorkin-ai-tools.github.io/airpods-mic-explainer/">When AirPods Eat Your Words</a> (six clips); <a href="https://idvorkin-ai-tools.github.io/larry-voice-samples/">Larry Voice Catalog</a> (twenty-odd voices, each with its own player).</dd></div>
+        <div><dt>Pairs with</dt><dd class="pairs"><span class="ok">case study</span><span class="ok">bake-off</span><span class="ok">field map</span><span class="ok">post-mortem</span></dd></div>
+      </dl>
+    </article>
+
+    <article class="strat" id="timestamps">
+      <div class="head"><span class="n">S12</span><h3>Timestamped source links</h3></div>
+      <p class="one">Every claim about a video links to the second it is said.</p>
+      <dl>
+        <div><dt>Why it works</dt><dd>It makes the page a better way into the source rather than a replacement for it, and every doubtful claim is one click from being checked. CS336 carries 1,618 of them.</dd></div>
+        <div><dt>What it costs</dt><dd>yt-dlp auto-captions (per video, then deduped), and one writer per chunk who verifies their own timestamps. Captions mangle proper nouns, so names get checked.</dd></div>
+        <div><dt>Live examples</dt><dd><a href="https://idvorkin-ai-tools.github.io/cs336-field-map/lectures/lec01.html">CS336, lecture 1</a>; <a href="https://idvorkin-ai-tools.github.io/build-gpt-field-map/">Let's build GPT</a>; <a href="https://idvorkin-ai-tools.github.io/3b1b-entropy-field-map/">Entropy, Mapped</a>. Brooks links 166 episodes but without timestamps.</dd></div>
+        <div><dt>Pairs with</dt><dd class="pairs"><span class="ok">field map</span><span class="ok">close reading of a speech on video</span><span class="no">atlas</span><span class="no">bake-off</span></dd></div>
+      </dl>
+    </article>
+
+    <article class="strat" id="transcript">
+      <div class="head"><span class="n">S13</span><h3>The transcript as its own page</h3></div>
+      <p class="one">The cleaned full text ships alongside the explainer, anchored by paragraph, so explanation and source are both one link away.</p>
+      <dl>
+        <div><dt>Why it works</dt><dd>It lets the explainer stay short and original: the source is there for anyone who wants the words. For a close reading, the full text is the object of study.</dd></div>
+        <div><dt>What it costs</dt><dd>Cleaning the captions into paragraphs with timestamp anchors; Parakeet for audio with no captions. Cheap once the timestamp pipeline exists.</dd></div>
+        <div><dt>Live examples</dt><dd><a href="https://idvorkin-ai-tools.github.io/cs336-field-map/transcripts/lec01.html">CS336 transcripts</a>; <a href="https://idvorkin-ai-tools.github.io/3b1b-entropy-field-map/transcripts/hamming1.html">Entropy, Mapped</a>; <a href="https://idvorkin-ai-tools.github.io/man-in-the-arena/transcript.html">the full 1910 speech</a>.</dd></div>
+        <div><dt>Pairs with</dt><dd class="pairs"><span class="ok">field map</span><span class="ok">close reading</span><span class="ok">case study (the session log)</span><span class="no">one question</span></dd></div>
+      </dl>
+    </article>
+
+    <article class="strat" id="line-links">
+      <div class="head"><span class="n">S14</span><h3>Line-linked code and data</h3></div>
+      <p class="one">Code is annotated against line ranges in the real repo, and every data row gets its own permalink back to the line it came from.</p>
+      <dl>
+        <div><dt>Why it works</dt><dd>“Line 69 does this” is checkable; “the model does this” is not. For a dataset, a permalink per row makes the page citable at the level people actually argue about.</dd></div>
+        <div><dt>What it costs</dt><dd>A pinned commit so the line numbers do not drift, and a script to generate the anchors. The HarmBench table adds a search box and three filters over 510 rows.</dd></div>
+        <div><dt>Live examples</dt><dd><a href="https://idvorkin-ai-tools.github.io/build-gpt-field-map/parts/p05.html">Let's build GPT, part 5</a>; <a href="https://idvorkin-ai-tools.github.io/harmbench-field-map/data/behaviors.html">HarmBench, all 510 behaviors</a>; <a href="https://idvorkin-ai-tools.github.io/cs336-field-map/assignments/a4.html">CS336 assignment 4</a> (every deliverable linked to its test).</dd></div>
+        <div><dt>Pairs with</dt><dd class="pairs"><span class="ok">field map</span><span class="ok">one question</span><span class="ok">case study (the diff)</span><span class="no">parable</span></dd></div>
+      </dl>
+    </article>
+
+    <article class="strat" id="checked">
+      <div class="head"><span class="n">S15</span><h3>Checked against the original</h3></div>
+      <p class="one">The source is checked against itself (paper against repo, handout against code, the famous quote against the first printing) and every disagreement is shown, not smoothed over.</p>
+      <dl>
+        <div><dt>Why it works</dt><dd>It is where a derived page earns more trust than the source. Finding that the paper says 40/20 and the CSV says 41/19 tells the reader someone actually looked.</dd></div>
+        <div><dt>What it costs</dt><dd>A verification pass with a link sweep (“33 URLs checked, 32 live”). It is slow, and it is the part agents skip unless the brief makes it the acceptance test.</dd></div>
+        <div><dt>Live examples</dt><dd><a href="https://idvorkin-ai-tools.github.io/harmbench-field-map/sources.html">HarmBench, where the sources disagree</a>; <a href="https://idvorkin-ai-tools.github.io/man-in-the-arena/pages/close-reading.html">the Arena against the 1910 printing</a>; <a href="https://idvorkin-ai-tools.github.io/micrograd-field-map/parts/p01.html">micrograd</a> (notebook against video); <a href="https://idvorkin-ai-tools.github.io/robert-moses-atlas/">Robert Moses Atlas</a> (two of Caro's claims marked disputed).</dd></div>
+        <div><dt>Pairs with</dt><dd class="pairs"><span class="ok">field map</span><span class="ok">close reading</span><span class="ok">atlas</span><span class="ok">parable</span><span class="ok">one question</span></dd></div>
+      </dl>
+    </article>
+  </section>
+
+  <section class="block" id="comparison">
+    <h2>Comparison <span>S16–S17</span></h2>
+
+    <article class="strat" id="bake-off-sheet">
+      <div class="head"><span class="n">S16</span><h3>The bake-off sheet</h3></div>
+      <p class="one">One frozen input through every candidate, outputs at the same size in a grid, with what each one really cost and how long it took.</p>
+      <dl>
+        <div><dt>Why it works</dt><dd>Only the tool varies, so the grid is the verdict. Measured cost per item ($0.010 to $0.255 an image on the Playground) beats a list-price table, and latency is often the deciding column.</dd></div>
+        <div><dt>What it costs</dt><dd>The renders themselves (the Playground cost about $0.96 for ten images), OpenRouter's billed cost field, and a stopwatch per call. Playwright to check the grid at phone width.</dd></div>
+        <div><dt>Live examples</dt><dd><a href="https://idvorkin-ai-tools.github.io/gutter-model-playground/">Gutter Model Playground</a>; <a href="https://idvorkin-ai-tools.github.io/larry-voice-samples/">Larry Voice Catalog</a>; <a href="https://idvorkin-ai-tools.github.io/chroma-key-explainer/">Chroma-key</a> (each keying approach side by side); <a href="https://idvork.in/the-den-styles">The Den, same script, three models</a>.</dd></div>
+        <div><dt>Pairs with</dt><dd class="pairs"><span class="ok">bake-off</span><span class="ok">one question</span><span class="ok">parable</span><span class="no">close reading</span><span class="no">atlas</span></dd></div>
+      </dl>
+    </article>
+
+    <article class="strat" id="scorecard">
+      <div class="head"><span class="n">S17</span><h3>A score you can climb</h3></div>
+      <p class="one">A written rubric or formula applied to every attempt, shown per attempt, so “better” means a number going down or a checkbox turning green.</p>
+      <dl>
+        <div><dt>Why it works</dt><dd>It turns taste into an eval. Chroma-key's <span class="chain">score = residual × 5 + holes</span> goes from 17,385 to 269; the Playground's five-point canon check (style, claw, beard, shirt, Crocs) makes model drift visible.</dd></div>
+        <div><dt>What it costs</dt><dd>Designing the metric, then scoring every output: a script for masks (magick), a zoomed-in look for canon checks. The metric can be gamed, so show the images next to the score.</dd></div>
+        <div><dt>Live examples</dt><dd><a href="https://idvorkin-ai-tools.github.io/chroma-key-explainer/">Chroma-key hill-climbing</a>; <a href="https://idvorkin-ai-tools.github.io/gutter-model-playground/">Gutter Model Playground</a>.</dd></div>
+        <div><dt>Pairs with</dt><dd class="pairs"><span class="ok">bake-off</span><span class="ok">one question</span><span class="ok">case study</span><span class="no">close reading</span><span class="no">parable</span></dd></div>
+      </dl>
+    </article>
+  </section>
+
+  <section class="block" id="interaction">
+    <h2>Interaction <span>S18–S19</span></h2>
+
+    <article class="strat" id="scrub">
+      <div class="head"><span class="n">S18</span><h3>A scrub control</h3></div>
+      <p class="one">One slider, playhead or step control that drives everything on screen, so the reader moves through time or through the steps themselves.</p>
+      <dl>
+        <div><dt>Why it works</dt><dd>Sequence becomes something you feel. Dragging from 1924 to 1968 and watching the expressways appear is the argument about accumulated power. On the parable, stepping through a chapter one move at a time shows the balance sheet change with each transaction.</dd></div>
+        <div><dt>What it costs</dt><dd>Real engineering: a dated, sourced event list, Leaflet or inline SVG, requestAnimationFrame, keyboard controls. Days, not hours, and Playwright tests for every breakpoint.</dd></div>
+        <div><dt>Live examples</dt><dd><a href="https://idvorkin-ai-tools.github.io/robert-moses-atlas/">Robert Moses Atlas</a> (drag, play, arrow keys); <a href="https://idvorkin-ai-tools.github.io/hierarchy-of-money-field-map/explainers/walkthrough.html">Hierarchy of Money walkthrough</a> (a 0 to 10 step slider).</dd></div>
+        <div><dt>Pairs with</dt><dd class="pairs"><span class="ok">atlas</span><span class="ok">parable</span><span class="ok">case study</span><span class="ok">post-mortem</span><span class="no">close reading</span></dd></div>
+      </dl>
+    </article>
+
+    <article class="strat" id="calculator">
+      <div class="head"><span class="n">S19</span><h3>A tested calculator</h3></div>
+      <p class="one">The answer as a live calculator with every assumption an editable field and every constant cited, and the arithmetic unit-tested.</p>
+      <dl>
+        <div><dt>Why it works</dt><dd>The reader's situation is never the example's. Letting them swap in their own numbers, with charts that redraw, turns a one-off answer into a tool, and the tests are why they can trust it.</dd></div>
+        <div><dt>What it costs</dt><dd>Plain JS and canvas charts, a Node test file per module (35 tests on cap-gains), and a citation for every constant. A day or two.</dd></div>
+        <div><dt>Live examples</dt><dd><a href="https://idvorkin-ai-tools.github.io/cap-gains-explainer/">Sell now or sell later</a> (three sliders, eleven inputs, two charts).</dd></div>
+        <div><dt>Pairs with</dt><dd class="pairs"><span class="ok">one question</span><span class="ok">field map (the napkin math)</span><span class="ok">bake-off (cost at your volume)</span><span class="no">close reading</span></dd></div>
+      </dl>
+    </article>
+  </section>
+
+  <p class="note">Left out on purpose: the read-progress checkboxes on the field maps and the scroll-reveal animation are navigation and polish, not ways of explaining. Everything listed was found on a live page; if a strategy turns up in a new site or a wild exemplar, it goes here. Suggest one by opening an issue on this index's repo.</p>
+</main>
+<footer>idvorkin-ai-tools · strategies page added 2026-09-26 · <a href="https://github.com/idvorkin-ai-tools/idvorkin-ai-tools.github.io">source</a></footer>
+</body>
+</html>
