@@ -20,7 +20,9 @@
   .brand{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;color:var(--ink-dim);display:flex;align-items:center;gap:10px}
   .dot{width:8px;height:8px;border-radius:50%;background:var(--def);box-shadow:0 0 12px var(--def)}
   .bar a.home{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-dim)}
+  @media(max-width:420px){.bar a.home{font-size:11px}.bar nav{flex-wrap:wrap;justify-content:flex-end;gap:2px 10px}}
   .bar nav{display:flex;gap:16px}
+  @media(max-width:420px){.bar-in{padding:12px 16px}.bar nav{gap:10px;font-size:11px}.brand{letter-spacing:.08em}}
   main{max-width:1080px;margin:0 auto;padding:56px 20px 80px}
   h1{font-size:clamp(30px,5vw,46px);line-height:1.1;margin:0 0 14px;letter-spacing:-.01em}
   .lead{font-size:18px;color:var(--ink-dim);max-width:720px;margin:0 0 44px}
@@ -47,11 +49,11 @@
 <body>
 <header class="bar"><div class="bar-in">
   <div class="brand"><span class="dot"></span>IDVORKIN-AI-TOOLS</div>
-  <nav><a class="home" href="kinds.html">kinds of explainer</a><a class="home" href="https://idvork.in" target="_blank" rel="noopener">idvork.in ↗</a></nav>
+  <nav><a class="home" href="kinds.html">kinds of explainer</a><a class="home" href="strategies.html">strategies</a><a class="home" href="https://idvork.in" target="_blank" rel="noopener">idvork.in ↗</a></nav>
 </div></header>
 <main>
   <h1>Explainers, field maps, and a few toys</h1>
-  <p class="lead">Everything with a live page in this org, in one place. Field maps take a course, an author or a subject and lay it out page by page with the sources pinned; explainers take one question and answer it properly. Built by <a href="https://idvork.in" target="_blank" rel="noopener">Igor Dvorkin</a>'s AI tools, reviewed by Igor. Cards say when each site was last touched. There are a few different <a href="kinds.html">kinds of explainer</a> here; that page says what each kind is for and shows an example we think is good.</p>
+  <p class="lead">Everything with a live page in this org, in one place. Field maps take a course, an author or a subject and lay it out page by page with the sources pinned; explainers take one question and answer it properly. Built by <a href="https://idvork.in" target="_blank" rel="noopener">Igor Dvorkin</a>'s AI tools, reviewed by Igor. Cards say when each site was last touched. There are a few different <a href="kinds.html">kinds of explainer</a> here; that page says what each kind is for and shows an example we think is good, and the <a href="strategies.html">production strategies</a> page pulls out the craft moves so they can be mixed with any kind.</p>
 
   <section id="ai">
     <h2>AI, models and safety <span>9 maps</span></h2>
