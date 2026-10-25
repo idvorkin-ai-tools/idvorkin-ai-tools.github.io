@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Safety and alignment, mapped — idvorkin-ai-tools</title>
+<meta name="description" content="A hub for the safety and alignment field maps: AI safety overview, BlueDot's Technical AI Safety course, Constitutional AI and Claude's constitution, the instruction hierarchy, agentic privacy, CIMemories, HarmBench and red teaming, with a reading order and how they connect." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{--paper:#0e0f12;--panel:#15171c;--ink:#e6e3da;--ink-dim:#8d8a80;--line:#2a2d35;--line-soft:#1e2027;--def:#5fd3e6;--off:#f0b34a;--pink:#f08ab8;--ok:#7fd69a}
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',system-ui,-apple-system,sans-serif;font-size:16px;line-height:1.6}
+  a{color:var(--def);text-decoration:none}
+  a:hover{text-decoration:underline;text-underline-offset:3px}
+  .bar{position:sticky;top:0;background:rgba(14,15,18,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:5}
+  .bar-in{max-width:1080px;margin:0 auto;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+  .brand{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;color:var(--ink-dim);display:flex;align-items:center;gap:10px}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--def);box-shadow:0 0 12px var(--def)}
+  .bar nav{display:flex;gap:16px}
+  .bar a.home{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-dim)}
+  @media(max-width:420px){.bar-in{padding:12px 16px}.bar nav{gap:10px;flex-wrap:wrap;justify-content:flex-end}.bar a.home{font-size:11px}.brand{letter-spacing:.08em}}
+  main{max-width:900px;margin:0 auto;padding:56px 20px 80px}
+  h1{font-size:clamp(30px,5vw,46px);line-height:1.1;margin:0 0 14px;letter-spacing:-.01em}
+  .lead{font-size:18px;color:var(--ink-dim);max-width:720px;margin:0 0 36px}
+  .lead a{color:var(--ink)}
+  section{margin:0 0 52px;scroll-margin-top:64px}
+  h2{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim);margin:0 0 16px;padding-bottom:8px;border-bottom:1px solid var(--line-soft)}
+  figure{margin:0 0 12px}
+  figure svg{display:block;width:100%;height:auto;background:var(--panel);border:1px solid var(--line);border-radius:10px}
+  figcaption{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-dim);margin-top:8px}
+  svg text{font-family:'IBM Plex Mono',monospace}
+  ol.order{padding-left:1.4em;margin:0}
+  ol.order li{margin:0 0 10px;color:var(--ink-dim)}
+  ol.order li b{color:var(--ink)}
+  .map{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:0 0 12px}
+  .map h3{margin:0 0 4px;font-size:17px;line-height:1.3}
+  .map .q{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--off);margin:0 0 8px}
+  .map p{margin:0;color:var(--ink-dim);font-size:15px}
+  footer{max-width:900px;margin:0 auto;padding:24px 20px 48px;border-top:1px solid var(--line-soft);font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-dim)}
+  footer a{color:var(--ink-dim);text-decoration:underline;text-underline-offset:3px}
+</style>
+</head>
+<body>
+<header class="bar"><div class="bar-in">
+  <div class="brand"><span class="dot"></span>SAFETY&nbsp;&amp;&nbsp;ALIGNMENT</div>
+  <nav><a class="home" href="./">index</a><a class="home" href="kinds.html">kinds</a><a class="home" href="https://idvork.in" target="_blank" rel="noopener">idvork.in ↗</a></nav>
+</div></header>
+<main>
+  <h1>Safety and alignment, mapped</h1>
+  <p class="lead">Eight field maps in this org are about making AI systems behave: what the field is, how a model is given values, whose instructions it should follow, what it may do with what it knows, and how to test it. They were built separately and now link into each other. This page says what question each answers, suggests an order, and shows how they connect. Back to <a href="./">all maps</a>.</p>
+
+  <section id="graph">
+    <h2>How they connect</h2>
+    <figure>
+      <svg viewBox="0 0 660 380" role="img" aria-label="Graph of the eight safety and alignment maps. Instruction hierarchy sits in the middle with bridge pages to Constitutional AI, Agentic privacy and CIMemories. Constitutional AI, Agentic privacy and CIMemories also link to each other through related-maps blocks. Constitutional AI links to Technical AI Safety. AI Safety overview and Technical AI Safety are orientation maps; HarmBench and the red-teaming ramp-up cover testing.">
+        <title>How the safety and alignment maps connect</title>
+        <g stroke="#2a2d35" stroke-width="1.5" fill="none" stroke-dasharray="5 5">
+          <line x1="345" y1="80" x2="545" y2="170"/>
+          <line x1="345" y1="80" x2="545" y2="300"/>
+          <line x1="560" y1="170" x2="560" y2="300"/>
+          <line x1="345" y1="80" x2="125" y2="150"/>
+          <line x1="125" y1="60" x2="125" y2="150"/>
+          <line x1="125" y1="250" x2="125" y2="330"/>
+        </g>
+        <g stroke="#5fd3e6" stroke-width="2.2" fill="none">
+          <line x1="345" y1="215" x2="345" y2="80"/>
+          <line x1="345" y1="215" x2="545" y2="170"/>
+          <line x1="345" y1="215" x2="545" y2="300"/>
+        </g>
+        <g font-size="12" text-anchor="middle">
+          <rect x="35" y="38" width="180" height="44" rx="8" fill="#15171c" stroke="#8d8a80"/><text x="125" y="58" fill="#e6e3da">AI Safety</text><text x="125" y="74" fill="#8d8a80" font-size="10.5">overview</text>
+          <rect x="35" y="128" width="180" height="44" rx="8" fill="#15171c" stroke="#8d8a80"/><text x="125" y="148" fill="#e6e3da">Technical AI Safety</text><text x="125" y="164" fill="#8d8a80" font-size="10.5">BlueDot course</text>
+          <rect x="35" y="228" width="180" height="44" rx="8" fill="#15171c" stroke="#f08ab8"/><text x="125" y="248" fill="#e6e3da">HarmBench</text><text x="125" y="264" fill="#8d8a80" font-size="10.5">testing</text>
+          <rect x="35" y="308" width="180" height="44" rx="8" fill="#15171c" stroke="#f08ab8"/><text x="125" y="328" fill="#e6e3da">Red teaming ramp-up</text><text x="125" y="344" fill="#8d8a80" font-size="10.5">testing</text>
+          <rect x="255" y="58" width="180" height="44" rx="8" fill="#15171c" stroke="#f0b34a"/><text x="345" y="78" fill="#e6e3da">Constitutional AI</text><text x="345" y="94" fill="#8d8a80" font-size="10.5">values</text>
+          <rect x="255" y="193" width="180" height="44" rx="8" fill="#15171c" stroke="#5fd3e6" stroke-width="2"/><text x="345" y="213" fill="#e6e3da">Instruction hierarchy</text><text x="345" y="229" fill="#8d8a80" font-size="10.5">whose orders</text>
+          <rect x="470" y="148" width="180" height="44" rx="8" fill="#15171c" stroke="#7fd69a"/><text x="560" y="168" fill="#e6e3da">Agentic privacy</text><text x="560" y="184" fill="#8d8a80" font-size="10.5">appropriate flows</text>
+          <rect x="470" y="278" width="180" height="44" rx="8" fill="#15171c" stroke="#7fd69a"/><text x="560" y="298" fill="#e6e3da">CIMemories</text><text x="560" y="314" fill="#8d8a80" font-size="10.5">memory</text>
+        </g>
+        <g font-size="10.5" fill="#8d8a80">
+          <line x1="255" y1="352" x2="285" y2="352" stroke="#5fd3e6" stroke-width="2.2"/><text x="292" y="356">bridge page</text>
+          <line x1="390" y1="352" x2="420" y2="352" stroke="#2a2d35" stroke-width="1.5" stroke-dasharray="5 5"/><text x="427" y="356">related link or shared topic</text>
+        </g>
+      </svg>
+      <figcaption>Solid lines are full bridge pages on the instruction-hierarchy map. Dashed lines are "Related maps" links between sites or maps on the same topic.</figcaption>
+    </figure>
+  </section>
+
+  <section id="order">
+    <h2>A reading order</h2>
+    <ol class="order">
+      <li><b>Get the lay of the land:</b> AI Safety, then Technical AI Safety for the course-length version.</li>
+      <li><b>How a model gets its values:</b> Constitutional AI, the 2022 paper and Claude's 2026 constitution.</li>
+      <li><b>Whose instructions count:</b> Instruction hierarchy, which bridges back to the constitution.</li>
+      <li><b>What an agent may do with information:</b> Agentic privacy, then CIMemories for the memory case.</li>
+      <li><b>How to test all of it:</b> HarmBench and the red-teaming ramp-up.</li>
+    </ol>
+  </section>
+
+  <section id="maps">
+    <h2>The maps</h2>
+    <div class="map"><h3><a href="https://idvorkin-ai-tools.github.io/ai-safety-field-map/">AI Safety &mdash; A Field Map</a></h3><div class="q">What is the field, and where do I start?</div><p>An engineer's orientation to alignment, interpretability, evaluations and governance: the subfields, who works on what, and an entry point into each.</p></div>
+    <div class="map"><h3><a href="https://idvorkin-ai-tools.github.io/technical-ai-safety-field-map/">Technical AI Safety, Mapped</a></h3><div class="q">What does a full course on technical safety cover?</div><p>BlueDot Impact's course in six units and twenty-seven chapters, with every reading linked and every exercise written out: RLHF, scalable oversight, interpretability, evaluation.</p></div>
+    <div class="map"><h3><a href="https://idvorkin-ai-tools.github.io/constitutional-ai-field-map/">Constitutional AI, Mapped</a></h3><div class="q">How do you train a model from a written set of values?</div><p>Anthropic's 2022 paper (self-critique and RL from AI feedback) section by section, then Claude's 2026 constitution chapter by chapter: ranked core values, principals, honesty, harm, hard constraints, corrigibility.</p></div>
+    <div class="map"><h3><a href="https://idvorkin-ai-tools.github.io/instruction-hierarchy-field-map/">Instruction Hierarchy, Mapped</a></h3><div class="q">When instructions conflict, whose wins?</div><p>The papers that rank system, user and tool text (Wallace et al. 2024, segment embeddings, reasoning-based training, many-tier hierarchies), plus three bridges: to contextual integrity, to the constitution's principals, and to memory.</p></div>
+    <div class="map"><h3><a href="https://idvorkin-ai-tools.github.io/agentic-privacy-field-map/">Agentic Privacy, Mapped</a></h3><div class="q">What should an agent be allowed to do with what it can reach?</div><p>The CAPS workshop report: contextual integrity applied to AI agents, why least privilege breaks, the contextual policy engine, and all 51 open problems.</p></div>
+    <div class="map"><h3><a href="https://idvorkin-ai-tools.github.io/cimemories-field-map/">CIMemories, Mapped</a></h3><div class="q">Does an assistant with memory tell the right things to the right people?</div><p>A benchmark of remembered facts and recipients: every model tested leaks, leaks accumulate with use, and privacy prompts turn everything down at once.</p></div>
+    <div class="map"><h3><a href="https://idvorkin-ai-tools.github.io/harmbench-field-map/">HarmBench, Mapped</a></h3><div class="q">How do you measure whether attacks get through?</div><p>The standard automated red-teaming benchmark by harm category, behavior type and attack method, with what the attack-success number hides.</p></div>
+    <div class="map"><h3><a href="https://idvorkin-ai-tools.github.io/red-teaming-ramp-up/">Red Teaming Models &mdash; A Ramp-Up Map</a></h3><div class="q">How does a security person start testing models?</div><p>Threat models, attack families, evaluations and how the field is organized, for security professionals moving into adversarial AI testing.</p></div>
+  </section>
+</main>
+<footer>idvorkin-ai-tools · safety and alignment hub · <a href="./">all maps</a> · <a href="https://github.com/idvorkin-ai-tools/idvorkin-ai-tools.github.io">source</a></footer>
+</body>
+</html>
