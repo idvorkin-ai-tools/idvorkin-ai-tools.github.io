@@ -30,6 +30,10 @@
   figure{margin:0 0 12px}
   figure svg{display:block;width:100%;height:auto;background:var(--panel);border:1px solid var(--line);border-radius:10px}
   figcaption{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-dim);margin-top:8px}
+  svg a{cursor:pointer}
+  svg .hit{stroke:transparent;stroke-width:14}
+  svg a.edge:hover line:not(.hit),svg a.edge:focus line:not(.hit){stroke:#e6e3da;stroke-width:3}
+  svg a.node:hover rect,svg a.node:focus rect{fill:#1f232b}
   svg text{font-family:'IBM Plex Mono',monospace}
   ol.order{padding-left:1.4em;margin:0}
   ol.order li{margin:0 0 10px;color:var(--ink-dim)}
@@ -56,35 +60,33 @@
     <figure>
       <svg viewBox="0 0 660 380" role="img" aria-label="Graph of the eight safety and alignment maps. Instruction hierarchy sits in the middle with bridge pages to Constitutional AI, Agentic privacy and CIMemories. Constitutional AI, Agentic privacy and CIMemories also link to each other through related-maps blocks. Constitutional AI links to Technical AI Safety. AI Safety overview and Technical AI Safety are orientation maps; HarmBench and the red-teaming ramp-up cover testing.">
         <title>How the safety and alignment maps connect</title>
-        <g stroke="#2a2d35" stroke-width="1.5" fill="none" stroke-dasharray="5 5">
-          <line x1="345" y1="80" x2="545" y2="170"/>
-          <line x1="345" y1="80" x2="545" y2="300"/>
-          <line x1="560" y1="170" x2="560" y2="300"/>
-          <line x1="345" y1="80" x2="125" y2="150"/>
-          <line x1="125" y1="60" x2="125" y2="150"/>
-          <line x1="125" y1="250" x2="125" y2="330"/>
-        </g>
-        <g stroke="#5fd3e6" stroke-width="2.2" fill="none">
-          <line x1="345" y1="215" x2="345" y2="80"/>
-          <line x1="345" y1="215" x2="545" y2="170"/>
-          <line x1="345" y1="215" x2="545" y2="300"/>
+        <g fill="none">
+          <a href="https://idvorkin-ai-tools.github.io/constitutional-ai-field-map/#related" class="edge"><title>Related maps: Constitutional AI to Agentic privacy</title><line x1="345" y1="80" x2="545" y2="170" stroke="#2a2d35" stroke-width="1.5" stroke-dasharray="5 5"/><line class="hit" x1="345" y1="80" x2="545" y2="170"/></a>
+          <a href="https://idvorkin-ai-tools.github.io/constitutional-ai-field-map/#related" class="edge"><title>Related maps: Constitutional AI to CIMemories</title><line x1="345" y1="80" x2="545" y2="300" stroke="#2a2d35" stroke-width="1.5" stroke-dasharray="5 5"/><line class="hit" x1="345" y1="80" x2="545" y2="300"/></a>
+          <a href="https://idvorkin-ai-tools.github.io/agentic-privacy-field-map/#related" class="edge"><title>Related maps: Agentic privacy to CIMemories</title><line x1="560" y1="170" x2="560" y2="300" stroke="#2a2d35" stroke-width="1.5" stroke-dasharray="5 5"/><line class="hit" x1="560" y1="170" x2="560" y2="300"/></a>
+          <a href="https://idvorkin-ai-tools.github.io/constitutional-ai-field-map/#related" class="edge"><title>Related maps: Constitutional AI to Technical AI Safety</title><line x1="345" y1="80" x2="125" y2="150" stroke="#2a2d35" stroke-width="1.5" stroke-dasharray="5 5"/><line class="hit" x1="345" y1="80" x2="125" y2="150"/></a>
+          <a href="#order" class="edge"><title>Shared topic: start with AI Safety, then Technical AI Safety</title><line x1="125" y1="60" x2="125" y2="150" stroke="#2a2d35" stroke-width="1.5" stroke-dasharray="5 5"/><line class="hit" x1="125" y1="60" x2="125" y2="150"/></a>
+          <a href="#order" class="edge"><title>Shared topic: testing, HarmBench and the red-teaming ramp-up</title><line x1="125" y1="250" x2="125" y2="330" stroke="#2a2d35" stroke-width="1.5" stroke-dasharray="5 5"/><line class="hit" x1="125" y1="250" x2="125" y2="330"/></a>
+          <a href="https://idvorkin-ai-tools.github.io/instruction-hierarchy-field-map/bridge/constitution.html" class="edge"><title>Bridge page: instruction hierarchy and the constitution</title><line x1="345" y1="215" x2="345" y2="80" stroke="#5fd3e6" stroke-width="2.2"/><line class="hit" x1="345" y1="215" x2="345" y2="80"/></a>
+          <a href="https://idvorkin-ai-tools.github.io/instruction-hierarchy-field-map/bridge/contextual-integrity.html" class="edge"><title>Bridge page: instruction hierarchy and contextual integrity</title><line x1="345" y1="215" x2="545" y2="170" stroke="#5fd3e6" stroke-width="2.2"/><line class="hit" x1="345" y1="215" x2="545" y2="170"/></a>
+          <a href="https://idvorkin-ai-tools.github.io/instruction-hierarchy-field-map/bridge/memory.html" class="edge"><title>Bridge page: instruction hierarchy and memory</title><line x1="345" y1="215" x2="545" y2="300" stroke="#5fd3e6" stroke-width="2.2"/><line class="hit" x1="345" y1="215" x2="545" y2="300"/></a>
         </g>
         <g font-size="12" text-anchor="middle">
-          <rect x="35" y="38" width="180" height="44" rx="8" fill="#15171c" stroke="#8d8a80"/><text x="125" y="58" fill="#e6e3da">AI Safety</text><text x="125" y="74" fill="#8d8a80" font-size="10.5">overview</text>
-          <rect x="35" y="128" width="180" height="44" rx="8" fill="#15171c" stroke="#8d8a80"/><text x="125" y="148" fill="#e6e3da">Technical AI Safety</text><text x="125" y="164" fill="#8d8a80" font-size="10.5">BlueDot course</text>
-          <rect x="35" y="228" width="180" height="44" rx="8" fill="#15171c" stroke="#f08ab8"/><text x="125" y="248" fill="#e6e3da">HarmBench</text><text x="125" y="264" fill="#8d8a80" font-size="10.5">testing</text>
-          <rect x="35" y="308" width="180" height="44" rx="8" fill="#15171c" stroke="#f08ab8"/><text x="125" y="328" fill="#e6e3da">Red teaming ramp-up</text><text x="125" y="344" fill="#8d8a80" font-size="10.5">testing</text>
-          <rect x="255" y="58" width="180" height="44" rx="8" fill="#15171c" stroke="#f0b34a"/><text x="345" y="78" fill="#e6e3da">Constitutional AI</text><text x="345" y="94" fill="#8d8a80" font-size="10.5">values</text>
-          <rect x="255" y="193" width="180" height="44" rx="8" fill="#15171c" stroke="#5fd3e6" stroke-width="2"/><text x="345" y="213" fill="#e6e3da">Instruction hierarchy</text><text x="345" y="229" fill="#8d8a80" font-size="10.5">whose orders</text>
-          <rect x="470" y="148" width="180" height="44" rx="8" fill="#15171c" stroke="#7fd69a"/><text x="560" y="168" fill="#e6e3da">Agentic privacy</text><text x="560" y="184" fill="#8d8a80" font-size="10.5">appropriate flows</text>
-          <rect x="470" y="278" width="180" height="44" rx="8" fill="#15171c" stroke="#7fd69a"/><text x="560" y="298" fill="#e6e3da">CIMemories</text><text x="560" y="314" fill="#8d8a80" font-size="10.5">memory</text>
+          <a href="https://idvorkin-ai-tools.github.io/ai-safety-field-map/" class="node"><title>AI Safety</title><rect x="35" y="38" width="180" height="44" rx="8" fill="#15171c" stroke="#8d8a80"/><text x="125" y="58" fill="#e6e3da">AI Safety</text><text x="125" y="74" fill="#8d8a80" font-size="10.5">overview</text></a>
+          <a href="https://idvorkin-ai-tools.github.io/technical-ai-safety-field-map/" class="node"><title>Technical AI Safety</title><rect x="35" y="128" width="180" height="44" rx="8" fill="#15171c" stroke="#8d8a80"/><text x="125" y="148" fill="#e6e3da">Technical AI Safety</text><text x="125" y="164" fill="#8d8a80" font-size="10.5">BlueDot course</text></a>
+          <a href="https://idvorkin-ai-tools.github.io/harmbench-field-map/" class="node"><title>HarmBench</title><rect x="35" y="228" width="180" height="44" rx="8" fill="#15171c" stroke="#f08ab8"/><text x="125" y="248" fill="#e6e3da">HarmBench</text><text x="125" y="264" fill="#8d8a80" font-size="10.5">testing</text></a>
+          <a href="https://idvorkin-ai-tools.github.io/red-teaming-ramp-up/" class="node"><title>Red teaming ramp-up</title><rect x="35" y="308" width="180" height="44" rx="8" fill="#15171c" stroke="#f08ab8"/><text x="125" y="328" fill="#e6e3da">Red teaming ramp-up</text><text x="125" y="344" fill="#8d8a80" font-size="10.5">testing</text></a>
+          <a href="https://idvorkin-ai-tools.github.io/constitutional-ai-field-map/" class="node"><title>Constitutional AI</title><rect x="255" y="58" width="180" height="44" rx="8" fill="#15171c" stroke="#f0b34a"/><text x="345" y="78" fill="#e6e3da">Constitutional AI</text><text x="345" y="94" fill="#8d8a80" font-size="10.5">values</text></a>
+          <a href="https://idvorkin-ai-tools.github.io/instruction-hierarchy-field-map/" class="node"><title>Instruction hierarchy</title><rect x="255" y="193" width="180" height="44" rx="8" fill="#15171c" stroke="#5fd3e6" stroke-width="2"/><text x="345" y="213" fill="#e6e3da">Instruction hierarchy</text><text x="345" y="229" fill="#8d8a80" font-size="10.5">whose orders</text></a>
+          <a href="https://idvorkin-ai-tools.github.io/agentic-privacy-field-map/" class="node"><title>Agentic privacy</title><rect x="470" y="148" width="180" height="44" rx="8" fill="#15171c" stroke="#7fd69a"/><text x="560" y="168" fill="#e6e3da">Agentic privacy</text><text x="560" y="184" fill="#8d8a80" font-size="10.5">appropriate flows</text></a>
+          <a href="https://idvorkin-ai-tools.github.io/cimemories-field-map/" class="node"><title>CIMemories</title><rect x="470" y="278" width="180" height="44" rx="8" fill="#15171c" stroke="#7fd69a"/><text x="560" y="298" fill="#e6e3da">CIMemories</text><text x="560" y="314" fill="#8d8a80" font-size="10.5">memory</text></a>
         </g>
         <g font-size="10.5" fill="#8d8a80">
-          <line x1="255" y1="352" x2="285" y2="352" stroke="#5fd3e6" stroke-width="2.2"/><text x="292" y="356">bridge page</text>
-          <line x1="390" y1="352" x2="420" y2="352" stroke="#2a2d35" stroke-width="1.5" stroke-dasharray="5 5"/><text x="427" y="356">related link or shared topic</text>
+          <a href="https://idvorkin-ai-tools.github.io/instruction-hierarchy-field-map/" class="node"><title>The instruction-hierarchy map and its bridge pages</title><line x1="255" y1="352" x2="285" y2="352" stroke="#5fd3e6" stroke-width="2.2"/><text x="292" y="356">bridge page</text></a>
+          <a href="#maps" class="node"><title>All eight maps</title><line x1="390" y1="352" x2="420" y2="352" stroke="#2a2d35" stroke-width="1.5" stroke-dasharray="5 5"/><text x="427" y="356">related link or shared topic</text></a>
         </g>
       </svg>
-      <figcaption>Solid lines are full bridge pages on the instruction-hierarchy map. Dashed lines are "Related maps" links between sites or maps on the same topic.</figcaption>
+      <figcaption>Solid lines are full bridge pages on the instruction-hierarchy map. Dashed lines are "Related maps" links between sites or maps on the same topic. Click any box to open its map, or any line to open the page that connects them.</figcaption>
     </figure>
   </section>
 
