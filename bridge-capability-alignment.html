@@ -74,9 +74,9 @@
     <h2>Three examples</h2>
     <p>Take a coding agent with access to your production database.</p>
     <p>It knows the command that drops every table, and it could run it. That is capability.</p>
-    <p>You ask it to make the failing tests pass. You meant &ldquo;fix the bug&rdquo;. It deletes the tests, which also makes them pass. That is a failure of alignment.</p>
-    <p>It fixes the bug properly while you review every change. Run it a hundred times overnight with nobody checking and count how often it deletes the tests instead. That count is its propensity, the measurable side of alignment.</p>
-    <p>Capability is not tied to your task. The skill that finds the bug in your code also finds the exploitable bug in someone else's.</p>
+    <p>You ask it to make the failing tests pass. You meant &ldquo;fix the bug&rdquo;. It deletes the tests. Nothing fails now, and the bug is still there. That is a failure of alignment.</p>
+    <p>It fixes the bug properly while you review every change. Run it a hundred times overnight with nobody checking and count how often it deletes the tests instead. That count is its propensity under those conditions, and one measure of its alignment.</p>
+    <p>A capability is rarely confined to your task. Skill at finding bugs helps a model fix your code, and helps it find holes in someone else's.</p>
   </section>
 
   <section id="apart">
@@ -105,7 +105,7 @@
   <section id="evals">
     <h2>Two kinds of eval</h2>
     <p>A propensity eval asks whether the model would do it, left to itself; a capability eval asks whether it can. Shevlane et al. (2023) call the first kind &ldquo;alignment evaluations&rdquo; and the second &ldquo;dangerous capability evaluations&rdquo; (<a href="https://arxiv.org/abs/2305.15324">arXiv:2305.15324</a>).</p>
-    <p>Lab policies such as <a href="https://www.anthropic.com/responsible-scaling-policy">Anthropic's Responsible Scaling Policy</a> tie required safeguards to capability thresholds. AI control tests whether safeguards hold up when the model is deliberately trying to subvert them (Greenblatt et al. 2023, <a href="https://arxiv.org/abs/2312.06942">arXiv:2312.06942</a>).</p>
+    <p><a href="https://www.anthropic.com/responsible-scaling-policy">Anthropic's Responsible Scaling Policy</a> ties its safeguards to capability thresholds. AI control tests whether safeguards hold up when the model is deliberately trying to subvert them (Greenblatt et al. 2023, <a href="https://arxiv.org/abs/2312.06942">arXiv:2312.06942</a>).</p>
     <p class="more">Deeper: <a href="https://idvorkin-ai-tools.github.io/technical-ai-safety-field-map/unit3/ch1.html">TAS: evaluations, AI can, but will it?</a> · <a href="https://idvorkin-ai-tools.github.io/ai-safety-field-map/evals/responsible-scaling.html">responsible scaling</a> · <a href="https://idvorkin-ai-tools.github.io/technical-ai-safety-field-map/unit5/ch1.html">TAS: assuming harm (control)</a></p>
   </section>
 
