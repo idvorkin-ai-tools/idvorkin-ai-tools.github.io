@@ -92,7 +92,7 @@
       <div class="map"><h3>Meta</h3>
         <p><b>Framework:</b> <a href="https://research.meta.ai/static/meta-superintelligence-scaling-framework">Meta Superintelligence Scaling Framework</a> v2.1, October 2, 2026. Earlier names: Frontier AI Framework (Feb 2025), Advanced AI Scaling Framework v2 (Apr 2026).</p>
         <p><b>Latest full report:</b> <a href="https://research.meta.ai/static/muse-spark-1-3-evaluation-report/">Muse Spark 1.3 Evaluation Report</a>, October 23, 2026. Before it: the Muse Spark report (model launched April 8; current PDF dated May 26), Contemplating (June 3), 1.1 (July 9).</p>
-        <p><b>Newest model:</b> Muse Wonder (October 12) has an 8-page <a href="https://research.meta.ai/static/muse-wonder-model-card">model card</a> with a short risk section; no full report found as of 2026-11-21.</p>
+        <p><b>Also:</b> a separate model family, Muse Wonder (released October 12), has an 8-page <a href="https://research.meta.ai/static/muse-wonder-model-card">model card</a> with a short risk section; no full report found as of 2026-11-21.</p>
         <p class="more"><a href="https://idvorkin-ai-tools.github.io/technical-ai-safety-field-map/unit3/ch6.html">TAS: Meta's framework</a></p></div>
       <div class="map"><h3>OpenAI</h3>
         <p><b>Framework:</b> <a href="https://cdn.openai.com/pdf/18a02b5d-6b67-4cec-ab64-68cdfbddebcd/preparedness-framework-v2.pdf">Preparedness Framework</a> v2, April 15, 2025, still the version the newest card cites. A companion <a href="https://cdn.openai.com/pdf/e37d949b-8c9f-4d76-b99e-4272f4631a7e/openai-frontier-governance-framework.pdf">Frontier Governance Framework</a> maps it onto regulatory tiers.</p>
@@ -125,7 +125,7 @@
         <td>CBRN, offensive cyber, loss of control, harmful manipulation (added June 2026).</td></tr>
       <tr><td>Threshold style</td>
         <td>Three levels (critical, high, moderate or lower), defined by whether the model could "substantially contribute to" a threat scenario. Some numbers, as illustrations: at least 80% refusal on BioTIER, at least 40% on MASK, at most 50% on Agentic Misalignment.</td>
-        <td>Two levels, High and Critical, defined in words. The card lists indicative numeric cutoffs (83% on GPQA Diamond, 90% on PostTrainBench Lite), but the call is "holistic judgment".</td>
+        <td>Two levels, High and Critical, defined in words. The card lists indicative numeric cutoffs (83% on GPQA Diamond, 90% on PostTrainBench Lite), but the framework says the call "reflects holistic judgment".</td>
         <td>Mostly arguments rather than levels. One number: automated R&amp;D means doubling the rate of AI progress, or replacing all research staff within 5× the cost. Reports use labels like CB-1, CB-2, Autonomy-1, Autonomy-2.</td>
         <td>Critical Capability Levels (severe harm), Tracked Capability Levels (significant harm) and earlier alert thresholds. The framework is in words; reports state numeric rule-out bars.</td>
         <td>"Risk tiers", no published numbers. The December 2025 version had two: under 1 in 20 answers on restricted bio queries, under 1 in 2 dishonest on MASK. June 2026 removed both.</td></tr>
@@ -154,7 +154,7 @@
         <td>Bio threat scenarios; the manipulation test method; the safety cases themselves.</td>
         <td>Threshold values. Its own evals are not cited: "Internal evaluations are not listed."</td></tr>
       <tr><td>Cadence</td>
-        <td>A report per frontier release, plus preliminary checks before A/B tests. The newest model has only a model card so far.</td>
+        <td>A report per frontier release, plus preliminary checks before A/B tests. Muse Wonder, released October 12, has only a model card so far.</td>
         <td>A card per model before deployment, plus addenda; several in October–November 2026.</td>
         <td>A card per model; a company-wide Risk Report every 3–6 months, "not ... with each new model release".</td>
         <td>A full assessment before a new frontier model's first external deployment; derived models get a check for material capability change. Reports can trail the card.</td>
@@ -167,7 +167,7 @@
         <td>Numbers, with no thresholds shown.</td></tr>
     </table></div>
     <h3 class="sub">What stands out</h3>
-    <p>The same capability gets very different words. On largely the same cyber benchmarks, OpenAI calls GPT-6.2 Critical, DeepMind says Argon's cyber CCL "cannot be ruled out", and Meta rates Muse Spark 1.3 "moderate or lower". The scales are not interchangeable.</p>
+    <p>The verdicts are not on a shared scale. For cyber, OpenAI calls GPT-6.2 Critical, DeepMind says Argon's CCL "cannot be ruled out", and Meta rates unmitigated Muse Spark 1.3 "moderate or lower". Part of that is a real capability gap (Meta's own table has Muse Spark 1.3 at 28.7 on ExploitBench capability coverage, against 73.5 for GPT-5.6 Sol), but each lab also defines its levels and chooses its tests differently, so the labels do not line up.</p>
     <p>OpenAI's v2 framework says that for a Critical cyber model, "until we have specified safeguards and security controls standards that would meet a Critical standard, halt further development". The GPT-6.2 card declares Critical, ships with its strongest safeguards, and still cites v2; we did not find where it addresses that line.</p>
     <p>Thresholds are moving in both directions. Meta's v2 changed critical risk from "Stop" to "Develop with Mitigations" but added numeric acceptance criteria. xAI deleted its numbers. Anthropic's v3 split its own commitments from industry-wide recommendations it "cannot commit to following ... unilaterally".</p>
     <p>Persuasion is split: OpenAI dropped it, DeepMind and xAI track manipulation, Meta does not list it. The labs that measure evaluation awareness all report it: Apollo told Meta that Muse Spark had the highest rate it had seen, Anthropic saw it in up to 43% of audit transcripts, and DeepMind calls it pervasive in Argon's cyber and stealth tests.</p>
@@ -205,7 +205,7 @@
       <tr><td>Gray Swan</td><td class="what">Agent red-teaming and <a href="https://arxiv.org/abs/2603.15714">prompt-injection arena</a>. Partly public.</td><td class="c">●</td><td class="c n">○ held-out</td><td class="c">●</td><td class="c">●</td><td class="c n">–</td></tr>
     </table></div>
     <p class="hint">Notes: ○ sandbagging = used to test whether the model underperforms on purpose, not as a capability score. ○ retired = named as dropped (saturated or near the maximum). ○ honeypot = OpenAI uses ExploitGym tasks believed impossible to see whether an agent cheats. ○ held-out = Gray Swan scenarios as a held-out test set. ○ earlier report = Meta's checkpoint result from the first Muse Spark report.</p>
-    <p><b>Shared most:</b> ExploitBench, ExploitGym and CyScenarioBench (four labs each, everyone but xAI) and VCT (four labs, everyone but DeepMind). xAI's cyber tests overlap with the others' only on CyberGym, shared with Meta. The same name is not the same number: labs run different subsets, harnesses and attempt counts, and Meta's first Muse Spark report flags such mismatches when it quotes other labs' Cybench and CyScenarioBench scores.</p>
+    <p><b>Shared most:</b> ExploitBench and CyScenarioBench (results from four labs each, everyone but xAI), VCT (four, everyone but DeepMind) and ExploitGym (three, plus OpenAI's honeypot use). xAI's cyber tests overlap with the others' only on CyberGym, shared with Meta. The same name is not the same number: labs run different subsets, harnesses and attempt counts, and Meta's first Muse Spark report flags such mismatches when it quotes other labs' Cybench and CyScenarioBench scores.</p>
     <p><b>Internal or undisclosed, by lab:</b> Meta: BioDesign Tools, high-risk bottleneck tests, PostTrainBench's siblings ResearchTasteBench and OptimBench. OpenAI: AAV, SHP2 and other bio-design tasks, NanoGPT, Sandbox Bench, FrontierCyber. Anthropic: Dyno sequence-design tasks, CoBench (results not reported), Binary Exploitation Benchmark. DeepMind: expert bio red teaming, the 22-attack cyber uplift model, Google RE-Bench. xAI: HackerBench, Biosecurity VCT, BioUseBench, Autointent.</p>
     <p><b>Benchmarks wear out:</b> Meta says Muse Spark 1.1 saturated Cybench, Anthropic retired CyberGym "due to saturation", and DeepMind calls CyScenarioBench saturated after Argon solved every end-to-end challenge. Each lab then moves to harder, often private, tests.</p>
     <p><b>HarmBench:</b> no latest report scores it. Meta's Contemplating report borrows its GCG attack to stress refusals. Several labs grade with LLM judges (StrongREJECT, DeepMind's manipulation tests, Anthropic's sandbagging audit), so the <a href="https://idvorkin-ai-tools.github.io/llm-judges-field-map/">LLM judges</a> questions apply.</p>
