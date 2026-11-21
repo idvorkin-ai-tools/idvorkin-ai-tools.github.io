@@ -74,8 +74,10 @@
   message goes to `<Cockpit>/page-chat`, the page's own Cockpit thread (made
   on its first message), so the same conversation is in the Cockpit; his
   replies there show in the panel, polled every CHAT_POLL_MS while it is
-  open and the tab is visible. Same Cockpit address as SEND TO LARRY; a
-  Cockpit that predates the route says so in the panel.
+  open and the tab is visible. Same Cockpit address as SEND TO LARRY. A
+  Cockpit that predates the route looks the same as one out of reach (its 404 has no CORS header):
+  the panel says "can't reach the Cockpit, or it has no page chat yet"
+  and keeps the text; a resend of the same text reuses its id.
 
   SECURITY: the GitHub token lives ONLY in this browser's localStorage under
   `blogAnnotateToken` and is sent only to api.github.com. Use one with the
@@ -1108,6 +1110,10 @@
           throw new Error("this Cockpit has no page chat yet");
         if (!res.ok) throw new Error("Cockpit returned " + res.status);
         return res.json();
+      }, function () {
+        // An older Cockpit answers 404 with no CORS header, which the browser
+        // reports as a failed fetch, the same as being off the tailnet.
+        throw new Error("can't reach the Cockpit, or it has no page chat yet");
       });
     }
 
@@ -1185,14 +1191,20 @@
 
     var chatPrev = "";
     var chatEnterAt = null;
+    var chatFailed = null; // {text, id} of the last send that failed
 
     function chatSend() {
       var text = chatTa.value.trim();
       if (!text || chatBusy || !LARRY) return Promise.resolve();
       chatBusy = true;
       chatSendBtn.disabled = true;
+      // a retry of the same text keeps its id: if the first try landed after
+      // all (a timeout), the Cockpit sees a duplicate and wakes nobody twice
       var id =
-        "pc-" + Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
+        chatFailed && chatFailed.text === text
+          ? chatFailed.id
+          : "pc-" + Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
+      chatFailed = null;
       var el = chatAdd({ id: id, who: "igor", text: text }, "sending");
       chatTa.value = "";
       chatPrev = "";
@@ -1216,6 +1228,7 @@
         .catch(function (err) {
           if (el.parentNode) el.parentNode.removeChild(el);
           delete chatSeen[id];
+          chatFailed = { text: text, id: id };
           if (!chatTa.value) chatTa.value = chatPrev = text;
           chatStatus("Not sent (" + (err.message || err) + "). Your text is kept.");
         })
