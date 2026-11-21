@@ -36,9 +36,9 @@
   h2/h3 headings; a heading hit links with a #:~:text= fragment). Arrows
   move, Enter opens, Esc or a tap outside closes. Maps and Pages come from
   /search.json on the host that serves this script, fetched on the first
-  open only; it is built by scripts/build_search.py in the org repo
-  (for now --maps-only, rerun when index.html changes; Pages is empty
-  until the crawl ships). If it fails to load, This page still works.
+  open only; it is built by scripts/build_search.py in the org repo,
+  nightly and on index changes, by the "search index" Action. If it fails
+  to load, This page still works.
 
   OWNER vs READER. The setup prompts (Cockpit address, GitHub token), the
   `#larry-cockpit=` fragment and the status dot are the owner's alone. A
@@ -705,8 +705,14 @@
         // Instant, not the page's smooth scroll-behavior, and clear of any
         // fixed header (the bar sits just under it).
         var off = (bar && parseInt(bar.style.top, 10)) || 0;
-        var y = h.el.getBoundingClientRect().top + window.scrollY - off - 8;
-        window.scrollTo({ top: Math.max(0, y), behavior: "instant" });
+        function jump() {
+          var y = h.el.getBoundingClientRect().top + window.scrollY - off - 8;
+          window.scrollTo({ top: Math.max(0, y), behavior: "instant" });
+        }
+        jump();
+        // Scroll-reveal animations shift the layout as sections come into
+        // view; land again once they have settled.
+        setTimeout(jump, 450);
       });
     });
     var n = here.length;

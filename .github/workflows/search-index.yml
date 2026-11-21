@@ -1,0 +1,31 @@
+# Rebuilds search.json (the index behind the 🔍 search on every explainer
+# page) nightly, on index changes, and by hand. Commits only when it changed.
+name: search index
+on:
+  schedule:
+    - cron: "17 10 * * *" # 03:17 Pacific (PDT)
+  push:
+    branches: [main]
+    paths: [index.html, "*.html", scripts/build_search.py, .github/workflows/search-index.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: search-index
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/build_search.py
+      - name: Commit if changed
+        run: |
+          git diff --quiet search.json && { echo "search.json unchanged"; exit 0; }
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add search.json
+          git commit -m "search.json: nightly rebuild"
+          git pull --rebase --autostash origin main
+          git push origin HEAD:main
