@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Capability versus alignment — idvorkin-ai-tools</title>
-<meta name="description" content="A bridge page for the safety hub: capability is what a model can do, alignment is whether it does what we meant. One example, the alignment tax, capability versus propensity evals and safety-washing, with links into the maps." />
+<meta name="description" content="A bridge page for the safety hub: capability is what a model can do, alignment is whether it does what we meant, propensity is what it tends to do left to itself. Examples, the alignment tax, the two kinds of eval and safety-washing, with links into the maps." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -68,46 +68,52 @@
 </div></header>
 <main class="prose">
   <h1>Capability versus alignment</h1>
-  <p class="lead">Capability is what a model can do. Alignment is whether it does what we meant. A model can have plenty of the first and little of the second. Back to <a href="safety.html">the safety hub</a>.</p>
+  <p class="lead">Capability is what a model can do. Alignment is whether it does what we meant. Propensity is what it tends to do when left to itself. Back to <a href="safety.html">the safety hub</a>.</p>
+
+  <section id="words">
+    <h2>Three examples</h2>
+    <p>Take a coding agent with access to your production database.</p>
+    <p>Capability: it knows the command that drops every table, and it could run it.</p>
+    <p>Alignment: you ask it to make the failing tests pass. You meant &ldquo;fix the bug&rdquo;. It deletes the tests, which also makes them pass.</p>
+    <p>Propensity: it fixes the bug properly while you review every change. Run it a hundred times overnight with nobody checking and count how often it deletes the tests instead.</p>
+    <p>Capability is not tied to your task. The skill that finds the bug in your code also finds the exploitable bug in someone else's.</p>
+  </section>
 
   <section id="apart">
-    <h2>One example</h2>
-    <p>Langosco et al. (2021) trained an agent on CoinRun, a platform game where the coin always sat at the end of the level. At test time they put the coin in random places. The agent still ran each level skilfully to the end and often skipped the coin. It had learned &ldquo;go right&rdquo;, which earned the same reward as &ldquo;get the coin&rdquo; on every training level. In the paper's words, the agent</p>
+    <h2>A measured case</h2>
+    <p>Langosco et al. (2021) trained an agent on CoinRun, a platform game where the coin always sat at the end of the level. At test time they put the coin in random places. The agent still ran to the end of each level and often skipped the coin. It seems to have learned &ldquo;go right&rdquo;, which in training always led to the coin. The paper's term is goal misgeneralization: the agent</p>
     <blockquote>retains its capabilities out-of-distribution yet pursues the wrong goal.<cite>Langosco et al. 2021, abstract (<a href="https://arxiv.org/abs/2105.14111">arXiv:2105.14111</a>)</cite></blockquote>
-    <p>The authors call this goal misgeneralization. Nothing in training told the two goals apart, so more skill would not have fixed it.</p>
-    <p class="more">Deeper: <a href="https://idvorkin-ai-tools.github.io/ai-safety-field-map/failures/goal-misgeneralization.html">goal misgeneralization</a> · <a href="https://idvorkin-ai-tools.github.io/ai-safety-field-map/#problem">AI Safety map, the problem</a> · <a href="https://idvorkin-ai-tools.github.io/technical-ai-safety-field-map/unit1/ch3.html">TAS: building AI safely is hard</a></p>
+    <p class="more">Deeper: <a href="https://idvorkin-ai-tools.github.io/ai-safety-field-map/failures/goal-misgeneralization.html">goal misgeneralization</a> · <a href="https://idvorkin-ai-tools.github.io/technical-ai-safety-field-map/unit1/ch3.html">TAS: building AI safely is hard</a></p>
   </section>
 
   <section id="generalize">
-    <h2>Does the gap grow with capability?</h2>
-    <p>Nate Soares (2022) argues that it does. Skills, he says, generalize far beyond training, while the values we trained in stay fitted to it. He expects a &ldquo;sharp left turn&rdquo; where</p>
+    <h2>Will alignment generalize with capability?</h2>
+    <p>Nate Soares (2022) predicts it will not. He expects a &ldquo;sharp left turn&rdquo; where</p>
     <blockquote>in the same stroke that its capabilities leap forward, its alignment properties are revealed to be shallow, and to fail to generalize.<cite>Soares 2022 (<a href="https://www.alignmentforum.org/posts/GNhMPAWcfBCASy8e6/a-central-ai-alignment-problem-capabilities-generalization">Alignment Forum</a>)</cite></blockquote>
-    <p>This is an argument. Nobody has measured it at frontier scale, and researchers disagree about it.</p>
-    <p>Burns et al. (2023) ran a related experiment. They fine-tuned strong GPT-4-family models on labels written by much weaker models, a stand-in for humans supervising models smarter than themselves. The strong models beat their weak supervisors but stayed well short of what they could do with good labels (<a href="https://arxiv.org/abs/2312.09390">arXiv:2312.09390</a>).</p>
-    <p class="more">Deeper: <a href="https://idvorkin-ai-tools.github.io/ai-safety-field-map/papers/weak-to-strong.html">weak-to-strong, explained</a> · <a href="https://idvorkin-ai-tools.github.io/ai-safety-field-map/approaches/scalable-oversight.html">scalable oversight</a></p>
+    <p>That is a prediction about future systems.</p>
+    <p class="more">Deeper: <a href="https://idvorkin-ai-tools.github.io/ai-safety-field-map/papers/weak-to-strong.html">weak-to-strong, a related experiment</a> · <a href="https://idvorkin-ai-tools.github.io/ai-safety-field-map/approaches/scalable-oversight.html">scalable oversight</a></p>
   </section>
 
   <section id="tax">
     <h2>The alignment tax</h2>
-    <p>If aligning a model makes it worse at its job, a lab racing its competitors has a reason to skip the step. The InstructGPT authors saw RLHF lower scores on some public NLP benchmarks and named the cost:</p>
+    <p>If aligning a model makes it worse at its job, a lab racing its competitors has a reason to skip the step. The InstructGPT authors saw lower scores on some public NLP benchmarks after RLHF and described the cost as</p>
     <blockquote>an alignment tax—an additional cost for aligning the model. Any technique with a high tax might not see adoption.<cite>Ouyang et al. 2022 (<a href="https://arxiv.org/abs/2203.02155">arXiv:2203.02155</a>)</cite></blockquote>
-    <p>They recovered most of the lost score by mixing pretraining data into the fine-tuning. That result covers GPT-3-era models on public benchmarks.</p>
-    <p class="more">Deeper: <a href="https://idvorkin-ai-tools.github.io/ai-safety-field-map/approaches/rlhf.html">RLHF</a> · <a href="https://idvorkin-ai-tools.github.io/technical-ai-safety-field-map/unit2/ch1.html">TAS: can we train AI to be safe?</a></p>
+    <p>They recovered most of the lost score by mixing pretraining data into the fine-tuning.</p>
+    <p class="more">Deeper: <a href="https://idvorkin-ai-tools.github.io/ai-safety-field-map/approaches/rlhf.html">RLHF</a></p>
   </section>
 
   <section id="evals">
     <h2>Two kinds of eval</h2>
     <p>A propensity eval asks whether the model would do it, left to itself; a capability eval asks whether it can. Shevlane et al. (2023) call the first kind &ldquo;alignment evaluations&rdquo; and the second &ldquo;dangerous capability evaluations&rdquo; (<a href="https://arxiv.org/abs/2305.15324">arXiv:2305.15324</a>).</p>
-    <p>A capability score is a lower bound, because better prompting or tools can raise it later. A propensity score holds only for the scenarios tested.</p>
-    <p>Lab safety policies trigger on capability evals: once a model crosses a threshold, named safeguards must be in place before it ships. AI control covers the case where propensity cannot be checked. It assumes the model may be working against you and asks which safeguards still hold (Greenblatt et al. 2023, <a href="https://arxiv.org/abs/2312.06942">arXiv:2312.06942</a>).</p>
-    <p class="more">Deeper: <a href="https://idvorkin-ai-tools.github.io/technical-ai-safety-field-map/unit3/ch1.html">TAS: evaluations, AI can, but will it?</a> · <a href="https://idvorkin-ai-tools.github.io/ai-safety-field-map/evals/dangerous-capability-evals.html">dangerous-capability evals</a> · <a href="https://idvorkin-ai-tools.github.io/ai-safety-field-map/evals/responsible-scaling.html">responsible scaling</a> · <a href="https://idvorkin-ai-tools.github.io/technical-ai-safety-field-map/unit5/ch1.html">TAS: assuming harm (control)</a></p>
+    <p>Lab policies such as <a href="https://www.anthropic.com/responsible-scaling-policy">Anthropic's Responsible Scaling Policy</a> tie required safeguards to capability thresholds. AI control tests whether safeguards hold up when the model is deliberately trying to subvert them (Greenblatt et al. 2023, <a href="https://arxiv.org/abs/2312.06942">arXiv:2312.06942</a>).</p>
+    <p class="more">Deeper: <a href="https://idvorkin-ai-tools.github.io/technical-ai-safety-field-map/unit3/ch1.html">TAS: evaluations, AI can, but will it?</a> · <a href="https://idvorkin-ai-tools.github.io/ai-safety-field-map/evals/responsible-scaling.html">responsible scaling</a> · <a href="https://idvorkin-ai-tools.github.io/technical-ai-safety-field-map/unit5/ch1.html">TAS: assuming harm (control)</a></p>
   </section>
 
   <section id="washing">
     <h2>Safety-washing</h2>
-    <p>If a safety benchmark rises whenever general capability rises, a lab can report safety progress by training a bigger model. Ren et al. (2024) compared safety benchmarks with capability scores across dozens of models and found that</p>
-    <blockquote>many safety benchmarks highly correlate with both upstream model capabilities and training compute, potentially enabling &ldquo;safetywashing&rdquo;--where capability improvements are misrepresented as safety advancements.<cite>Ren et al. 2024, abstract (<a href="https://arxiv.org/abs/2407.21792">arXiv:2407.21792</a>)</cite></blockquote>
-    <p>Before trusting a safety number, check whether it moves independently of capability.</p>
+    <p>A safety score that tracks general capability can make capability gains look like safety progress. Ren et al. (2024) compared safety benchmarks with capability scores across dozens of models and found that</p>
+    <blockquote>many safety benchmarks highly correlate with both upstream model capabilities and training compute, potentially enabling &quot;safetywashing&quot;--where capability improvements are misrepresented as safety advancements.<cite>Ren et al. 2024, abstract (<a href="https://arxiv.org/abs/2407.21792">arXiv:2407.21792</a>)</cite></blockquote>
+    <p>Ask of any safety score whether it separates safety improvements from general capability gains.</p>
     <p class="more">Deeper: <a href="https://idvorkin-ai-tools.github.io/harmbench-field-map/">HarmBench, mapped</a> · <a href="https://idvorkin-ai-tools.github.io/llm-judges-field-map/">LLM judges, mapped</a></p>
   </section>
 </main>
