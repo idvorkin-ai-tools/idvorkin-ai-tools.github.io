@@ -71,7 +71,9 @@
       localStorage `blogLarryCockpit`, set once by the prompt on the first
       Send or by opening any page with `#larry-cockpit=<origin>` (a fragment,
       so it stays out of server logs; it strips itself and asks before
-      replacing a different saved address). Only an https origin on a
+      replacing a different saved address). The fragment is saved only in
+      the owner's browser (see OWNER vs READER); on a new device open
+      `?annotate=1#larry-cockpit=<origin>`. Only an https origin on a
       tailnet name or localhost is accepted. That Cockpit must allow CORS
       from this origin (its `cors_origins`).
     * If the POST fails, errors or hangs past COCKPIT_TIMEOUT_MS: one SECRET
@@ -392,14 +394,15 @@
   // sticky, or a <nav>/<header> (the blog's navbar scrolls with the page).
   function headerAt(y) {
     var el = document.elementFromPoint(window.innerWidth - 24, y);
+    var best = null; // the outermost band, so a nav inside a header counts as the header
     for (; el && el !== document.body && el !== document.documentElement; el = el.parentElement) {
       var pos = window.getComputedStyle(el).position;
       var band = el.tagName === "NAV" || el.tagName === "HEADER";
       if (pos !== "fixed" && pos !== "sticky" && !band) continue;
       var r = el.getBoundingClientRect();
-      if (r.top <= y && r.bottom > y && r.bottom < window.innerHeight / 3) return r;
+      if (r.top <= y && r.bottom > y && r.bottom < window.innerHeight / 3) best = r;
     }
-    return null;
+    return best;
   }
 
   // Top right, but under the page's own fixed or sticky headers, so the
@@ -407,7 +410,7 @@
   function placeBar() {
     bar.style.display = "none";
     var bottom = 0;
-    for (var i = 0, r; i < 3 && (r = headerAt(bottom + 4)); i++) bottom = r.bottom;
+    for (var i = 0, r; i < 3 && (r = headerAt(bottom + 16)); i++) bottom = r.bottom;
     bar.style.display = "";
     bar.style.top = bottom ? Math.round(bottom + 6) + "px" : "";
   }
