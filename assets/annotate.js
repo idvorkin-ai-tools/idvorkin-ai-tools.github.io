@@ -8,7 +8,9 @@
   It is a port of the blog's _includes/annotate.html (idvorkin.github.io)
   with no Jekyll in it: page identity comes from the URL, not from Liquid.
   Left out on purpose: the blog's rendered-diff view and its "open PRs touch
-  this page" badge, both specific to the blog repo.
+  this page" badge, both specific to the blog repo. The blog puts the 💬
+  toggle in its navbar, next to the navbar's own GitHub link; here, with no
+  shared header, it is the floating top-right pair.
 
   KEEP IN SYNC (Igor 2026-11-21): this file and the blog's
   _includes/annotate.html are double-written. A fix or feature in one is
@@ -382,12 +384,14 @@
       window.location.pathname;
   }
 
-  // The fixed or sticky header band under (right edge, y), or null.
+  // The header band under (right edge, y), or null: anything fixed or
+  // sticky, or a <nav>/<header> (the blog's navbar scrolls with the page).
   function headerAt(y) {
     var el = document.elementFromPoint(window.innerWidth - 24, y);
     for (; el && el !== document.body && el !== document.documentElement; el = el.parentElement) {
       var pos = window.getComputedStyle(el).position;
-      if (pos !== "fixed" && pos !== "sticky") continue;
+      var band = el.tagName === "NAV" || el.tagName === "HEADER";
+      if (pos !== "fixed" && pos !== "sticky" && !band) continue;
       var r = el.getBoundingClientRect();
       if (r.top <= y && r.bottom > y && r.bottom < window.innerHeight / 3) return r;
     }
