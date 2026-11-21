@@ -10,6 +10,11 @@
   Left out on purpose: the blog's rendered-diff view and its "open PRs touch
   this page" badge, both specific to the blog repo.
 
+  KEEP IN SYNC (Igor 2026-11-21): this file and the blog's
+  _includes/annotate.html are double-written. A fix or feature in one is
+  ported to the other in the same change, or filed against the other the
+  same day. The blog copy is the spec.
+
   INERT BY DEFAULT. Readers get no UI and no network calls; the only cost is
   this file's fetch and parse, plus one keydown listener. Everything else is
   guarded by a localStorage flag that only the owner ever sets. The one
