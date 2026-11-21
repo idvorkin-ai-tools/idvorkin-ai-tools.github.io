@@ -68,7 +68,7 @@
   <p class="lead">Everything with a live page in this org, in one place. Field maps take a course, an author or a subject and lay it out page by page with the sources pinned; explainers take one question and answer it properly. Built by <a href="https://idvork.in" target="_blank" rel="noopener">Igor Dvorkin</a>'s AI tools, reviewed by Igor. Cards say when each site was last touched. There are a few different <a href="kinds.html">kinds of explainer</a> here; that page says what each kind is for and shows an example we think is good, and the <a href="strategies.html">production strategies</a> page pulls out the craft moves so they can be mixed with any kind.</p>
 
   <nav class="tabs" aria-label="Groups">
-    <a href="#safety" id="tab-safety">Safety and alignment<span>11 maps + a bridge</span></a>
+    <a href="#safety" id="tab-safety">Safety and alignment<span>12 maps + a bridge</span></a>
     <a href="#ai" id="tab-ai">LLMs: how they are built and judged<span>4 pages</span></a>
     <a href="#learning" id="tab-learning">Courses and learning<span>2 maps</span></a>
     <a href="#people" id="tab-people">People, mapped<span>3 maps</span></a>
@@ -79,7 +79,7 @@
   </nav>
 
   <section id="safety" data-tab>
-    <h2><a href="safety.html">Safety and alignment &rarr;</a> <span>11 maps + a bridge</span></h2>
+    <h2><a href="safety.html">Safety and alignment &rarr;</a> <span>12 maps + a bridge</span></h2>
     <p class="sec-note">Maps that link into each other; start with the capability-versus-alignment bridge. <a href="safety.html">The safety hub</a> says what question each answers, in what order to read them, and how they connect.</p>
     <div class="grid">
       <a class="card" href="bridge-capability-alignment.html"><span class="t">Capability versus Alignment &mdash; Start Here</span><span class="d">The first question a reader brings: isn&#39;t a smarter model a safer one? What each word means and why they come apart, the alignment tax, whether capabilities generalize further than alignment, weak-to-strong generalization, capability versus propensity evals, and safety-washing, with links into the maps and to the primary sources.</span><span class="m"><b>BRIDGE</b><span>2026-11</span></span></a>
@@ -96,11 +96,12 @@
       <a class="card" href="https://idvorkin-ai-tools.github.io/model-spec-field-map/"><span class="t">OpenAI&#39;s Model Spec, Mapped &mdash; and the Delta with Claude&#39;s Constitution</span><span class="d">The 2026-10-29 Model Spec in fourteen parts: five values, the Root &gt; System &gt; Developer &gt; User &gt; Guideline authority ladder, red lines, corrigibility, honesty, memory and teen safety. Then a section-by-section comparison with Claude&#39;s 2026 constitution.</span><span class="m"><b>FIELD MAP</b><span>2026-11</span></span></a>
       <a class="card" href="https://idvorkin-ai-tools.github.io/instruction-hierarchy-field-map/"><span class="t">Instruction Hierarchy, Mapped &mdash; Who Gets to Give a Model Orders</span><span class="d">The papers on ranking a model&#39;s instructions by source: Wallace et al. 2024 (system &gt; user &gt; tool, trained on synthetic conflicts), Instructional Segment Embedding (rank as a per-token embedding), VerIH (reasoning about precedence with verifiable rewards) and ManyIH (up to 12 tiers set at run time, best model 42.7%), plus StruQ/SecAlign and the Model Spec chain of command. A comparison page and three bridges into the contextual-integrity, constitution and CIMemories maps; inline diagrams, every number checked against the PDFs.</span><span class="m"><b>FIELD MAP</b><span>2026-10</span></span></a>
     </div>
-    <h3 class="sub">Evaluations and red teaming <span>2 maps</span></h3>
-    <p class="sec-note">How to measure whether a model can be pushed into harm, and how people go about testing it.</p>
+    <h3 class="sub">Evaluations and red teaming <span>3 maps</span></h3>
+    <p class="sec-note">How to measure whether a model can be pushed into harm, how people go about testing it, and when to trust the model doing the grading.</p>
     <div class="grid">
       <a class="card" href="https://idvorkin-ai-tools.github.io/harmbench-field-map/"><span class="t">HarmBench, Mapped</span><span class="d">The standard automated red-teaming benchmark, laid out so you can browse it by harm: a page for each of the seven categories, the four behavior types and their three grading paths, eighteen attack methods with a deep link per method, and what the ASR number hides. All 510 behavior IDs are permalinked and line-linked to the source CSV. Counts parsed from the shipped CSVs; four paper/repo discrepancies found and shown.</span><span class="m"><b>FIELD MAP</b><span>2026-09</span></span></a>
       <a class="card" href="https://idvorkin-ai-tools.github.io/red-teaming-ramp-up/"><span class="t">Red Teaming Models — A Ramp-Up Map</span><span class="d">A self-contained guide for security professionals moving into adversarial AI testing: threat models, attack families, evals, and how the field is organised.</span><span class="m"><b>FIELD MAP</b><span>2026-06</span></span></a>
+      <a class="card" href="https://idvorkin-ai-tools.github.io/llm-judges-field-map/"><span class="t">LLM Judges, Mapped &mdash; Judging and Grading, a Mini-Course</span><span class="d">Nine units and a maths appendix on whether to believe an LLM judge: the written policy, scoring versus pairwise versus reference grading, inter-judge agreement (percent agreement, Cohen&#39;s and Fleiss&#39; kappa, Krippendorff&#39;s alpha), the confusion matrix, Youden&#39;s J and ROC, position, verbosity, self-preference, halo and Goodhart failures, validating a judge, and when not to trust one. A site-wide menu retells every example as job interviews, performance reviews, wine judging, medicine or umpires, on the same numbers; lots of inline diagrams.</span><span class="m"><b>FIELD MAP</b><span>2026-11</span></span></a>
     </div>
     <h3 class="sub">Interpretability <span>1 map</span></h3>
     <p class="sec-note">Reading what a model represents inside, rather than only what it says.</p>
