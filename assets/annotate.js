@@ -119,7 +119,9 @@
       if (!m || !segs.length) return { repo: "", path: "" };
       repo = m[1] + "/" + segs[0];
     }
-    var rest = segs.slice(1);
+    // With data-repo the site is served from the host root (the org index
+    // itself), so no path segment names the repo.
+    var rest = override ? segs : segs.slice(1);
     var path;
     if (!rest.length || /\/$/.test(pathname)) {
       path = rest.concat(["index.html"]).join("/");
