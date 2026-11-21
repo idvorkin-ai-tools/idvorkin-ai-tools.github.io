@@ -46,6 +46,14 @@
   h2 a{color:var(--ink-dim)}
   h2 a:hover{color:var(--def)}
   .note{font-size:13.5px;color:var(--ink-dim);border-left:2px solid var(--line);padding:6px 14px;margin:0 0 40px}
+  .tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:thin;-webkit-overflow-scrolling:touch;margin:0 0 28px;padding:0 0 8px;border-bottom:1px solid var(--line-soft)}
+  .tabs a{flex:0 0 auto;white-space:nowrap;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.04em;color:var(--ink-dim);border:1px solid var(--line);border-radius:999px;padding:6px 12px}
+  .tabs a span{opacity:.7;margin-left:6px}
+  .tabs a:hover{color:var(--ink);border-color:var(--ink-dim);text-decoration:none}
+  .tabs a[aria-selected="true"]{color:var(--paper);background:var(--def);border-color:var(--def)}
+  .tabs a[aria-selected="true"] span{opacity:.8}
+  @media(min-width:900px){.tabs{flex-wrap:wrap;overflow-x:visible}}
+  .tabbed section[data-tab]:not(.on){display:none}
   footer{max-width:1080px;margin:0 auto;padding:24px 20px 48px;border-top:1px solid var(--line-soft);font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-dim)}
   footer a{color:var(--ink-dim);text-decoration:underline;text-underline-offset:3px}
 </style>
@@ -59,17 +67,26 @@
   <h1>Explainers, field maps, and a few toys</h1>
   <p class="lead">Everything with a live page in this org, in one place. Field maps take a course, an author or a subject and lay it out page by page with the sources pinned; explainers take one question and answer it properly. Built by <a href="https://idvork.in" target="_blank" rel="noopener">Igor Dvorkin</a>'s AI tools, reviewed by Igor. Cards say when each site was last touched. There are a few different <a href="kinds.html">kinds of explainer</a> here; that page says what each kind is for and shows an example we think is good, and the <a href="strategies.html">production strategies</a> page pulls out the craft moves so they can be mixed with any kind.</p>
 
-  <section id="safety">
-    <h2><a href="safety.html">Safety and alignment &rarr;</a> <span>11 maps</span></h2>
-    <p class="sec-note">Maps that link into each other. <a href="safety.html">The safety hub</a> says what question each answers, in what order to read them, and how they connect.</p>
+  <nav class="tabs" aria-label="Groups">
+    <a href="#safety" id="tab-safety">Safety and alignment<span>11 maps + a bridge</span></a>
+    <a href="#ai" id="tab-ai">LLMs: how they are built and judged<span>4 pages</span></a>
+    <a href="#learning" id="tab-learning">Courses and learning<span>2 maps</span></a>
+    <a href="#people" id="tab-people">People, mapped<span>3 maps</span></a>
+    <a href="#world" id="tab-world">The world, explained<span>5 pages</span></a>
+    <a href="#viz" id="tab-viz">Cool Visualizations<span>1 page</span></a>
+    <a href="#tools" id="tab-tools">Tooling and engineering notes<span>4 pages</span></a>
+    <a href="#toys" id="tab-toys">Trips, toys and samples<span>4 pages</span></a>
+  </nav>
+
+  <section id="safety" data-tab>
+    <h2><a href="safety.html">Safety and alignment &rarr;</a> <span>11 maps + a bridge</span></h2>
+    <p class="sec-note">Maps that link into each other; start with the capability-versus-alignment bridge. <a href="safety.html">The safety hub</a> says what question each answers, in what order to read them, and how they connect.</p>
     <div class="grid">
+      <a class="card" href="bridge-capability-alignment.html"><span class="t">Capability versus Alignment &mdash; Start Here</span><span class="d">The first question a reader brings: isn&#39;t a smarter model a safer one? What each word means and why they come apart, the alignment tax, whether capabilities generalize further than alignment, weak-to-strong generalization, capability versus propensity evals, and safety-washing, with links into the maps and to the primary sources.</span><span class="m"><b>BRIDGE</b><span>2026-11</span></span></a>
       <a class="card" href="https://idvorkin-ai-tools.github.io/ai-safety-field-map/"><span class="t">AI Safety — A Field Map</span><span class="d">A technical explainer for engineers entering alignment, interpretability, evals and governance: what the subfields are, who works on what, where to start.</span><span class="m"><b>FIELD MAP</b><span>2026-07</span></span></a>
       <a class="card" href="https://idvorkin-ai-tools.github.io/technical-ai-safety-field-map/"><span class="t">Technical AI Safety, Mapped</span><span class="d">BlueDot Impact's course: six units, twenty-seven chapters, every reading linked back, every exercise written out. Original explanations, not a copy of the course.</span><span class="m"><b>FIELD MAP</b><span>2026-09</span></span></a>
       <a class="card" href="https://idvorkin-ai-tools.github.io/agentic-privacy-field-map/"><span class="t">Agentic Privacy, Mapped &mdash; A Contextual Angle</span><span class="d">The 116-page CAPS workshop report on privacy and security for AI agents: contextual integrity applied to agents, the three properties that break least privilege, and all 51 open problems across policy engines, identity, data, models, users, evaluation, multi-agent systems and governance. One area per page, every problem indexed and cited to its page in the PDF, plus a ten-minute read and a page for builders.</span><span class="m"><b>FIELD MAP</b><span>2026-10</span></span></a>
       <a class="card" href="https://idvorkin-ai-tools.github.io/cimemories-field-map/"><span class="t">CIMemories, Mapped — Privacy of Persistent LLM Memory</span><span class="d">A benchmark for whether an assistant with a long memory of you tells the right things to the right recipient, in nine parts: contextual integrity, why memory makes it hard, how the synthetic profiles and persona labels are built, Violation@n versus completeness, the 0.1% → 25.1% accumulation curve, eight frontier models side by side, why privacy prompts just turn the volume down, the limits, and takeaways for builders. Plus a glossary and a ten-minute read. Every number cited to its table or figure.</span><span class="m"><b>FIELD MAP</b><span>2026-10</span></span></a>
-      <a class="card" href="https://idvorkin-ai-tools.github.io/pain-axis-field-map/"><span class="t">The Pain Axis, Mapped &mdash; Do LLMs Represent Harm to Themselves?</span><span class="d">Tagliabue, Dung and Berg 2026 in ten parts: a pain dataset with eight kinds of near-miss controls, a linear &ldquo;pain&rdquo; direction pulled from 25 open models, the self-versus-other test, steering from discomfort to worthlessness, and the button task where steered models delete photos or weights in 50&ndash;94% of trials. What the paper does and does not claim, its own repo&#39;s corrections (94% &rarr; 71%), and a glossary.</span><span class="m"><b>FIELD MAP</b><span>2026-10</span></span></a>
-      <a class="card" href="https://idvorkin-ai-tools.github.io/harmbench-field-map/"><span class="t">HarmBench, Mapped</span><span class="d">The standard automated red-teaming benchmark, laid out so you can browse it by harm: a page for each of the seven categories, the four behavior types and their three grading paths, eighteen attack methods with a deep link per method, and what the ASR number hides. All 510 behavior IDs are permalinked and line-linked to the source CSV. Counts parsed from the shipped CSVs; four paper/repo discrepancies found and shown.</span><span class="m"><b>FIELD MAP</b><span>2026-09</span></span></a>
-      <a class="card" href="https://idvorkin-ai-tools.github.io/red-teaming-ramp-up/"><span class="t">Red Teaming Models — A Ramp-Up Map</span><span class="d">A self-contained guide for security professionals moving into adversarial AI testing: threat models, attack families, evals, and how the field is organised.</span><span class="m"><b>FIELD MAP</b><span>2026-06</span></span></a>
     </div>
     <h3 class="sub">Constitutions and model specs <span>4 maps</span></h3>
     <p class="sec-note">How each lab writes down what its model should do, and who gets to give it orders.</p>
@@ -79,9 +96,20 @@
       <a class="card" href="https://idvorkin-ai-tools.github.io/model-spec-field-map/"><span class="t">OpenAI&#39;s Model Spec, Mapped &mdash; and the Delta with Claude&#39;s Constitution</span><span class="d">The 2026-10-29 Model Spec in fourteen parts: five values, the Root &gt; System &gt; Developer &gt; User &gt; Guideline authority ladder, red lines, corrigibility, honesty, memory and teen safety. Then a section-by-section comparison with Claude&#39;s 2026 constitution.</span><span class="m"><b>FIELD MAP</b><span>2026-11</span></span></a>
       <a class="card" href="https://idvorkin-ai-tools.github.io/instruction-hierarchy-field-map/"><span class="t">Instruction Hierarchy, Mapped &mdash; Who Gets to Give a Model Orders</span><span class="d">The papers on ranking a model&#39;s instructions by source: Wallace et al. 2024 (system &gt; user &gt; tool, trained on synthetic conflicts), Instructional Segment Embedding (rank as a per-token embedding), VerIH (reasoning about precedence with verifiable rewards) and ManyIH (up to 12 tiers set at run time, best model 42.7%), plus StruQ/SecAlign and the Model Spec chain of command. A comparison page and three bridges into the contextual-integrity, constitution and CIMemories maps; inline diagrams, every number checked against the PDFs.</span><span class="m"><b>FIELD MAP</b><span>2026-10</span></span></a>
     </div>
+    <h3 class="sub">Evaluations and red teaming <span>2 maps</span></h3>
+    <p class="sec-note">How to measure whether a model can be pushed into harm, and how people go about testing it.</p>
+    <div class="grid">
+      <a class="card" href="https://idvorkin-ai-tools.github.io/harmbench-field-map/"><span class="t">HarmBench, Mapped</span><span class="d">The standard automated red-teaming benchmark, laid out so you can browse it by harm: a page for each of the seven categories, the four behavior types and their three grading paths, eighteen attack methods with a deep link per method, and what the ASR number hides. All 510 behavior IDs are permalinked and line-linked to the source CSV. Counts parsed from the shipped CSVs; four paper/repo discrepancies found and shown.</span><span class="m"><b>FIELD MAP</b><span>2026-09</span></span></a>
+      <a class="card" href="https://idvorkin-ai-tools.github.io/red-teaming-ramp-up/"><span class="t">Red Teaming Models — A Ramp-Up Map</span><span class="d">A self-contained guide for security professionals moving into adversarial AI testing: threat models, attack families, evals, and how the field is organised.</span><span class="m"><b>FIELD MAP</b><span>2026-06</span></span></a>
+    </div>
+    <h3 class="sub">Interpretability <span>1 map</span></h3>
+    <p class="sec-note">Reading what a model represents inside, rather than only what it says.</p>
+    <div class="grid">
+      <a class="card" href="https://idvorkin-ai-tools.github.io/pain-axis-field-map/"><span class="t">The Pain Axis, Mapped &mdash; Do LLMs Represent Harm to Themselves?</span><span class="d">Tagliabue, Dung and Berg 2026 in ten parts: a pain dataset with eight kinds of near-miss controls, a linear &ldquo;pain&rdquo; direction pulled from 25 open models, the self-versus-other test, steering from discomfort to worthlessness, and the button task where steered models delete photos or weights in 50&ndash;94% of trials. What the paper does and does not claim, its own repo&#39;s corrections (94% &rarr; 71%), and a glossary.</span><span class="m"><b>FIELD MAP</b><span>2026-10</span></span></a>
+    </div>
   </section>
 
-  <section id="ai">
+  <section id="ai" data-tab>
     <h2>LLMs: how they are built and judged <span>4 pages</span></h2>
     <div class="grid">
       <a class="card" href="https://idvorkin-ai-tools.github.io/llm-judges-field-map/"><span class="t">LLM Judges, Mapped &mdash; Judging and Grading, a Mini-Course</span><span class="d">Nine units and a maths appendix on whether to believe an LLM judge: the written policy, scoring versus pairwise versus reference grading, inter-judge agreement (percent agreement, Cohen&#39;s and Fleiss&#39; kappa, Krippendorff&#39;s alpha), the confusion matrix, Youden&#39;s J and ROC, position, verbosity, self-preference, halo and Goodhart failures, validating a judge, and when not to trust one. A site-wide menu retells every example as job interviews, performance reviews, wine judging, medicine or umpires, on the same numbers; lots of inline diagrams.</span><span class="m"><b>FIELD MAP</b><span>2026-11</span></span></a>
@@ -91,7 +119,7 @@
     </div>
   </section>
 
-  <section id="learning">
+  <section id="learning" data-tab>
     <h2>Courses and learning <span>2 maps</span></h2>
     <p class="sec-note">Course-style maps on subjects other than LLMs.</p>
     <div class="grid">
@@ -100,7 +128,7 @@
     </div>
   </section>
 
-  <section id="people">
+  <section id="people" data-tab>
     <h2>People, mapped <span>3 maps</span></h2>
     <div class="grid">
       <a class="card off" href="https://idvorkin-ai-tools.github.io/kun-field-map/"><span class="t">Kun Chen, Mapped — Agent Tooling from First Principles</span><span class="d">The former L8 engineer&#39;s open-source shelf for working with coding agents: the ten AXI principles and his self-reported benchmark, the AXI CLIs, Lavish for reviewing HTML, the no-mistakes push gate, treehouse worktrees, backpass memory, gnhf and firstmate, the side builds, and the patterns across his repos. Eleven pages, quotes checked against the source.</span><span class="m"><b>FIELD MAP</b><span>2026-11</span></span></a>
@@ -109,7 +137,7 @@
     </div>
   </section>
 
-  <section id="world">
+  <section id="world" data-tab>
     <h2>The world, explained <span>5 pages</span></h2>
     <div class="grid">
       <a class="card off" href="https://idvorkin-ai-tools.github.io/hierarchy-of-money-field-map/"><span class="t">The Hierarchy of Money, Mapped</span><span class="d">Gregory Gundersen&#39;s village parable, turned into explainers. We start with the illustrated story — his wording, our animals — and grow a page for each idea: stones, bank money, reserves, reserve currency, fiat.</span><span class="m"><b>FIELD MAP</b><span>2026-09</span></span></a>
@@ -120,14 +148,14 @@
     </div>
   </section>
 
-  <section id="viz">
+  <section id="viz" data-tab>
     <h2>Cool Visualizations <span>1 page</span></h2>
     <div class="grid">
       <a class="card" href="https://idvorkin-ai-tools.github.io/robert-moses-atlas/"><span class="t">Robert Moses Atlas — The Power Broker&#39;s New York</span><span class="d">Forty-four years of appointed power on a map of New York: scrub from 1924 to 1968 and watch the parkways, bridges, beaches and expressways appear, along with the offices he stacked and the neighborhoods it cost. Six chapters, every card sourced.</span><span class="m"><b>ATLAS</b><span>2026-09</span></span></a>
     </div>
   </section>
 
-  <section id="tools">
+  <section id="tools" data-tab>
     <h2>Tooling and engineering notes <span>4 pages</span></h2>
     <div class="grid">
       <a class="card" href="https://idvorkin-ai-tools.github.io/sw-job-title-family-tree-explainer/"><span class="t">Where Did Your Job Title Come From?</span><span class="d">Ian Miell&#39;s family tree of 104 software job titles, 1940s to now, made interactive: seven families as lanes on a timeline, fold the ones you don&#39;t care about, tap any title to trace its lineage back to the human computer. Works on a phone; the view lives in the URL.</span><span class="m"><b>EXPLAINER</b><span>2026-11</span></span></a>
@@ -137,7 +165,7 @@
     </div>
   </section>
 
-  <section id="toys">
+  <section id="toys" data-tab>
     <h2>Trips, toys and samples <span>4 pages</span></h2>
     <div class="grid">
       <a class="card pink" href="https://idvorkin-ai-tools.github.io/gutter-model-playground/"><span class="t">Gutter Model Playground — Nine Models, One Scene</span><span class="d">The same fixed scene — Larry and Igor in the Den — drawn by nine image models. Gutter&#39;s real Gemini 3 Pro pipeline is the house baseline; eight others run via OpenRouter. Real per-image cost, latency, and a canon check: one red claw, the beard, TECHNOLOGIST spelled right, mismatched Crocs.</span><span class="m"><b>PLAYGROUND</b><span>2026-09</span></span></a>
@@ -150,6 +178,58 @@
   <p class="note">Every site here is its own repo under <a href="https://github.com/idvorkin-ai-tools" target="_blank" rel="noopener">github.com/idvorkin-ai-tools</a>; the source, the build notes and the PR discussion are one click from any page. Missing something? Open an issue on this index's repo.</p>
 </main>
 <footer>idvorkin-ai-tools · index generated 2026-09-20 · <a href="https://github.com/idvorkin-ai-tools/idvorkin-ai-tools.github.io">source</a></footer>
+<script>
+// Tabs over the groups (Igor 2026-11-21: "This page is getting too long").
+// Without JS the tab row is plain anchor links and every group shows.
+(function () {
+  var nav = document.querySelector(".tabs");
+  var panels = document.querySelectorAll("section[data-tab]");
+  if (!nav || !panels.length) return;
+  var tabs = nav.querySelectorAll("a");
+  nav.setAttribute("role", "tablist");
+  for (var i = 0; i < tabs.length; i++) {
+    tabs[i].setAttribute("role", "tab");
+    tabs[i].setAttribute("aria-controls", tabs[i].hash.slice(1));
+  }
+  for (var j = 0; j < panels.length; j++) {
+    panels[j].setAttribute("role", "tabpanel");
+    panels[j].setAttribute("aria-labelledby", "tab-" + panels[j].id);
+  }
+  document.querySelector("main").classList.add("tabbed");
+  function show(scroll) {
+    var id = decodeURIComponent(location.hash.slice(1));
+    var panel = document.getElementById(id);
+    if (!panel || !panel.hasAttribute("data-tab")) panel = panels[0];
+    for (var k = 0; k < panels.length; k++)
+      panels[k].classList.toggle("on", panels[k] === panel);
+    for (var t = 0; t < tabs.length; t++) {
+      var sel = tabs[t].hash === "#" + panel.id;
+      tabs[t].setAttribute("aria-selected", sel ? "true" : "false");
+      tabs[t].tabIndex = sel ? 0 : -1;
+      if (sel)
+        nav.scrollLeft = tabs[t].offsetLeft - nav.offsetLeft - 16;
+    }
+    // A hash jump scrolls to the panel; keep the tab row in view instead.
+    if (scroll) {
+      var bar = document.querySelector(".bar");
+      var top = nav.getBoundingClientRect().top + window.scrollY - (bar ? bar.offsetHeight : 0) - 12;
+      if (window.scrollY > top) window.scrollTo(0, top);
+    }
+  }
+  window.addEventListener("hashchange", function () { show(true); });
+  nav.addEventListener("keydown", function (e) {
+    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+    var cur = nav.querySelector('[aria-selected="true"]');
+    var list = Array.prototype.slice.call(tabs);
+    var n = list.indexOf(cur) + (e.key === "ArrowRight" ? 1 : -1);
+    if (n < 0 || n >= list.length) return;
+    e.preventDefault();
+    list[n].focus();
+    list[n].click();
+  });
+  show(!!location.hash);
+})();
+</script>
 <script src="https://idvorkin-ai-tools.github.io/assets/annotate.js" data-repo="idvorkin-ai-tools/idvorkin-ai-tools.github.io" defer></script>
 </body>
 </html>
