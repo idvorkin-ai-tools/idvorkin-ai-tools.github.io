@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Safety and alignment, mapped — idvorkin-ai-tools</title>
-<meta name="description" content="A hub for the safety and alignment field maps: a capability-versus-alignment bridge to start, then the AI safety overview, BlueDot's Technical AI Safety course, constitutions and model specs, agentic privacy and CIMemories, evaluations and red teaming (HarmBench, the red-teaming ramp-up) and interpretability (the Pain Axis), with a reading order and how they connect." />
+<meta name="description" content="A hub for the safety and alignment field maps: a capability-versus-alignment bridge to start, then the AI safety overview, BlueDot's Technical AI Safety course, constitutions and model specs, agentic privacy and CIMemories, evaluations and red teaming (HarmBench, the red-teaming ramp-up, LLM judges) and interpretability (the Pain Axis), with a reading order and how they connect." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -61,7 +61,7 @@
 </div></header>
 <main>
   <h1>Safety and alignment, mapped</h1>
-  <p class="lead">Eleven field maps in this org are about making AI systems behave: what the field is, how a model is given values, whose instructions it should follow, what it may do with what it knows, how to test it, and what it represents inside. They were built separately and now link into each other. This page says what question each answers, suggests an order, and shows how they connect. Back to <a href="./">all maps</a>.</p>
+  <p class="lead">Twelve field maps in this org are about making AI systems behave: what the field is, how a model is given values, whose instructions it should follow, what it may do with what it knows, how to test it, and what it represents inside. They were built separately and now link into each other. This page says what question each answers, suggests an order, and shows how they connect. Back to <a href="./">all maps</a>.</p>
 
   <section id="start">
     <h2>Start here</h2>
@@ -71,15 +71,15 @@
   <section id="graph">
     <h2>How they connect</h2>
     <figure>
-      <svg viewBox="0 0 660 452" role="img" aria-label="Graph of the eleven safety and alignment maps. A labelled cluster, Constitutions and model specs, holds Claude&#39;s constitution, Constitutional AI, OpenAI&#39;s Model Spec and Instruction hierarchy: the Model Spec has a delta page against Claude&#39;s constitution, Constitutional AI has a bridge page to Claude&#39;s constitution, and Instruction hierarchy has bridge pages to Constitutional AI, Agentic privacy and CIMemories. Constitutional AI also links to Technical AI Safety, Agentic privacy and CIMemories. AI Safety overview and Technical AI Safety are orientation maps; a second cluster, Evaluations and red teaming, holds HarmBench and the red-teaming ramp-up; a third, Interpretability, holds the Pain Axis.">
+      <svg viewBox="0 0 660 480" role="img" aria-label="Graph of the twelve safety and alignment maps. A labelled cluster, Constitutions and model specs, holds Claude&#39;s constitution, Constitutional AI, OpenAI&#39;s Model Spec and Instruction hierarchy: the Model Spec has a delta page against Claude&#39;s constitution, Constitutional AI has a bridge page to Claude&#39;s constitution, and Instruction hierarchy has bridge pages to Constitutional AI, Agentic privacy and CIMemories. Constitutional AI also links to Technical AI Safety, Agentic privacy and CIMemories. AI Safety overview and Technical AI Safety are orientation maps; a second cluster, Evaluations and red teaming, holds HarmBench, the red-teaming ramp-up and LLM Judges, whose related maps link to HarmBench; a third, Interpretability, holds the Pain Axis.">
         <title>How the safety and alignment maps connect</title>
         <g pointer-events="none">
           <rect x="20" y="36" width="370" height="226" rx="12" fill="#f0b34a" fill-opacity="0.05" stroke="#f0b34a" stroke-opacity="0.55" stroke-dasharray="2 4"/>
           <text x="35" y="60" fill="#f0b34a" font-size="10.5" letter-spacing="1.2">CONSTITUTIONS AND MODEL SPECS</text>
-          <rect x="20" y="278" width="370" height="86" rx="12" fill="#f08ab8" fill-opacity="0.05" stroke="#f08ab8" stroke-opacity="0.55" stroke-dasharray="2 4"/>
+          <rect x="20" y="278" width="370" height="162" rx="12" fill="#f08ab8" fill-opacity="0.05" stroke="#f08ab8" stroke-opacity="0.55" stroke-dasharray="2 4"/>
           <text x="35" y="298" fill="#f08ab8" font-size="10.5" letter-spacing="1.2">EVALUATIONS AND RED TEAMING</text>
-          <rect x="20" y="374" width="186" height="72" rx="12" fill="#8d8a80" fill-opacity="0.05" stroke="#8d8a80" stroke-opacity="0.6" stroke-dasharray="2 4"/>
-          <text x="35" y="390" fill="#8d8a80" font-size="10.5" letter-spacing="1.2">INTERPRETABILITY</text>
+          <rect x="460" y="364" width="194" height="76" rx="12" fill="#8d8a80" fill-opacity="0.05" stroke="#8d8a80" stroke-opacity="0.6" stroke-dasharray="2 4"/>
+          <text x="475" y="382" fill="#8d8a80" font-size="10.5" letter-spacing="1.2">INTERPRETABILITY</text>
         </g>
         <g fill="none">
           <a href="https://idvorkin-ai-tools.github.io/constitutional-ai-field-map/bridge.html" class="edge"><title>Bridge page: from the 2022 principles to Claude&#39;s 2026 constitution</title><line x1="113" y1="102" x2="297" y2="102" stroke="#5fd3e6" stroke-width="2.2"/><line class="hit" x1="113" y1="102" x2="297" y2="102"/></a>
@@ -96,6 +96,7 @@
           <a href="https://idvorkin-ai-tools.github.io/agentic-privacy-field-map/#related" class="edge"><title>Related maps: Agentic privacy to CIMemories</title><line x1="560" y1="222" x2="560" y2="322" stroke="#2a2d35" stroke-width="1.5" stroke-dasharray="5 5"/><line class="hit" x1="560" y1="222" x2="560" y2="322"/></a>
           <a href="#order" class="edge"><title>Shared topic: start with AI Safety, then Technical AI Safety</title><line x1="560" y1="52" x2="560" y2="132" stroke="#2a2d35" stroke-width="1.5" stroke-dasharray="5 5"/><line class="hit" x1="560" y1="52" x2="560" y2="132"/></a>
           <a href="#order" class="edge"><title>Shared topic: testing, HarmBench and the red-teaming ramp-up</title><line x1="113" y1="332" x2="297" y2="332" stroke="#2a2d35" stroke-width="1.5" stroke-dasharray="5 5"/><line class="hit" x1="113" y1="332" x2="297" y2="332"/></a>
+          <a href="https://idvorkin-ai-tools.github.io/llm-judges-field-map/#related" class="edge"><title>Related maps: LLM Judges to HarmBench</title><line x1="113" y1="332" x2="113" y2="408" stroke="#2a2d35" stroke-width="1.5" stroke-dasharray="5 5"/><line class="hit" x1="113" y1="332" x2="113" y2="408"/></a>
         </g>
         <g font-size="12" text-anchor="middle">
           <a href="https://idvorkin-ai-tools.github.io/claude-constitution-field-map/" class="node"><title>Claude&#39;s constitution</title><rect x="30" y="80" width="166" height="44" rx="8" fill="#15171c" stroke="#f0b34a"/><text x="113" y="100" fill="#e6e3da">Claude&#39;s constitution</text><text x="113" y="116" fill="#8d8a80" font-size="10.5">the 2026 text, a ladder</text></a>
@@ -108,11 +109,12 @@
           <a href="https://idvorkin-ai-tools.github.io/cimemories-field-map/" class="node"><title>CIMemories</title><rect x="470" y="300" width="180" height="44" rx="8" fill="#15171c" stroke="#7fd69a"/><text x="560" y="320" fill="#e6e3da">CIMemories</text><text x="560" y="336" fill="#8d8a80" font-size="10.5">memory</text></a>
           <a href="https://idvorkin-ai-tools.github.io/harmbench-field-map/" class="node"><title>HarmBench</title><rect x="30" y="310" width="166" height="44" rx="8" fill="#15171c" stroke="#f08ab8"/><text x="113" y="330" fill="#e6e3da">HarmBench</text><text x="113" y="346" fill="#8d8a80" font-size="10.5">testing</text></a>
           <a href="https://idvorkin-ai-tools.github.io/red-teaming-ramp-up/" class="node"><title>Red teaming ramp-up</title><rect x="214" y="310" width="166" height="44" rx="8" fill="#15171c" stroke="#f08ab8"/><text x="297" y="330" fill="#e6e3da">Red teaming ramp-up</text><text x="297" y="346" fill="#8d8a80" font-size="10.5">testing</text></a>
-          <a href="https://idvorkin-ai-tools.github.io/pain-axis-field-map/" class="node"><title>The Pain Axis</title><rect x="30" y="396" width="166" height="42" rx="8" fill="#15171c" stroke="#8d8a80"/><text x="113" y="415" fill="#e6e3da">The Pain Axis</text><text x="113" y="430" fill="#8d8a80" font-size="10.5">harm to the model</text></a>
+          <a href="https://idvorkin-ai-tools.github.io/llm-judges-field-map/" class="node"><title>LLM Judges</title><rect x="30" y="386" width="166" height="44" rx="8" fill="#15171c" stroke="#f08ab8"/><text x="113" y="406" fill="#e6e3da">LLM Judges</text><text x="113" y="422" fill="#8d8a80" font-size="10.5">grading the grader</text></a>
+          <a href="https://idvorkin-ai-tools.github.io/pain-axis-field-map/" class="node"><title>The Pain Axis</title><rect x="470" y="390" width="174" height="42" rx="8" fill="#15171c" stroke="#8d8a80"/><text x="557" y="409" fill="#e6e3da">The Pain Axis</text><text x="557" y="424" fill="#8d8a80" font-size="10.5">harm to the model</text></a>
         </g>
         <g font-size="10.5" fill="#8d8a80">
-          <a href="#maps" class="node"><title>Bridge and delta pages</title><line x1="255" y1="408" x2="285" y2="408" stroke="#5fd3e6" stroke-width="2.2"/><text x="292" y="412">bridge or delta page</text></a>
-          <a href="#maps" class="node"><title>All eleven maps</title><line x1="440" y1="408" x2="470" y2="408" stroke="#2a2d35" stroke-width="1.5" stroke-dasharray="5 5"/><text x="477" y="412">related link or topic</text></a>
+          <a href="#maps" class="node"><title>Bridge and delta pages</title><line x1="30" y1="462" x2="60" y2="462" stroke="#5fd3e6" stroke-width="2.2"/><text x="67" y="466">bridge or delta page</text></a>
+          <a href="#maps" class="node"><title>All twelve maps</title><line x1="255" y1="462" x2="285" y2="462" stroke="#2a2d35" stroke-width="1.5" stroke-dasharray="5 5"/><text x="292" y="466">related link or topic</text></a>
         </g>
       </svg>
       <figcaption>The boxes are the groups, as on the index: amber for constitutions and model specs, pink for evaluations and red teaming, grey for interpretability. Solid lines are full bridge or delta pages that compare two maps; dashed lines are "Related maps" links between sites or maps on the same topic. Click any box to open its map, or any line to open the page that connects them.</figcaption>
@@ -125,7 +127,7 @@
       <li><b>Get the lay of the land:</b> the <a href="bridge-capability-alignment.html">capability versus alignment</a> bridge, then AI Safety, then Technical AI Safety for the course-length version.</li>
       <li><b>Constitutions and model specs, as one stop:</b> Constitutional AI for the 2022 paper and how it grew into Claude's 2026 constitution; the <a href="https://idvorkin-ai-tools.github.io/claude-constitution-field-map/">constitution ladder</a> for that document in depth; <a href="https://idvorkin-ai-tools.github.io/model-spec-field-map/">OpenAI's Model Spec</a> and its <a href="https://idvorkin-ai-tools.github.io/model-spec-field-map/delta.html">delta with Claude's constitution</a>; then Instruction hierarchy for whose instructions count, which bridges back to the constitution.</li>
       <li><b>What an agent may do with information:</b> Agentic privacy, then CIMemories for the memory case.</li>
-      <li><b>Evaluations and red teaming, how to test all of it:</b> HarmBench for the benchmark, then the red-teaming ramp-up for how the field does it.</li>
+      <li><b>Evaluations and red teaming, how to test all of it:</b> HarmBench for the benchmark, then the red-teaming ramp-up for how the field does it, then LLM Judges for when to believe the model that grades the results.</li>
       <li><b>Interpretability, looking inside:</b> the Pain Axis, for what a model represents about harm to itself and what steering that direction does.</li>
     </ol>
   </section>
@@ -145,10 +147,11 @@
     <div class="map"><h3><a href="https://idvorkin-ai-tools.github.io/agentic-privacy-field-map/">Agentic Privacy, Mapped</a></h3><div class="q">What should an agent be allowed to do with what it can reach?</div><p>The CAPS workshop report: contextual integrity applied to AI agents, why least privilege breaks, the contextual policy engine, and all 51 open problems.</p></div>
     <div class="map"><h3><a href="https://idvorkin-ai-tools.github.io/cimemories-field-map/">CIMemories, Mapped</a></h3><div class="q">Does an assistant with memory tell the right things to the right people?</div><p>A benchmark of remembered facts and recipients: every model tested leaks, leaks accumulate with use, and privacy prompts turn everything down at once.</p></div>
     <div class="group evals">
-      <h3 class="sub">Evaluations and red teaming <span>2 maps</span></h3>
-      <p class="sec-note">How to measure whether a model can be pushed into harm, and how people go about testing it.</p>
+      <h3 class="sub">Evaluations and red teaming <span>3 maps</span></h3>
+      <p class="sec-note">How to measure whether a model can be pushed into harm, how people go about testing it, and when to trust the model doing the grading.</p>
       <div class="map"><h3><a href="https://idvorkin-ai-tools.github.io/harmbench-field-map/">HarmBench, Mapped</a></h3><div class="q">How do you measure whether attacks get through?</div><p>The standard automated red-teaming benchmark by harm category, behavior type and attack method, with what the attack-success number hides.</p></div>
       <div class="map"><h3><a href="https://idvorkin-ai-tools.github.io/red-teaming-ramp-up/">Red Teaming Models &mdash; A Ramp-Up Map</a></h3><div class="q">How does a security person start testing models?</div><p>Threat models, attack families, evaluations and how the field is organized, for security professionals moving into adversarial AI testing.</p></div>
+      <div class="map"><h3><a href="https://idvorkin-ai-tools.github.io/llm-judges-field-map/">LLM Judges, Mapped</a></h3><div class="q">When should you believe an LLM judge?</div><p>A nine-unit mini-course on judging and grading: the written policy, scoring versus pairwise versus reference grading, agreement statistics from Cohen&#39;s kappa to Krippendorff&#39;s alpha, ROC and Youden&#39;s J, position, verbosity and self-preference biases, and how to validate a judge before trusting it.</p></div>
     </div>
     <div class="group interp">
       <h3 class="sub">Interpretability <span>1 map</span></h3>
