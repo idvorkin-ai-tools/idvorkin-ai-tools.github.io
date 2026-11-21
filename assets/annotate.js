@@ -382,22 +382,26 @@
       window.location.pathname;
   }
 
-  // Top right, but under the page's own sticky or fixed header when it has
-  // one, so the buttons never sit on its title or nav links.
-  function placeBar() {
-    bar.style.display = "none";
-    var el = document.elementFromPoint(window.innerWidth - 24, 4);
-    bar.style.display = "";
+  // The fixed or sticky header band under (right edge, y), or null.
+  function headerAt(y) {
+    var el = document.elementFromPoint(window.innerWidth - 24, y);
     for (; el && el !== document.body && el !== document.documentElement; el = el.parentElement) {
       var pos = window.getComputedStyle(el).position;
       if (pos !== "fixed" && pos !== "sticky") continue;
       var r = el.getBoundingClientRect();
-      if (r.top <= 4 && r.bottom < window.innerHeight / 3) {
-        bar.style.top = Math.round(r.bottom + 6) + "px";
-        return;
-      }
+      if (r.top <= y && r.bottom > y && r.bottom < window.innerHeight / 3) return r;
     }
-    bar.style.top = "";
+    return null;
+  }
+
+  // Top right, but under the page's own fixed or sticky headers, so the
+  // buttons never sit on its title or nav links.
+  function placeBar() {
+    bar.style.display = "none";
+    var bottom = 0;
+    for (var i = 0, r; i < 3 && (r = headerAt(bottom + 4)); i++) bottom = r.bottom;
+    bar.style.display = "";
+    bar.style.top = bottom ? Math.round(bottom + 6) + "px" : "";
   }
 
   function mountBar() {
@@ -626,6 +630,7 @@
       "#blog-annot-chat .bac-msg[data-who='igor']{align-self:flex-end;background:#0b5ed7;color:#fff}",
       "#blog-annot-chat .bac-msg[data-who='larry']{align-self:flex-start;background:#f1f3f5;color:#111}",
       "#blog-annot-chat .bac-msg[data-state='sending']{opacity:.6}",
+      "#blog-annot-chat .bac-msg a{color:inherit;text-decoration:underline}",
       "#blog-annot-chat-status{padding:0 12px 4px;font-size:12px;color:#868e96}",
       "#blog-annot-chat-status:empty{display:none}",
       "#blog-annot-chat .bac-row{display:flex;gap:6px;padding:8px 12px;",
@@ -1312,6 +1317,34 @@
       });
     }
 
+    // A message's text with its http(s) URLs as links, built as nodes:
+    // message text never goes through innerHTML.
+    var URL_RE = /https?:\/\/[^\s<>"']+/g;
+    function chatSetText(el, text) {
+      el.textContent = "";
+      var at = 0;
+      text.replace(URL_RE, function (raw, i) {
+        var url = raw.replace(/[.,;:!?)\]]+$/, "");
+        var ok = false;
+        try {
+          ok = /^https?:$/.test(new URL(url).protocol);
+        } catch (e) {
+          ok = false;
+        }
+        if (!ok) return raw;
+        el.appendChild(document.createTextNode(text.slice(at, i)));
+        var a = document.createElement("a");
+        a.href = url;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.textContent = url;
+        el.appendChild(a);
+        at = i + url.length;
+        return raw;
+      });
+      el.appendChild(document.createTextNode(text.slice(at)));
+    }
+
     // One bubble per message id, text only (never HTML).
     function chatAdd(m, state) {
       var el = m.id ? chatSeen[m.id] : null;
@@ -1322,21 +1355,29 @@
         if (m.id) chatSeen[m.id] = el;
       }
       el.setAttribute("data-who", m.who === "larry" ? "larry" : "igor");
-      el.textContent = m.text || "";
+      chatSetText(el, String(m.text || ""));
       if (state) el.setAttribute("data-state", state);
       else el.removeAttribute("data-state");
       chatLog.scrollTop = chatLog.scrollHeight;
       return el;
     }
 
-    function chatPoll() {
+    // fromStart re-reads the whole thread and redraws it in the Cockpit's
+    // order (used after the first send makes a thread, whose opener the
+    // Cockpit writes before Igor's message).
+    function chatPoll(fromStart) {
       if (!LARRY || chatPanel.hidden || !live) return Promise.resolve();
       var q =
         "/page-chat?page=" +
         encodeURIComponent(CHAT_PAGE.permalink || CHAT_PAGE.page_url) +
-        (chatLastId ? "&after=" + encodeURIComponent(chatLastId) : "");
+        (chatLastId && fromStart !== true ? "&after=" + encodeURIComponent(chatLastId) : "");
       return chatFetch(q, { cache: "no-store" })
         .then(function (out) {
+          if (fromStart === true) {
+            chatLog.textContent = "";
+            chatSeen = {};
+            chatLastId = null;
+          }
           (out.messages || []).forEach(function (m) {
             chatAdd(m);
             if (m.id) chatLastId = m.id;
@@ -1406,6 +1447,7 @@
           ? chatFailed.id
           : "pc-" + Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
       chatFailed = null;
+      var fresh = chatLastId === null; // no message seen yet: a new thread
       var el = chatAdd({ id: id, who: "igor", text: text }, "sending");
       chatTa.value = "";
       chatPrev = "";
@@ -1425,6 +1467,7 @@
           // still comes in on the next poll, and this one is not shown twice.
           chatAdd({ id: id, who: "igor", text: text });
           chatStatus("");
+          if (fresh) return chatPoll(true);
         })
         .catch(function (err) {
           if (el.parentNode) el.parentNode.removeChild(el);
