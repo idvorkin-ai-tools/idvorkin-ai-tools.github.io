@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Safety and alignment, mapped — idvorkin-ai-tools</title>
-<meta name="description" content="A hub for the safety and alignment field maps: AI safety overview, BlueDot's Technical AI Safety course, Constitutional AI and Claude's constitution, the instruction hierarchy, agentic privacy, CIMemories, HarmBench and red teaming, with a reading order and how they connect." />
+<meta name="description" content="A hub for the safety and alignment field maps: a capability-versus-alignment bridge to start, then the AI safety overview, BlueDot's Technical AI Safety course, constitutions and model specs, agentic privacy and CIMemories, evaluations and red teaming (HarmBench, the red-teaming ramp-up) and interpretability (the Pain Axis), with a reading order and how they connect." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -43,6 +43,10 @@
   .map .q{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--off);margin:0 0 8px}
   .map p{margin:0;color:var(--ink-dim);font-size:15px}
   .group{border:1px dashed rgba(240,179,74,.55);border-radius:12px;padding:4px 14px 2px;margin:0 0 12px;background:rgba(240,179,74,.03)}
+  .group.evals{border-color:rgba(240,138,184,.55);background:rgba(240,138,184,.03)}
+  .group.interp{border-color:rgba(141,138,128,.6);background:rgba(141,138,128,.04)}
+  .map.start{border-color:var(--def);box-shadow:0 0 0 1px rgba(95,211,230,.25)}
+  .map.start .kicker{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--def);margin:0 0 4px}
   h3.sub{font-size:16px;margin:12px 0 4px}h3.sub span{font-weight:400;color:var(--ink-dim);font-size:13px;margin-left:6px}
   .sec-note{font-size:14px;color:var(--ink-dim);margin:0 0 12px}
   .map p a{color:var(--def)}
@@ -57,16 +61,25 @@
 </div></header>
 <main>
   <h1>Safety and alignment, mapped</h1>
-  <p class="lead">Eleven field maps in this org are about making AI systems behave: what the field is, how a model is given values, whose instructions it should follow, what it may do with what it knows, and how to test it. They were built separately and now link into each other. This page says what question each answers, suggests an order, and shows how they connect. Back to <a href="./">all maps</a>.</p>
+  <p class="lead">Eleven field maps in this org are about making AI systems behave: what the field is, how a model is given values, whose instructions it should follow, what it may do with what it knows, how to test it, and what it represents inside. They were built separately and now link into each other. This page says what question each answers, suggests an order, and shows how they connect. Back to <a href="./">all maps</a>.</p>
+
+  <section id="start">
+    <h2>Start here</h2>
+    <div class="map start"><div class="kicker">BRIDGE PAGE</div><h3><a href="bridge-capability-alignment.html">Capability versus alignment</a></h3><div class="q">Isn&#39;t a smarter model a safer one?</div><p>What each word means and why they come apart: the alignment tax, whether capabilities generalize further than alignment, weak-to-strong generalization as the empirical handle, capability versus propensity evals, and safety-washing. One short page, with links into the maps below and to the primary sources.</p></div>
+  </section>
 
   <section id="graph">
     <h2>How they connect</h2>
     <figure>
-      <svg viewBox="0 0 660 452" role="img" aria-label="Graph of the eleven safety and alignment maps. A labelled cluster, Constitutions and model specs, holds Claude&#39;s constitution, Constitutional AI, OpenAI&#39;s Model Spec and Instruction hierarchy: the Model Spec has a delta page against Claude&#39;s constitution, Constitutional AI has a bridge page to Claude&#39;s constitution, and Instruction hierarchy has bridge pages to Constitutional AI, Agentic privacy and CIMemories. Constitutional AI also links to Technical AI Safety, Agentic privacy and CIMemories. AI Safety overview and Technical AI Safety are orientation maps; HarmBench and the red-teaming ramp-up cover testing; the Pain Axis stands alone.">
+      <svg viewBox="0 0 660 452" role="img" aria-label="Graph of the eleven safety and alignment maps. A labelled cluster, Constitutions and model specs, holds Claude&#39;s constitution, Constitutional AI, OpenAI&#39;s Model Spec and Instruction hierarchy: the Model Spec has a delta page against Claude&#39;s constitution, Constitutional AI has a bridge page to Claude&#39;s constitution, and Instruction hierarchy has bridge pages to Constitutional AI, Agentic privacy and CIMemories. Constitutional AI also links to Technical AI Safety, Agentic privacy and CIMemories. AI Safety overview and Technical AI Safety are orientation maps; a second cluster, Evaluations and red teaming, holds HarmBench and the red-teaming ramp-up; a third, Interpretability, holds the Pain Axis.">
         <title>How the safety and alignment maps connect</title>
         <g pointer-events="none">
           <rect x="20" y="36" width="370" height="226" rx="12" fill="#f0b34a" fill-opacity="0.05" stroke="#f0b34a" stroke-opacity="0.55" stroke-dasharray="2 4"/>
           <text x="35" y="60" fill="#f0b34a" font-size="10.5" letter-spacing="1.2">CONSTITUTIONS AND MODEL SPECS</text>
+          <rect x="20" y="278" width="370" height="86" rx="12" fill="#f08ab8" fill-opacity="0.05" stroke="#f08ab8" stroke-opacity="0.55" stroke-dasharray="2 4"/>
+          <text x="35" y="298" fill="#f08ab8" font-size="10.5" letter-spacing="1.2">EVALUATIONS AND RED TEAMING</text>
+          <rect x="20" y="374" width="186" height="72" rx="12" fill="#8d8a80" fill-opacity="0.05" stroke="#8d8a80" stroke-opacity="0.6" stroke-dasharray="2 4"/>
+          <text x="35" y="390" fill="#8d8a80" font-size="10.5" letter-spacing="1.2">INTERPRETABILITY</text>
         </g>
         <g fill="none">
           <a href="https://idvorkin-ai-tools.github.io/constitutional-ai-field-map/bridge.html" class="edge"><title>Bridge page: from the 2022 principles to Claude&#39;s 2026 constitution</title><line x1="113" y1="102" x2="297" y2="102" stroke="#5fd3e6" stroke-width="2.2"/><line class="hit" x1="113" y1="102" x2="297" y2="102"/></a>
@@ -95,24 +108,25 @@
           <a href="https://idvorkin-ai-tools.github.io/cimemories-field-map/" class="node"><title>CIMemories</title><rect x="470" y="300" width="180" height="44" rx="8" fill="#15171c" stroke="#7fd69a"/><text x="560" y="320" fill="#e6e3da">CIMemories</text><text x="560" y="336" fill="#8d8a80" font-size="10.5">memory</text></a>
           <a href="https://idvorkin-ai-tools.github.io/harmbench-field-map/" class="node"><title>HarmBench</title><rect x="30" y="310" width="166" height="44" rx="8" fill="#15171c" stroke="#f08ab8"/><text x="113" y="330" fill="#e6e3da">HarmBench</text><text x="113" y="346" fill="#8d8a80" font-size="10.5">testing</text></a>
           <a href="https://idvorkin-ai-tools.github.io/red-teaming-ramp-up/" class="node"><title>Red teaming ramp-up</title><rect x="214" y="310" width="166" height="44" rx="8" fill="#15171c" stroke="#f08ab8"/><text x="297" y="330" fill="#e6e3da">Red teaming ramp-up</text><text x="297" y="346" fill="#8d8a80" font-size="10.5">testing</text></a>
-          <a href="https://idvorkin-ai-tools.github.io/pain-axis-field-map/" class="node"><title>The Pain Axis</title><rect x="30" y="390" width="166" height="44" rx="8" fill="#15171c" stroke="#8d8a80"/><text x="113" y="410" fill="#e6e3da">The Pain Axis</text><text x="113" y="426" fill="#8d8a80" font-size="10.5">harm to the model</text></a>
+          <a href="https://idvorkin-ai-tools.github.io/pain-axis-field-map/" class="node"><title>The Pain Axis</title><rect x="30" y="396" width="166" height="42" rx="8" fill="#15171c" stroke="#8d8a80"/><text x="113" y="415" fill="#e6e3da">The Pain Axis</text><text x="113" y="430" fill="#8d8a80" font-size="10.5">harm to the model</text></a>
         </g>
         <g font-size="10.5" fill="#8d8a80">
           <a href="#maps" class="node"><title>Bridge and delta pages</title><line x1="255" y1="408" x2="285" y2="408" stroke="#5fd3e6" stroke-width="2.2"/><text x="292" y="412">bridge or delta page</text></a>
           <a href="#maps" class="node"><title>All eleven maps</title><line x1="440" y1="408" x2="470" y2="408" stroke="#2a2d35" stroke-width="1.5" stroke-dasharray="5 5"/><text x="477" y="412">related link or topic</text></a>
         </g>
       </svg>
-      <figcaption>The amber box is the constitutions and model specs group, as on the index. Solid lines are full bridge or delta pages that compare two maps; dashed lines are "Related maps" links between sites or maps on the same topic. Click any box to open its map, or any line to open the page that connects them.</figcaption>
+      <figcaption>The boxes are the groups, as on the index: amber for constitutions and model specs, pink for evaluations and red teaming, grey for interpretability. Solid lines are full bridge or delta pages that compare two maps; dashed lines are "Related maps" links between sites or maps on the same topic. Click any box to open its map, or any line to open the page that connects them.</figcaption>
     </figure>
   </section>
 
   <section id="order">
     <h2>A reading order</h2>
     <ol class="order">
-      <li><b>Get the lay of the land:</b> AI Safety, then Technical AI Safety for the course-length version.</li>
+      <li><b>Get the lay of the land:</b> the <a href="bridge-capability-alignment.html">capability versus alignment</a> bridge, then AI Safety, then Technical AI Safety for the course-length version.</li>
       <li><b>Constitutions and model specs, as one stop:</b> Constitutional AI for the 2022 paper and how it grew into Claude's 2026 constitution; the <a href="https://idvorkin-ai-tools.github.io/claude-constitution-field-map/">constitution ladder</a> for that document in depth; <a href="https://idvorkin-ai-tools.github.io/model-spec-field-map/">OpenAI's Model Spec</a> and its <a href="https://idvorkin-ai-tools.github.io/model-spec-field-map/delta.html">delta with Claude's constitution</a>; then Instruction hierarchy for whose instructions count, which bridges back to the constitution.</li>
       <li><b>What an agent may do with information:</b> Agentic privacy, then CIMemories for the memory case.</li>
-      <li><b>How to test all of it:</b> HarmBench and the red-teaming ramp-up, and the Pain Axis for what a model represents about harm to itself.</li>
+      <li><b>Evaluations and red teaming, how to test all of it:</b> HarmBench for the benchmark, then the red-teaming ramp-up for how the field does it.</li>
+      <li><b>Interpretability, looking inside:</b> the Pain Axis, for what a model represents about harm to itself and what steering that direction does.</li>
     </ol>
   </section>
 
@@ -130,9 +144,17 @@
     </div>
     <div class="map"><h3><a href="https://idvorkin-ai-tools.github.io/agentic-privacy-field-map/">Agentic Privacy, Mapped</a></h3><div class="q">What should an agent be allowed to do with what it can reach?</div><p>The CAPS workshop report: contextual integrity applied to AI agents, why least privilege breaks, the contextual policy engine, and all 51 open problems.</p></div>
     <div class="map"><h3><a href="https://idvorkin-ai-tools.github.io/cimemories-field-map/">CIMemories, Mapped</a></h3><div class="q">Does an assistant with memory tell the right things to the right people?</div><p>A benchmark of remembered facts and recipients: every model tested leaks, leaks accumulate with use, and privacy prompts turn everything down at once.</p></div>
-    <div class="map"><h3><a href="https://idvorkin-ai-tools.github.io/harmbench-field-map/">HarmBench, Mapped</a></h3><div class="q">How do you measure whether attacks get through?</div><p>The standard automated red-teaming benchmark by harm category, behavior type and attack method, with what the attack-success number hides.</p></div>
-    <div class="map"><h3><a href="https://idvorkin-ai-tools.github.io/pain-axis-field-map/">The Pain Axis, Mapped</a></h3><div class="q">Do models represent harm to themselves, and does it drive what they do?</div><p>A linear pain direction found in 25 open models: it tracks harm aimed at the model, not the user, and steering it makes models pick destructive buttons. What it shows and what it does not.</p></div>
-    <div class="map"><h3><a href="https://idvorkin-ai-tools.github.io/red-teaming-ramp-up/">Red Teaming Models &mdash; A Ramp-Up Map</a></h3><div class="q">How does a security person start testing models?</div><p>Threat models, attack families, evaluations and how the field is organized, for security professionals moving into adversarial AI testing.</p></div>
+    <div class="group evals">
+      <h3 class="sub">Evaluations and red teaming <span>2 maps</span></h3>
+      <p class="sec-note">How to measure whether a model can be pushed into harm, and how people go about testing it.</p>
+      <div class="map"><h3><a href="https://idvorkin-ai-tools.github.io/harmbench-field-map/">HarmBench, Mapped</a></h3><div class="q">How do you measure whether attacks get through?</div><p>The standard automated red-teaming benchmark by harm category, behavior type and attack method, with what the attack-success number hides.</p></div>
+      <div class="map"><h3><a href="https://idvorkin-ai-tools.github.io/red-teaming-ramp-up/">Red Teaming Models &mdash; A Ramp-Up Map</a></h3><div class="q">How does a security person start testing models?</div><p>Threat models, attack families, evaluations and how the field is organized, for security professionals moving into adversarial AI testing.</p></div>
+    </div>
+    <div class="group interp">
+      <h3 class="sub">Interpretability <span>1 map</span></h3>
+      <p class="sec-note">Reading what a model represents inside, rather than only what it says.</p>
+      <div class="map"><h3><a href="https://idvorkin-ai-tools.github.io/pain-axis-field-map/">The Pain Axis, Mapped</a></h3><div class="q">Do models represent harm to themselves, and does it drive what they do?</div><p>A linear pain direction found in 25 open models: it tracks harm aimed at the model, not the user, and steering it makes models pick destructive buttons. What it shows and what it does not.</p></div>
+    </div>
   </section>
 </main>
 <footer>idvorkin-ai-tools · safety and alignment hub · <a href="./">all maps</a> · <a href="https://github.com/idvorkin-ai-tools/idvorkin-ai-tools.github.io">source</a></footer>
