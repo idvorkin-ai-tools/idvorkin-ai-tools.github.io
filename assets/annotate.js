@@ -44,7 +44,7 @@
   blog's own setting.
 
   Once enabled: select text -> a small "Comment" bubble appears near the
-  selection -> tap it -> type a note -> pick an intent -> Save (or
+  selection -> tap it (or press Enter) -> type a note -> pick an intent -> Save (or
   Cmd/Ctrl+Enter, or Enter twice at the end of the note; Escape cancels).
   Notes buffer in localStorage across pages. "Review (N)" opens the list;
   "Send to Larry" posts one batch per page.
@@ -133,6 +133,22 @@
       return { save: true, lastAt: null };
     }
     return { save: false, lastAt: now };
+  }
+
+  // Should this keydown open the composer for the selection's bubble?
+  // Plain Enter only, bubble showing, composer shut, focus not in a field.
+  // Same rule as the blog.
+  function enterOpensComposer(e, isLive, composerOpen, bubbleShown) {
+    if (!isLive || composerOpen || !bubbleShown) return false;
+    if (e.key !== "Enter" || e.repeat || e.isComposing || e.defaultPrevented)
+      return false;
+    if (e.metaKey || e.ctrlKey || e.altKey || e.shiftKey) return false;
+    var t = e.target;
+    if (t && t.nodeType === 1) {
+      if (t.isContentEditable) return false;
+      if (/^(INPUT|TEXTAREA|SELECT|BUTTON|A)$/.test(t.tagName)) return false;
+    }
+    return true;
   }
 
   // {repo: "owner/name" | "", path: "file in that repo" | ""} for a page on a
@@ -332,6 +348,7 @@
     },
     ENTER_SAVE_MS: ENTER_SAVE_MS,
     noteEnterStep: noteEnterStep,
+    enterOpensComposer: enterOpensComposer,
     cockpitOrigin: cockpitOrigin,
     pageSource: pageSource,
     set: function (on) {
@@ -715,6 +732,15 @@
         e.preventDefault();
         composerKeys.save();
       }
+    });
+
+    // Enter with the Comment bubble up opens the composer, as a tap would
+    // (Igor 2026-11-21). Never while typing in a field or the composer.
+    document.addEventListener("keydown", function (e) {
+      var shown = btn.style.display === "block";
+      if (!enterOpensComposer(e, live, !!composerKeys, shown)) return;
+      e.preventDefault();
+      if (pending) openComposer(pending);
     });
 
     var sending = false;
