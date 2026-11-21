@@ -15,15 +15,30 @@
   KEEP IN SYNC (Igor 2026-11-21): this file and the blog's
   _includes/annotate.html are double-written. A fix or feature in one is
   ported to the other in the same change, or filed against the other the
-  same day. The blog copy is the spec.
+  same day. The blog copy is the spec. One exception: SEARCH (the 🔍
+  button, `/` and search.json) is explainer-only and is not ported; the
+  blog has its own search.
 
-  NO NETWORK UNTIL USED. Every reader gets two small buttons, fixed top
-  right (Igor 2026-11-21: "everyone can see the chat box"): a GitHub link
-  to this page's source and a 💬 toggle that turns Comments mode on and off
-  live (no reload; aria-pressed and a blue fill say it is on; the tooltip
-  names the page path). Building them is DOM only: no request until the
-  reader sends something, and none ever to a Cockpit this browser has not
+  NO NETWORK UNTIL USED. Every reader gets three small buttons, fixed top
+  right (Igor 2026-11-21: "everyone can see the chat box"): a 🔍 search
+  (see SEARCH), a GitHub link to this page's source and a 💬 toggle that
+  turns Comments mode on and off live (no reload; aria-pressed and a blue
+  fill say it is on; the tooltip names the page path). Building them is DOM
+  only: no request until the reader opens search (one GET of search.json)
+  or sends something, and none ever to a Cockpit this browser has not
   saved.
+
+  SEARCH (explainer-only, Igor 2026-11-21): the 🔍 button, or `/` when
+  focus is not in a field and the page has not bound `/` itself (the org
+  index's own box keeps `/`), opens a small overlay. Results come in three
+  groups: This page (its h1-h4 headings; picking one scrolls there), Maps
+  (the org index's cards) and Pages (every page of every map, by title and
+  h2/h3 headings; a heading hit links with a #:~:text= fragment). Arrows
+  move, Enter opens, Esc or a tap outside closes. Maps and Pages come from
+  /search.json on the host that serves this script, fetched on the first
+  open only; it is built by scripts/build_search.py in the org repo
+  (for now --maps-only, rerun when index.html changes; Pages is empty
+  until the crawl ships). If it fails to load, This page still works.
 
   OWNER vs READER. The setup prompts (Cockpit address, GitHub token), the
   `#larry-cockpit=` fragment and the status dot are the owner's alone. A
@@ -328,7 +343,8 @@
     saveCockpit(origin);
   })();
 
-  // The keyboard toggle is the only listener a normal reader ever pays for.
+  // The keyboard toggle and the `/` search key are the only listeners a
+  // normal reader ever pays for.
   document.addEventListener("keydown", function (e) {
     var key = e.key || "";
     if ((e.metaKey || e.ctrlKey) && e.shiftKey && key.toLowerCase() === "a") {
@@ -337,6 +353,19 @@
       setEnabled(!enabled());
       window.location.reload();
     }
+  });
+
+  // `/` opens search unless focus is in a field or the page already took
+  // the key: on `window`, so a page's own `/` handler on document (the org
+  // index's search box) runs first, calls preventDefault, and wins.
+  window.addEventListener("keydown", function (e) {
+    if (e.key !== "/" || e.defaultPrevented || e.ctrlKey || e.metaKey || e.altKey) return;
+    var t = e.target;
+    if (t && t.nodeType === 1 && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)))
+      return;
+    if (!bar) return;
+    e.preventDefault();
+    openSearch();
   });
 
   var live = false;
@@ -351,6 +380,15 @@
     enterOpensComposer: enterOpensComposer,
     cockpitOrigin: cockpitOrigin,
     pageSource: pageSource,
+    searchRank: searchRank,
+    search: {
+      open: function () {
+        openSearch();
+      },
+      close: function () {
+        closeSearch();
+      },
+    },
     set: function (on) {
       live = !!on;
       setEnabled(live);
@@ -409,8 +447,8 @@
 
   // The header band under (right edge, y), or null: anything fixed or
   // sticky, or a <nav>/<header> (the blog's navbar scrolls with the page).
-  function headerAt(y) {
-    var el = document.elementFromPoint(window.innerWidth - 24, y);
+  function headerAt(x, y) {
+    var el = document.elementFromPoint(x, y);
     var best = null; // the outermost band, so a nav inside a header counts as the header
     for (; el && el !== document.body && el !== document.documentElement; el = el.parentElement) {
       var pos = window.getComputedStyle(el).position;
@@ -422,14 +460,350 @@
     return best;
   }
 
+  // The lowest header band under any point of the bar's footprint (each
+  // button's centre, at two heights), or null.
+  function bandUnderBar(top) {
+    var best = null;
+    var w = window.innerWidth;
+    var xs = [w - 24, w - 60, w - 96];
+    var ys = [top + 12, top + 28];
+    for (var i = 0; i < xs.length; i++)
+      for (var j = 0; j < ys.length; j++) {
+        var r = headerAt(xs[i], ys[j]);
+        if (r && (!best || r.bottom > best.bottom)) best = r;
+      }
+    return best;
+  }
+
   // Top right, but under the page's own fixed or sticky headers, so the
   // buttons never sit on its title or nav links.
   function placeBar() {
     bar.style.display = "none";
     var bottom = 0;
-    for (var i = 0, r; i < 3 && (r = headerAt(bottom + 16)); i++) bottom = r.bottom;
+    for (var i = 0, r; i < 3 && (r = bandUnderBar(bottom)); i++) bottom = r.bottom;
     bar.style.display = "";
     bar.style.top = bottom ? Math.round(bottom + 6) + "px" : "";
+  }
+
+  // -------------------------------------------------------------- search
+  // See SEARCH in the header. Explainer-only: the blog has its own search,
+  // so none of this is double-written into _includes/annotate.html.
+  var SEARCH_MAX = { here: 8, maps: 6, pages: 10 };
+  var searchData = null; // promise of search.json, made on the first open
+  var ov = null; // the overlay, built on the first open
+  var ovItems = []; // the result rows now shown, in keyboard order
+  var ovActive = -1;
+  var ovReturn = null; // focus goes back here on close
+
+  // search.json sits at the root of the host that serves this script, so a
+  // tailnet or localhost preview still reads the live index.
+  function searchUrl() {
+    var base = (SCRIPT && SCRIPT.src) || "https://idvorkin-ai-tools.github.io/assets/annotate.js";
+    try {
+      return new URL("../search.json", base).href;
+    } catch (e) {
+      return "https://idvorkin-ai-tools.github.io/search.json";
+    }
+  }
+
+  // Items whose text holds every word of `query`, best first: the whole
+  // query in the title, then every word in the title, then the rest, each
+  // in the given order. item = {t: title, x: other searchable text}.
+  // ponytail: substring match, fine for ~500 pages; past a few thousand,
+  // swap in MiniSearch over the same search.json.
+  function searchRank(query, items) {
+    var q = String(query || "").toLowerCase().trim();
+    var words = q.split(/\s+/).filter(Boolean);
+    if (!words.length) return [];
+    var out = [];
+    for (var i = 0; i < items.length; i++) {
+      var t = String(items[i].t || "").toLowerCase();
+      var all = t + " " + String(items[i].x || "").toLowerCase();
+      var hit = true;
+      for (var w = 0; w < words.length && hit; w++) hit = all.indexOf(words[w]) >= 0;
+      if (!hit) continue;
+      var inTitle = words.every(function (x) {
+        return t.indexOf(x) >= 0;
+      });
+      out.push({ item: items[i], score: (t.indexOf(q) >= 0 ? 0 : 1) + (inTitle ? 0 : 2), i: i });
+    }
+    out.sort(function (a, b) {
+      return a.score - b.score || a.i - b.i;
+    });
+    return out.map(function (r) {
+      return r.item;
+    });
+  }
+
+  // The first heading that holds a query word, for a page result's subtitle.
+  function firstHeading(heads, query) {
+    var words = String(query).toLowerCase().split(/\s+/).filter(Boolean);
+    for (var i = 0; i < heads.length; i++) {
+      var h = heads[i].toLowerCase();
+      for (var w = 0; w < words.length; w++) if (h.indexOf(words[w]) >= 0) return heads[i];
+    }
+    return "";
+  }
+
+  function pageHeadings() {
+    var out = [];
+    var hs = document.querySelectorAll("h1,h2,h3,h4");
+    for (var i = 0; i < hs.length; i++) {
+      var h = hs[i];
+      if (h.closest("#blog-annot-bar,#blog-annot-search,.blog-annot-ui")) continue;
+      if (!h.getClientRects().length) continue; // hidden (another tab)
+      var t = (h.textContent || "").replace(/\s+/g, " ").trim();
+      if (t) out.push({ t: t, el: h });
+    }
+    return out;
+  }
+
+  // The page's own colours, so the overlay looks like part of it.
+  function pageColors() {
+    function opaque(c) {
+      return c && !/^rgba\(.*,\s*0\)$/.test(c) && c !== "transparent";
+    }
+    var b = getComputedStyle(document.body);
+    var bg = opaque(b.backgroundColor) ? b.backgroundColor : getComputedStyle(document.documentElement).backgroundColor;
+    if (!opaque(bg)) bg = "";
+    return { bg: bg, fg: b.color };
+  }
+
+  function buildOverlay() {
+    var css = document.createElement("style");
+    css.textContent = [
+      "#blog-annot-search{position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.45);",
+      "display:flex;justify-content:center;align-items:flex-start;",
+      "padding:calc(56px + env(safe-area-inset-top,0px)) 16px 16px;box-sizing:border-box}",
+      "#blog-annot-search[hidden]{display:none}",
+      "#bas-box{width:100%;max-width:560px;max-height:100%;display:flex;flex-direction:column;",
+      "background:#fff;color:#111;border:1px solid rgba(128,128,128,.45);border-radius:10px;",
+      "box-shadow:0 12px 40px rgba(0,0,0,.35);overflow:hidden;font:15px/1.35 system-ui,sans-serif}",
+      "@media (prefers-color-scheme:dark){#bas-box{background:#1c1e22;color:#e6e6e6}}",
+      "#bas-q{box-sizing:border-box;width:100%;font:inherit;font-size:16px;color:inherit;",
+      "background:transparent;border:0;border-bottom:1px solid rgba(128,128,128,.35);",
+      "padding:12px 14px;outline:none;-webkit-appearance:none;appearance:none;border-radius:0}",
+      "#bas-list{overflow-y:auto;overscroll-behavior:contain;padding:4px 0 8px}",
+      "#bas-list .bas-g{font:600 11px/1 system-ui,sans-serif;letter-spacing:.06em;",
+      "text-transform:uppercase;opacity:.6;padding:12px 14px 4px}",
+      "#bas-list a{display:block;padding:7px 14px;color:inherit;text-decoration:none;",
+      "border-left:3px solid transparent;overflow-wrap:anywhere}",
+      "#bas-list a .s{display:block;font-size:13px;opacity:.65;margin-top:2px;",
+      "overflow:hidden;text-overflow:ellipsis;white-space:nowrap}",
+      "#bas-list a[aria-selected='true']{background:rgba(11,94,215,.16);border-left-color:#0b5ed7}",
+      "#bas-status{font-size:13px;opacity:.65;padding:8px 14px 10px}",
+      "#bas-status:empty{display:none}",
+      "@media print{#blog-annot-search{display:none}}",
+    ].join("");
+    document.head.appendChild(css);
+    ov = document.createElement("div");
+    ov.id = "blog-annot-search";
+    ov.hidden = true;
+    ov.innerHTML =
+      '<div id="bas-box" role="dialog" aria-modal="true" aria-label="Search">' +
+      '<input id="bas-q" type="search" autocomplete="off" spellcheck="false" ' +
+      'placeholder="Search this page and every map" aria-label="Search" ' +
+      'role="combobox" aria-expanded="true" aria-controls="bas-list" aria-autocomplete="list" />' +
+      '<div id="bas-list" role="listbox" aria-label="Results"></div>' +
+      '<div id="bas-status" role="status"></div></div>';
+    document.body.appendChild(ov);
+    var input = document.getElementById("bas-q");
+    input.addEventListener("input", renderResults);
+    // Esc, arrows and Enter belong to the overlay: stop them here so the
+    // page's own handlers (its search box, Comments mode) never see them.
+    ov.addEventListener("keydown", function (e) {
+      var k = e.key;
+      if (k === "Escape" || k === "Esc") {
+        e.preventDefault();
+        e.stopPropagation();
+        closeSearch();
+      } else if (k === "ArrowDown" || k === "ArrowUp") {
+        e.preventDefault();
+        e.stopPropagation();
+        if (ovItems.length)
+          setActive((ovActive + (k === "ArrowDown" ? 1 : -1) + ovItems.length) % ovItems.length);
+      } else if (k === "Enter" && e.target === input) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (ovItems[ovActive]) ovItems[ovActive].click();
+      }
+    });
+    ov.addEventListener("mousedown", function (e) {
+      if (e.target === ov) closeSearch();
+    });
+  }
+
+  function setActive(n) {
+    if (ovItems[ovActive]) ovItems[ovActive].setAttribute("aria-selected", "false");
+    ovActive = n;
+    var input = document.getElementById("bas-q");
+    var a = ovItems[n];
+    if (!a) {
+      input.removeAttribute("aria-activedescendant");
+      return;
+    }
+    a.setAttribute("aria-selected", "true");
+    input.setAttribute("aria-activedescendant", a.id);
+    a.scrollIntoView({ block: "nearest" });
+  }
+
+  function row(list, title, sub, href, onPick) {
+    var a = document.createElement("a");
+    a.id = "bas-r" + ovItems.length;
+    a.setAttribute("role", "option");
+    a.setAttribute("aria-selected", "false");
+    a.href = href;
+    a.textContent = title;
+    if (sub) {
+      var s = document.createElement("span");
+      s.className = "s";
+      s.textContent = sub;
+      a.appendChild(s);
+    }
+    a.addEventListener("click", function (e) {
+      if (onPick) {
+        e.preventDefault();
+        onPick();
+      } else closeSearch(true);
+    });
+    a.addEventListener("mousemove", function () {
+      var i = ovItems.indexOf(a);
+      if (i !== ovActive) setActive(i);
+    });
+    list.appendChild(a);
+    ovItems.push(a);
+  }
+
+  function group(list, name) {
+    var g = document.createElement("div");
+    g.className = "bas-g";
+    g.textContent = name;
+    list.appendChild(g);
+  }
+
+  function renderResults() {
+    var input = document.getElementById("bas-q");
+    var list = document.getElementById("bas-list");
+    var status = document.getElementById("bas-status");
+    var q = input.value;
+    list.textContent = "";
+    ovItems = [];
+    ovActive = -1;
+    var data = ov.data; // set when search.json arrives
+    if (!q.trim()) {
+      status.textContent = ov.failed
+        ? "Couldn't load the map index; only this page is searchable."
+        : "Type to search this page's headings" + (data ? ", every map and its pages." : ".");
+      setActive(-1);
+      return;
+    }
+    var here = searchRank(q, ov.heads).slice(0, SEARCH_MAX.here);
+    if (here.length) group(list, "This page");
+    here.forEach(function (h) {
+      row(list, h.t, "", "#", function () {
+        closeSearch(true);
+        // Instant, not the page's smooth scroll-behavior, and clear of any
+        // fixed header (the bar sits just under it).
+        var off = (bar && parseInt(bar.style.top, 10)) || 0;
+        var y = h.el.getBoundingClientRect().top + window.scrollY - off - 8;
+        window.scrollTo({ top: Math.max(0, y), behavior: "instant" });
+      });
+    });
+    var n = here.length;
+    if (data) {
+      var maps = searchRank(q, data.maps).slice(0, SEARCH_MAX.maps);
+      if (maps.length) group(list, "Maps");
+      maps.forEach(function (m) {
+        row(list, m.t, m.d, m.u);
+      });
+      var self = window.location.pathname.replace(/index\.html$/, "");
+      var pages = searchRank(
+        q,
+        data.pages.filter(function (p) {
+          return p.rel !== self;
+        })
+      ).slice(0, SEARCH_MAX.pages);
+      if (pages.length) group(list, "Pages");
+      pages.forEach(function (p) {
+        var h = firstHeading(p.h, q);
+        // A text fragment lands on the matching heading where supported;
+        // elsewhere it is ignored and the page opens at the top.
+        row(list, p.t, h || (p.site !== p.t ? p.site : ""), p.u + (h ? "#:~:text=" + encodeURIComponent(h) : ""));
+      });
+      n += maps.length + pages.length;
+    }
+    status.textContent = ov.failed
+      ? "Couldn't load the map index; only this page is searchable."
+      : n
+        ? ""
+        : "Nothing matches “" + q.trim() + "”" + (data ? "." : " on this page; loading the maps…");
+    setActive(ovItems.length ? 0 : -1);
+  }
+
+  function loadIndex() {
+    if (searchData) return searchData;
+    var url = searchUrl();
+    searchData = fetch(url)
+      .then(function (r) {
+        if (!r.ok) throw new Error(r.status);
+        return r.json();
+      })
+      .then(function (d) {
+        var origin = new URL(url).origin;
+        var abs = function (u) {
+          return /^\//.test(u) ? origin + u : u;
+        };
+        var sites = {}; // a site's front-page title names its other pages
+        (d.pages || []).forEach(function (p) {
+          if (/\/$/.test(p.u)) sites[p.u] = p.t;
+        });
+        return {
+          maps: (d.maps || []).map(function (m) {
+            return { t: m.t, x: m.d + " " + m.u, d: m.d, u: abs(m.u) };
+          }),
+          pages: (d.pages || []).map(function (p) {
+            var root = (/^\/[^/]+\//.exec(p.u) || [""])[0];
+            return { t: p.t, x: (p.h || []).join(" \u2022 "), h: p.h || [], u: abs(p.u), rel: p.u, site: sites[root] || "" };
+          }),
+        };
+      });
+    return searchData;
+  }
+
+  function openSearch() {
+    if (!document.body) return;
+    if (!ov) buildOverlay();
+    ovReturn = document.activeElement;
+    ov.heads = pageHeadings();
+    var c = pageColors();
+    var box = document.getElementById("bas-box");
+    box.style.background = c.bg;
+    box.style.color = c.bg ? c.fg : "";
+    ov.hidden = false;
+    var input = document.getElementById("bas-q");
+    input.focus();
+    input.select();
+    renderResults();
+    if (!ov.data) {
+      ov.failed = false;
+      loadIndex().then(
+        function (d) {
+          ov.data = d;
+          if (!ov.hidden) renderResults();
+        },
+        function () {
+          ov.failed = true;
+          searchData = null; // the next open tries again
+          if (!ov.hidden) renderResults();
+        }
+      );
+    }
+  }
+
+  function closeSearch(navigating) {
+    if (!ov || ov.hidden) return;
+    ov.hidden = true;
+    if (!navigating && ovReturn && ovReturn.focus) ovReturn.focus();
   }
 
   function mountBar() {
@@ -462,10 +836,20 @@
           "</a>"
         : "") +
       '<button type="button" id="blog-annot-toggle" aria-label="Comments">💬</button>';
-    if (href) bar.firstChild.href = href;
+    bar.insertAdjacentHTML(
+      "afterbegin",
+      '<button type="button" id="blog-annot-find" aria-label="Search" ' +
+        'title="Search this page and every map (/)">🔍</button>'
+    );
+    if (href) bar.querySelector("#blog-annot-src").href = href;
     document.body.appendChild(bar);
     placeBar();
     window.addEventListener("resize", placeBar);
+    // A page that builds its header in script (the Moses atlas) may not
+    // have it yet: place again once everything has loaded.
+    if (document.readyState !== "complete") window.addEventListener("load", placeBar);
+    setTimeout(placeBar, 1500);
+    document.getElementById("blog-annot-find").onclick = openSearch;
     document.getElementById("blog-annot-toggle").onclick = function () {
       if (owner()) lsSet(OWNER_KEY, "1");
       lsSet(TOGGLE_SEEN_KEY, "1");
@@ -794,7 +1178,8 @@
         el &&
         el.closest &&
         el.closest(
-          "#blog-annot-pill,#blog-annot-modal,#blog-annot-btn,#blog-annot-chat"
+          "#blog-annot-pill,#blog-annot-modal,#blog-annot-btn,#blog-annot-chat," +
+            "#blog-annot-bar,#blog-annot-search"
         )
       );
     }
