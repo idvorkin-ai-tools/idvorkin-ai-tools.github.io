@@ -15,15 +15,27 @@
   ported to the other in the same change, or filed against the other the
   same day. The blog copy is the spec.
 
-  INERT BY DEFAULT. Readers get no UI and no network calls; the only cost is
-  this file's fetch and parse, plus one keydown listener. Everything else is
-  guarded by a localStorage flag that only the owner ever sets. The one
-  exception is a `#larry-cockpit=` fragment (see SEND TO LARRY): it saves an
-  address to localStorage and strips itself, with no network call.
+  NO NETWORK UNTIL USED. Every reader gets two small buttons, fixed top
+  right (Igor 2026-11-21: "everyone can see the chat box"): a GitHub link
+  to this page's source and a 💬 toggle that turns Comments mode on and off
+  live (no reload; aria-pressed and a blue fill say it is on; the tooltip
+  names the page path). Building them is DOM only: no request until the
+  reader sends something, and none ever to a Cockpit this browser has not
+  saved.
 
-  Enable  : open any explainer page with ?annotate=1  (persists via localStorage)
+  OWNER vs READER. The setup prompts (Cockpit address, GitHub token), the
+  `#larry-cockpit=` fragment and the status dot are the owner's alone. A
+  browser is the owner's once ?annotate=1 or the shortcut has been used
+  there (localStorage `blogAnnotateOwner`), or it has a saved token or
+  Cockpit address, or it already had Comments on before the toggle shipped.
+  A reader without Larry can still comment and chat; Send opens the review
+  card with "Copy for Igor" (readable text led by the page URL), plus
+  "Upload to gist" only when a token is saved. The chat panel's Copy does
+  the same for a chat message.
+
+  Enable  : open any explainer page with ?annotate=1  (persists; marks owner)
   Disable : open any explainer page with ?annotate=0
-  Toggle  : Cmd/Ctrl+Shift+A on desktop
+  Toggle  : the 💬 button, or Cmd/Ctrl+Shift+A on desktop (marks owner)
 
   localStorage is per origin, so one ?annotate=1 turns it on for every
   explainer on this host (they all share it), and none of this touches the
@@ -177,7 +189,40 @@
     }
   }
 
+  function lsGet(k) {
+    try {
+      return localStorage.getItem(k);
+    } catch (e) {
+      return null;
+    }
+  }
+  function lsSet(k, v) {
+    try {
+      localStorage.setItem(k, v);
+    } catch (e) {
+      /* private mode */
+    }
+  }
+
+  // See OWNER vs READER. TOGGLE_SEEN_KEY is written on the first toggle
+  // click, so a flag set before the toggle existed (only the owner could)
+  // still counts, and one set by a reader's click does not.
+  var OWNER_KEY = "blogAnnotateOwner";
+  var TOGGLE_SEEN_KEY = "blogAnnotateToggleSeen";
+  function owner() {
+    var h = String(window.location.hostname || "").toLowerCase();
+    return (
+      lsGet(OWNER_KEY) === "1" ||
+      (enabled() && lsGet(TOGGLE_SEEN_KEY) === null) ||
+      !!lsGet(TOKEN_KEY) ||
+      !!savedCockpit() ||
+      h === "localhost" ||
+      /\.ts\.net$/.test(h)
+    );
+  }
+
   var q = readQueryFlag();
+  if (q === true) lsSet(OWNER_KEY, "1");
   if (q !== null) setEnabled(q);
 
   // ------------------------------------------------- saved Cockpit address
@@ -237,9 +282,12 @@
     } catch (e) {
       /* the address is still read; the hash just stays visible */
     }
+    // A reader's browser never takes an address from a link: anyone can own
+    // a tailnet name, and a crafted link must not route their notes there.
+    if (!owner()) return;
     var origin = cockpitOrigin(raw);
     if (!origin) {
-      // Fixed text, never the link's: a reader without the flag sees nothing.
+      // Fixed text, never the link's.
       if (enabled())
         window.alert("That is not a Cockpit address, so nothing was saved.");
       return;
@@ -261,6 +309,7 @@
     var key = e.key || "";
     if ((e.metaKey || e.ctrlKey) && e.shiftKey && key.toLowerCase() === "a") {
       e.preventDefault();
+      lsSet(OWNER_KEY, "1");
       setEnabled(!enabled());
       window.location.reload();
     }
@@ -281,6 +330,7 @@
       live = !!on;
       setEnabled(live);
       document.documentElement.classList.toggle("blog-annot-off", !live);
+      renderBar();
       if (live && !started) {
         started = true;
         whenBody(start);
@@ -294,6 +344,104 @@
     if (document.body) fn();
     else document.addEventListener("DOMContentLoaded", fn);
   }
+
+  // ------------------------------------------------- toggle + source link
+  // Shown to every reader; DOM only, no request. Kept out of the
+  // .blog-annot-off rule so it stays visible when Comments are off.
+  var bar = null;
+  var GITHUB_SVG =
+    '<svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" fill="currentColor">' +
+    '<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>';
+
+  // https://github.com/<repo>/blob/<branch>/<path>, or "" when the page has
+  // no known source. ponytail: a site without data-branch is assumed to
+  // publish from main; one on master or gh-pages needs data-branch.
+  function sourceUrl() {
+    var ds = (SCRIPT && SCRIPT.dataset) || {};
+    var src = pageSource(window.location.hostname, window.location.pathname, ds.repo);
+    if (!src.repo || !src.path) return "";
+    return (
+      "https://github.com/" +
+      src.repo +
+      "/blob/" +
+      encodeURIComponent(ds.branch || "main") +
+      "/" +
+      src.path.split("/").map(encodeURIComponent).join("/")
+    );
+  }
+
+  function renderBar() {
+    if (!bar) return;
+    var t = document.getElementById("blog-annot-toggle");
+    t.setAttribute("aria-pressed", String(live));
+    t.title =
+      (live
+        ? "Comments on: select text to comment. Click to turn off."
+        : "Comments off: click to comment on this page.") +
+      "\n" +
+      window.location.pathname;
+  }
+
+  // Top right, but under the page's own sticky or fixed header when it has
+  // one, so the buttons never sit on its title or nav links.
+  function placeBar() {
+    bar.style.display = "none";
+    var el = document.elementFromPoint(window.innerWidth - 24, 4);
+    bar.style.display = "";
+    for (; el && el !== document.body && el !== document.documentElement; el = el.parentElement) {
+      var pos = window.getComputedStyle(el).position;
+      if (pos !== "fixed" && pos !== "sticky") continue;
+      var r = el.getBoundingClientRect();
+      if (r.top <= 4 && r.bottom < window.innerHeight / 3) {
+        bar.style.top = Math.round(r.bottom + 6) + "px";
+        return;
+      }
+    }
+    bar.style.top = "";
+  }
+
+  function mountBar() {
+    if (bar || !document.body) return;
+    var css = document.createElement("style");
+    css.textContent = [
+      "#blog-annot-bar{position:fixed;z-index:99998;display:flex;gap:6px;",
+      "top:calc(8px + env(safe-area-inset-top,0px));",
+      "right:calc(8px + env(safe-area-inset-right,0px));opacity:.7}",
+      "#blog-annot-bar:hover,#blog-annot-bar:focus-within{opacity:1}",
+      "#blog-annot-bar>*{box-sizing:border-box;width:30px;height:30px;padding:0;",
+      "display:inline-flex;align-items:center;justify-content:center;",
+      "border-radius:50%;border:1px solid rgba(128,128,128,.45);",
+      "background:rgba(128,128,128,.18);color:inherit;cursor:pointer;",
+      "font:14px/1 system-ui,sans-serif;text-decoration:none;",
+      "-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}",
+      "#blog-annot-toggle[aria-pressed='true']{background:#0b5ed7;",
+      "border-color:#0b5ed7;box-shadow:0 0 0 2px rgba(11,94,215,.35)}",
+      "@media print{#blog-annot-bar{display:none}}",
+    ].join("");
+    document.head.appendChild(css);
+    bar = document.createElement("div");
+    bar.id = "blog-annot-bar";
+    var href = sourceUrl();
+    bar.innerHTML =
+      (href
+        ? '<a id="blog-annot-src" target="_blank" rel="noopener" ' +
+          'aria-label="This page on GitHub" title="This page\'s source on GitHub">' +
+          GITHUB_SVG +
+          "</a>"
+        : "") +
+      '<button type="button" id="blog-annot-toggle" aria-label="Comments">💬</button>';
+    if (href) bar.firstChild.href = href;
+    document.body.appendChild(bar);
+    placeBar();
+    window.addEventListener("resize", placeBar);
+    document.getElementById("blog-annot-toggle").onclick = function () {
+      if (owner()) lsSet(OWNER_KEY, "1");
+      lsSet(TOGGLE_SEEN_KEY, "1");
+      window.blogAnnotate.set(!live);
+    };
+    renderBar();
+  }
+  whenBody(mountBar);
 
   if (enabled()) window.blogAnnotate.set(true); // <-- readers stop here
   return;
@@ -488,6 +636,7 @@
       "#blog-annot-chat .bac-row button{padding:6px 12px;border:0;border-radius:8px;",
       "background:#0b5ed7;color:#fff;font:600 13px/1.2 system-ui,sans-serif;cursor:pointer}",
       "#blog-annot-chat .bac-row button:disabled{opacity:.5;cursor:default}",
+      "#blog-annot-chat #blog-annot-chat-copy{background:#495057}",
       "@media (prefers-color-scheme:dark){#blog-annot-chat{background:#1e1f22;",
       "color:#e9ecef;border-color:#3a3d42}",
       "#blog-annot-chat .bac-head,#blog-annot-chat .bac-row{border-color:#3a3d42}",
@@ -744,6 +893,51 @@
     };
 
     // ---------------------------------------------------------- review flow
+    var OWNER = owner();
+
+    // Clipboard write with the execCommand fallback; resolves or rejects.
+    function copyText(text) {
+      function fallback() {
+        var ta = document.createElement("textarea");
+        ta.value = text;
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        var ok = false;
+        try {
+          ok = document.execCommand("copy");
+        } catch (e) {
+          ok = false;
+        }
+        document.body.removeChild(ta);
+        return ok ? Promise.resolve() : Promise.reject(new Error("copy failed"));
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText)
+        return navigator.clipboard.writeText(text).then(null, fallback);
+      return fallback();
+    }
+
+    // The buffer as a reader pastes it to Igor: page link first, then each
+    // note under its quote, one block per page.
+    function readableNotes(list) {
+      return reviewBatches(list)
+        .map(function (batch) {
+          var head =
+            "Comments on " +
+            batch.body.page_url +
+            (batch.body.title ? " (" + batch.body.title + ")" : "");
+          var lines = batch.items.map(function (a, i) {
+            return (
+              i + 1 + ". [" + (a.intent || DEFAULT_INTENT) + '] "' + a.quote + '"' +
+              (a.comment ? "\n   " + a.comment : "")
+            );
+          });
+          return head + "\n\n" + lines.join("\n");
+        })
+        .join("\n\n");
+    }
+
     document.getElementById("blog-annot-open").onclick = openReview;
 
     function openReview() {
@@ -776,8 +970,12 @@
           "</ul>" +
           '<div class="blog-annot-row">' +
           '<button type="button" class="blog-annot-ghost" id="blog-annot-clear">Clear all</button>' +
-          '<button type="button" class="blog-annot-ghost" id="blog-annot-copy">Copy to clipboard</button>' +
-          '<button type="button" class="blog-annot-primary" id="blog-annot-gist">Upload to gist</button>' +
+          (OWNER
+            ? '<button type="button" class="blog-annot-ghost" id="blog-annot-copy">Copy to clipboard</button>'
+            : '<button type="button" class="blog-annot-primary" id="blog-annot-copy">Copy for Igor</button>') +
+          (OWNER || lsGet(TOKEN_KEY)
+            ? '<button type="button" class="blog-annot-primary" id="blog-annot-gist">Upload to gist</button>'
+            : "") +
           '<button type="button" class="blog-annot-ghost" id="blog-annot-close">Close</button>' +
           "</div>" +
           '<div id="blog-annot-note"></div>'
@@ -794,32 +992,20 @@
       };
 
       document.getElementById("blog-annot-copy").onclick = function () {
-        var json = payloadJson(list);
-        function fallback() {
-          var ta = document.createElement("textarea");
-          ta.value = json;
-          ta.style.position = "fixed";
-          ta.style.opacity = "0";
-          document.body.appendChild(ta);
-          ta.select();
-          try {
-            document.execCommand("copy");
-            note.textContent = "Copied " + list.length + " annotations.";
-          } catch (e) {
-            note.textContent = "Copy failed — select the JSON manually.";
+        copyText(OWNER ? payloadJson(list) : readableNotes(list)).then(
+          function () {
+            note.textContent = OWNER
+              ? "Copied " + list.length + " annotations."
+              : "Copied " + list.length + " notes with the page link. Paste them to Igor.";
+          },
+          function () {
+            note.textContent = "Copy failed. Select the text by hand.";
           }
-          document.body.removeChild(ta);
-        }
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(json).then(function () {
-            note.textContent = "Copied " + list.length + " annotations.";
-          }, fallback);
-        } else {
-          fallback();
-        }
+        );
       };
 
-      document.getElementById("blog-annot-gist").onclick = function () {
+      var gistBtn = document.getElementById("blog-annot-gist");
+      if (gistBtn) gistBtn.onclick = function () {
         if (!list.length) {
           note.textContent = "Nothing to upload.";
           return;
@@ -916,7 +1102,15 @@
       }
       // Off the tailnet with no saved address, ask once. Cancel means "use
       // the gist"; a bad address sends nothing.
-      if (!LARRY && !SAME_HOST) {
+      // A reader with no Larry and no token: nothing to send to, so the
+      // review card with Copy for Igor.
+      if (!LARRY && !OWNER && !lsGet(TOKEN_KEY)) {
+        openReview();
+        document.getElementById("blog-annot-note").textContent =
+          "Larry isn't connected in this browser. Copy your notes and send them to Igor.";
+        return Promise.resolve();
+      }
+      if (!LARRY && !SAME_HOST && OWNER) {
         var typed = window.prompt(
           "Cockpit address for Send to Larry (https://…), saved in this " +
             "browser. Cancel to send to a secret gist instead."
@@ -940,7 +1134,7 @@
       function gist(batch, why) {
         if (!asked) {
           asked = true;
-          token = getToken();
+          token = OWNER ? getToken() : lsGet(TOKEN_KEY);
         }
         if (!token)
           return Promise.reject(
@@ -1091,6 +1285,7 @@
       '<div id="blog-annot-chat-status"></div>' +
       '<div class="bac-row"><textarea id="blog-annot-chat-text" rows="2" ' +
       'placeholder="Talk to Larry about this page…"></textarea>' +
+      '<button type="button" id="blog-annot-chat-copy">Copy</button>' +
       '<button type="button" id="blog-annot-chat-send">Send</button></div>';
     document.body.appendChild(chatPanel);
     var chatLog = document.getElementById("blog-annot-chat-log");
@@ -1163,7 +1358,7 @@
     }
 
     function chatOpen() {
-      if (!LARRY && !SAME_HOST) {
+      if (!LARRY && !SAME_HOST && OWNER) {
         var origin = cockpitOrigin(
           window.prompt(
             "Cockpit address for the chat (https://…), saved in this browser."
@@ -1175,8 +1370,14 @@
         }
       }
       chatPanel.hidden = false;
+      chatSendBtn.disabled = !LARRY;
       if (!LARRY) {
-        chatStatus("No Cockpit address, so the chat is off. Open it again to set one.");
+        chatStatus(
+          OWNER
+            ? "No Cockpit address, so the chat is off. Open it again to set one."
+            : "Larry isn't connected in this browser. Write here, then Copy and send it to Igor."
+        );
+        chatTa.focus();
         return Promise.resolve();
       }
       chatTa.focus();
@@ -1230,11 +1431,11 @@
           delete chatSeen[id];
           chatFailed = { text: text, id: id };
           if (!chatTa.value) chatTa.value = chatPrev = text;
-          chatStatus("Not sent (" + (err.message || err) + "). Your text is kept.");
+          chatStatus("Not sent (" + (err.message || err) + "). Your text is kept: retry, or Copy it for Igor.");
         })
         .then(function () {
           chatBusy = false;
-          chatSendBtn.disabled = false;
+          chatSendBtn.disabled = !LARRY;
         });
     }
 
@@ -1244,6 +1445,20 @@
     };
     document.getElementById("blog-annot-chat-close").onclick = chatClose;
     chatSendBtn.onclick = chatSend;
+    // Copy works with or without Larry: the message with the page link, to
+    // paste to Igor anywhere.
+    document.getElementById("blog-annot-chat-copy").onclick = function () {
+      var text = chatTa.value.trim();
+      if (!text) return;
+      copyText("About " + CHAT_PAGE.page_url + "\n\n" + text).then(
+        function () {
+          chatStatus("Copied with the page link. Paste it to Igor.");
+        },
+        function () {
+          chatStatus("Copy failed. Select the text by hand.");
+        }
+      );
+    };
     chatTa.addEventListener("keydown", function (e) {
       if (e.key === "Escape" || e.key === "Esc") {
         chatClose();
