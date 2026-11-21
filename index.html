@@ -54,6 +54,20 @@
   .tabs a[aria-selected="true"] span{opacity:.8}
   @media(min-width:900px){.tabs{flex-wrap:wrap;overflow-x:visible}}
   .tabbed section[data-tab]:not(.on){display:none}
+  .search{margin:0 0 16px}
+  .search[hidden]{display:none}
+  .search input{width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 40px 10px 14px}
+  .search input:focus{outline:none;border-color:var(--def)}
+  .search input::-webkit-search-cancel-button{display:none}
+  .search .box{position:relative}
+  .search kbd{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-dim);border:1px solid var(--line);border-radius:4px;padding:0 6px;pointer-events:none}
+  .search input:focus + kbd,.search input:not(:placeholder-shown) + kbd{display:none}
+  .search .status{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-dim);margin:8px 0 0;min-height:1em}
+  main.searching .tabs,main.searching .sec-note,main.searching h2 > span:not(.hits),main.searching h3.sub > span{display:none}
+  main.searching.tabbed section[data-tab]{display:block}
+  main.searching .nohit,main.searching.tabbed section.miss[data-tab]{display:none}
+  h2 .hits{display:none}
+  main.searching h2 .hits{display:inline}
   footer{max-width:1080px;margin:0 auto;padding:24px 20px 48px;border-top:1px solid var(--line-soft);font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-dim)}
   footer a{color:var(--ink-dim);text-decoration:underline;text-underline-offset:3px}
 </style>
@@ -66,6 +80,11 @@
 <main>
   <h1>Explainers, field maps, and a few toys</h1>
   <p class="lead">Everything with a live page in this org, in one place. Field maps take a course, an author or a subject and lay it out page by page with the sources pinned; explainers take one question and answer it properly. Built by <a href="https://idvork.in" target="_blank" rel="noopener">Igor Dvorkin</a>'s AI tools, reviewed by Igor. Cards say when each site was last touched. There are a few different <a href="kinds.html">kinds of explainer</a> here; that page says what each kind is for and shows an example we think is good, and the <a href="strategies.html">production strategies</a> page pulls out the craft moves so they can be mixed with any kind.</p>
+
+  <div class="search" role="search" hidden>
+    <div class="box"><input type="search" id="q" placeholder="Search every map and page" aria-label="Search the maps by title and description" autocomplete="off" spellcheck="false" /><kbd>/</kbd></div>
+    <p class="status" id="q-status" aria-live="polite"></p>
+  </div>
 
   <nav class="tabs" aria-label="Groups">
     <a href="#safety" id="tab-safety">Safety and alignment<span>12 maps + a bridge</span></a>
@@ -229,6 +248,92 @@
     list[n].click();
   });
   show(!!location.hash);
+  window.showTab = show;
+})();
+
+// Search across every tab, client-side (Igor 2026-11-22: "search on the
+// idvorkin-ai-tools index page, client-side, the way the blog does it").
+// ponytail: substring match over each card's title + description, every word
+// must hit. Fine for ~40 cards; past a few hundred, or to search inside each
+// map's own pages, swap in MiniSearch over a generated JSON like the blog.
+(function () {
+  var wrap = document.querySelector(".search");
+  var input = document.getElementById("q");
+  var status = document.getElementById("q-status");
+  var main = document.querySelector("main");
+  var panels = document.querySelectorAll("section[data-tab]");
+  if (!wrap || !input || !panels.length) return;
+  wrap.hidden = false;
+
+  var cards = Array.prototype.map.call(document.querySelectorAll("section[data-tab] .card"), function (c) {
+    var t = c.querySelector(".t"), d = c.querySelector(".d");
+    return { el: c, text: ((t ? t.textContent : "") + " " + (d ? d.textContent : "")).toLowerCase() };
+  });
+  // Each sub-group heading goes with the grid that follows it.
+  var subs = Array.prototype.map.call(document.querySelectorAll("section[data-tab] h3.sub"), function (h) {
+    var g = h.nextElementSibling;
+    while (g && !g.classList.contains("grid")) g = g.nextElementSibling;
+    return { h: h, grid: g };
+  });
+  var hits = [];
+  for (var i = 0; i < panels.length; i++) {
+    var span = document.createElement("span");
+    span.className = "hits";
+    var h2 = panels[i].querySelector("h2");
+    if (h2) h2.appendChild(span);
+    hits.push(span);
+  }
+
+  function setUrl(q) {
+    var u = new URL(location.href);
+    if (q) u.searchParams.set("q", q); else u.searchParams.delete("q");
+    history.replaceState(null, "", u.pathname + u.search + u.hash);
+  }
+
+  function run() {
+    var q = input.value.trim();
+    var words = q.toLowerCase().split(/\s+/).filter(Boolean);
+    setUrl(q);
+    if (!words.length) {
+      main.classList.remove("searching");
+      status.textContent = "";
+      if (window.showTab) window.showTab(false);
+      return;
+    }
+    main.classList.add("searching");
+    var total = 0, groups = 0;
+    cards.forEach(function (c) {
+      var ok = words.every(function (w) { return c.text.indexOf(w) !== -1; });
+      c.el.classList.toggle("nohit", !ok);
+    });
+    subs.forEach(function (s) {
+      var any = s.grid && s.grid.querySelector(".card:not(.nohit)");
+      s.h.classList.toggle("nohit", !any);
+    });
+    for (var p = 0; p < panels.length; p++) {
+      var n = panels[p].querySelectorAll(".card:not(.nohit)").length;
+      panels[p].classList.toggle("miss", n === 0);
+      hits[p].textContent = n + (n === 1 ? " match" : " matches");
+      total += n;
+      if (n) groups++;
+    }
+    status.textContent = total
+      ? total + (total === 1 ? " match" : " matches") + " in " + groups + (groups === 1 ? " group" : " groups") + " · Esc to clear"
+      : "Nothing matches \u201c" + q + "\u201d · Esc to clear";
+  }
+
+  input.addEventListener("input", run);
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && input.value) { input.value = ""; run(); input.blur(); return; }
+    if (e.key !== "/" || e.ctrlKey || e.metaKey || e.altKey) return;
+    var t = e.target;
+    if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
+    e.preventDefault();
+    input.focus();
+    input.select();
+  });
+  var q0 = new URL(location.href).searchParams.get("q");
+  if (q0) { input.value = q0; run(); }
 })();
 </script>
 <script src="https://idvorkin-ai-tools.github.io/assets/annotate.js" data-repo="idvorkin-ai-tools/idvorkin-ai-tools.github.io" defer></script>
