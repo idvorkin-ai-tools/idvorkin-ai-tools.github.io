@@ -8,7 +8,9 @@
   It is a port of the blog's _includes/annotate.html (idvorkin.github.io)
   with no Jekyll in it: page identity comes from the URL, not from Liquid.
   Left out on purpose: the blog's rendered-diff view and its "open PRs touch
-  this page" badge, both specific to the blog repo.
+  this page" badge, both specific to the blog repo. The blog puts the 💬
+  toggle in its navbar, next to the navbar's own GitHub link; here, with no
+  shared header, it is the floating top-right pair.
 
   KEEP IN SYNC (Igor 2026-11-21): this file and the blog's
   _includes/annotate.html are double-written. A fix or feature in one is
@@ -89,7 +91,11 @@
   open and the tab is visible. Same Cockpit address as SEND TO LARRY. A
   Cockpit that predates the route looks the same as one out of reach (its 404 has no CORS header):
   the panel says "can't reach the Cockpit, or it has no page chat yet"
-  and keeps the text; a resend of the same text reuses its id.
+  and keeps the text; a resend of the same text reuses its id. URLs in
+  messages render as links (built as nodes, never innerHTML). After the
+  first send on a brand-new thread the panel re-reads it from the start, so
+  the Cockpit's page-details opener sits above that message. Copy puts the
+  message and the page URL on the clipboard, for a reader without Larry.
 
   SECURITY: the GitHub token lives ONLY in this browser's localStorage under
   `blogAnnotateToken` and is sent only to api.github.com. Use one with the
@@ -382,12 +388,14 @@
       window.location.pathname;
   }
 
-  // The fixed or sticky header band under (right edge, y), or null.
+  // The header band under (right edge, y), or null: anything fixed or
+  // sticky, or a <nav>/<header> (the blog's navbar scrolls with the page).
   function headerAt(y) {
     var el = document.elementFromPoint(window.innerWidth - 24, y);
     for (; el && el !== document.body && el !== document.documentElement; el = el.parentElement) {
       var pos = window.getComputedStyle(el).position;
-      if (pos !== "fixed" && pos !== "sticky") continue;
+      var band = el.tagName === "NAV" || el.tagName === "HEADER";
+      if (pos !== "fixed" && pos !== "sticky" && !band) continue;
       var r = el.getBoundingClientRect();
       if (r.top <= y && r.bottom > y && r.bottom < window.innerHeight / 3) return r;
     }
@@ -1362,23 +1370,28 @@
       return el;
     }
 
-    // fromStart re-reads the whole thread and redraws it in the Cockpit's
-    // order (used after the first send makes a thread, whose opener the
-    // Cockpit writes before Igor's message).
-    function chatPoll(fromStart) {
+    // fromId re-reads the whole thread and, when it holds that message,
+    // redraws it in the Cockpit's order: after the first send makes a thread,
+    // the Cockpit's opener goes above Igor's message, not below it.
+    function chatPoll(fromId) {
       if (!LARRY || chatPanel.hidden || !live) return Promise.resolve();
       var q =
         "/page-chat?page=" +
         encodeURIComponent(CHAT_PAGE.permalink || CHAT_PAGE.page_url) +
-        (chatLastId && fromStart !== true ? "&after=" + encodeURIComponent(chatLastId) : "");
+        (chatLastId && !fromId ? "&after=" + encodeURIComponent(chatLastId) : "");
       return chatFetch(q, { cache: "no-store" })
         .then(function (out) {
-          if (fromStart === true) {
+          var msgs = out.messages || [];
+          if (fromId) {
+            var has = msgs.some(function (x) {
+              return x.id === fromId;
+            });
+            if (!has) return;
             chatLog.textContent = "";
             chatSeen = {};
             chatLastId = null;
           }
-          (out.messages || []).forEach(function (m) {
+          msgs.forEach(function (m) {
             chatAdd(m);
             if (m.id) chatLastId = m.id;
           });
@@ -1467,7 +1480,7 @@
           // still comes in on the next poll, and this one is not shown twice.
           chatAdd({ id: id, who: "igor", text: text });
           chatStatus("");
-          if (fresh) return chatPoll(true);
+          if (fresh) return chatPoll(id);
         })
         .catch(function (err) {
           if (el.parentNode) el.parentNode.removeChild(el);
