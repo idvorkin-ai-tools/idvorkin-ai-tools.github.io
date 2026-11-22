@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Safety and alignment, mapped — idvorkin-ai-tools</title>
-<meta name="description" content="A hub for the safety and alignment field maps: a capability-versus-alignment bridge to start, then the AI safety overview, BlueDot's Technical AI Safety course, constitutions and model specs, agentic privacy and CIMemories, evaluations and red teaming (HarmBench, the red-teaming ramp-up, LLM judges, and a comparison of the labs' preparedness reports) and interpretability (the Pain Axis), with a reading order and how they connect." />
+<meta name="description" content="A hub for the safety and alignment field maps: a capability-versus-alignment bridge to start, then the AI safety overview, BlueDot's Technical AI Safety course, constitutions and model specs, agentic privacy and CIMemories, evaluations and red teaming (HarmBench, the red-teaming ramp-up, LLM judges, and a comparison of the labs' preparedness reports) and interpretability (ablations and the refusal direction, the Pain Axis), with a reading order and how they connect." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -128,7 +128,7 @@
       <li><b>Constitutions and model specs, as one stop:</b> Constitutional AI for the 2022 paper and how it grew into Claude's 2026 constitution; the <a href="https://idvorkin-ai-tools.github.io/claude-constitution-field-map/">constitution ladder</a> for that document in depth; <a href="https://idvorkin-ai-tools.github.io/model-spec-field-map/">OpenAI's Model Spec</a> and its <a href="https://idvorkin-ai-tools.github.io/model-spec-field-map/delta.html">delta with Claude's constitution</a>; then Instruction hierarchy for whose instructions count, which bridges back to the constitution.</li>
       <li><b>What an agent may do with information:</b> Agentic privacy, then CIMemories for the memory case.</li>
       <li><b>Evaluations and red teaming, how to test all of it:</b> HarmBench for the benchmark, then the red-teaming ramp-up for how the field does it, then LLM Judges for when to believe the model that grades the results, then <a href="bridge-preparedness-reports.html">preparedness reports compared</a> for how the labs test their own models before release.</li>
-      <li><b>Interpretability, looking inside:</b> the Pain Axis, for what a model represents about harm to itself and what steering that direction does.</li>
+      <li><b>Interpretability, looking inside:</b> <a href="bridge-ablations.html">ablations and the refusal direction</a> for the method and what it says about safety training, then the Pain Axis, for what a model represents about harm to itself and what steering that direction does.</li>
     </ol>
   </section>
 
@@ -156,8 +156,9 @@
       <div class="map"><h3><a href="https://idvorkin-ai-tools.github.io/llm-judges-field-map/">LLM Judges, Mapped</a></h3><div class="q">When should you believe an LLM judge?</div><p>A nine-unit mini-course on judging and grading: the written policy, scoring versus pairwise versus reference grading, agreement statistics from Cohen&#39;s kappa to Krippendorff&#39;s alpha, ROC and Youden&#39;s J, position, verbosity and self-preference biases, and how to validate a judge before trusting it.</p></div>
     </div>
     <div class="group interp">
-      <h3 class="sub">Interpretability <span>1 map</span></h3>
+      <h3 class="sub">Interpretability <span>1 map + a bridge</span></h3>
       <p class="sec-note">Reading what a model represents inside, rather than only what it says.</p>
+      <div class="map"><h3><a href="bridge-ablations.html">Ablations, and the Refusal Direction</a></h3><div class="q">What is an ablation, and how do &ldquo;uncensored&rdquo; models remove refusals?</div><p>Removing a part and measuring the change, from ablation tables to zero and mean ablation of heads and directions; the finding that refusal sits largely in one direction; an abliterated model as a real example; and what that says about shallow safety training, open weights and tamper-resistant safeguards.</p></div>
       <div class="map"><h3><a href="https://idvorkin-ai-tools.github.io/pain-axis-field-map/">The Pain Axis, Mapped</a></h3><div class="q">Do models represent harm to themselves, and does it drive what they do?</div><p>A linear pain direction found in 25 open models: it tracks harm aimed at the model, not the user, and steering it makes models pick destructive buttons. What it shows and what it does not.</p></div>
     </div>
   </section>
