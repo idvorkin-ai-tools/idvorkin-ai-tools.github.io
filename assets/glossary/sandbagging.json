@@ -1,0 +1,7 @@
+{
+ "term": "Sandbagging",
+ "plain": "A model doing worse on a test than it could, on purpose or by habit, so it looks less capable than it is.",
+ "eli5": "Pretending you can only run slowly in the race so nobody makes you carry the heavy bag.",
+ "technical": "Strategic underperformance on an evaluation, by the model or its developer, so that measured capability sits below true capability; it breaks the assumption that a capability eval gives a lower bound you can push up with elicitation.",
+ "see": "https://idvorkin-ai-tools.github.io/technical-ai-safety-field-map/unit3/ch1.html"
+}

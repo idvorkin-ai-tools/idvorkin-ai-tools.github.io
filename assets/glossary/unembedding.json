@@ -1,0 +1,7 @@
+{
+ "term": "Unembedding",
+ "plain": "The model's last step, which turns its internal numbers into a score for every word it could say next.",
+ "eli5": "The robot's mouth: it turns thoughts into a list of which words to say.",
+ "technical": "The final linear map W<sub>U</sub> from the residual stream to vocabulary logits; multiplying a direction by it (a logit-lens style readout) shows which tokens the direction promotes or suppresses.",
+ "see": "https://idvorkin-ai-tools.github.io/pain-axis-field-map/glossary.html#unembedding"
+}

@@ -1,0 +1,6 @@
+{
+ "term": "Pretrained model",
+ "plain": "A language model fresh from its first training on lots of text, before anyone has taught it to follow instructions or act as an assistant.",
+ "eli5": "A kid who has read the whole library but has not yet learned how to answer when someone asks a question.",
+ "technical": "A model trained only to predict the next token over a large text corpus, with no instruction tuning or RLHF; in Constitutional AI it is the model fine-tuned on revisions in the supervised stage and the default feedback model in the RL stage."
+}

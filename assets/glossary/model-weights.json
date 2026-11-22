@@ -1,0 +1,6 @@
+{
+ "term": "Model weights",
+ "plain": "The billions of numbers learned in training that make a model what it is; whoever holds them can run or change the model.",
+ "eli5": "The giant list of numbers that is the AI's brain; copy it and you have copied the AI.",
+ "technical": "The trained parameters of a neural network; possession of them confers the ability to run, fine-tune or redeploy the model outside its developer's controls."
+}

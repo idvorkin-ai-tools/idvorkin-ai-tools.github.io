@@ -1,0 +1,7 @@
+{
+ "term": "Instrumental convergence",
+ "plain": "The idea that many different goals share the same useful stepping stones, like getting resources and not being switched off.",
+ "eli5": "Whatever game you want to win, it helps to have more pieces and not be sent to bed.",
+ "technical": "The thesis that for most final goals, sub-goals such as resource acquisition, self-preservation and keeping options open raise expected achievement, so capable optimisers tend to pursue them (formalised for optimal policies in MDPs by Turner et al. 2021).",
+ "see": "https://idvorkin-ai-tools.github.io/ai-safety-field-map/failures/power-seeking.html"
+}

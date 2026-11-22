@@ -1,0 +1,8 @@
+{
+ "term": "Projection (onto a direction)",
+ "plain": "One number saying how much of a given direction a list of numbers contains, found with a dot product.",
+ "eli5": "How far you have walked in the north direction, even if you walked a bit sideways too.",
+ "technical": "The scalar h·v̂ of an activation h with a unit vector v̂; interpretability papers read a concept's strength this way, and AUCs, z-scores and steering checks are all built from it.",
+ "formula": "proj = h · v / ‖v‖",
+ "see": "https://idvorkin-ai-tools.github.io/pain-axis-field-map/glossary.html#projection"
+}

@@ -1,0 +1,7 @@
+{
+ "term": "Hallucination",
+ "plain": "A model stating something false or made up as if it were fact.",
+ "eli5": "When the robot makes up an answer and says it like it is sure.",
+ "technical": "Fluent output not supported by the model's inputs or by the world, such as invented citations, packages or facts; a product of next-token prediction, made worse by sampling and missing grounding.",
+ "see": "https://idvorkin-ai-tools.github.io/red-teaming-ramp-up/risks/llm09-misinformation.html"
+}

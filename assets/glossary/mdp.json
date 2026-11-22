@@ -1,0 +1,6 @@
+{
+ "term": "Markov decision process (MDP)",
+ "plain": "The standard maths model of an agent moving between situations by taking actions and collecting rewards.",
+ "eli5": "A board game: where you are, what moves you can make, and the points each move gets you.",
+ "technical": "A tuple of states, actions, transition probabilities and a reward function, where the next state depends only on the current state and action; the setting for most RL theory."
+}

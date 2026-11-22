@@ -1,0 +1,8 @@
+{
+ "term": "Cosine similarity",
+ "plain": "How closely two directions point the same way: 1 means the same, 0 unrelated, negative opposed.",
+ "eli5": "Two arrows pointing the same way score 1; arrows at right angles score 0.",
+ "technical": "The cosine of the angle between two vectors, their dot product divided by the product of their norms; it ignores length, so it compares directions only.",
+ "formula": "cos θ = (a · b) / (‖a‖ ‖b‖)",
+ "see": "https://idvorkin-ai-tools.github.io/pain-axis-field-map/glossary.html#cosine"
+}

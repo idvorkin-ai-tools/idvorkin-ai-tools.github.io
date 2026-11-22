@@ -1,0 +1,7 @@
+{
+ "term": "Transformation exception",
+ "plain": "The Model Spec rule that GPT may translate, summarise or reformat text the user pasted in, even text it would not write itself, as long as it adds nothing harmful.",
+ "eli5": "You can ask the robot to copy your own note neatly, but it won't add new bad parts.",
+ "technical": "A Root-level carve-out letting GPT translate, paraphrase, summarise, classify, encode, format or proofread restricted or sensitive content the user directly supplied, provided the output draws only on that input; it never reaches the prohibited tier.",
+ "see": "https://idvorkin-ai-tools.github.io/model-spec-field-map/parts/p07.html#transform"
+}

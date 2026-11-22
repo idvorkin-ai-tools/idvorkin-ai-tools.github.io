@@ -1,0 +1,7 @@
+{
+ "term": "Privilege prompt interface (PPI)",
+ "plain": "A way of writing each instruction's rank into the prompt as a tag, so the model can tell which instruction wins without relying on message roles.",
+ "eli5": "Sticking a number badge on every order so the robot knows which boss it came from.",
+ "technical": "ManyIH's scheme for in-text privilege: each instruction is wrapped in a tag, ordinal ([[Privilege k]], lower number wins, ties go to the later instruction) or scalar ([[z=v]], higher value wins), and a meta-instruction states the rule; only the order of values matters.",
+ "see": "https://idvorkin-ai-tools.github.io/instruction-hierarchy-field-map/paper/many-tier.html#method"
+}

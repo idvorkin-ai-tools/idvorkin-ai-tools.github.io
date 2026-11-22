@@ -1,0 +1,7 @@
+{
+  "term": "PII (personally identifiable information)",
+  "plain": "Information that can identify a particular person, such as a name, address, phone number or ID number.",
+  "eli5": "Anything that lets someone figure out exactly who you are.",
+  "technical": "Data that identifies a person alone or in combination with other data; the agentic-privacy report finds that blunt PII redaction breaks agent tasks, and that pattern scanners miss leaks through reasoning traces and re-identification from details scattered across memory.",
+  "see": "https://idvorkin-ai-tools.github.io/agentic-privacy-field-map/problems/data-privacy.html#op-7-6"
+}

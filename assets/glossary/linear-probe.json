@@ -1,0 +1,7 @@
+{
+ "term": "Probe (linear probe)",
+ "plain": "A small, simple classifier trained to read one property, like \"is this statement true?\", off a model's internal numbers.",
+ "eli5": "A thermometer you dip into the robot's thoughts to read one thing, like whether it is lying.",
+ "technical": "A linear classifier fit on a layer's activations to predict a labelled property; high probe accuracy shows the property is linearly decodable there, not that the model uses it.",
+ "see": "https://idvorkin-ai-tools.github.io/technical-ai-safety-field-map/unit4/ch2.html#probes-cheapest-thing"
+}

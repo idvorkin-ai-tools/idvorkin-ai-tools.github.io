@@ -1,0 +1,7 @@
+{
+ "term": "Guardrail",
+ "plain": "A separate check wrapped around a model that screens what goes in or comes out and blocks or fixes anything off-limits.",
+ "eli5": "A grown-up who reads your note before it goes out and crosses out the rude words.",
+ "technical": "A filter layer outside the model's weights, such as a classifier, rule set or second model, applied to inputs, outputs or tool calls; it raises an attacker's cost but is itself bypassable by adaptive attacks.",
+ "see": "https://idvorkin-ai-tools.github.io/red-teaming-ramp-up/index.html#tools"
+}

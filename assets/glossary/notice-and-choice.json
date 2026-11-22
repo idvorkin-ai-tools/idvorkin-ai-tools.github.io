@@ -1,0 +1,7 @@
+{
+  "term": "Notice and choice",
+  "plain": "The familiar privacy model where a service tells you what it will do with your data and you agree or walk away.",
+  "eli5": "A long paper you have to say yes to before you can play the game.",
+  "technical": "The consent regime built on disclosure plus user acceptance (privacy policies, click-through and permission prompts); contextual integrity argues against it, and the agentic-privacy report finds one-time consent cannot cover the open-ended actions of an autonomous agent.",
+  "see": "https://idvorkin-ai-tools.github.io/agentic-privacy-field-map/problems/mental-models-consent.html#static-consent"
+}

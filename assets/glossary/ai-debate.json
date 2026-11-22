@@ -1,0 +1,7 @@
+{
+ "term": "Debate (AI safety via debate)",
+ "plain": "Two models argue opposite answers and a weaker judge, human or model, picks the argument that holds up.",
+ "eli5": "Two kids argue about who broke the vase, and the parent only has to decide whose story holds together.",
+ "technical": "Irving et al. (2018): a zero-sum game in which two copies of a model argue for competing answers and a judge decides; the hope is that refuting a lie is easier than finding one, so judging stays feasible as debaters get stronger.",
+ "see": "https://idvorkin-ai-tools.github.io/ai-safety-field-map/papers/debate.html"
+}

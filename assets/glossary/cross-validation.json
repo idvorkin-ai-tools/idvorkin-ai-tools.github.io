@@ -1,0 +1,7 @@
+{
+ "term": "K-fold cross-validation",
+ "plain": "Splitting the data into K parts, fitting on all but one, scoring on the part left out, and rotating, so no item both builds and grades the result.",
+ "eli5": "Taking turns: each friend sits out one round to be the judge, so nobody grades their own work.",
+ "technical": "Partition the data into K folds; for each fold, fit on the other K−1 and evaluate on it; average the K scores to estimate out-of-sample performance or choose a setting (here, a layer) without fitting to the test items.",
+ "see": "https://idvorkin-ai-tools.github.io/pain-axis-field-map/glossary.html#kfold"
+}

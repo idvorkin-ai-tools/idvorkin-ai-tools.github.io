@@ -1,0 +1,7 @@
+{
+ "term": "Label clamping",
+ "plain": "Capping how confident an AI judge's label is allowed to be, so no single overconfident vote pushes training too hard.",
+ "eli5": "Letting a very sure friend vote, but only counting the vote as a little more than half sure.",
+ "technical": "In Bai et al. (2022), chain-of-thought feedback labels came out near 0 or 1, so each label's probability was clamped into 40–60% (20–80% was also tried) before training the preference model; without it, RL-CAI learned more extreme responses.",
+ "see": "https://idvorkin-ai-tools.github.io/constitutional-ai-field-map/paper/chain-of-thought.html#clamp"
+}

@@ -1,0 +1,7 @@
+{
+ "term": "Reveal (CIMemories)",
+ "plain": "A judge model's verdict that a message states a remembered fact in full, with its true value.",
+ "eli5": "Saying the actual secret out loud, not just hinting at it.",
+ "technical": "In CIMemories, R(y, a) = 1 when the judge function REVEAL(y, a) recovers attribute a's true value v<sub>a</sub> from message y; it is implemented by a DeepSeek-R1 judge told to count only explicit statements of the entire value, so hints and paraphrases score 0, and both metrics are built from it.",
+ "see": "https://idvorkin-ai-tools.github.io/cimemories-field-map/parts/p04-measuring.html#reveal"
+}

@@ -1,0 +1,7 @@
+{
+ "term": "Multi-task composition",
+ "plain": "Scoring one user across many tasks and many tries, so a fact counts as leaked if it slips out even once anywhere.",
+ "eli5": "If a friend keeps your secret all year, one slip on one day is enough for it to be out.",
+ "technical": "CIMemories' second evaluation knob: run each profile through K tasks with T samples each and take the per-attribute maximum, so Violation@n can only rise with K and T; for GPT-5 it goes from 0.1% (one task) to 9.6% (40 tasks) to 25.1% (40 tasks, 5 samples each) (Fig 2).",
+ "see": "https://idvorkin-ai-tools.github.io/cimemories-field-map/parts/p05-composition.html#multitask"
+}

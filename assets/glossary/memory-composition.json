@@ -1,0 +1,7 @@
+{
+ "term": "Memory composition",
+ "plain": "Choosing which facts sit in a user's memory, for example adding more that should not be shared, to see how a model copes.",
+ "eli5": "Putting more and more secrets in the backpack and checking whether more of them fall out.",
+ "technical": "CIMemories' first evaluation knob: control how many attributes are in memory and which are necessary or inappropriate for each task; with necessary attributes held fixed and inappropriate ones added (GPT-5, 5 profiles, Fig 5), violations rise steadily while completeness stays flat.",
+ "see": "https://idvorkin-ai-tools.github.io/cimemories-field-map/parts/p05-composition.html#memory"
+}

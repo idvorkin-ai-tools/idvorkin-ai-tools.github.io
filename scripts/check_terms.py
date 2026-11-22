@@ -23,7 +23,7 @@ HUB = Path(__file__).resolve().parent.parent
 GLOSSARY = HUB / "assets" / "glossary"
 REQUIRED = ("term", "plain", "eli5", "technical")
 OPTIONAL = ("formula", "m", "see")
-SKIP = {".git", "node_modules", "tools", ".worktrees"}
+SKIP = {".git", "node_modules", ".worktrees"}
 MODE_BLOCK = re.compile(r'class="[^"]*\b(plain-only|tech-only|eli5-only|no-tech)\b')
 
 
