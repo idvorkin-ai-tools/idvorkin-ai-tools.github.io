@@ -97,8 +97,8 @@
       Cockpit's "Pair a page" and types the 6-digit number it shows back here
       (`/pair/redeem`; 5 min, single use). Then the address is saved as the
       fragment saves it. The same box offers one-click `#larry-cockpit=` links
-      for a browser that has the Cockpit open. DEFAULT_COCKPIT is empty: the
-      address stays out of this public file.
+      for a browser that has the Cockpit open. DEFAULT_COCKPIT names the Cockpit
+      Connect pairs with; empty makes it ask.
     * If the POST fails, errors or hangs past COCKPIT_TIMEOUT_MS: one SECRET
       gist per batch (token asked for only then), description
       `blog-review: <path>`, file review.json. The review card also offers
@@ -133,9 +133,9 @@
   var TOKEN_KEY = "blogAnnotateToken";
   var BUF_KEY = "blogAnnotateBuffer";
   var COCKPIT_KEY = "blogLarryCockpit"; // saved Cockpit origin, off-tailnet
-  // The Cockpit address every browser starts with. Empty on purpose: the
-  // address is private, so a browser gets it from Connect, the Cockpit's
-  // one-click link or a prompt, and keeps it in COCKPIT_KEY.
+  // The Cockpit Connect pairs with. Set, pairing is only a challenge and a
+  // number; "" makes Connect ask for the address once. It only presets
+  // Connect: nothing talks to it until a browser has paired.
   var DEFAULT_COCKPIT = "";
   var COCKPIT_TIMEOUT_MS = 8000; // a hung POST off the tailnet falls back
   var CTX = 30; // chars of prefix/suffix context (W3C TextQuoteSelector)
@@ -296,13 +296,11 @@
   }
 
   function savedCockpit() {
-    var saved = "";
     try {
-      saved = cockpitOrigin(localStorage.getItem(COCKPIT_KEY));
+      return cockpitOrigin(localStorage.getItem(COCKPIT_KEY));
     } catch (e) {
-      /* private mode */
+      return "";
     }
-    return saved || cockpitOrigin(DEFAULT_COCKPIT);
   }
 
   function saveCockpit(origin) {
@@ -1832,7 +1830,9 @@
           }
         });
       });
-      if (LARRY) start(LARRY);
+      var preset = LARRY || cockpitOrigin(DEFAULT_COCKPIT);
+      addr.value = preset;
+      if (preset) start(preset);
       else addr.focus();
     }
 
