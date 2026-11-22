@@ -66,6 +66,7 @@
   ul.read li b{color:var(--ink)}
   ol.src{padding-left:1.4em;margin:0;color:var(--ink-dim);font-size:14px}
   ol.src li{margin:0 0 8px}
+  .lab [hidden]{display:none}
   .lab .lab-pre button[aria-pressed="true"]{border-color:var(--def);color:var(--ink);background:rgba(95,211,230,.12)}
   .lab select{font:inherit;font-size:14px;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:6px 8px;min-height:36px;max-width:100%}
   .lab .lab-sl.eo-pick,.lab .lab-sl.tr-pick{grid-template-columns:minmax(0,1fr);max-width:420px}
@@ -187,7 +188,7 @@
         <td>Numbers: red-team scores against web baselines, cost-<span class="term" data-term="uplift">uplift</span> multiples.</td>
         <td>Numbers, with no thresholds shown.</td></tr>
     </table></div>
-    <p class="lab-try"><b>Try this</b>Pick a lab, then slide the score across the one number its documents print: see which side of the bar it lands on, and how few bars are published at all.</p>
+    <p class="lab-try"><b>Try this</b>Pick a lab, then slide the score across a number its documents print: see which side of the bar it lands on, and how few bars are published at all.</p>
     <div data-widget="threshold-reader"></div>
     <h3 class="sub">What stands out</h3>
     <p>The verdicts are not on a shared scale. For cyber, OpenAI calls GPT-6.2 Critical, DeepMind says Argon's CCL "cannot be ruled out", and Meta rates unmitigated Muse Spark 1.3 "moderate or lower". Part of that is a real capability gap (Meta's own table has Muse Spark 1.3 at 28.7 on ExploitBench capability coverage, against 73.5 for GPT-5.6 Sol), but each lab also defines its levels and chooses its tests differently, so the labels do not line up.</p>
