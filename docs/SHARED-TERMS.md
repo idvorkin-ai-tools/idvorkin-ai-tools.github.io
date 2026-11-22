@@ -17,10 +17,11 @@ At the bottom of the page, next to annotate.js:
 <script src="https://idvorkin-ai-tools.github.io/assets/terms.js" defer></script>
 ```
 
-Optional, in `<head>`, so a Technical or ELI5 reader sees no flash of Plain:
+Optional, in `<head>`, so the page paints in the reader's mode before terms.js arrives (the script sets the mode, the style hides other modes' blocks; the style is only needed with mode blocks):
 
 ```html
 <script>try{var m=localStorage.getItem('aitools-mode')||localStorage.getItem('llm-judges-mode');if(m==='tech'||m==='eli5')document.documentElement.setAttribute('data-'+m,'on')}catch(e){}</script>
+<style>html:is([data-tech="on"],[data-eli5="on"]) .plain-only,html:not([data-tech="on"]) .tech-only,html:not([data-eli5="on"]) .eli5-only,html[data-tech="on"] .no-tech{display:none!important}</style>
 ```
 
 The script injects its own CSS first in `<head>` at zero specificity, so it works on a page with no stylesheet and any rule in the map's CSS wins. It reads the map's colour variables when they exist (`--def`, `--panel`, `--line`, `--ink-mid`, …).

@@ -5,8 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="robots" content="noindex" />
 <title>terms.js and widgets.js test page</title>
-<!-- optional: sets the mode before first paint (docs/SHARED-TERMS.md) -->
+<!-- optional: paints in the reader's mode before terms.js arrives (docs/SHARED-TERMS.md) -->
 <script>try{var m=localStorage.getItem('aitools-mode')||localStorage.getItem('llm-judges-mode');if(m==='tech'||m==='eli5')document.documentElement.setAttribute('data-'+m,'on')}catch(e){}</script>
+<style>html:is([data-tech="on"],[data-eli5="on"]) .plain-only,html:not([data-tech="on"]) .tech-only,html:not([data-eli5="on"]) .eli5-only,html[data-tech="on"] .no-tech{display:none!important}</style>
 <style>
   :root{color-scheme:light dark}
   body{margin:0;font:16px/1.6 system-ui,sans-serif}

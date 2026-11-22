@@ -83,6 +83,7 @@
     // in a top bar that has no metaphor menu: sit before the back link
     ':where(.modesel.aitm-solo){margin-left:auto}',
     '.bar-in .modesel.aitm-solo+.back{margin-left:0}',
+    '.bar-in:has(.modesel.aitm-solo){padding-top:6px;padding-bottom:6px}',
     // no top bar: a fixed pill, bottom left (annotate.js owns top right and bottom right)
     '.modesel.aitm-float{position:fixed;z-index:9990;left:calc(12px + env(safe-area-inset-left,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));' +
       'background:var(--panel-2,var(--aitm-bg,Canvas));box-shadow:0 4px 18px rgba(0,0,0,.3)}',
