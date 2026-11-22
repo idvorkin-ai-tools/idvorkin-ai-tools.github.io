@@ -1,0 +1,7 @@
+{
+ "term": "Reflective equilibrium",
+ "plain": "A state where, after careful thought, you endorse your values as your own while still being willing to question them.",
+ "eli5": "Thinking hard about the rules and deciding you really agree with them, while still asking questions.",
+ "technical": "A term from moral philosophy (Rawls 1971) that Claude's constitution uses for its hope that Claude, after careful reflection, endorses its core values as genuinely its own rather than as rules imposed from outside, while continuing to examine them.",
+ "see": "https://idvorkin-ai-tools.github.io/constitutional-ai-field-map/constitution/rules-vs-judgment.html#endorsement"
+}

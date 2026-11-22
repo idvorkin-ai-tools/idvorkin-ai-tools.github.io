@@ -1,0 +1,7 @@
+{
+ "term": "Model context / context window",
+ "plain": "Everything the model can see at once while producing an answer.",
+ "eli5": "All the pages laid out on the robot's desk right now.",
+ "technical": "The material in the model's input when it generates (instructions, conversation, retrieved content, tool outputs, in-context memory), bounded by the context window; the agentic-privacy report distinguishes it from system context (memory and tools beyond the window) and from social context.",
+ "see": "https://idvorkin-ai-tools.github.io/agentic-privacy-field-map/guide/glossary.html#t-model-context"
+}

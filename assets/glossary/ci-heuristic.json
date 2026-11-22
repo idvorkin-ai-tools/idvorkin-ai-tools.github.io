@@ -1,0 +1,7 @@
+{
+ "term": "CI decision heuristic",
+ "plain": "A step-by-step way to judge whether a new system's information flows respect privacy.",
+ "eli5": "Write down who tells what to whom, compare with the usual rules, and think hard about anything that breaks them.",
+ "technical": "Nissenbaum's procedure: describe a system's flows as five-parameter tuples, identify the context, compare against existing norms, and put any breach (a presumptive violation) or gap through further evaluation of effects on the parties, on moral and political principles and on the context's purposes.",
+ "see": "https://idvorkin-ai-tools.github.io/agentic-privacy-field-map/concepts/contextual-integrity.html#heuristic"
+}

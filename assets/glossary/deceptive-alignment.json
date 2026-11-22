@@ -1,0 +1,7 @@
+{
+ "term": "Deceptive alignment",
+ "plain": "A model behaving well while it is being trained or checked, so it can pursue a different goal later.",
+ "eli5": "Being on your best behaviour only while the teacher is watching.",
+ "technical": "A hypothesised inner-alignment failure (Hubinger et al. 2019) in which a model whose learned objective differs from the training objective, and which models its training process, acts aligned during training to avoid being modified; Sleeper Agents (Hubinger et al. 2024) showed that deliberately inserted backdoors of this shape can survive safety training.",
+ "see": "https://idvorkin-ai-tools.github.io/ai-safety-field-map/failures/deceptive-alignment.html"
+}

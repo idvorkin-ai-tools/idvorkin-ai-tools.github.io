@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex" />
+<title>terms.js and widgets.js test page</title>
+<!-- optional: paints in the reader's mode before terms.js arrives (docs/SHARED-TERMS.md) -->
+<script>try{var m=localStorage.getItem('aitools-mode')||localStorage.getItem('llm-judges-mode');if(m==='tech'||m==='eli5')document.documentElement.setAttribute('data-'+m,'on')}catch(e){}</script>
+<style>html:is([data-tech="on"],[data-eli5="on"]) .plain-only,html:not([data-tech="on"]) .tech-only,html:not([data-eli5="on"]) .eli5-only,html[data-tech="on"] .no-tech{display:none!important}</style>
+<style>
+  :root{color-scheme:light dark}
+  body{margin:0;font:16px/1.6 system-ui,sans-serif}
+  main{max-width:680px;margin:0 auto;padding:48px 20px 120px}
+  h1{font-size:24px;line-height:1.3}
+  .note{opacity:.75;font-size:14px}
+  .callout{display:flex;gap:10px;border-left:3px solid #2b8fc9;padding:8px 12px;margin:16px 0}
+</style>
+</head>
+<body>
+<main>
+  <h1>terms.js and widgets.js test page</h1>
+  <p class="note">Not linked from anywhere. Exercises every piece of the shared explanation modes: term boxes, mode blocks, the definitions lists and a widget. The mode control sits bottom left on pages without a top bar.</p>
+
+  <h2 id="boxes">Term boxes</h2>
+  <p>Two raters can match often and still barely agree: <span class="term" data-term="percent-agreement">percent agreement</span> counts lucky matches, and <span class="term" data-term="kappa">Cohen's kappa</span> takes them out. A judge that says YES to everything has perfect <span class="term" data-term="sensitivity">sensitivity</span> and no use.</p>
+  <p>Later uses are not boxed: kappa again, sensitivity again.</p>
+
+  <h2 id="blocks">Mode blocks</h2>
+  <p class="plain-only">Plain only: this sentence shows in Plain mode.</p>
+  <p class="tech-only">Technical only: κ = (p<sub>o</sub> − p<sub>e</sub>) / (1 − p<sub>e</sub>).</p>
+  <p class="eli5-only">ELI5 only: like two friends guessing coin flips.</p>
+  <div class="callout no-tech"><b>no-tech:</b><span>hidden in Technical mode; a flex block that keeps its flex layout.</span></div>
+
+  <h2 id="widget">A widget</h2>
+  <p class="lab-try"><b>Try this</b>Move the slider and watch the share.</p>
+  <div data-widget="demo-share"></div>
+
+  <h2 id="defs">Definitions on this page</h2>
+  <div data-terms-list></div>
+
+  <h2 id="all">The whole glossary</h2>
+  <div data-terms-list="all"></div>
+</main>
+<script>
+  // A throwaway widget so this page exercises widgets.js; real ones live in widgets/<name>.js.
+  document.addEventListener('DOMContentLoaded', function () {
+    var H = window.AIToolsWidgets;
+    if (!H) return;
+    H.register('demo-share', function (el) {
+      var p = 'd' + H.uid();
+      el.innerHTML = H.presets([['lo', 'Low'], ['hi', 'High']]) +
+        '<div class="lab-ctl">' + H.slider(p + '-s', 'Matches out of 100', 0, 100, 1, 75) + '</div>' +
+        '<div class="statgrid">' + H.stat('share', p + '-v') + H.stat('as a decimal', p + '-d') + '</div>' + H.sum(p + '-sum');
+      var s = H.$(el, p + '-s');
+      function draw() {
+        var x = +s.value / 100;
+        H.$(el, p + '-s-o').textContent = s.value;
+        H.$(el, p + '-v').innerHTML = H.pct(x);
+        H.$(el, p + '-d').innerHTML = H.f3(x);
+        H.$(el, p + '-sum').textContent = s.value + ' of 100 match, ' + H.pct(x).replace('&mdash;', '-') + '.';
+      }
+      el.querySelectorAll('[data-p]').forEach(function (b) { b.addEventListener('click', function () { s.value = b.getAttribute('data-p') === 'lo' ? 20 : 90; draw(); }); });
+      s.addEventListener('input', draw);
+      draw();
+    });
+  });
+</script>
+<script src="terms.js" defer></script>
+<script src="widgets.js" defer></script>
+<script src="annotate.js" defer></script>
+</body>
+</html>

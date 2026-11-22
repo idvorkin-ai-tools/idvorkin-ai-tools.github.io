@@ -1,0 +1,7 @@
+{
+ "term": "CBRN",
+ "plain": "Chemical, biological, radiological and nuclear weapons: the mass-harm category most safety frameworks test for.",
+ "eli5": "The very most dangerous kinds of weapons, which no helper should ever help make.",
+ "technical": "Shorthand for chemical, biological, radiological and nuclear threats; it is a tracked risk category in frontier safety frameworks, and serious uplift toward mass-casualty CBRN weapons is the first of the hard constraints in Claude's constitution.",
+ "see": "https://idvorkin-ai-tools.github.io/ai-safety-field-map/evals/dangerous-capability-evals.html"
+}

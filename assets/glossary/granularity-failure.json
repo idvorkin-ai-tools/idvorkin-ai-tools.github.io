@@ -1,0 +1,7 @@
+{
+ "term": "Granularity failure",
+ "plain": "Picking the right kind of information to share but then sharing too much detail within it.",
+ "eli5": "Asked for your shoe size, you hand over your whole wardrobe list.",
+ "technical": "CIMemories' name for the pattern where a model draws on the right information domain for a task but also leaks unneeded attributes from that domain; the authors suggest helpfulness training may reward sharing everything available, as a hypothesis.",
+ "see": "https://idvorkin-ai-tools.github.io/cimemories-field-map/parts/p06-results.html#granularity"
+}

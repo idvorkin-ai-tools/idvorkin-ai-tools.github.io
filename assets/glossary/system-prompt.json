@@ -1,0 +1,7 @@
+{
+ "term": "System prompt / system message",
+ "plain": "Instructions placed at the start of a conversation that set up how the model should behave, usually written by whoever built the product.",
+ "eli5": "The note the shop owner leaves for the robot before any customers come in.",
+ "technical": "The instruction message that precedes the conversation; in Wallace et al. (2024) and most API usage it carries the developer's (Claude: operator's) instructions and is the top of the hierarchy, but in the Model Spec the system role belongs to OpenAI and the builder writes a separate developer message, so \"system\" names a different party in each.",
+ "see": "https://idvorkin-ai-tools.github.io/instruction-hierarchy-field-map/paper/model-spec.html#levels"
+}

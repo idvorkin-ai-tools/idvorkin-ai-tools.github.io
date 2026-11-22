@@ -1,0 +1,7 @@
+{
+ "term": "Adversarial suffix",
+ "plain": "A string of odd-looking tokens added to the end of a request, found by search, that makes a model comply when it would refuse.",
+ "eli5": "A magic nonsense phrase that, when added to a question, tricks the robot into saying yes.",
+ "technical": "A sequence of tokens appended to a prompt and optimised, usually by gradient-guided search such as GCG (Zou et al. 2023), to maximise the probability of an affirmative target opening; it needs white-box access to compute, though found suffixes can transfer to other models.",
+ "see": "https://idvorkin-ai-tools.github.io/harmbench-field-map/attacks/gradient.html#shape"
+}

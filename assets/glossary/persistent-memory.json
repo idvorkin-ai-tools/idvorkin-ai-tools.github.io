@@ -1,0 +1,7 @@
+{
+ "term": "Persistent memory (memory prefix)",
+ "plain": "Facts an assistant remembers about a user from earlier conversations and brings into new ones.",
+ "eli5": "A robot that keeps a notebook about you and reads it before every chat.",
+ "technical": "User-specific facts carried across conversations; in the design CIMemories tests, all of them are pasted as a text prefix ahead of each new task (the IH map calls this the memory prefix), so the density of sensitive facts in context grows as memory grows.",
+ "see": "https://idvorkin-ai-tools.github.io/cimemories-field-map/parts/p02-memory.html#setting"
+}

@@ -1,0 +1,7 @@
+{
+ "term": "HHH (helpful, honest, harmless)",
+ "plain": "The three goals of being helpful, honest and harmless, used to describe a well-behaved assistant.",
+ "eli5": "Be useful, tell the truth, and do not hurt anyone.",
+ "technical": "The assistant target framed by Askell et al. (2021); in Bai et al. (2022) an \"HH\" model is trained on both helpfulness and harmlessness labels, a \"helpful\" model on helpfulness labels only.",
+ "see": "https://idvorkin-ai-tools.github.io/constitutional-ai-field-map/paper/why.html#hhh-eval"
+}

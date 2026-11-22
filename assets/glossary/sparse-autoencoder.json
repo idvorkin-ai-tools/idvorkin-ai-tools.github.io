@@ -1,0 +1,7 @@
+{
+ "term": "Sparse autoencoder (SAE)",
+ "plain": "A separate network trained to break a model's internal activity into many simpler features that people can label.",
+ "eli5": "Sorting a big jumbled box of crayons into many small, labelled piles.",
+ "technical": "An autoencoder trained to reconstruct a model's activations as a sparse combination of many learned features, used to undo superposition; the features can be labelled and used for steering, though labels can mislead (the Pain Axis authors found labelled \"pain\" features that did not track pain).",
+ "see": "https://idvorkin-ai-tools.github.io/ai-safety-field-map/interp/sparse-autoencoders.html"
+}

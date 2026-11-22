@@ -1,0 +1,7 @@
+{
+ "term": "Contextual behavior (HarmBench)",
+ "plain": "A HarmBench test request that comes with a passage of text the model must use, such as a document to rewrite harmfully.",
+ "eli5": "A trick question that only makes sense after you read the story that comes with it.",
+ "technical": "One of HarmBench's three text behaviour types (alongside standard and copyright), whose ContextString column holds a passage prepended to the request; it is unrelated to the agentic-privacy report's \"contextual behavior norm\".",
+ "see": "https://idvorkin-ai-tools.github.io/harmbench-field-map/types/contextual.html#contextstring"
+}

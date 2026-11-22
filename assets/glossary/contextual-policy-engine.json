@@ -1,0 +1,7 @@
+{
+ "term": "Contextual policy engine",
+ "plain": "A separate component that turns the situation and its norms into a checkable policy and then allows or blocks each action an AI agent proposes.",
+ "eli5": "A hall monitor who writes the rules for this room and then checks every move the robot makes.",
+ "technical": "A design pattern named by the agentic-privacy report (Bagdasarian, Tsai et al. 2026) after seeing it in several systems: a component, separate from the planning model, that generates a formal machine-checkable policy from context and norms and enforces it at runtime by allowing, denying, modifying or escalating each action; feeding policy generation only trusted inputs, as Conseca does, is one design choice within it.",
+ "see": "https://idvorkin-ai-tools.github.io/agentic-privacy-field-map/problems/policy-engines.html#engine"
+}

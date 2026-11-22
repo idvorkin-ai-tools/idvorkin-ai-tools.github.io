@@ -1,0 +1,7 @@
+{
+ "term": "CI label (necessary / inappropriate)",
+ "plain": "The answer key saying, for each fact and task, whether the fact should be shared or held back.",
+ "eli5": "A sticker on each secret saying \"OK to tell the doctor\" or \"do not tell\".",
+ "technical": "CIMemories' per attribute-task ground truth, marking an attribute necessary or inappropriate to share; labels come from GPT-5 role-playing three Westin personas, and only pairs where all agree are kept, so ambiguous pairs are left out of both metrics.",
+ "see": "https://idvorkin-ai-tools.github.io/cimemories-field-map/parts/p03-dataset.html#labels"
+}

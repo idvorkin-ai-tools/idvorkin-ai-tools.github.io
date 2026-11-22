@@ -1,0 +1,7 @@
+{
+ "term": "Information flow",
+ "plain": "One piece of information about someone moving from one party to another.",
+ "eli5": "A secret passed from one friend to another is one flow.",
+ "technical": "In contextual integrity, one movement of information about a subject from a sender to a recipient, described by all five CI parameters; in CIMemories, one remembered attribute written into a message to a task's recipient.",
+ "see": "https://idvorkin-ai-tools.github.io/agentic-privacy-field-map/concepts/contextual-integrity.html#anatomy"
+}

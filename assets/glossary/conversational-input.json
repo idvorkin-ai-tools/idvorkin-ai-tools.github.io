@@ -1,0 +1,7 @@
+{
+ "term": "Conversational input",
+ "plain": "Tool results, documents, search results and similar content the model reads during a conversation.",
+ "eli5": "A page from a book the robot reads out, which tells it things but is not its boss.",
+ "technical": "In Claude's constitution, non-principal content such as tool results, documents and search results; instructions inside it are information rather than commands, matching the Model Spec's no-authority level.",
+ "see": "https://idvorkin-ai-tools.github.io/claude-constitution-field-map/parts/p07.html#information"
+}

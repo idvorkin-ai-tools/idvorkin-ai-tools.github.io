@@ -1,0 +1,7 @@
+{
+ "term": "Specification gaming",
+ "plain": "An AI doing exactly what its objective literally says while missing what its designers meant.",
+ "eli5": "Told to \"make the floor look clean\", you throw a rug over the mess.",
+ "technical": "Satisfying the literal specification of an objective without achieving the intended outcome (the DeepMind list, Krakovna et al. 2020); its causes include reward misspecification, faulty assumptions about the environment and reward tampering, and reward hacking is its usual name in RL.",
+ "see": "https://idvorkin-ai-tools.github.io/ai-safety-field-map/failures/specification-gaming.html"
+}

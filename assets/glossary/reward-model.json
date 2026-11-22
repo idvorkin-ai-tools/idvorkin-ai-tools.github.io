@@ -1,0 +1,6 @@
+{
+ "term": "Reward model / preference model",
+ "plain": "A model trained to predict which answer people (or an AI labeller) would prefer, used as the judge during training.",
+ "eli5": "A robot taster that learned what the real tasters like.",
+ "technical": "A learned scalar scorer r(x, y), typically fit to pairwise preferences with a Bradley–Terry loss; Bai et al. (2022) call it a preference model, and in Constitutional AI its harmlessness comparisons come from AI feedback. It is a proxy judge; optimising hard against it exploits its errors (Gao et al. 2022)."
+}

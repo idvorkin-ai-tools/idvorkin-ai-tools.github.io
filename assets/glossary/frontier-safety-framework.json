@@ -1,0 +1,7 @@
+{
+ "term": "Frontier safety framework",
+ "plain": "A lab's published plan saying which dangerous capabilities it tests for and what safeguards it will require if a model has them.",
+ "eli5": "A promise like \"if the dog learns to open the gate, we will put a lock on it before letting it out\".",
+ "technical": "A standing if-then policy document that defines risk areas, capability thresholds and the safeguards each requires; examples are Anthropic's Responsible Scaling Policy, OpenAI's Preparedness Framework and Google DeepMind's Frontier Safety Framework, with per-model system cards or reports applying it.",
+ "see": "https://idvorkin-ai-tools.github.io/bridge-preparedness-reports.html#what"
+}

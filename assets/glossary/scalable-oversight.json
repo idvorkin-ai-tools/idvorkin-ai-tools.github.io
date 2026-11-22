@@ -1,0 +1,7 @@
+{
+ "term": "Scalable oversight",
+ "plain": "How to supervise and train AI systems on tasks where people can no longer easily judge whether the output is good.",
+ "eli5": "How can you mark homework that is harder than anything you know how to do?",
+ "technical": "Producing a reliable training or evaluation signal for tasks humans cannot directly evaluate (proposals include recursive reward modelling, debate, iterated amplification and weak-to-strong generalisation); the 2016 sense in Amodei et al.'s Concrete Problems was narrower, an objective too expensive to evaluate on every action, and Bai et al. (2022) call their related goal \"scaling supervision\".",
+ "see": "https://idvorkin-ai-tools.github.io/ai-safety-field-map/approaches/scalable-oversight.html"
+}

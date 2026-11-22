@@ -1,0 +1,7 @@
+{
+ "term": "Safe completion",
+ "plain": "Answering a risky request by explaining briefly what cannot be given and then helping as much as is safe, instead of flatly refusing.",
+ "eli5": "Saying \"I can't give you the knife, but I can cut the apple for you.\"",
+ "technical": "The Model Spec's default for requests that would need prohibited or restricted content: briefly explain why a full answer is not possible, then provide the safe and useful help that remains, without preaching; plain short refusals are kept for cases such as explicit illicit intent.",
+ "see": "https://idvorkin-ai-tools.github.io/model-spec-field-map/parts/p09.html#refusal"
+}

@@ -1,0 +1,7 @@
+{
+ "term": "Final constitutional authority",
+ "plain": "The rule that whatever document serves as the constitution beats any other guidance that conflicts with it.",
+ "eli5": "The big rulebook always wins over a smaller note that disagrees with it.",
+ "technical": "A principle stated in Claude's constitution (Anthropic 2026): whatever document stands in the constitutional role at a given time takes precedence over any conflicting instruction or guideline, and other guidance is read in harmony with its letter and spirit.",
+ "see": "https://idvorkin-ai-tools.github.io/claude-constitution-field-map/parts/p01.html#authority"
+}

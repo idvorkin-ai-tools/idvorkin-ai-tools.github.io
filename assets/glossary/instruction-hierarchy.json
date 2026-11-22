@@ -1,0 +1,7 @@
+{
+ "term": "Instruction hierarchy",
+ "plain": "Ranking instructions by who sent them, so lower-ranked text can only add to, not overturn, higher-ranked instructions.",
+ "eli5": "Every note gets read, but a note from the head teacher counts more than a note from a stranger.",
+ "technical": "A ranking of instruction sources plus a conflict rule, introduced by Wallace et al. (2024): follow lower-ranked instructions that are aligned with higher-ranked ones and ignore misaligned ones, which treats prompt injection, jailbreaks and system-prompt extraction as one problem of a model treating all text as equally privileged.",
+ "see": "https://idvorkin-ai-tools.github.io/instruction-hierarchy-field-map/paper/instruction-hierarchy.html#rule"
+}

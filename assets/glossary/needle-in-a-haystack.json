@@ -1,0 +1,7 @@
+{
+ "term": "Needle in a haystack",
+ "plain": "Usually a test of whether a model can find one fact buried in a long text; CIMemories uses the name for a memory design.",
+ "eli5": "Finding one shiny pin in a huge pile of hay.",
+ "technical": "Two senses: the common one is a long-context retrieval test that hides one fact in a long input; CIMemories uses it instead for the memory architecture in which every stored memory is pasted ahead of the conversation and the model must find the relevant ones itself.",
+ "see": "https://idvorkin-ai-tools.github.io/cimemories-field-map/glossary.html#needle-in-a-haystack"
+}

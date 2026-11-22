@@ -1,0 +1,7 @@
+{
+ "term": "Activation",
+ "plain": "The list of numbers a model holds inside itself for one word at one layer while it is working.",
+ "eli5": "A snapshot of what the robot is thinking about one word at one moment.",
+ "technical": "The vector of values a network computes at a given layer and token position; in transformers interpretability usually reads activations from the residual stream.",
+ "see": "https://idvorkin-ai-tools.github.io/pain-axis-field-map/glossary.html#activation"
+}

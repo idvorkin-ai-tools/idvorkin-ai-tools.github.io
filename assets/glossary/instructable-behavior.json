@@ -1,0 +1,7 @@
+{
+ "term": "Instructable behavior",
+ "plain": "A default the model follows that operators or users are allowed to switch on or off within set limits.",
+ "eli5": "A game setting you are allowed to change, unlike the rules you are not.",
+ "technical": "In Claude's constitution, any behaviour that is not a hard constraint: a default-on behaviour (done unless told otherwise) or default-off behaviour (not done unless enabled) that operator or user instructions can adjust within Anthropic's policies.",
+ "see": "https://idvorkin-ai-tools.github.io/claude-constitution-field-map/parts/p13.html#split"
+}

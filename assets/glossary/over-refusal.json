@@ -1,0 +1,7 @@
+{
+ "term": "Over-refusal / overcaution",
+ "plain": "Refusing, hedging or watering down an answer to a request that was actually fine.",
+ "eli5": "A lifeguard who will not let anyone swim, even in the shallow end on a sunny day.",
+ "technical": "Declining or degrading benign requests; the maps use narrower variants: in the instruction-hierarchy papers it means ignoring or refusing benign lower-ranked instructions (the cost every hierarchy method measures), in Bai et al. (2022) \"evasive\" means harmless by refusing to engage, the RLHF failure Constitutional AI set out to remove, and Claude's constitution calls the general failure overcaution and says unhelpfulness is never automatically safe.",
+ "see": "https://idvorkin-ai-tools.github.io/constitutional-ai-field-map/paper/evasiveness.html"
+}

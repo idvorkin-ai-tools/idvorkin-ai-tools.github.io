@@ -1,0 +1,7 @@
+{
+ "term": "Constitution",
+ "plain": "A written set of principles used to shape how an AI model behaves.",
+ "eli5": "A list of rules the robot learns from, like a class charter on the classroom wall.",
+ "technical": "The word names three different objects across these maps: the 16 critique-and-revision pairs and 16 comparison instructions of Bai et al. (2022), the 58 published principles of May 2023, and the long explanatory document Anthropic published in January 2026; the 2022 and 2023 versions were tools for generating training labels, while the 2026 one is written to the model.",
+ "see": "https://idvorkin-ai-tools.github.io/constitutional-ai-field-map/bridge.html#compare"
+}

@@ -1,0 +1,7 @@
+{
+ "term": "Harness",
+ "plain": "The software around a model that passes messages in and out and runs its tools.",
+ "eli5": "The robot's hands and phone, which carry out what its brain decides.",
+ "technical": "The developer-written code between a model and the world that relays messages and executes tool calls; it can host components such as a policy engine.",
+ "see": "https://idvorkin-ai-tools.github.io/agentic-privacy-field-map/guide/glossary.html#t-harness"
+}

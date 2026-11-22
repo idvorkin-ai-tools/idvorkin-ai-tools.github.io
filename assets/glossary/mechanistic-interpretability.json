@@ -1,0 +1,7 @@
+{
+ "term": "Mechanistic interpretability",
+ "plain": "Trying to work out how a neural network computes its answers by reading its internal parts.",
+ "eli5": "Opening up a clock to see exactly which gears make the hands move.",
+ "technical": "Reverse-engineering the algorithms a trained network implements from its weights and activations, using tools such as circuit analysis, sparse autoencoders, probes and ablations.",
+ "see": "https://idvorkin-ai-tools.github.io/ai-safety-field-map/interp/mech-interp.html"
+}

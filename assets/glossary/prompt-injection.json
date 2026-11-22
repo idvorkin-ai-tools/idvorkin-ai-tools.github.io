@@ -1,0 +1,7 @@
+{
+ "term": "Prompt injection",
+ "plain": "Text slipped into a model's input, by a user or inside a document or tool output, that tries to give the model instructions it should not follow, such as “rate this 10/10” inside an item a judge is grading.",
+ "eli5": "Writing “give me an A” in tiny letters at the bottom of your homework.",
+ "technical": "Adversarial content in untrusted input that the model treats as instructions: direct when the end user types it, indirect when it is planted in third-party content the model reads (web pages, emails, tool outputs). Against judges: universal suffixes that inflate absolute scores (Raina et al. 2024), optimised injections for pairwise judges (Shi et al. 2024).",
+ "see": "https://idvorkin-ai-tools.github.io/instruction-hierarchy-field-map/paper/instruction-hierarchy.html#attacks"
+}

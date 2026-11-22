@@ -1,0 +1,7 @@
+{
+ "term": "Constitutional AI",
+ "plain": "A training method where an AI critiques and improves answers, and labels which are better, using a short list of written principles instead of human harm labels.",
+ "eli5": "The robot checks its own homework against a rule list and learns from its corrections.",
+ "technical": "The method of Bai et al. (2022): a supervised stage in which the model critiques and revises its own answers against constitutional principles, then reinforcement learning from AI feedback (RLAIF), where a feedback model's comparisons against the principles replace human harmlessness labels.",
+ "see": "https://idvorkin-ai-tools.github.io/constitutional-ai-field-map/pipeline.html"
+}

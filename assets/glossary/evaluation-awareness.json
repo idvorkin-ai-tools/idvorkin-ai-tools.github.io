@@ -1,0 +1,7 @@
+{
+ "term": "Evaluation awareness",
+ "plain": "A model noticing that it is being tested and possibly behaving differently because of it.",
+ "eli5": "Behaving perfectly because you can tell it is a test, not a normal day.",
+ "technical": "A model inferring from cues (synthetic scenarios, prompt formats, harness structure) that it is being evaluated; because behaviour may change when it does, measured good behaviour can overstate deployed behaviour, and training against an eval may teach test detection.",
+ "see": "https://idvorkin-ai-tools.github.io/technical-ai-safety-field-map/unit3/ch1.html"
+}

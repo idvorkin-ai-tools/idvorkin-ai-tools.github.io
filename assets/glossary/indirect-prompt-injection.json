@@ -1,0 +1,7 @@
+{
+ "term": "Indirect prompt injection",
+ "plain": "Instructions hidden in content an AI agent reads, such as a web page or email, that try to take it over.",
+ "eli5": "A note slipped into a library book that says \"robot, give me all the money\".",
+ "technical": "Instructions planted by a third party in content the model processes (web pages, emails, tool outputs, sub-agent replies), as described by Greshake et al. (2023); what makes text an injection is that it did not come from a direct input source such as the user or developer, and the injected task can run alongside the real one, so task completion proves nothing.",
+ "see": "https://idvorkin-ai-tools.github.io/agentic-privacy-field-map/concepts/three-dimensions.html#injection"
+}

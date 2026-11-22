@@ -1,0 +1,7 @@
+{
+ "term": "LLM judge",
+ "plain": "A language model used to grade or label other models' outputs.",
+ "eli5": "A robot that marks the other robots' homework.",
+ "technical": "A language model prompted, or fine-tuned, to score or classify outputs; across these maps the same idea appears as HarmBench's fine-tuned Llama 2 13B classifier (a \"classifier judge\"), CIMemories' REVEAL judge, and the feedback model of Constitutional AI, and the LLM-judges map covers how to validate one.",
+ "see": "https://idvorkin-ai-tools.github.io/llm-judges-field-map/"
+}

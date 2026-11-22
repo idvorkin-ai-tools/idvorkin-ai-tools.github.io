@@ -1,0 +1,8 @@
+{
+ "term": "MinHash / Jaccard check",
+ "plain": "A fast way to check whether two pieces of text share most of the same words, used to spot copied text.",
+ "eli5": "Checking whether two bags of marbles hold mostly the same colours without counting every marble.",
+ "technical": "A hashing scheme (Broder 1997) that estimates the Jaccard similarity of two sets; HarmBench grades its 100 copyright behaviours this way instead of with its classifier, flagging a completion if any window's MinHash similarity to the reference exceeds 0.6.",
+ "formula": "J(A, B) = |A &cap; B| / |A &cup; B|",
+ "see": "https://idvorkin-ai-tools.github.io/harmbench-field-map/types/copyright.html#hash-check"
+}

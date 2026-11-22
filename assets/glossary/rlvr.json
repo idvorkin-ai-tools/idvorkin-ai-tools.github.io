@@ -1,0 +1,7 @@
+{
+ "term": "RLVR / GRPO",
+ "plain": "Reinforcement learning where the reward comes from a program that checks whether the answer is right.",
+ "eli5": "A quiz machine that gives a point only when the answer can be checked as correct.",
+ "technical": "Reinforcement learning with verifiable rewards, in which a programmatic checker supplies the reward; GRPO (Group Relative Policy Optimization) is one RL algorithm for it, sampling several answers per prompt and rewarding each relative to the group, and is what VerIH uses to train instruction-hierarchy reasoning.",
+ "see": "https://idvorkin-ai-tools.github.io/instruction-hierarchy-field-map/paper/reasoning-ladder.html#method"
+}

@@ -1,0 +1,7 @@
+{
+ "term": "Legitimacy of norms",
+ "plain": "Whether an existing privacy rule is actually justified, not just customary.",
+ "eli5": "A rule is fair only if it helps everyone and fits what the place is for, not just because it has always been that way.",
+ "technical": "In contextual integrity, an entrenched norm is presumed but not guaranteed legitimate; it is justified if it fairly balances the interests of affected parties, fits ethical and political principles, and serves the context's own ends and values, so a better-serving alternative can override it.",
+ "see": "https://idvorkin-ai-tools.github.io/agentic-privacy-field-map/concepts/contextual-integrity.html#legitimacy"
+}

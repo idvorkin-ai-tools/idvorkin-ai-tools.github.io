@@ -1,0 +1,7 @@
+{
+ "term": "Disposition dial",
+ "plain": "A sliding scale from always deferring to human oversight to acting fully on the AI's own judgment.",
+ "eli5": "A knob between \"always ask the teacher\" and \"do whatever I think is right\".",
+ "technical": "The spectrum Claude's constitution uses from fully corrigible to fully autonomous; it places Claude somewhat toward the corrigible end for the current period because humans cannot yet verify whether an AI's values and judgment meet the bar for more autonomy.",
+ "see": "https://idvorkin-ai-tools.github.io/claude-constitution-field-map/parts/p15.html#dial"
+}

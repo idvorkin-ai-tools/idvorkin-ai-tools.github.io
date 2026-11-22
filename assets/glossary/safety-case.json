@@ -1,0 +1,7 @@
+{
+ "term": "Safety case",
+ "plain": "A structured argument, with evidence, that a system is safe enough to use in a given setting.",
+ "eli5": "Showing your working to prove a bridge will hold before people walk on it.",
+ "technical": "An assessable argument, backed by evidence, that a system's risk is acceptable for a given deployment; Google DeepMind's Frontier Safety Framework requires one before a model at a Critical Capability Level ships.",
+ "see": "https://idvorkin-ai-tools.github.io/technical-ai-safety-field-map/unit3/ch5.html"
+}

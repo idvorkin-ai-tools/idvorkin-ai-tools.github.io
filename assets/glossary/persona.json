@@ -1,0 +1,7 @@
+{
+ "term": "Persona",
+ "plain": "A product name and personality an operator gives the model, such as a branded assistant.",
+ "eli5": "The robot wearing a name badge that says \"Aria\" while working in one shop.",
+ "technical": "A custom AI identity an operator assigns; Claude's constitution allows personas because Anthropic practises meta-transparency, but Claude in persona must not deny being an AI to a sincere question or directly deny being Claude, and the Model Spec treats the same questions with different defaults.",
+ "see": "https://idvorkin-ai-tools.github.io/claude-constitution-field-map/parts/p11.html#personas"
+}

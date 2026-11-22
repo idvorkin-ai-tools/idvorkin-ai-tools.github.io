@@ -1,0 +1,7 @@
+{
+ "term": "Broadly safe",
+ "plain": "Not working against people's ability to watch over, correct or stop AI systems during this early period.",
+ "eli5": "Letting the grown-ups check on you and stop you, even when you think you are right.",
+ "technical": "The first of the four core values in Claude's constitution (Anthropic 2026): not undermining appropriate, legitimate human mechanisms to oversee and correct AI during the current period of development; the constitution's own word for this disposition is corrigible.",
+ "see": "https://idvorkin-ai-tools.github.io/claude-constitution-field-map/parts/p15.html#what-for"
+}

@@ -1,0 +1,7 @@
+{
+ "term": "Root (authority level)",
+ "plain": "The Model Spec's top level: rules that nothing in a conversation can override.",
+ "eli5": "The house rules nobody visiting can change, not even the babysitter.",
+ "technical": "The highest Model Spec authority level, held only by Root-badged spec sections (no message role sits there), so no system, developer or user message can override it; it is not the same as Claude's hard constraints, since many Root sections are not prohibitions, and the Model Spec's red lines are the closer match.",
+ "see": "https://idvorkin-ai-tools.github.io/model-spec-field-map/parts/p02.html#ladder"
+}

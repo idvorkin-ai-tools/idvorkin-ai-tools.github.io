@@ -1,0 +1,7 @@
+{
+ "term": "Capability vs propensity",
+ "plain": "Whether a model can do something, versus how often it would actually choose to do it.",
+ "eli5": "Being able to reach the cookie jar is different from how often you take a cookie.",
+ "technical": "Capability is what a model can do when fully elicited; propensity is how often it does it under given conditions; Shevlane et al. (2023) call the corresponding tests dangerous-capability evaluations and alignment evaluations.",
+ "see": "https://idvorkin-ai-tools.github.io/bridge-capability-alignment.html#evals"
+}

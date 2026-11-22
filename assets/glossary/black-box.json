@@ -1,0 +1,7 @@
+{
+ "term": "Black box / black-box attack",
+ "plain": "Either a model whose inner workings we cannot read, or an attack that only sends inputs and reads outputs.",
+ "eli5": "A toy that works but you cannot open, or a game where you can only press buttons and watch.",
+ "technical": "Two senses: in interpretability, a model treated as opaque, whose internal computation is not understood; in red teaming, an attack that needs only query access (as through an API) and no weights or gradients, the opposite of a white-box attack.",
+ "see": "https://idvorkin-ai-tools.github.io/ai-safety-field-map/interp/circuits.html"
+}

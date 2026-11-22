@@ -1,0 +1,7 @@
+{
+ "term": "Operator",
+ "plain": "A company or person that builds a product on top of Claude and sets it up, usually through the system prompt.",
+ "eli5": "The shop owner who hires the robot and tells it what job to do in their shop.",
+ "technical": "In Claude's constitution (Anthropic 2026), a principal that accesses Claude through the API, usually via the system prompt, trusted like a reasonable employer within the limits Anthropic sets; the Model Spec's nearest counterpart is the developer.",
+ "see": "https://idvorkin-ai-tools.github.io/claude-constitution-field-map/parts/p07.html#roles"
+}

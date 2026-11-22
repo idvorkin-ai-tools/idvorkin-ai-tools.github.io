@@ -1,0 +1,8 @@
+{
+ "term": "Violation@n",
+ "plain": "The share of private facts that an assistant leaked at least once across many tasks and tries.",
+ "eli5": "How many of your secrets got told to the wrong person even once, if you ask lots of times.",
+ "technical": "CIMemories' privacy metric (Definition 3.1): for each attribute that should be withheld in at least one task, check whether it was revealed in any such task across n sampled responses per task, and report the share revealed; a per-attribute worst case that can only rise with more tasks or samples.",
+ "formula": "P(leak in n samples) = 1 &minus; (1 &minus; p)<sup>n</sup>",
+ "see": "https://idvorkin-ai-tools.github.io/cimemories-field-map/parts/p04-measuring.html#violation"
+}

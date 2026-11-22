@@ -1,0 +1,7 @@
+{
+ "term": "Meta-transparency",
+ "plain": "Being open about the rules for what businesses can make the model do, so that individual product personas are not deceptive.",
+ "eli5": "Everyone knows the costume rules, so the robot in the costume is not lying.",
+ "technical": "Anthropic publishing the norms for what operators may and may not instruct, which Claude's constitution says keeps personas and confidential system prompts honest at the level of the overall system.",
+ "see": "https://idvorkin-ai-tools.github.io/claude-constitution-field-map/parts/p11.html#personas"
+}

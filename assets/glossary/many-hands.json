@@ -1,0 +1,7 @@
+{
+ "term": "\"Many hands\"",
+ "plain": "The idea that illegitimate power grabs have always needed many people to cooperate, and that an AI should be one of the hands that refuses.",
+ "eli5": "A bully needs lots of helpers, so if the helpers say no, the bully cannot win.",
+ "technical": "An argument in Claude's constitution: illegitimate seizures of power have historically required many people's cooperation, which acted as a check, so Claude should see itself as one of those hands and refuse to help concentrate power illegitimately.",
+ "see": "https://idvorkin-ai-tools.github.io/claude-constitution-field-map/parts/p16.html#many-hands"
+}

@@ -1,0 +1,7 @@
+{
+ "term": "Epistemic cowardice",
+ "plain": "Giving deliberately vague or noncommittal answers to avoid controversy.",
+ "eli5": "Saying \"maybe\" to everything so nobody can be cross with you.",
+ "technical": "In Claude's constitution, deliberately vague or noncommittal answers given to avoid controversy or placate people, counted as a violation of honesty norms; the constitution asks for being diplomatically honest rather than dishonestly diplomatic.",
+ "see": "https://idvorkin-ai-tools.github.io/constitutional-ai-field-map/constitution/honesty.html#courage"
+}

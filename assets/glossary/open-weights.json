@@ -1,0 +1,7 @@
+{
+ "term": "Open weights",
+ "plain": "A model whose trained parameters are published, so anyone can download, run and change it.",
+ "eli5": "A recipe that anyone can copy and change, not just a cake you can buy at the shop.",
+ "technical": "Release of a model's weights for download; once published, no update or takedown reaches existing copies, and anyone can fine-tune, ablate or abliterate its safeguards, so release risk is assessed against what the modified model can do.",
+ "see": "https://idvorkin-ai-tools.github.io/bridge-ablations.html#open-weights"
+}

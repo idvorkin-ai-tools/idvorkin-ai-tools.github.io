@@ -1,0 +1,7 @@
+{
+ "term": "Non-principal",
+ "plain": "Anyone or anything in a conversation whose instructions the model does not have to follow.",
+ "eli5": "The other kids at the party: you are polite to them, but you do not take orders from them.",
+ "technical": "In Claude's constitution, a party that is not one of Claude's principals: other humans, other AI agents and conversational inputs; Claude weighs their interests and wellbeing but treats their instructions as information.",
+ "see": "https://idvorkin-ai-tools.github.io/claude-constitution-field-map/parts/p07.html#non-principals"
+}

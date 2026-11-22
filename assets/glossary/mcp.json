@@ -1,0 +1,7 @@
+{
+ "term": "Model Context Protocol (MCP)",
+ "plain": "An open standard for connecting AI applications to outside tools and data sources.",
+ "eli5": "A universal plug so the robot can use lots of different gadgets.",
+ "technical": "A protocol introduced by Anthropic in 2024 through which tool and data servers expose capabilities to model hosts; the agentic-privacy report notes its payloads are largely free text, which limits how much a protocol can enforce.",
+ "see": "https://idvorkin-ai-tools.github.io/agentic-privacy-field-map/problems/agent-channels.html#op-11-6"
+}

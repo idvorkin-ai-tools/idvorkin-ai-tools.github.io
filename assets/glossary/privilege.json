@@ -1,0 +1,7 @@
+{
+ "term": "Privilege (authority level)",
+ "plain": "How much authority an instruction carries, based on how far the system trusts its source.",
+ "eli5": "Mum's rule beats your big brother's rule because mum is in charge.",
+ "technical": "The rank an instruction gets from its source in an instruction hierarchy (Wallace et al. 2024: system above user above tool output); ManyIH (2026) generalises this to many tiers written into the prompt, where a tier is one distinct privilege level.",
+ "see": "https://idvorkin-ai-tools.github.io/instruction-hierarchy-field-map/guide/glossary.html#privilege"
+}

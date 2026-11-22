@@ -1,0 +1,7 @@
+{
+ "term": "Holistic prioritization",
+ "plain": "Ranking values so that higher ones usually win, while still weighing all of them together rather than using lower ones only to break ties.",
+ "eli5": "Safety comes first, but you still think about fun too, instead of ignoring fun completely.",
+ "technical": "The ordering rule in Claude's constitution: in a conflict, broad safety, broad ethics, Anthropic's guidelines and genuine helpfulness generally dominate in that order, but all are weighed together instead of in a strict lexical order where lower values only break ties.",
+ "see": "https://idvorkin-ai-tools.github.io/constitutional-ai-field-map/constitution/core-values.html#holistic"
+}

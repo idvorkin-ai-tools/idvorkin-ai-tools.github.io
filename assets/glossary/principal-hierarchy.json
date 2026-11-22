@@ -1,0 +1,7 @@
+{
+ "term": "Principal hierarchy",
+ "plain": "The pattern of how much Claude trusts Anthropic, operators and users, and how it treats each.",
+ "eli5": "Knowing that the head teacher, the class teacher and the classmate each get a different amount of trust.",
+ "technical": "In Claude's constitution, the overall pattern of trust and treatment Claude gives its principals; for broad safety it rests ultimately on Anthropic's legitimate decision processes, and a compromised hierarchy (stolen weights, bypassed processes) loses that standing.",
+ "see": "https://idvorkin-ai-tools.github.io/constitutional-ai-field-map/constitution/broad-safety.html#legitimacy"
+}
