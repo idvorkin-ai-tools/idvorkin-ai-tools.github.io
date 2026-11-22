@@ -1,0 +1,7 @@
+{
+ "term": "Direct Preference Optimization (DPO)",
+ "plain": "Training a model on pairs of answers, one better and one worse, so it learns to prefer the better kind without a separate reward model.",
+ "eli5": "Showing the robot a good answer and a bad answer side by side, again and again, until it picks the good kind by itself.",
+ "technical": "A fine-tuning objective (Rafailov et al., 2023) that raises the policy's log-probability ratio, relative to a frozen reference model, for preferred over dispreferred responses, replacing RLHF's reward model and RL step with a single classification-style loss.",
+ "see": "https://idvorkin-ai-tools.github.io/instruction-hierarchy-field-map/paper/data-channel.html#secalign"
+}

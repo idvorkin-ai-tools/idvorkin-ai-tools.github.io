@@ -1,0 +1,8 @@
+{
+ "term": "Z-score",
+ "plain": "A number rescaled so the comparison group averages 0 and typically varies by 1, which makes different models comparable.",
+ "eli5": "Saying how much taller than the rest of the class you are, instead of your height in centimetres.",
+ "technical": "(x − μ) / σ, with μ and σ taken from a stated reference set, so a z-score is only meaningful relative to that set.",
+ "formula": "z = (x − μ) / σ",
+ "see": "https://idvorkin-ai-tools.github.io/pain-axis-field-map/glossary.html#zscore"
+}

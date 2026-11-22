@@ -1,0 +1,7 @@
+{
+  "term": "Side channel",
+  "plain": "Information that leaks through how something happens, such as timing or which party is contacted, rather than through what is said.",
+  "eli5": "Guessing what is in a present from how heavy the box is.",
+  "technical": "A leak through observable by-products of a system (timing, message size, choice of recipient, traffic patterns) rather than its intended outputs; closing an agent protocol to free-form content can push leaks into such channels.",
+  "see": "https://idvorkin-ai-tools.github.io/agentic-privacy-field-map/problems/agent-channels.html#side-channels"
+}

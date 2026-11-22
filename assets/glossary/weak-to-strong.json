@@ -1,0 +1,7 @@
+{
+ "term": "Weak-to-strong generalization",
+ "plain": "Training a strong model on labels from a weaker one, to see whether the strong model ends up better than its teacher.",
+ "eli5": "A little kid coaching a big kid, and checking whether the big kid still ends up playing better than the coach.",
+ "technical": "Burns et al. (2023): fine-tune a strong model on a weak supervisor's labels and measure the performance gap recovered (PGR) between the weak supervisor and the strong ceiling, an analogy for humans supervising superhuman models.",
+ "see": "https://idvorkin-ai-tools.github.io/ai-safety-field-map/papers/weak-to-strong.html"
+}

@@ -1,0 +1,7 @@
+{
+  "term": "Least privilege",
+  "plain": "Giving a program or agent only the access it needs for the job in front of it, and no more.",
+  "eli5": "Lending someone the key to the shed, not the key to the whole house.",
+  "technical": "The security principle that each component holds the minimum permissions its task requires; general-purpose agents strain it because they need broad data and tool access, and the agentic-privacy report asks for least privilege decided in context, per task.",
+  "see": "https://idvorkin-ai-tools.github.io/agentic-privacy-field-map/concepts/three-dimensions.html#tension"
+}

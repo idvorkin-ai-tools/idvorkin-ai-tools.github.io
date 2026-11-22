@@ -1,0 +1,7 @@
+{
+ "term": "Feature (interpretability)",
+ "plain": "Something the network has learned to notice in its input, stored as a direction in its internal numbers.",
+ "eli5": "One thing the robot's brain has learned to spot, like \"this is a cat\" or \"this is French\".",
+ "technical": "A property of the input that a model represents internally, taken in current work to be a direction in a layer's activation space (not a single neuron); sparse autoencoders try to recover features as dictionary elements.",
+ "see": "https://idvorkin-ai-tools.github.io/technical-ai-safety-field-map/unit4/ch1.html#features-unit-explanation"
+}

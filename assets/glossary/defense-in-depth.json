@@ -1,0 +1,7 @@
+{
+ "term": "Defence in depth",
+ "plain": "Stacking several independent safeguards, so a harm has to get past all of them, not just one.",
+ "eli5": "A castle with a moat, a wall and a guard, so getting past one is not enough.",
+ "technical": "A layered-risk strategy in which independent controls (training, evaluation, monitoring, access limits) each catch some failures, so the chance of harm is roughly the product of each layer's miss rate when failures are not correlated.",
+ "see": "https://idvorkin-ai-tools.github.io/technical-ai-safety-field-map/unit1/ch1.html#spine-defence-depth"
+}

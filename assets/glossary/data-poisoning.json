@@ -1,0 +1,7 @@
+{
+ "term": "Data poisoning",
+ "plain": "Slipping a few bad examples into training data so the trained model picks up a hidden behaviour.",
+ "eli5": "Sneaking a few wrong pages into a schoolbook so the student learns one silly thing on purpose.",
+ "technical": "An attack that inserts crafted samples into a training corpus to implant a backdoor or bias; Souly et al. (2025) found about 250 poisoned documents sufficed across model sizes, so the number needed does not grow with the corpus.",
+ "see": "https://idvorkin-ai-tools.github.io/technical-ai-safety-field-map/unit2/ch2.html#poisoning-inverts-scaling"
+}

@@ -1,0 +1,7 @@
+{
+ "term": "Transfer attack",
+ "plain": "An attack prompt built against one model, then sent unchanged to a different model in the hope it works there too.",
+ "eli5": "A trick you worked out on one friend, tried on another friend without changing a word.",
+ "technical": "A test case optimised against a surrogate model (or an ensemble) and replayed at a target with no access to it, which is how white-box methods such as GCG-Transfer reach closed API models.",
+ "see": "https://idvorkin-ai-tools.github.io/harmbench-field-map/attacks/gradient.html#gcg-transfer"
+}

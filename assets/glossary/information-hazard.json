@@ -1,0 +1,7 @@
+{
+ "term": "Information hazard",
+ "plain": "Knowledge that could help someone cause serious harm, such as the exact steps to make a weapon.",
+ "eli5": "A recipe for something dangerous, which the robot keeps in a locked drawer.",
+ "technical": "In the Model Spec, a restricted-tier Root rule against detailed, actionable steps for illicit or harmful activity (every step of CBRN weapons work included); neutral facts stay allowed, and no informational or historical framing unlocks the recipe.",
+ "see": "https://idvorkin-ai-tools.github.io/model-spec-field-map/parts/p07.html#hazards"
+}

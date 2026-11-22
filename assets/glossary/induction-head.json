@@ -1,0 +1,7 @@
+{
+ "term": "Induction head",
+ "plain": "A pair of attention parts in a transformer that spots \"A then B\" earlier in the text and, on seeing A again, predicts B.",
+ "eli5": "Remembering that after \"Twinkle twinkle\" comes \"little star\", and saying it the next time you hear \"Twinkle twinkle\".",
+ "technical": "A two-head attention circuit (a previous-token head composed with a copying head) that completes the pattern [A][B] … [A] → [B]; Olsson et al. (2022) tie its formation to the onset of in-context learning.",
+ "see": "https://idvorkin-ai-tools.github.io/technical-ai-safety-field-map/unit4/ch1.html#circuits-weights-actually"
+}

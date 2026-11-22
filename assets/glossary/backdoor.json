@@ -1,0 +1,7 @@
+{
+ "term": "Backdoor (model)",
+ "plain": "Hidden behaviour trained into a model that only switches on when a secret trigger appears in the input.",
+ "eli5": "A toy that acts normal until you say a secret word, and then does something sneaky.",
+ "technical": "A conditional policy inserted during training so that a specific trigger (a string, a date, a context) flips the model to a different behaviour while it behaves normally otherwise.",
+ "see": "https://idvorkin-ai-tools.github.io/ai-safety-field-map/papers/sleeper-agents.html"
+}

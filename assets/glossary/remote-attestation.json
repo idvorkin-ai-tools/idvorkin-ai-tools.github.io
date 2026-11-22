@@ -1,0 +1,7 @@
+{
+  "term": "Remote attestation",
+  "plain": "A way for a machine to prove to someone far away exactly which software it is running.",
+  "eli5": "A sealed note from the computer saying \"this is really the program you trust\".",
+  "technical": "A hardware-rooted protocol (typically a trusted execution environment) in which a platform signs a measurement of the code it runs so a remote party can verify it; it attests the code, not how a model-driven agent running that code will behave.",
+  "see": "https://idvorkin-ai-tools.github.io/agentic-privacy-field-map/problems/agent-channels.html#op-11-7"
+}

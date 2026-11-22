@@ -1,0 +1,7 @@
+{
+ "term": "RAG (retrieval-augmented generation)",
+ "plain": "Letting a model look things up in a document store and paste what it finds into its prompt before answering.",
+ "eli5": "Letting the robot check the library before it answers your question.",
+ "technical": "A pipeline that embeds a query, retrieves the nearest chunks from a vector store and inserts them into the model's context; every retrieved document is untrusted input, which makes it a route for indirect prompt injection and poisoning.",
+ "see": "https://idvorkin-ai-tools.github.io/red-teaming-ramp-up/risks/llm08-vector-and-embedding-weaknesses.html"
+}

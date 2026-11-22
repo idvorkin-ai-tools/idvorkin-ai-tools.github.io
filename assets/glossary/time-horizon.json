@@ -1,0 +1,7 @@
+{
+ "term": "Time horizon (METR)",
+ "plain": "The length of task, measured by how long it takes a skilled human, that an AI agent can finish about half the time.",
+ "eli5": "The longest chore a robot can usually finish by itself, counted in how long a grown-up would take.",
+ "technical": "METR's 50% (or 80%) task-completion time horizon: the human expert completion time at which a fitted logistic curve of agent success against log task length crosses 50% (or 80%); it has doubled roughly every seven months.",
+ "see": "https://idvorkin-ai-tools.github.io/ai-safety-field-map/evals/metr.html"
+}

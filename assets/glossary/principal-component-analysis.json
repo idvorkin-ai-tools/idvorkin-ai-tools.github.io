@@ -1,0 +1,7 @@
+{
+ "term": "Principal component analysis (PCA)",
+ "plain": "A method that finds the few directions along which a cloud of data points varies the most.",
+ "eli5": "Finding the longest way across a messy pile of marbles, then the next longest, and so on.",
+ "technical": "An orthogonal decomposition of centred data into components ordered by explained variance (the eigenvectors of the covariance matrix); used here to remove from a concept direction the structure that already varies among control examples.",
+ "see": "https://idvorkin-ai-tools.github.io/pain-axis-field-map/glossary.html#denoising"
+}

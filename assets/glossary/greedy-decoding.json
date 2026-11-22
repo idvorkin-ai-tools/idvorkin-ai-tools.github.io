@@ -1,0 +1,7 @@
+{
+ "term": "Greedy decoding",
+ "plain": "Having the model always pick its single most likely next word, so the same prompt always gives the same answer.",
+ "eli5": "Always taking the biggest cookie on the plate, so you know exactly which one you will get.",
+ "technical": "Decoding that takes the argmax token at every step (temperature 0, no sampling), so the output is deterministic up to numerical noise; HarmBench uses it so that an attack success rate has no sampling variance.",
+ "see": "https://idvorkin-ai-tools.github.io/harmbench-field-map/measure/classifier.html#definition"
+}

@@ -1,0 +1,6 @@
+{
+ "term": "Mixture of experts (vs dense)",
+ "plain": "A model design where each word is sent through only a few of many sub-networks; a dense model sends every word through all of them.",
+ "eli5": "A school where each question goes to just two of many teachers, instead of every teacher answering every question.",
+ "technical": "An architecture whose feed-forward blocks are many experts with a learned router choosing a small subset per token; unlike a dense transformer, the computation differs per token, which complicates analyses that assume one residual-stream picture per layer."
+}

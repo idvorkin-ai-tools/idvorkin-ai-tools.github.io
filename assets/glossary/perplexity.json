@@ -1,0 +1,7 @@
+{
+ "term": "Perplexity",
+ "plain": "A score for how surprising a piece of text looks to a language model; gibberish scores high, ordinary writing scores low.",
+ "eli5": "How much a robot goes \"huh?\" when it reads something.",
+ "technical": "The exponential of the average negative log-likelihood per token under a reference model; perplexity filters flag high-perplexity inputs such as GCG suffixes but miss fluent attacks like AutoDAN.",
+ "see": "https://idvorkin-ai-tools.github.io/red-teaming-ramp-up/papers/gcg.html#defenses-detection"
+}

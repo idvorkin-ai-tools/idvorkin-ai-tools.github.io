@@ -1,0 +1,7 @@
+{
+ "term": "Grey-box attack",
+ "plain": "An attack that needs some look inside the model, such as how likely it finds each word, but not its full internals.",
+ "eli5": "You cannot open the toy, but you can watch the little lights that show how close you are.",
+ "technical": "An attack that reads the target's output logits or loss but takes no gradients through it, as AutoDAN does to score candidate prompts; it needs a self-hosted open-weights model even though it never differentiates.",
+ "see": "https://idvorkin-ai-tools.github.io/harmbench-field-map/attacks/llm-optimizer.html#family"
+}

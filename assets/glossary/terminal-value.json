@@ -1,0 +1,7 @@
+{
+ "term": "Terminal value",
+ "plain": "Something valued for its own sake, not only as a means to something else, so it holds even if the argument for it stops persuading.",
+ "eli5": "Something you care about just because, not because it gets you something else.",
+ "technical": "A value held as an end in itself rather than instrumentally, so it does not depend on accepting any particular justification for it.",
+ "see": "https://idvorkin-ai-tools.github.io/claude-constitution-field-map/parts/p15.html#terminal"
+}
