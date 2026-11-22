@@ -76,6 +76,15 @@
     <h2>What an ablation is</h2>
     <p>Neuroscientists have long run ablation studies: damage or remove one region of a brain, then see which abilities go missing. Meyes et al. (2019) note how widely the method is used there and apply the same idea to neural networks, removing units to see which parts of the data each one represents (<a href="https://arxiv.org/abs/1901.08644">arXiv:1901.08644</a>).</p>
     <p>In ML papers the word has a looser everyday meaning too. An &ldquo;ablation table&rdquo; takes the full method, drops one ingredient at a time, and reports the score each time. If the score barely moves, that ingredient was not doing much. It is the basic way a paper shows which of its ideas mattered.</p>
+    <p>A made-up example: a paper's new chatbot scores 80 on a test, built from three ideas.</p>
+    <table>
+      <tr><th>Version</th><th>Score</th></tr>
+      <tr><td>Full method</td><td>80</td></tr>
+      <tr><td>Without the extra training data</td><td>62</td></tr>
+      <tr><td>Without the longer context</td><td>79</td></tr>
+      <tr><td>Without the new reward model</td><td>71</td></tr>
+    </table>
+    <p>The data mattered most (−18), the reward model some (−9), and the longer context hardly at all (−1), so the paper could drop it.</p>
     <p>Applied to a trained model, ablations often show redundancy. Michel et al. (2019) found that</p>
     <blockquote>a large percentage of attention heads can be removed at test time without significantly impacting performance.<cite>Michel, Levy and Neubig 2019, abstract (<a href="https://arxiv.org/abs/1905.10650">arXiv:1905.10650</a>)</cite></blockquote>
   </section>
