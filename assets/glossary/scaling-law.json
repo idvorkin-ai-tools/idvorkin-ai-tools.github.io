@@ -1,0 +1,8 @@
+{
+ "term": "Scaling law",
+ "plain": "The finding that a model's error falls in a smooth, predictable way as you add parameters, data and compute.",
+ "eli5": "The bigger the brain and the more books it reads, the smarter it gets, at a steady, predictable pace.",
+ "technical": "An empirical power law relating test loss to model size N, data D and compute C (Kaplan et al. 2020); Chinchilla (Hoffmann et al. 2022) set the compute-optimal ratio near 20 training tokens per parameter.",
+ "formula": "L(N) &asymp; (N<sub>c</sub>/N)<sup>&alpha;<sub>N</sub></sup>",
+ "see": "https://idvorkin-ai-tools.github.io/red-teaming-ramp-up/foundations/scaling-laws.html"
+}

@@ -1,0 +1,7 @@
+{
+ "term": "Model organism (of misalignment)",
+ "plain": "A model deliberately built to have a known bad behaviour, so researchers can test whether their tools catch it.",
+ "eli5": "A practice robot that is naughty on purpose, so you can check whether your naughty-robot detector works.",
+ "technical": "A model trained or prompted to exhibit a specific misalignment (a hidden objective, a backdoor, reward-model sycophancy), used as ground truth for auditing, interpretability and detection methods.",
+ "see": "https://idvorkin-ai-tools.github.io/technical-ai-safety-field-map/unit4/ch2.html#model-organisms-audit"
+}

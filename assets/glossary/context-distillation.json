@@ -1,0 +1,7 @@
+{
+ "term": "Context distillation",
+ "plain": "Make the model answer with extra instructions in its prompt, then train it to give those same answers without them, so the behavior becomes its default.",
+ "eli5": "Whisper hints to the robot while it practises, then keep practising until it does the right thing without the hints.",
+ "technical": "Generate targets from a model prompted with additional context or instructions, then fine-tune the model on (input without that context, target) pairs so the conditioned behavior is distilled into the weights (Snell, Klein and Zhong, 2022).",
+ "see": "https://idvorkin-ai-tools.github.io/instruction-hierarchy-field-map/paper/instruction-hierarchy.html#method"
+}

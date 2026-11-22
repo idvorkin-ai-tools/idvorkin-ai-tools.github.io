@@ -1,0 +1,7 @@
+{
+ "term": "AI agent",
+ "plain": "A model set up to take actions on its own, such as browsing, running code or sending email, in a loop toward a goal.",
+ "eli5": "A robot helper that can press buttons for you, not just talk.",
+ "technical": "A system in which a model chooses and calls tools over many steps with limited human review; its permissions and autonomy set the blast radius of any injection or mistake.",
+ "see": "https://idvorkin-ai-tools.github.io/red-teaming-ramp-up/risks/llm06-excessive-agency.html"
+}

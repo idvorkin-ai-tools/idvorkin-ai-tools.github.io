@@ -1,0 +1,8 @@
+{
+ "term": "Difference-in-means",
+ "plain": "A direction found by averaging a model's internal numbers for one group of inputs, averaging them for another group, and subtracting.",
+ "eli5": "Average the \"ouch\" sentences, average the \"no ouch\" sentences, and the gap between them points toward \"ouch\".",
+ "technical": "The vector v = mean<sub>s∈P</sub> h<sub>s</sub> − mean<sub>s∈C</sub> h<sub>s</sub> between the activations of a target set P and a contrast set C at one layer; the standard recipe for refusal, steering and concept directions, which also absorbs any other property that differs systematically between the sets.",
+ "formula": "v = mean<sub>P</sub>(h) − mean<sub>C</sub>(h)",
+ "see": "https://idvorkin-ai-tools.github.io/pain-axis-field-map/glossary.html#dim"
+}

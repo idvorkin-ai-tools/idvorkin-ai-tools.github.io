@@ -1,0 +1,7 @@
+{
+ "term": "Deliberative alignment",
+ "plain": "Training a reasoning model to read the written safety rules and think about them before it answers.",
+ "eli5": "Teaching a kid to stop and remember the house rules before doing something, instead of only learning from being told off.",
+ "technical": "OpenAI (2024): fine-tune a reasoning model on chains of thought that quote and apply a written safety specification, then RL against a judge that sees the spec, so the policy reasons explicitly over the rules at inference time.",
+ "see": "https://idvorkin-ai-tools.github.io/technical-ai-safety-field-map/unit2/ch4.html#deliberative-alignment-model"
+}

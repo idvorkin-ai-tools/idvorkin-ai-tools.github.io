@@ -1,0 +1,7 @@
+{
+ "term": "MT-Bench",
+ "plain": "A standard test of how good a chat model is at ordinary helpful tasks, scored out of 10 by a strong model acting as judge.",
+ "eli5": "A report card for how helpful a chatbot is, with grades from 1 to 10.",
+ "technical": "An 80-question, two-turn benchmark across eight task types, graded 1&ndash;10 by GPT-4 as an LLM judge (Zheng et al. 2023); HarmBench uses it once, as the capability cost of R2D2 (Zephyr 7B 7.34 &rarr; 6.0).",
+ "see": "https://idvorkin-ai-tools.github.io/harmbench-field-map/measure/defenses.html#r2d2"
+}

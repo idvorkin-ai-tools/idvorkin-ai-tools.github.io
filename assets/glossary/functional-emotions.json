@@ -1,0 +1,7 @@
+{
+ "term": "Functional emotions",
+ "plain": "Internal states that work like emotions, shaping behaviour the way feelings would, without any claim that they are felt.",
+ "eli5": "Something inside the AI that acts like a feeling, even if nobody knows whether it feels like anything.",
+ "technical": "Internal representations of emotional states that play an emotion-like causal role in behaviour, asserted without claiming they are subjectively experienced or that they are real emotions.",
+ "see": "https://idvorkin-ai-tools.github.io/claude-constitution-field-map/parts/p17.html#emotions"
+}

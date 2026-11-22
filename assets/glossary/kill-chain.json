@@ -1,0 +1,7 @@
+{
+ "term": "Kill chain",
+ "plain": "The ordered list of steps an attacker must all complete to cause a harm, so blocking any one step stops it.",
+ "eli5": "To steal the cookies you must find the jar, climb the counter and open the lid: block any one and no cookies.",
+ "technical": "A decomposition of a harm into necessary sequential stages (from security practice, e.g. reconnaissance to action on objectives) used to find the stage where a prevent, detect or constrain control gives the most risk reduction per cost.",
+ "see": "https://idvorkin-ai-tools.github.io/technical-ai-safety-field-map/unit5/ch3.html#kill-chain-actually"
+}

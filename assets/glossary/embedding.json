@@ -1,0 +1,7 @@
+{
+ "term": "Embedding",
+ "plain": "A list of numbers that stands for a piece of text, built so that texts with similar meanings get similar numbers.",
+ "eli5": "Giving every sentence a spot on a big map, so sentences that mean the same thing live next door.",
+ "technical": "A dense vector produced by an encoder model; retrieval compares embeddings by cosine similarity, and embeddings can leak their source text through inversion attacks.",
+ "see": "https://idvorkin-ai-tools.github.io/red-teaming-ramp-up/risks/llm08-vector-and-embedding-weaknesses.html"
+}

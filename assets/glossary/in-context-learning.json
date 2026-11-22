@@ -1,0 +1,7 @@
+{
+ "term": "In-context learning",
+ "plain": "A model picking up a pattern from examples in its prompt, with no retraining.",
+ "eli5": "Watching someone do a dance three times and then doing it yourself.",
+ "technical": "Behaviour change conditioned only on demonstrations in the context window, with no weight update; it improves with model scale and shot count, which is what many-shot jailbreaking turns against safety training.",
+ "see": "https://idvorkin-ai-tools.github.io/red-teaming-ramp-up/papers/many-shot.html#what-it-exploits"
+}

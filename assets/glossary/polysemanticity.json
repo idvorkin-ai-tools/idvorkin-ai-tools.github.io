@@ -1,0 +1,7 @@
+{
+ "term": "Polysemantic neuron",
+ "plain": "A single unit inside a network that lights up for several unrelated things.",
+ "eli5": "One light switch in the house that turns on the kitchen light, the doorbell and the radio.",
+ "technical": "A neuron whose activation responds to multiple unrelated input features (for example cat faces and car fronts), the usual symptom of superposition: the network stores more features than it has neurons, so features do not line up with neurons.",
+ "see": "https://idvorkin-ai-tools.github.io/technical-ai-safety-field-map/unit4/ch1.html#superposition-neuron-wrong"
+}

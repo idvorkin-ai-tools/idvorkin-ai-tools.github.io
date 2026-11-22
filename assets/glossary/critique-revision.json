@@ -1,0 +1,7 @@
+{
+ "term": "Critique and revision",
+ "plain": "A model points out what is wrong with its own answer against a written principle, then rewrites the answer to fix it.",
+ "eli5": "Checking your own homework against a rule, circling the mistakes, then writing it out again neatly.",
+ "technical": "The supervised stage of Constitutional AI (SL-CAI): a helpful RLHF model answers a red-team prompt, critiques its answer under a randomly drawn principle and revises it, up to four times, and a pretrained model is fine-tuned on the revisions.",
+ "see": "https://idvorkin-ai-tools.github.io/constitutional-ai-field-map/paper/sl-cai.html#loop"
+}

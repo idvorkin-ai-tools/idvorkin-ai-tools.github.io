@@ -1,0 +1,7 @@
+{
+ "term": "Legitimacy (of power and oversight)",
+ "plain": "Whether power, including the power to oversee an AI, is gained and used fairly, stays answerable to real checks, and is exercised in the open.",
+ "eli5": "Whether the people in charge got there fairly and can still be stopped if they do wrong.",
+ "technical": "In Claude's constitution, a judgment about process (fair methods versus fraud or coercion), accountability (subject to elections, courts, press and oversight) and transparency, weighed with scale, reversibility and broad benefit; oversight from stolen weights or from bypassing Anthropic's official processes is not legitimate.",
+ "see": "https://idvorkin-ai-tools.github.io/claude-constitution-field-map/parts/p16.html#legitimacy"
+}

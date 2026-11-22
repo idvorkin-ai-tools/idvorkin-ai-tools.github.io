@@ -1,0 +1,7 @@
+{
+ "term": "System (Model Spec level)",
+ "plain": "In the Model Spec, the level of rules OpenAI sets for a product or a group of users, which no developer or user can change.",
+ "eli5": "The rules the toy company sets for each shop, which the shopkeeper and the customer can't change.",
+ "technical": "The second rung of the Model Spec's chain of command: System-badged spec sections and OpenAI's own system messages, below Root and above Developer, allowed to vary by deployment surface or user traits such as age.",
+ "see": "https://idvorkin-ai-tools.github.io/model-spec-field-map/parts/p02.html#ladder"
+}

@@ -1,0 +1,7 @@
+{
+ "term": "Circuit (interpretability)",
+ "plain": "A small group of features and the weights between them that together compute one thing.",
+ "eli5": "A few parts of the robot's brain that pass a message along to do one small job, like spotting a wheel and a window to see a car.",
+ "technical": "A subgraph of a network (features plus the weights connecting them) that implements an identifiable computation, such as a car detector built from wheel and window detectors, or an induction head.",
+ "see": "https://idvorkin-ai-tools.github.io/technical-ai-safety-field-map/unit4/ch1.html#circuits-weights-actually"
+}
