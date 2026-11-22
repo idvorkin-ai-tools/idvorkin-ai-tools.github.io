@@ -134,8 +134,8 @@
   var BUF_KEY = "blogAnnotateBuffer";
   var COCKPIT_KEY = "blogLarryCockpit"; // saved Cockpit origin, off-tailnet
   // The Cockpit Connect pairs with. Set, pairing is only a challenge and a
-  // number; "" makes Connect ask for the address once. It only presets
-  // Connect: nothing talks to it until a browser has paired.
+  // number; "" makes Connect ask for the address once. Only a click on
+  // Connect sends to it; Send and Chat use the saved address alone.
   var DEFAULT_COCKPIT = "";
   var COCKPIT_TIMEOUT_MS = 8000; // a hung POST off the tailnet falls back
   var CTX = 30; // chars of prefix/suffix context (W3C TextQuoteSelector)
@@ -1792,10 +1792,8 @@
             if (r.status === 200 && r.body.ok) {
               saveCockpit(base);
               lsSet(OWNER_KEY, "1");
-              LARRY = base;
-              var c = document.getElementById("blog-annot-connect");
-              if (c) c.remove();
-              hideModal();
+              // Reload so the status dot, Send and an open chat all pick it up.
+              window.location.reload();
               return;
             }
             connectNote(
