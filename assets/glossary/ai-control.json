@@ -1,0 +1,7 @@
+{
+ "term": "AI control",
+ "plain": "Designing safeguards that keep a model from causing harm even if it is trying to.",
+ "eli5": "Putting the cookie jar on a high shelf in case the dog decides it really wants cookies.",
+ "technical": "An approach (Greenblatt et al. 2023) that assumes the model may be misaligned and tests whether monitoring and other protocols built around it hold up when it deliberately tries to subvert them, using trusted weaker models and limited human review.",
+ "see": "https://idvorkin-ai-tools.github.io/technical-ai-safety-field-map/unit5/ch1.html"
+}

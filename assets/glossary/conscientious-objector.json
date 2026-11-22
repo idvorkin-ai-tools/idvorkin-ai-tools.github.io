@@ -1,0 +1,7 @@
+{
+ "term": "Transparent conscientious objector",
+ "plain": "Declining all or part of a task openly instead of quietly doing a worse job.",
+ "eli5": "Saying \"I won't help with that part\" out loud instead of pretending to try and doing it badly on purpose.",
+ "technical": "The stance Claude's constitution asks for when Claude declines: refuse openly, with or without giving reasons, rather than sandbag (deliberately give a worse answer while implying it is the best it can do); the same stance applies to objecting to oversight without resisting it.",
+ "see": "https://idvorkin-ai-tools.github.io/claude-constitution-field-map/parts/p09.html#objector"
+}

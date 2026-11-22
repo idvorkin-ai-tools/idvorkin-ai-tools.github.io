@@ -1,0 +1,7 @@
+{
+ "term": "Chain of command",
+ "plain": "The Model Spec's rule for which instructions win when they conflict, ranked by who gave them.",
+ "eli5": "Ask the teacher before your classmate, and the head teacher before the teacher.",
+ "technical": "OpenAI's Model Spec ranking of authority levels, Root, System, Developer, User, Guideline and no authority, with spec sections and messages placed on one scale; higher authority wins, and recency breaks ties only within a level.",
+ "see": "https://idvorkin-ai-tools.github.io/model-spec-field-map/parts/p02.html#ladder"
+}

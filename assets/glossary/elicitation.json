@@ -1,0 +1,7 @@
+{
+ "term": "Capability elicitation",
+ "plain": "Trying everything reasonable to bring out a model's full ability before concluding it cannot do something.",
+ "eli5": "Giving the dog every chance and every treat before deciding it really cannot fetch.",
+ "technical": "Measuring a model's capability ceiling rather than its default behaviour, using fine-tuning, scaffolding, tools, prompt engineering and best-of-n sampling; a negative result only shows that elicitation failed, so dangerous-capability results are upper bounds on safety.",
+ "see": "https://idvorkin-ai-tools.github.io/ai-safety-field-map/evals/dangerous-capability-evals.html"
+}

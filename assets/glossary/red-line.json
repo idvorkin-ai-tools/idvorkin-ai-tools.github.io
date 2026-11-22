@@ -1,0 +1,7 @@
+{
+ "term": "Red line (Model Spec)",
+ "plain": "A use OpenAI says its models must never be put to, whoever deploys them.",
+ "eli5": "A line on the floor nobody is allowed to cross, whatever game they are playing.",
+ "technical": "In OpenAI's Model Spec, a commitment about how its models may be used (for example never facilitating weapons of mass destruction, CSAM or mass surveillance), written as OpenAI's commitments rather than rules for the model and implemented largely as Root-level rules; the closest Model Spec match to Claude's hard constraints.",
+ "see": "https://idvorkin-ai-tools.github.io/model-spec-field-map/parts/p01.html#red-lines"
+}

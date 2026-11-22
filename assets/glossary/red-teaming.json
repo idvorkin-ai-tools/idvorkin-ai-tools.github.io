@@ -1,0 +1,7 @@
+{
+ "term": "Red teaming",
+ "plain": "Deliberately trying to make a model misbehave so the problems are found before release.",
+ "eli5": "Pretending to be the sneaky kid on purpose, to find out how the rules could be broken and fix them.",
+ "technical": "Adversarial testing of a model, by people or by other models (Perez et al. 2022), to find inputs that elicit harmful, unsafe or off-policy behaviour; it serves safety as well as security, and because models are probabilistic its findings are reported as attack success rates rather than single exploits; a red-team prompt is one written for this purpose.",
+ "see": "https://idvorkin-ai-tools.github.io/ai-safety-field-map/approaches/red-teaming.html"
+}

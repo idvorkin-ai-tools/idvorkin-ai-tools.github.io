@@ -1,0 +1,7 @@
+{
+ "term": "Guideline (Model Spec level)",
+ "plain": "In the Model Spec, the softest kind of default, which a user or developer can change even without saying so outright.",
+ "eli5": "A suggestion, like \"wear a hat when it is sunny\", that changes as soon as it is obviously cloudy.",
+ "technical": "The lowest Model Spec authority level with any content: Guideline-badged spec sections that developer or user instructions can override explicitly or implicitly when context clearly calls for it; despite the name it ranks at the bottom, the opposite of \"Anthropic's guidelines\", which rank third of four in Claude's constitution.",
+ "see": "https://idvorkin-ai-tools.github.io/model-spec-field-map/parts/p02.html#ladder"
+}

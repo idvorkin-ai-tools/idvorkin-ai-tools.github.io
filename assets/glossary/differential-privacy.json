@@ -1,0 +1,7 @@
+{
+ "term": "Differential privacy",
+ "plain": "A mathematical guarantee that the output of an analysis barely changes whether or not any one person's data is included.",
+ "eli5": "Adding a little noise so nobody can tell whether your answer was in the survey.",
+ "technical": "A formal privacy definition (Dwork et al. 2006) bounding how much any single record can change an algorithm's output distribution; the agentic-privacy report contrasts it with contextual integrity because it is context-agnostic by design.",
+ "see": "https://idvorkin-ai-tools.github.io/agentic-privacy-field-map/concepts/contextual-integrity.html#context"
+}

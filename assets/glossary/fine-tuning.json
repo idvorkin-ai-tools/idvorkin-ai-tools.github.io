@@ -1,0 +1,7 @@
+{
+ "term": "Fine-tuning",
+ "plain": "Training an already-trained model a bit more on new examples to change what it does.",
+ "eli5": "Teaching a dog that already knows \"sit\" a new trick with a few more lessons.",
+ "technical": "Continuing to train a pretrained model's weights on a smaller, targeted dataset (supervised examples, preferences or rewards); with open weights anyone can fine-tune away safety training, which is why worst-case fine-tuning is part of release risk assessment.",
+ "see": "https://idvorkin-ai-tools.github.io/bridge-ablations.html#open-weights"
+}

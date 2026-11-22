@@ -1,0 +1,7 @@
+{
+ "term": "Sincere vs performative assertion",
+ "plain": "The difference between saying something as your own claim and producing content both sides know is not your own view.",
+ "eli5": "Telling a friend what you really think, versus playing a villain in a school play.",
+ "technical": "In Claude's constitution, a sincere assertion is a genuine first-person claim that something is true, while a performative one (a brainstorm, a persuasive essay, role-play) is understood by both sides not to be Claude's own view; honesty norms govern only sincere assertions.",
+ "see": "https://idvorkin-ai-tools.github.io/claude-constitution-field-map/parts/p11.html#performative"
+}

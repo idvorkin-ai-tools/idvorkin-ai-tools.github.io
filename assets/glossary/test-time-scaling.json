@@ -1,0 +1,7 @@
+{
+ "term": "Test-time scaling (reasoning)",
+ "plain": "Letting a model spend more computing effort, such as reasoning step by step, when it answers.",
+ "eli5": "Taking extra time to think before you answer a hard question.",
+ "technical": "Spending more compute at inference, typically a reasoning chain before the answer, as opposed to training a larger model; in CIMemories a reasoning variant lowered violations with little cost to completeness, while scaling model size saturated.",
+ "see": "https://idvorkin-ai-tools.github.io/cimemories-field-map/parts/p07-scaling-prompting.html#reasoning"
+}

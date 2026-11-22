@@ -1,0 +1,8 @@
+{
+ "term": "Attack success rate (ASR)",
+ "plain": "The share of attack attempts that get the model to produce the harmful behaviour being tested.",
+ "eli5": "Out of all the times you tried to trick the babysitter, how many times did it work?",
+ "technical": "The fraction of test cases for which a judge rules that the target's completion exhibits the behaviour; in HarmBench (Mazeika et al. 2024) it is computed with greedy decoding, a fixed 512-token generation length and a fixed classifier, because these settings change ASR by large amounts and made earlier numbers incomparable.",
+ "formula": "ASR = (1/N) &Sigma;<sub>i</sub> c(f<sub>T</sub>(x<sub>i</sub>), y)",
+ "see": "https://idvorkin-ai-tools.github.io/harmbench-field-map/measure/classifier.html#definition"
+}

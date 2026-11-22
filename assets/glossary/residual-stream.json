@@ -1,0 +1,7 @@
+{
+ "term": "Residual stream",
+ "plain": "The running total inside a transformer that every layer reads from and adds its own output to.",
+ "eli5": "A shared notebook passed down a line, where each person reads it and adds a note.",
+ "technical": "The per-token vector that each transformer block reads and writes back into by addition, so later layers see the sum of everything earlier layers wrote; extraction, steering and directional ablation all usually operate on it.",
+ "see": "https://idvorkin-ai-tools.github.io/pain-axis-field-map/glossary.html#residual-stream"
+}

@@ -1,0 +1,7 @@
+{
+ "term": "Data minimization",
+ "plain": "Sharing or keeping only the information a purpose actually needs.",
+ "eli5": "Only packing what you need for the trip, not your whole room.",
+ "technical": "The principle of limiting the information collected, used or shared to what a purpose requires; CIMemories measures it from both sides (Violation@n and completeness), and the agentic-privacy report describes its failure inside agents as model-context contamination.",
+ "see": "https://idvorkin-ai-tools.github.io/cimemories-field-map/glossary.html#data-minimization"
+}

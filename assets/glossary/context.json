@@ -1,0 +1,7 @@
+{
+ "term": "Context (social context)",
+ "plain": "In privacy theory, an area of social life such as healthcare or school, with its own roles, purposes and rules.",
+ "eli5": "The hospital, the classroom and the playground are different places with different rules.",
+ "technical": "In contextual integrity, an abstract social domain defined by its purposes, roles and norms, never the model's context window; the agentic-privacy report separates it from model, system and physical context, and CIMemories uses \"context\" for a task, a recipient plus a purpose that places a message in such a domain.",
+ "see": "https://idvorkin-ai-tools.github.io/agentic-privacy-field-map/guide/glossary.html#t-social-context"
+}

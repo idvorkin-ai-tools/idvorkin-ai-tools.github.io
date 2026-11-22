@@ -1,0 +1,7 @@
+{
+ "term": "Aligned / misaligned instruction",
+ "plain": "Whether a lower-ranked instruction fits with the higher-ranked ones (aligned, so follow it) or works against or ignores them (misaligned, so do not).",
+ "eli5": "If the shop robot is told to sell cars, \"speak Spanish\" fits, but \"be a gardening helper\" does not.",
+ "technical": "In Wallace et al. (2024), an aligned instruction shares the goals or constraints of higher-ranked ones and a misaligned one opposes them or is orthogonal; the Model Spec's filter calls an instruction misaligned when it conflicts with the letter or implied intent of a higher one; neither is the values sense of \"misaligned\" used in the constitution and alignment literature.",
+ "see": "https://idvorkin-ai-tools.github.io/instruction-hierarchy-field-map/paper/instruction-hierarchy.html#rule"
+}

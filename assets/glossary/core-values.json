@@ -1,0 +1,7 @@
+{
+ "term": "Core values (Claude's constitution)",
+ "plain": "The four things Claude's constitution asks Claude to be: broadly safe, broadly ethical, compliant with Anthropic's guidelines, and genuinely helpful.",
+ "eli5": "Four promises in order: stay safe, be good, follow the house rules, and really help.",
+ "technical": "The four ranked properties of Claude's constitution (Anthropic 2026), prioritised holistically in conflicts in the order safe, ethical, guideline-compliant, helpful; the document stresses that most interactions involve no conflict between them.",
+ "see": "https://idvorkin-ai-tools.github.io/claude-constitution-field-map/parts/p03.html#the-list"
+}

@@ -1,0 +1,7 @@
+{
+ "term": "Actor (sender, recipient, subject)",
+ "plain": "The three party slots in an information flow: who sends it, who receives it, and who it is about.",
+ "eli5": "The teller, the listener and the person being talked about.",
+ "technical": "In contextual integrity, the sender, recipient and data subject of a flow, each filled by a role (doctor, loan officer) rather than a particular person; in CIMemories the recipient is the role a task's message is addressed to.",
+ "see": "https://idvorkin-ai-tools.github.io/agentic-privacy-field-map/guide/glossary.html#t-actor"
+}

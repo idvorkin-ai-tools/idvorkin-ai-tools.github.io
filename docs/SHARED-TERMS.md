@@ -73,7 +73,7 @@ Each entry shows the register for the current mode.
    }
    ```
 
-   `term`, `plain`, `eli5` and `technical` are required; values are HTML. `formula` is optional and shows in Technical mode. `m` (one example per LLM Judges metaphor) is optional and shows only on a map with a metaphor menu. One sentence per register, plain words.
+   `term`, `plain`, `eli5` and `technical` are required; values are HTML. `formula` is optional and shows in Technical mode. `see` is optional: the URL of the page in this family that explains the term in depth, shown as an "In depth →" link (hidden on that page itself). `m` (one example per LLM Judges metaphor) is optional and shows only on a map with a metaphor menu. One sentence per register, plain words.
 3. `python3 scripts/build_glossary_index.py` (rewrites `index.json`, which `data-terms-list="all"` reads).
 4. `python3 scripts/check_terms.py` here, and `python3 scripts/check_terms.py <map-dir>` on the map that uses it: every `data-term` has an entry, none is boxed twice on a page, every entry has the required keys, `index.json` is current, and pages that use any of this load terms.js.
 

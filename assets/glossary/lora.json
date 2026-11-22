@@ -1,0 +1,8 @@
+{
+ "term": "LoRA",
+ "plain": "A cheap way to fine-tune a model by training a small add-on instead of changing all its weights.",
+ "eli5": "Clipping a small new part onto a toy instead of rebuilding the whole toy.",
+ "technical": "Low-rank adaptation (Hu et al. 2021): freeze the pretrained weights and learn a low-rank update BA added to selected weight matrices, which makes fine-tuning cheap enough for small targeted changes such as the Pain Axis paper's denial-removal adapter.",
+ "formula": "W' = W + BA, with rank(BA) &lt;&lt; dim(W)",
+ "see": "https://idvorkin-ai-tools.github.io/pain-axis-field-map/glossary.html#lora"
+}

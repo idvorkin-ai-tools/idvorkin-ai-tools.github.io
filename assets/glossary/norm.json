@@ -1,0 +1,7 @@
+{
+ "term": "Norm (contextual or informational norm)",
+ "plain": "A shared rule in some part of life about who may share what information with whom, and when.",
+ "eli5": "The unwritten rule that what you tell the school nurse stays with the nurse.",
+ "technical": "In contextual integrity, a rule about personal information moving between parties (who may send what, about whom, to whom, under what transmission principle) within a social context; whether a norm exists is an empirical question and whether it is legitimate a separate one, and benchmarks such as CIMemories approximate norms with labels that are aggregated judgments, not norms themselves; unrelated to vector norm.",
+ "see": "https://idvorkin-ai-tools.github.io/agentic-privacy-field-map/concepts/contextual-integrity.html#anatomy"
+}

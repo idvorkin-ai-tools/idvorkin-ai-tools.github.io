@@ -1,0 +1,7 @@
+{
+ "term": "Inner and outer alignment",
+ "plain": "Outer alignment asks whether the training goal is the right goal; inner alignment asks whether the trained model actually learned that goal.",
+ "eli5": "Did we write the right rule, and did the robot really learn that rule or just something that looked like it?",
+ "technical": "From Hubinger et al. (2019): outer alignment is whether the base objective is a good proxy for what we want (its failures include specification gaming), and inner alignment is whether a learned (mesa-) objective matches the base objective (its failures include goal misgeneralisation and deceptive alignment).",
+ "see": "https://idvorkin-ai-tools.github.io/ai-safety-field-map/failures/mesa-optimization.html"
+}

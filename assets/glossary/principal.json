@@ -1,0 +1,7 @@
+{
+ "term": "Principal",
+ "plain": "Someone whose instructions the model gives weight to and on whose behalf it acts.",
+ "eli5": "The grown-ups the robot actually works for, as opposed to everyone else in the room.",
+ "technical": "In Claude's constitution, the parties whose instructions Claude weighs and acts on behalf of (Anthropic, operators and users), as distinct from third parties and other non-principals whose interests it weighs but whose instructions it need not follow.",
+ "see": "https://idvorkin-ai-tools.github.io/claude-constitution-field-map/parts/p07.html#three"
+}

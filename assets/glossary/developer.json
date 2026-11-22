@@ -1,0 +1,7 @@
+{
+ "term": "Developer (Model Spec)",
+ "plain": "In OpenAI's Model Spec, the company or person building an app on the API, who writes the developer message.",
+ "eli5": "The person who built the game and wrote its rules before you started playing.",
+ "technical": "One of the Model Spec's message roles and authority levels: developer messages outrank user messages but sit below Root and System, and the role corresponds to the constitution's operator; in Wallace et al. (2024) the developer's instructions arrive as the system message, which is why \"system\" names a different party in the two documents (see system prompt).",
+ "see": "https://idvorkin-ai-tools.github.io/model-spec-field-map/parts/p02.html#roles"
+}

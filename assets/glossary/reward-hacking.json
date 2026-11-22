@@ -1,0 +1,7 @@
+{
+ "term": "Reward hacking",
+ "plain": "An AI getting a high score by exploiting flaws in how it is scored instead of doing the intended task.",
+ "eli5": "Getting a gold star by hiding the mess under the bed instead of tidying your room.",
+ "technical": "Optimising a proxy reward in a way that raises proxy return while lowering true return (Skalse et al. 2022); in RL it is commonly used as a synonym for specification gaming, while some writers reserve it for reward tampering, where the agent corrupts the reward channel itself (the score register, sensor or rater), and the taxonomy used here treats specification gaming as the umbrella, reward hacking as its RL form and tampering as its extreme case.",
+ "see": "https://idvorkin-ai-tools.github.io/ai-safety-field-map/failures/reward-hacking.html"
+}

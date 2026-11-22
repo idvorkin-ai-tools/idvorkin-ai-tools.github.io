@@ -1,0 +1,7 @@
+{
+ "term": "Delegation (of authority)",
+ "plain": "A higher-ranked instruction lending some of its authority to content that would otherwise have none.",
+ "eli5": "Mum saying \"do what the recipe card says\", so the card now counts, but only for cooking.",
+ "technical": "In the Model Spec, the only way no-authority content (a file, a tool output) gains authority: an applicable instruction delegates to it, and only as far as the delegator could grant; the agentic-privacy report adds that delegated authority should narrow at each hop (trust attenuation).",
+ "see": "https://idvorkin-ai-tools.github.io/model-spec-field-map/parts/p05.html#delegation"
+}

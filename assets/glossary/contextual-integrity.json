@@ -1,0 +1,7 @@
+{
+ "term": "Contextual integrity (CI)",
+ "plain": "A theory of privacy that says what matters is whether information flows in a way that fits the norms of its setting, not whether it is secret.",
+ "eli5": "Telling the doctor about your tummy ache is fine; the doctor telling your class is not.",
+ "technical": "Helen Nissenbaum's theory, introduced in the article \"Privacy as Contextual Integrity\" (2004) and given its canonical statement in the book Privacy in Context (2009): privacy is appropriate flow of information, and a flow is appropriate when it fits the legitimate norms of its social context or, where it departs from them, still serves that context's purposes; the agentic-privacy report treats the 2004 version as superseded, while CIMemories cites the 2004 article.",
+ "see": "https://idvorkin-ai-tools.github.io/agentic-privacy-field-map/concepts/contextual-integrity.html#definitions"
+}

@@ -1,0 +1,7 @@
+{
+ "term": "Uplift",
+ "plain": "How much real extra help a model gives someone toward a goal, compared with what they could already do without it.",
+ "eli5": "Not just telling someone that a ladder exists, but actually holding it so they can climb higher.",
+ "technical": "The marginal increase in a person's ability to cause a harm that model access provides, usually against a baseline such as web search; \"serious uplift\" toward mass-casualty weapons is a hard constraint in Claude's constitution, and dangerous-capability evals measure it with uplift trials.",
+ "see": "https://idvorkin-ai-tools.github.io/ai-safety-field-map/evals/dangerous-capability-evals.html"
+}

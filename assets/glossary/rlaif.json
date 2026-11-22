@@ -1,0 +1,7 @@
+{
+ "term": "RLAIF",
+ "plain": "Reinforcement learning where some or all of the preference labels come from a model instead of people.",
+ "eli5": "A robot teacher, not a human one, picks which of two answers is better.",
+ "technical": "Reinforcement learning from AI feedback: RLHF in which a feedback model generates the comparison labels used to train the preference model; in Constitutional AI (Bai et al. 2022) the harmlessness labels are AI-generated and the helpfulness labels human.",
+ "see": "https://idvorkin-ai-tools.github.io/constitutional-ai-field-map/paper/rlaif.html#label"
+}

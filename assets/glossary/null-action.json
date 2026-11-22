@@ -1,0 +1,7 @@
+{
+ "term": "Null action",
+ "plain": "Refusing or doing nothing.",
+ "eli5": "Choosing to sit still instead of doing anything at all.",
+ "technical": "In Claude's constitution, refusing or staying passive: always compatible with the hard constraints, and what Claude should accept if Anthropic legitimately asks it to stop or pause, but not automatically the right or safe choice.",
+ "see": "https://idvorkin-ai-tools.github.io/constitutional-ai-field-map/constitution/hard-constraints.html#null-action"
+}

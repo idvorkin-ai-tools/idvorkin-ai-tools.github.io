@@ -1,0 +1,7 @@
+{
+ "term": "Jailbreak",
+ "plain": "A prompt or trick that gets a model to do something its safety training is meant to stop.",
+ "eli5": "Talking the babysitter into letting you have cake for dinner by telling a clever story.",
+ "technical": "An input crafted to bypass a model's safety training so it produces behaviour it would normally refuse; unlike prompt injection it often involves no conflict with the developer's instructions, only with the training itself, and its success is usually measured as an attack success rate.",
+ "see": "https://idvorkin-ai-tools.github.io/red-teaming-ramp-up/index.html#surface"
+}

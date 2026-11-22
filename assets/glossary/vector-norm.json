@@ -1,0 +1,8 @@
+{
+ "term": "Norm (vector length)",
+ "plain": "The length of a list of numbers treated as an arrow.",
+ "eli5": "How long an arrow is, no matter which way it points.",
+ "technical": "A function giving the size of a vector, usually the Euclidean (L2) norm; interpretability papers compare a steering vector's norm with the residual stream's norm to set doses, and the word is unrelated to a contextual-integrity norm.",
+ "formula": "&#8214;x&#8214;<sub>2</sub> = &radic;(&Sigma;<sub>i</sub> x<sub>i</sub><sup>2</sup>)",
+ "see": "https://idvorkin-ai-tools.github.io/pain-axis-field-map/glossary.html#coefficient"
+}

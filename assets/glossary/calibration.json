@@ -1,6 +1,6 @@
 {
  "term": "Calibration",
- "plain": "Whether a judge's confidence matches how often it is actually right.",
+ "plain": "Whether stated confidence matches how often one is actually right, whether the speaker is a judge model or an assistant answering a question.",
  "eli5": "When the weather person says 70% rain, it should rain on about 7 of 10 such days.",
- "technical": "Agreement between predicted probabilities and observed frequencies (reliability diagrams, expected calibration error). On this site also: aligning human raters to the policy on a shared calibration set."
+ "technical": "Agreement between predicted probabilities and observed frequencies (reliability diagrams, expected calibration error); Claude's constitution lists being calibrated (confidence that matches the evidence, admitting uncertainty) among its honesty properties. On the LLM-judges map also: aligning human raters to the policy on a shared calibration set."
 }

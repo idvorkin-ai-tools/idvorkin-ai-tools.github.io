@@ -1,0 +1,7 @@
+{
+ "term": "Abliteration",
+ "plain": "Editing a model's weights to remove its tendency to refuse, then sharing the edited model.",
+ "eli5": "Snipping out the robot's \"no\" button for good.",
+ "technical": "The open-model community's term for directional ablation of the refusal direction applied once to the weights (rather than during each run), producing a published model that no longer refuses.",
+ "see": "https://idvorkin-ai-tools.github.io/bridge-ablations.html#abliteration"
+}

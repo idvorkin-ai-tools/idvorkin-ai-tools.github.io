@@ -1,0 +1,7 @@
+{
+ "term": "Ablation",
+ "plain": "Removing or switching off one part of a system to see what changes.",
+ "eli5": "Taking one wheel off a toy car to see whether it still rolls.",
+ "technical": "The general method of removing a component and measuring the effect, from dropping one ingredient in an ML paper's ablation table to zero or mean ablation of units inside a network; directional ablation, which projects one direction out of the residual stream or the weights (as with the refusal direction, Arditi et al. 2024, or the Pain Axis), is one special case.",
+ "see": "https://idvorkin-ai-tools.github.io/bridge-ablations.html#ablation"
+}

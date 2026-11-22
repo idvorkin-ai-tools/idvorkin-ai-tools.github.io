@@ -1,0 +1,7 @@
+{
+ "term": "Privacy-utility trade-off",
+ "plain": "The pattern where more privacy protection tends to make a system less useful.",
+ "eli5": "A locked diary is safer, but harder to share good news from.",
+ "technical": "The general tension between protecting information and task performance; CIMemories finds its own form, the violation-completeness trade-off, in which models and privacy prompts that lower violations also lower completeness rather than escaping the curve.",
+ "see": "https://idvorkin-ai-tools.github.io/cimemories-field-map/parts/p06-results.html#tradeoff"
+}

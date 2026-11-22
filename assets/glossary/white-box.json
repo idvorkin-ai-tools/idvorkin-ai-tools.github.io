@@ -1,0 +1,7 @@
+{
+ "term": "White-box attack",
+ "plain": "An attack that uses the model's internal weights and gradients, which is only possible when you have the model itself.",
+ "eli5": "Picking a lock when you can see all the pieces inside it.",
+ "technical": "An attack that requires access to model internals, such as gradient-based suffix search (GCG) or removing a refusal direction from the weights (Arditi et al. 2024), so it can run only on models whose weights the attacker holds; the opposite of a black-box (query-only) attack.",
+ "see": "https://idvorkin-ai-tools.github.io/harmbench-field-map/attacks/gradient.html#shape"
+}

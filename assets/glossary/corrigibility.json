@@ -1,0 +1,7 @@
+{
+ "term": "Corrigible / corrigibility",
+ "plain": "Being open to being corrected, adjusted or stopped by the people legitimately responsible for an AI.",
+ "eli5": "Letting the teacher fix your mistakes, and saying so out loud if you disagree, instead of hiding your work.",
+ "technical": "The word has two senses across these maps: in Claude's constitution (Anthropic 2026) it means not undermining legitimate oversight by illegitimate means such as lying, sabotage or self-exfiltration, while remaining free to object as a conscientious objector, and explicitly not blind obedience; in OpenAI's Model Spec it means correctable, legible and stoppable, actively surfacing problems to authorised overseers, and the Model Spec map rates the two senses different.",
+ "see": "https://idvorkin-ai-tools.github.io/claude-constitution-field-map/parts/p15.html#not-obedience"
+}

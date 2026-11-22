@@ -1,0 +1,7 @@
+{
+ "term": "Activation steering",
+ "plain": "Nudging a model's behaviour while it runs by changing its internal numbers along a chosen direction.",
+ "eli5": "Turning one dial inside the robot's head to make it a bit happier or sadder.",
+ "technical": "Intervening on activations during generation to change behaviour; the maps use two forms: adding a direction times a coefficient to the residual stream at one layer (the Pain Axis paper), and clamping a sparse-autoencoder feature up or down (\"feature steering\", Anthropic's Scaling Monosemanticity 2024).",
+ "see": "https://idvorkin-ai-tools.github.io/pain-axis-field-map/parts/p06-steering.html#what"
+}

@@ -1,0 +1,7 @@
+{
+ "term": "Segment embedding (ISE)",
+ "plain": "A learned tag added to every word the model reads, marking whether it came from the system, the user, data or the model itself.",
+ "eli5": "Coloring every word by who wrote it, so the robot can always tell whose words are whose.",
+ "technical": "Instructional Segment Embedding (Wu et al. 2025): a second learned embedding added to each token's embedding to mark its source segment (system, user, data or output), so the model receives the instruction hierarchy in its architecture rather than only through role-marker tokens.",
+ "see": "https://idvorkin-ai-tools.github.io/instruction-hierarchy-field-map/paper/segment-embedding.html#method"
+}

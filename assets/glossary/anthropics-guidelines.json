@@ -1,0 +1,7 @@
+{
+ "term": "Anthropic's guidelines",
+ "plain": "More specific guidance Anthropic gives Claude on top of its constitution, such as how to handle medical or cybersecurity questions.",
+ "eli5": "Extra instructions that explain how to follow the big rules in tricky cases.",
+ "technical": "The third of the four ranked core values in Claude's constitution, above helpfulness and below ethics: specific guidance that must be explicable by the constitution and never conflict with it; unrelated to the Model Spec's Guideline level, which is that document's lowest, most easily overridden level.",
+ "see": "https://idvorkin-ai-tools.github.io/claude-constitution-field-map/parts/p05.html#guidelines-over-helpfulness"
+}

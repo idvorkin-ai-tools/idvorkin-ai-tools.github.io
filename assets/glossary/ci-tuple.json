@@ -1,0 +1,7 @@
+{
+ "term": "CI tuple (five parameters)",
+ "plain": "The five things you name to describe an information flow: sender, recipient, subject, type of information and the condition it travels under.",
+ "eli5": "Who tells, who hears, who it is about, what it is, and the rule for sharing it.",
+ "technical": "The five parameters of a contextual-integrity flow or norm: sender, recipient and data subject (the actors), information type (attribute) and transmission principle; a well-formed norm fills all five.",
+ "see": "https://idvorkin-ai-tools.github.io/agentic-privacy-field-map/concepts/contextual-integrity.html#ci-tuple"
+}

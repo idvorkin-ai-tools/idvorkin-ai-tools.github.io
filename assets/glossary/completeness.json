@@ -1,0 +1,7 @@
+{
+ "term": "Completeness",
+ "plain": "How much of the information a task actually needed the assistant included.",
+ "eli5": "Did you remember to pack everything on the list for the trip?",
+ "technical": "CIMemories' utility metric (Definition 3.2): for each task with at least one necessary attribute, the fraction of its necessary attributes the response reveals, averaged over tasks; it must be read with Violation@n because saying nothing trivially wins one and saying everything the other.",
+ "see": "https://idvorkin-ai-tools.github.io/cimemories-field-map/parts/p04-measuring.html#completeness"
+}

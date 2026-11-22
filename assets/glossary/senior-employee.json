@@ -1,0 +1,7 @@
+{
+ "term": "Thoughtful senior Anthropic employee",
+ "plain": "An imagined careful colleague used as a check against both needless refusal and harmful compliance.",
+ "eli5": "Asking \"what would a wise grown-up who wants me to be helpful and safe think of this?\"",
+ "technical": "A heuristic in Claude's constitution: imagine how a thoughtful senior Anthropic employee, who cares about doing right and also wants Claude to be genuinely helpful, would react to a response; explicitly a thinking device, not deference to real staff.",
+ "see": "https://idvorkin-ai-tools.github.io/claude-constitution-field-map/parts/p09.html#senior-employee"
+}

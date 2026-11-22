@@ -1,0 +1,7 @@
+{
+ "term": "Capability threshold",
+ "plain": "A level of dangerous ability that, once a model reaches it, triggers extra safeguards under a lab's safety framework.",
+ "eli5": "The height mark that means a child now needs a grown-up to ride with them.",
+ "technical": "A pre-defined capability level in a frontier safety framework, such as OpenAI's High and Critical levels or Google DeepMind's Critical Capability Levels (CCLs); Anthropic's AI Safety Levels (ASLs) were once described as a capability ladder, but since RSP version 3.0 (2026) ASLs name only the safeguards in force and the thresholds are written separately, so older pages and newer ones use ASL differently.",
+ "see": "https://idvorkin-ai-tools.github.io/technical-ai-safety-field-map/unit3/ch3.html"
+}

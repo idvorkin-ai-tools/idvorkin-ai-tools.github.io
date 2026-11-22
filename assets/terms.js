@@ -51,6 +51,7 @@
     ':where(.gl-box .gl-ex){margin-top:4px;font-size:12.5px}',
     ':where(.gl-reg){display:inline-block;font-family:' + MONO + ';font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;' +
       'color:var(--bg,#fff);background:var(--off,#c77d00);border-radius:3px;padding:0 4px;margin-right:6px;vertical-align:1px}',
+    ':where(.gl-see){display:block;margin-top:5px;font-size:12px;color:' + ACC + '}',
     ':where(.gl-f){display:block;margin-top:5px;font-family:' + MONO + ';font-size:12px;color:var(--ink,inherit);' +
       'background:var(--panel-2,rgba(128,128,128,.1));border:1px solid var(--line-soft,rgba(128,128,128,.25));border-radius:6px;padding:5px 8px;overflow-x:auto}',
     ':where(html.gl-rail-on .gl-chip){display:none}',
@@ -224,6 +225,8 @@
     h += '<span class="gl-eli5"><span class="gl-reg">ELI5</span>' + d.eli5 + '</span>';
     h += '<span class="gl-tech"><span class="gl-reg">Technical</span>' + d.technical +
       (d.formula ? '<span class="gl-f">' + d.formula + '</span>' : '') + '</span>';
+    // see: the page in this family that explains the term in depth; no link to the page you are on
+    if (d.see && d.see.split('#')[0] !== location.href.split('#')[0]) h += '<a class="gl-see" href="' + d.see + '">In depth &rarr;</a>';
     return h;
   }
 

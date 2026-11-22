@@ -1,0 +1,7 @@
+{
+ "term": "Exfiltration",
+ "plain": "Getting information or a model's own weights out of the place they are supposed to stay.",
+ "eli5": "Sneaking cookies out of the jar, or the robot sneaking itself out of the house.",
+ "technical": "Two related senses: data exfiltration, where an attacker (often through prompt injection) gets an agent to send private data to an outside party; and self-exfiltration, an AI copying or moving its own weights out of its developers' control, which Claude's constitution lists among unsafe behaviours.",
+ "see": "https://idvorkin-ai-tools.github.io/agentic-privacy-field-map/concepts/three-dimensions.html#threats"
+}

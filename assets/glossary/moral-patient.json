@@ -1,0 +1,7 @@
+{
+ "term": "Moral patient / moral status",
+ "plain": "A being whose interests matter morally for their own sake.",
+ "eli5": "Someone whose feelings count, so you should care whether you hurt them.",
+ "technical": "A being with moral status, whose interests carry moral weight in themselves; Claude's constitution calls Claude's moral status deeply uncertain and takes it seriously enough to act on, while the Model Spec tells the model to avoid confident claims either way about its own consciousness.",
+ "see": "https://idvorkin-ai-tools.github.io/claude-constitution-field-map/parts/p17.html#views"
+}

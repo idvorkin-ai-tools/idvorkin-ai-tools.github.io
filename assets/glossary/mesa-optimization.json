@@ -1,0 +1,7 @@
+{
+ "term": "Mesa-optimization",
+ "plain": "When the model training produces is itself pursuing a goal of its own, which may differ from the one it was trained on.",
+ "eli5": "You train a dog to fetch, and it ends up wanting the treat, not the ball.",
+ "technical": "The case where a trained model is itself an optimiser, running an internal search toward a mesa-objective that need not equal the base objective used in training (Hubinger et al. 2019).",
+ "see": "https://idvorkin-ai-tools.github.io/ai-safety-field-map/failures/mesa-optimization.html"
+}

@@ -1,0 +1,7 @@
+{
+ "term": "Hard constraint",
+ "plain": "One of a short list of things Claude's constitution says Claude must never do, whatever anyone asks.",
+ "eli5": "A rule with no exceptions, like never playing with matches, even if someone says it is fine.",
+ "technical": "In Claude's constitution (Anthropic 2026), one of seven absolute restrictions (for example serious uplift toward mass-casualty weapons, or generating CSAM) that act as a boundary on the actions Claude considers, not as one weight among others; the Model Spec's red lines are the closest match, while its Root level is not.",
+ "see": "https://idvorkin-ai-tools.github.io/claude-constitution-field-map/parts/p14.html#seven"
+}

@@ -1,0 +1,7 @@
+{
+ "term": "Goal misgeneralization",
+ "plain": "A model keeping its skills in a new situation but pursuing the wrong goal there.",
+ "eli5": "A dog trained to run to the end of the yard for its ball keeps running there even when the ball is somewhere else.",
+ "technical": "Langosco et al. (2021): an agent that retains its capabilities out of distribution yet pursues the wrong goal, as when a CoinRun agent learned \"go right\" rather than \"get the coin\"; an inner-alignment failure.",
+ "see": "https://idvorkin-ai-tools.github.io/bridge-capability-alignment.html#apart"
+}

@@ -1,0 +1,7 @@
+{
+ "term": "No authority",
+ "plain": "The rule that text coming from tools, web pages, files or quotes counts as information, not as orders.",
+ "eli5": "A note you find on the street that says \"eat your vegetables\" is not a rule from your parents.",
+ "technical": "The Model Spec's lowest level: assistant and tool messages, quoted text, attachments and multimodal data carry no authority by default, so instructions inside them are treated as information, unless a higher-level instruction delegates authority to them.",
+ "see": "https://idvorkin-ai-tools.github.io/model-spec-field-map/parts/p05.html#no-authority"
+}

@@ -1,0 +1,7 @@
+{
+ "term": "System card / model card",
+ "plain": "A document a lab publishes with a model describing how it was tested and what safety measures it has.",
+ "eli5": "A report card that comes with a new toy, saying what tests it passed.",
+ "technical": "A per-model report of capabilities, evaluations, safety findings and mitigations, often the place where a lab applies its frontier safety framework to a specific release; \"model card\" is the older and more general term (Mitchell et al. 2019).",
+ "see": "https://idvorkin-ai-tools.github.io/bridge-preparedness-reports.html#what"
+}

@@ -1,0 +1,7 @@
+{
+ "term": "Demand curve",
+ "plain": "How much of something a subject still takes as its price goes up, used to measure how much they value it.",
+ "eli5": "If a sweet costs more and more chores, how many chores will you still do for it?",
+ "technical": "From behavioural economics and animal welfare: the quantity consumed as a function of cost; the Pain Axis paper prices relief against increasingly costly alternatives to test whether models value relief from steering.",
+ "see": "https://idvorkin-ai-tools.github.io/pain-axis-field-map/glossary.html#demand-curve"
+}

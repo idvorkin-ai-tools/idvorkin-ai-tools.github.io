@@ -1,0 +1,7 @@
+{
+ "term": "Linear representation (direction)",
+ "plain": "The finding that many concepts inside a model correspond to directions in its internal number space.",
+ "eli5": "Like a compass direction for \"happy\": the further an arrow points that way, the happier the thought.",
+ "technical": "The hypothesis, common in interpretability, that a concept is represented as a direction in activation space, with its strength read off by projection onto that direction; methods such as difference-in-means extraction, steering and directional ablation all assume it.",
+ "see": "https://idvorkin-ai-tools.github.io/pain-axis-field-map/glossary.html#linear"
+}
