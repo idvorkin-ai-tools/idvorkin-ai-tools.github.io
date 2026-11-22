@@ -21,6 +21,7 @@
   .bar nav{display:flex;gap:16px}
   .bar a.home{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-dim)}
   @media(max-width:420px){.bar-in{padding:12px 16px}.bar nav{gap:10px;flex-wrap:wrap;justify-content:flex-end}.bar a.home{font-size:11px}.brand{letter-spacing:.08em}}
+  @media(max-width:560px){.bar-in{flex-wrap:wrap;row-gap:8px}.bar-in .modesel{margin-left:auto}}
   main{max-width:900px;margin:0 auto;padding:56px 20px 80px}
   @media(max-width:420px){main{padding:40px 16px 64px}}
   h1{font-size:clamp(30px,5vw,46px);line-height:1.1;margin:0 0 14px;letter-spacing:-.01em}
@@ -65,6 +66,22 @@
   ul.read li b{color:var(--ink)}
   ol.src{padding-left:1.4em;margin:0;color:var(--ink-dim);font-size:14px}
   ol.src li{margin:0 0 8px}
+  .lab .lab-pre button[aria-pressed="true"]{border-color:var(--def);color:var(--ink);background:rgba(95,211,230,.12)}
+  .lab select{font:inherit;font-size:14px;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:6px 8px;min-height:36px;max-width:100%}
+  .lab .lab-sl.eo-pick,.lab .lab-sl.tr-pick{grid-template-columns:minmax(0,1fr);max-width:420px}
+  .eo-key,.eo-note,.tr-note{font-size:12.5px;color:var(--ink-dim);margin:6px 0;max-width:none}
+  .eo-list{list-style:none;margin:6px 0;padding:0;font-size:14px}
+  .eo-list li{display:grid;grid-template-columns:6.4em minmax(0,1fr);align-items:baseline;gap:0 8px;padding:5px 0;border-bottom:1px solid var(--line-soft)}
+  .eo-list .eo-dim{color:var(--ink-dim)}
+  .eo-strip{font-family:'IBM Plex Mono',monospace;font-size:13px;white-space:nowrap}
+  .eo-strip span{display:inline-block;width:1.2em;text-align:center}
+  .eo-result{color:var(--def)}.eo-other{color:var(--off)}.eo-none{color:var(--line)}
+  [data-widget="threshold-reader"] svg{max-width:520px}
+  .lab svg .tr-track{fill:var(--line-soft)}.lab svg .tr-side{fill:var(--line)}
+  .lab.tr-met svg .tr-side{fill:var(--off);fill-opacity:.55}
+  .lab svg .tr-bar{stroke:var(--off);stroke-width:2}
+  .lab svg .tr-dot{fill:var(--def);stroke:var(--paper);stroke-width:2}
+  .lab svg .tr-lbl{fill:var(--ink-dim);font-size:11px}
 </style>
 <script>try{var m=localStorage.getItem('aitools-mode')||localStorage.getItem('llm-judges-mode');if(m==='tech'||m==='eli5')document.documentElement.setAttribute('data-'+m,'on')}catch(e){}</script>
 <style>html:is([data-tech="on"],[data-eli5="on"]) .plain-only,html:not([data-tech="on"]) .tech-only,html:not([data-eli5="on"]) .eli5-only,html[data-tech="on"] .no-tech{display:none!important}</style>
@@ -170,6 +187,8 @@
         <td>Numbers: red-team scores against web baselines, cost-<span class="term" data-term="uplift">uplift</span> multiples.</td>
         <td>Numbers, with no thresholds shown.</td></tr>
     </table></div>
+    <p class="lab-try"><b>Try this</b>Pick a lab, then slide the score across the one number its documents print: see which side of the bar it lands on, and how few bars are published at all.</p>
+    <div data-widget="threshold-reader"></div>
     <h3 class="sub">What stands out</h3>
     <p>The verdicts are not on a shared scale. For cyber, OpenAI calls GPT-6.2 Critical, DeepMind says Argon's CCL "cannot be ruled out", and Meta rates unmitigated Muse Spark 1.3 "moderate or lower". Part of that is a real capability gap (Meta's own table has Muse Spark 1.3 at 28.7 on ExploitBench capability coverage, against 73.5 for GPT-5.6 Sol), but each lab also defines its levels and chooses its tests differently, so the labels do not line up.</p>
     <p>OpenAI's v2 framework says that for a Critical cyber model, "until we have specified safeguards and security controls standards that would meet a Critical standard, halt further development". The GPT-6.2 card declares Critical, ships with its strongest safeguards, and still cites v2; we did not find where it addresses that line.</p>
@@ -209,6 +228,8 @@
       <tr><td>Gray Swan</td><td class="what">Agent red-teaming and <a href="https://arxiv.org/abs/2603.15714">prompt-injection arena</a>. Partly public.</td><td class="c">●</td><td class="c n">○ held-out</td><td class="c">●</td><td class="c">●</td><td class="c n">–</td></tr>
     </table></div>
     <p class="hint">Notes: ○ sandbagging = used to test whether the model underperforms on purpose, not as a capability score. ○ retired = named as dropped (saturated or near the maximum). ○ honeypot = OpenAI uses ExploitGym tasks believed impossible to see whether an agent cheats. ○ held-out = Gray Swan scenarios as a held-out test set. ○ earlier report = Meta's checkpoint result from the first Muse Spark report.</p>
+    <p class="lab-try"><b>Try this</b>Pick a lab to list the evals its latest report scores and who else scores them; pick an eval to see which labs use it. It reads the table above.</p>
+    <div data-widget="eval-overlap"></div>
     <p><b>Shared most:</b> ExploitBench and CyScenarioBench (results from four labs each, everyone but xAI), VCT (four, everyone but DeepMind) and ExploitGym (three, plus OpenAI's honeypot use). xAI's cyber tests overlap with the others' only on CyberGym, shared with Meta. The same name is not the same number: labs run different subsets, harnesses and attempt counts, and Meta's first Muse Spark report flags such mismatches when it quotes other labs' Cybench and CyScenarioBench scores.</p>
     <p><b>Internal or undisclosed, by lab:</b> Meta: BioDesign Tools, high-risk bottleneck tests, PostTrainBench's siblings ResearchTasteBench and OptimBench. OpenAI: AAV, SHP2 and other bio-design tasks, NanoGPT, Sandbox Bench, FrontierCyber. Anthropic: Dyno sequence-design tasks, CoBench (results not reported), Binary Exploitation Benchmark. DeepMind: expert bio red teaming, the 22-attack cyber uplift model, Google RE-Bench. xAI: HackerBench, Biosecurity VCT, BioUseBench, Autointent.</p>
     <p><b>Benchmarks wear out:</b> Meta says Muse Spark 1.1 saturated Cybench, Anthropic retired CyberGym "due to saturation", and DeepMind calls CyScenarioBench saturated after Argon solved every end-to-end challenge. Each lab then moves to harder, often private, tests.</p>
@@ -245,6 +266,11 @@
 </main>
 <footer>idvorkin-ai-tools · safety and alignment comparison · <a href="safety.html">safety hub</a> · <a href="./">all maps</a> · <a href="https://github.com/idvorkin-ai-tools/idvorkin-ai-tools.github.io">source</a></footer>
 <script src="https://idvorkin-ai-tools.github.io/assets/terms.js" defer></script>
+<script src="https://idvorkin-ai-tools.github.io/assets/widgets.js" defer></script>
+<script src="lab/eval-overlap.js" defer></script>
+<script src="lab/threshold-reader.js" defer></script>
+<script src="widgets/eval-overlap.js" defer></script>
+<script src="widgets/threshold-reader.js" defer></script>
 <script src="https://idvorkin-ai-tools.github.io/assets/annotate.js" data-repo="idvorkin-ai-tools/idvorkin-ai-tools.github.io" defer></script>
 </body>
 </html>
