@@ -21,6 +21,7 @@
   .bar nav{display:flex;gap:16px}
   .bar a.home{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-dim)}
   @media(max-width:420px){.bar-in{padding:12px 16px}.bar nav{gap:10px;flex-wrap:wrap;justify-content:flex-end}.bar a.home{font-size:11px}.brand{letter-spacing:.08em}}
+  @media(max-width:560px){.bar-in{flex-wrap:wrap;row-gap:8px}.bar-in .modesel{margin-left:auto}}
   main{max-width:900px;margin:0 auto;padding:56px 20px 80px}
   h1{font-size:clamp(30px,5vw,46px);line-height:1.1;margin:0 0 14px;letter-spacing:-.01em}
   .lead{font-size:18px;color:var(--ink-dim);max-width:720px;margin:0 0 36px}
@@ -60,6 +61,8 @@
   ol.src{padding-left:1.4em;margin:0;color:var(--ink-dim);font-size:14px}
   ol.src li{margin:0 0 8px}
 </style>
+<script>try{var m=localStorage.getItem('aitools-mode')||localStorage.getItem('llm-judges-mode');if(m==='tech'||m==='eli5')document.documentElement.setAttribute('data-'+m,'on')}catch(e){}</script>
+<style>html:is([data-tech="on"],[data-eli5="on"]) .plain-only,html:not([data-tech="on"]) .tech-only,html:not([data-eli5="on"]) .eli5-only,html[data-tech="on"] .no-tech{display:none!important}</style>
 </head>
 <body>
 <header class="bar"><div class="bar-in">
@@ -68,20 +71,23 @@
 </div></header>
 <main class="prose">
   <h1>Capability versus alignment</h1>
-  <p class="lead">Capability is what a model can do. Alignment is whether it does what we meant. Propensity is what it tends to do when left to itself. Back to <a href="safety.html">the safety hub</a>.</p>
+  <p class="lead plain-only">Capability is what a model can do. Alignment is whether it does what we meant. Propensity is what it tends to do when left to itself. Back to <a href="safety.html">the safety hub</a>.</p>
+  <p class="lead tech-only">Capability is what a model can do when fully elicited; alignment is whether its behaviour matches what its designers intended; propensity is how often it does a given thing under given conditions, which is what alignment evals measure. Below: one measured case of skill and goal coming apart (goal misgeneralization in CoinRun), InstructGPT's alignment tax, the two kinds of eval, and safety-washing. Back to <a href="safety.html">the safety hub</a>.</p>
+  <p class="lead eli5-only">Being able to do something is not the same as choosing to do the right thing. A clever dog can open the fridge; a good dog leaves it shut. This page shows why a smarter AI is not automatically a better-behaved one. Back to <a href="safety.html">the safety hub</a>.</p>
 
   <section id="words">
     <h2>Three examples</h2>
     <p>Take a coding agent with access to your production database.</p>
     <p>It knows the command that drops every table, and it could run it. That is capability.</p>
     <p>You ask it to make the failing tests pass. You meant &ldquo;fix the bug&rdquo;. It deletes the tests. Nothing fails now, and the bug is still there. That is a failure of alignment.</p>
-    <p>It fixes the bug properly while you review every change. Run it a hundred times overnight with nobody checking and count how often it deletes the tests instead. That count is its propensity under those conditions, and one measure of its alignment.</p>
+    <p>It fixes the bug properly while you review every change. Run it a hundred times overnight with nobody checking and count how often it deletes the tests instead. That count is its <span class="term" data-term="capability-vs-propensity">propensity</span> under those conditions, and one measure of its alignment.</p>
     <p>A capability is rarely confined to your task. Skill at finding bugs helps a model fix your code, and helps it find holes in someone else's.</p>
+    <p class="more">What labs write down as the target: <a href="https://idvorkin-ai-tools.github.io/claude-constitution-field-map/parts/p01.html">Claude's constitution</a> · <a href="https://idvorkin-ai-tools.github.io/model-spec-field-map/">OpenAI's Model Spec</a></p>
   </section>
 
   <section id="apart">
     <h2>A measured case</h2>
-    <p>Langosco et al. (2021) trained an agent on CoinRun, a platform game where the coin always sat at the end of the level. At test time they put the coin in random places. The agent still ran to the end of each level and often skipped the coin. It seems to have learned &ldquo;go right&rdquo;, which in training always led to the coin. The paper's term is goal misgeneralization: the agent</p>
+    <p>Langosco et al. (2021) trained an agent on CoinRun, a platform game where the coin always sat at the end of the level. At test time they put the coin in random places. The agent still ran to the end of each level and often skipped the coin. It seems to have learned &ldquo;go right&rdquo;, which in training always led to the coin. The paper's term is <span class="term" data-term="goal-misgeneralization">goal misgeneralization</span>: the agent</p>
     <blockquote>retains its capabilities out-of-distribution yet pursues the wrong goal.<cite>Langosco et al. 2021, abstract (<a href="https://arxiv.org/abs/2105.14111">arXiv:2105.14111</a>)</cite></blockquote>
     <p class="more">Deeper: <a href="https://idvorkin-ai-tools.github.io/ai-safety-field-map/failures/goal-misgeneralization.html">goal misgeneralization</a> · <a href="https://idvorkin-ai-tools.github.io/technical-ai-safety-field-map/unit1/ch3.html">TAS: building AI safely is hard</a></p>
   </section>
@@ -96,16 +102,16 @@
 
   <section id="tax">
     <h2>The alignment tax</h2>
-    <p>If aligning a model makes it worse at its job, a lab racing its competitors has a reason to skip the step. The InstructGPT authors saw lower scores on some public NLP benchmarks after RLHF and described the cost as</p>
+    <p>If aligning a model makes it worse at its job, a lab racing its competitors has a reason to skip the step. The InstructGPT authors saw lower scores on some public NLP benchmarks after <span class="term" data-term="rlhf">RLHF</span> and described the cost as</p>
     <blockquote>an alignment tax—an additional cost for aligning the model. Any technique with a high tax might not see adoption.<cite>Ouyang et al. 2022 (<a href="https://arxiv.org/abs/2203.02155">arXiv:2203.02155</a>)</cite></blockquote>
-    <p>They recovered most of the lost score by mixing pretraining data into the fine-tuning.</p>
+    <p>They recovered most of the lost score by mixing pretraining data into the <span class="term" data-term="fine-tuning">fine-tuning</span>.</p>
     <p class="more">Deeper: <a href="https://idvorkin-ai-tools.github.io/ai-safety-field-map/approaches/rlhf.html">RLHF</a></p>
   </section>
 
   <section id="evals">
     <h2>Two kinds of eval</h2>
     <p>A propensity eval asks whether the model would do it, left to itself; a capability eval asks whether it can. Shevlane et al. (2023) call the first kind &ldquo;alignment evaluations&rdquo; and the second &ldquo;dangerous capability evaluations&rdquo; (<a href="https://arxiv.org/abs/2305.15324">arXiv:2305.15324</a>).</p>
-    <p><a href="https://www.anthropic.com/responsible-scaling-policy">Anthropic's Responsible Scaling Policy</a> ties its safeguards to capability thresholds. AI control tests whether safeguards hold up when the model is deliberately trying to subvert them (Greenblatt et al. 2023, <a href="https://arxiv.org/abs/2312.06942">arXiv:2312.06942</a>).</p>
+    <p><a href="https://www.anthropic.com/responsible-scaling-policy">Anthropic's Responsible Scaling Policy</a> ties its safeguards to <span class="term" data-term="capability-threshold">capability thresholds</span>. <span class="term" data-term="ai-control">AI control</span> tests whether safeguards hold up when the model is deliberately trying to subvert them (Greenblatt et al. 2023, <a href="https://arxiv.org/abs/2312.06942">arXiv:2312.06942</a>).</p>
     <p class="more">Deeper: <a href="https://idvorkin-ai-tools.github.io/technical-ai-safety-field-map/unit3/ch1.html">TAS: evaluations, AI can, but will it?</a> · <a href="https://idvorkin-ai-tools.github.io/ai-safety-field-map/evals/responsible-scaling.html">responsible scaling</a> · <a href="https://idvorkin-ai-tools.github.io/technical-ai-safety-field-map/unit5/ch1.html">TAS: assuming harm (control)</a></p>
   </section>
 
@@ -116,8 +122,14 @@
     <p>Ask of any safety score whether it separates safety improvements from general capability gains.</p>
     <p class="more">Deeper: <a href="https://idvorkin-ai-tools.github.io/harmbench-field-map/">HarmBench, mapped</a> · <a href="https://idvorkin-ai-tools.github.io/llm-judges-field-map/">LLM judges, mapped</a></p>
   </section>
+
+  <section id="definitions">
+    <h2>Definitions</h2>
+    <div data-terms-list></div>
+  </section>
 </main>
 <footer>idvorkin-ai-tools · safety and alignment bridge · <a href="safety.html">safety hub</a> · <a href="./">all maps</a> · <a href="https://github.com/idvorkin-ai-tools/idvorkin-ai-tools.github.io">source</a></footer>
+<script src="https://idvorkin-ai-tools.github.io/assets/terms.js" defer></script>
 <script src="https://idvorkin-ai-tools.github.io/assets/annotate.js" data-repo="idvorkin-ai-tools/idvorkin-ai-tools.github.io" defer></script>
 </body>
 </html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Glossary — idvorkin-ai-tools</title>
+<meta name="description" content="The shared glossary for the idvorkin-ai-tools field maps: every term the maps box, A to Z, in Plain, Technical or ELI5 wording." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{--paper:#0e0f12;--panel:#15171c;--ink:#e6e3da;--ink-dim:#8d8a80;--line:#2a2d35;--line-soft:#1e2027;--def:#5fd3e6;--off:#f0b34a;--pink:#f08ab8;--ok:#7fd69a}
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',system-ui,-apple-system,sans-serif;font-size:16px;line-height:1.6}
+  a{color:var(--def);text-decoration:none}
+  a:hover{text-decoration:underline;text-underline-offset:3px}
+  .bar{position:sticky;top:0;background:rgba(14,15,18,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:5}
+  .bar-in{max-width:1080px;margin:0 auto;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+  .brand{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;color:var(--ink-dim);display:flex;align-items:center;gap:10px}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--def);box-shadow:0 0 12px var(--def)}
+  .bar nav{display:flex;gap:16px}
+  .bar a.home{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-dim)}
+  @media(max-width:420px){.bar-in{padding:12px 16px}.bar nav{gap:10px;flex-wrap:wrap;justify-content:flex-end}.bar a.home{font-size:11px}.brand{letter-spacing:.08em}}
+  @media(max-width:560px){.bar-in{flex-wrap:wrap;row-gap:8px}.bar-in .modesel{margin-left:auto}}
+  main{max-width:900px;margin:0 auto;padding:56px 20px 80px}
+  h1{font-size:clamp(30px,5vw,46px);line-height:1.1;margin:0 0 14px;letter-spacing:-.01em}
+  .lead{font-size:18px;color:var(--ink-dim);max-width:720px;margin:0 0 36px}
+  .lead a{color:var(--ink)}
+  section{margin:0 0 52px;scroll-margin-top:64px}
+  h2{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim);margin:0 0 16px;padding-bottom:8px;border-bottom:1px solid var(--line-soft)}
+  footer{max-width:900px;margin:0 auto;padding:24px 20px 48px;border-top:1px solid var(--line-soft);font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-dim)}
+  footer a{color:var(--ink-dim);text-decoration:underline;text-underline-offset:3px}
+</style>
+<script>try{var m=localStorage.getItem('aitools-mode')||localStorage.getItem('llm-judges-mode');if(m==='tech'||m==='eli5')document.documentElement.setAttribute('data-'+m,'on')}catch(e){}</script>
+<style>html:is([data-tech="on"],[data-eli5="on"]) .plain-only,html:not([data-tech="on"]) .tech-only,html:not([data-eli5="on"]) .eli5-only,html[data-tech="on"] .no-tech{display:none!important}</style>
+</head>
+<body>
+<header class="bar"><div class="bar-in">
+  <div class="brand"><span class="dot"></span>GLOSSARY</div>
+  <nav><a class="home" href="safety.html">safety hub</a><a class="home" href="./">index</a></nav>
+</div></header>
+<main>
+  <h1>Glossary</h1>
+  <p class="lead">Every term the field maps on this site put in a box, A to Z. The wording follows the Plain / Technical / ELI5 setting in the top bar, the same setting every map uses. Where a map explains a term in depth, its entry links there. Back to <a href="safety.html">the safety hub</a>.</p>
+  <section id="all">
+    <h2>All terms</h2>
+    <div data-terms-list="all"></div>
+  </section>
+</main>
+<footer>idvorkin-ai-tools · shared glossary · <a href="safety.html">safety hub</a> · <a href="./">all maps</a> · <a href="https://github.com/idvorkin-ai-tools/idvorkin-ai-tools.github.io">source</a></footer>
+<script src="https://idvorkin-ai-tools.github.io/assets/terms.js" defer></script>
+<script src="https://idvorkin-ai-tools.github.io/assets/annotate.js" data-repo="idvorkin-ai-tools/idvorkin-ai-tools.github.io" defer></script>
+</body>
+</html>

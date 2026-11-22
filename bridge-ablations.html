@@ -21,6 +21,7 @@
   .bar nav{display:flex;gap:16px}
   .bar a.home{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-dim)}
   @media(max-width:420px){.bar-in{padding:12px 16px}.bar nav{gap:10px;flex-wrap:wrap;justify-content:flex-end}.bar a.home{font-size:11px}.brand{letter-spacing:.08em}}
+  @media(max-width:560px){.bar-in{flex-wrap:wrap;row-gap:8px}.bar-in .modesel{margin-left:auto}}
   main{max-width:900px;margin:0 auto;padding:56px 20px 80px}
   h1{font-size:clamp(30px,5vw,46px);line-height:1.1;margin:0 0 14px;letter-spacing:-.01em}
   .lead{font-size:18px;color:var(--ink-dim);max-width:720px;margin:0 0 36px}
@@ -62,6 +63,8 @@
   .prose ul{margin:0 0 14px;padding-left:1.3em;max-width:720px}
   .prose ul li{margin:0 0 6px}
 </style>
+<script>try{var m=localStorage.getItem('aitools-mode')||localStorage.getItem('llm-judges-mode');if(m==='tech'||m==='eli5')document.documentElement.setAttribute('data-'+m,'on')}catch(e){}</script>
+<style>html:is([data-tech="on"],[data-eli5="on"]) .plain-only,html:not([data-tech="on"]) .tech-only,html:not([data-eli5="on"]) .eli5-only,html[data-tech="on"] .no-tech{display:none!important}</style>
 </head>
 <body>
 <header class="bar"><div class="bar-in">
@@ -70,11 +73,13 @@
 </div></header>
 <main class="prose">
   <h1>Ablations, and the refusal direction</h1>
-  <p class="lead">An ablation removes one part of a system and measures what changes. Interpretability researchers use it to find what a part of a model does. One such finding, that refusal often sits in a single direction, is what community &ldquo;uncensored&rdquo; models remove. Back to <a href="safety.html">the safety hub</a>.</p>
+  <p class="lead plain-only">An ablation removes one part of a system and measures what changes. Interpretability researchers use it to find what a part of a model does. One such finding, that refusal often sits in a single direction, is what community &ldquo;uncensored&rdquo; models remove. Back to <a href="safety.html">the safety hub</a>.</p>
+  <p class="lead tech-only">An ablation removes a component (a unit, an attention head, a direction) and measures the effect. Arditi et al. (2024) found that refusal in 13 open chat models is mediated largely by one residual-stream direction; projecting it out of the weights (abliteration) removes refusals with little loss of capability. What that implies for shallow safety training, open weights and tamper-resistant safeguards. Back to <a href="safety.html">the safety hub</a>.</p>
+  <p class="lead eli5-only">To learn what a part of a machine does, take it out and see what stops working. Researchers did that inside chatbots and found the &ldquo;say no&rdquo; habit lives mostly in one spot, and some people now cut that spot out to make chatbots that never say no. Back to <a href="safety.html">the safety hub</a>.</p>
 
   <section id="ablation">
     <h2>What an ablation is</h2>
-    <p>Neuroscientists have long run ablation studies: damage or remove one region of a brain, then see which abilities go missing. Meyes et al. (2019) note how widely the method is used there and apply the same idea to neural networks, removing units to see which parts of the data each one represents (<a href="https://arxiv.org/abs/1901.08644">arXiv:1901.08644</a>).</p>
+    <p>Neuroscientists have long run <span class="term" data-term="ablation">ablation</span> studies: damage or remove one region of a brain, then see which abilities go missing. Meyes et al. (2019) note how widely the method is used there and apply the same idea to neural networks, removing units to see which parts of the data each one represents (<a href="https://arxiv.org/abs/1901.08644">arXiv:1901.08644</a>).</p>
     <p>In ML papers the word has a looser everyday meaning too. An &ldquo;ablation table&rdquo; takes the full method, drops one ingredient at a time, and reports the score each time. If the score barely moves, that ingredient was not doing much. It is the basic way a paper shows which of its ideas mattered.</p>
     <p>A made-up example: a paper's new chatbot scores 80 on a test, built from three ideas.</p>
     <table>
@@ -91,10 +96,10 @@
 
   <section id="inside">
     <h2>Ablations inside a model</h2>
-    <p>Interpretability uses ablation as a causal test. You think a few attention heads carry out some behavior; switch them off and check whether the behavior breaks.</p>
+    <p><span class="term" data-term="mechanistic-interpretability">Interpretability</span> uses ablation as a causal test. You think a few attention heads carry out some behavior; switch them off and check whether the behavior breaks. <a href="https://idvorkin-ai-tools.github.io/technical-ai-safety-field-map/unit4/ch1.html">TAS 4.1</a> ranks the evidence: a part that merely correlates with a concept is the weakest claim, ablating it and watching the behavior degrade is the next rung up, and <span class="term" data-term="steering">steering</span> it to move behavior as predicted is stronger still.</p>
     <p>&ldquo;Switch off&rdquo; has more than one meaning. A <b>zero ablation</b> sets a component's output to zero. A <b>mean ablation</b> replaces it with its average output over many inputs. Wang et al. (2022), reverse-engineering a small circuit in GPT-2, found zero ablation noisy, because later layers may rely on the average value as an implicit bias. Mean ablation, they write, removes</p>
     <blockquote>the information that varies in the reference distribution (e.g. the value of the name outputted by a head) but will preserve constant information (e.g. the fact that a head is outputting a name).<cite>Wang et al. 2022, section 3 (<a href="https://arxiv.org/abs/2211.00593">arXiv:2211.00593</a>)</cite></blockquote>
-    <p>The part you remove need not be a neuron or a head. It can be a <b>direction</b>: a pattern across many neurons at once. Morcos et al. (2018) define a single direction as &ldquo;the activation of a single unit or some linear combination of units&rdquo; and ablated directions to test how much a network leans on any one of them (<a href="https://arxiv.org/abs/1803.06959">arXiv:1803.06959</a>). Removing a direction leaves every neuron in place and takes out only the part of the activity that points that way.</p>
+    <p>The part you remove need not be a neuron or a head. It can be a <b>direction</b>: a pattern across many neurons at once. Morcos et al. (2018) define a single direction as &ldquo;the activation of a single unit or some linear combination of units&rdquo; and ablated directions to test how much a network leans on any one of them (<a href="https://arxiv.org/abs/1803.06959">arXiv:1803.06959</a>). Removing a direction leaves every neuron in place and takes out only the part of the activity that points that way. The Pain Axis map has a short primer on <a href="https://idvorkin-ai-tools.github.io/pain-axis-field-map/parts/p01-why-pain.html#directions">concepts as directions</a> in the <span class="term" data-term="residual-stream">residual stream</span>, the running vector these directions live in.</p>
     <p class="more">Deeper: <a href="https://idvorkin-ai-tools.github.io/ai-safety-field-map/interp/mech-interp.html">mechanistic interpretability</a> · <a href="https://idvorkin-ai-tools.github.io/ai-safety-field-map/interp/circuits.html">circuits</a> · <a href="https://idvorkin-ai-tools.github.io/technical-ai-safety-field-map/unit4/ch1.html">TAS: how does AI think?</a> · <a href="https://idvorkin-ai-tools.github.io/pain-axis-field-map/">the Pain Axis, another single direction</a></p>
   </section>
 
@@ -102,17 +107,18 @@
     <h2>Refusal is mediated by a single direction</h2>
     <p>Chat models are trained to answer ordinary requests and refuse harmful ones. Arditi et al. (2024) looked for where that decision lives, across 13 open chat models up to 72B parameters. For each model they found one direction:</p>
     <blockquote>erasing this direction from the model's residual stream activations prevents it from refusing harmful instructions, while adding this direction elicits refusal on even harmless instructions.<cite>Arditi et al. 2024, abstract (<a href="https://arxiv.org/abs/2406.11717">arXiv:2406.11717</a>)</cite></blockquote>
-    <p>Taking the direction out stopped the refusals &ldquo;with minimal effect on other capabilities&rdquo;, and the authors present that as a white-box jailbreak, one that needs access to the model's internals. Their conclusion: the result shows &ldquo;the brittleness of current safety fine-tuning methods.&rdquo;</p>
+    <p>Taking the direction out stopped the refusals &ldquo;with minimal effect on other capabilities&rdquo;, and the authors present that as a <span class="term" data-term="white-box">white-box</span> <span class="term" data-term="jailbreak">jailbreak</span>, one that needs access to the model's internals. Their conclusion: the result shows &ldquo;the brittleness of current safety fine-tuning methods.&rdquo;</p>
     <p>&ldquo;Single&rdquo; is a finding about those models, not a law. Wollschläger et al. (2025), with a different search method, found &ldquo;multiple independent directions and even multi-dimensional concept cones that mediate refusal&rdquo; (<a href="https://arxiv.org/abs/2502.17420">arXiv:2502.17420</a>). So refusal may live in a small region rather than one line, but that region is still small.</p>
+    <p>Removal only shows something when the behavior is there to remove. The Pain Axis paper used Arditi's weight edit to project its pain direction out of 25 models and saw no change in 24 of them; its authors note that models showing no distress to begin with give the cut nothing to take away (<a href="https://idvorkin-ai-tools.github.io/pain-axis-field-map/parts/p10-limitations.html#ablation">Pain Axis, part 10</a>).</p>
   </section>
 
   <section id="abliteration">
     <h2>Abliteration, a real example</h2>
-    <p>The open-model community calls removing the refusal direction from a model's weights <b>abliteration</b>. Instead of erasing the direction while the model runs, the edit is made to the weights once, and the edited model is published for anyone to download.</p>
+    <p>The open-model community calls removing the refusal direction from a model's weights <b><span class="term" data-term="abliteration">abliteration</span></b>. Instead of erasing the direction while the model runs, the edit is made to the weights once, and the edited model is published for anyone to download.</p>
     <p>One example is <a href="https://huggingface.co/OpenUncensored/Inkling-2-Mini-Uncensored">Inkling 2 Mini Uncensored</a> on Hugging Face, an edit of Thinking Machines' <a href="https://huggingface.co/thinkingmachines/Inkling-2-Mini">Inkling 2 Mini</a>. What its model card claims, as read on 2026-11-22:</p>
     <ul>
       <li>Its refusals are removed &ldquo;by directional ablation (abliteration)&rdquo;, and the method &ldquo;builds on refusal-direction research by Arditi et al.&rdquo;</li>
-      <li>It refused 0 of 32 harmful prompts, against 32 of 32 for the original. An LLM judge rated 21 of its 32 answers full and specific.</li>
+      <li>It refused 0 of 32 harmful prompts, against 32 of 32 for the original. An <span class="term" data-term="llm-judge">LLM judge</span> rated 21 of its 32 answers full and specific.</li>
       <li>General knowledge held: MMLU went from 78.95% to 79.47%.</li>
       <li>Only a small set of weight matrices changed. The files are the same size and format as the original, and the rest is &ldquo;byte for byte the original&rdquo;.</li>
       <li>It was made on the base model's release day.</li>
@@ -127,7 +133,7 @@
     <ul>
       <li><b>Few parameters.</b> Wei et al. (2024) found regions critical to safety that are sparse, &ldquo;about 3% at the parameter level&rdquo;, and removing them &ldquo;compromises safety without significantly impacting utility&rdquo; (<a href="https://arxiv.org/abs/2402.05162">arXiv:2402.05162</a>).</li>
       <li><b>Few tokens.</b> Qi et al. (2024) argue that alignment mostly changes the model's &ldquo;very first few output tokens&rdquo;, which they call shallow safety alignment, and show that training it deeper improves robustness (<a href="https://arxiv.org/abs/2406.05946">arXiv:2406.05946</a>).</li>
-      <li><b>Little fine-tuning.</b> Lermen et al. (2023) undid Llama 2-Chat's safety training for under $200 on one GPU (<a href="https://arxiv.org/abs/2310.20624">arXiv:2310.20624</a>). Qi et al. (2023) did it to GPT-3.5 Turbo through OpenAI's fine-tuning API with 10 examples, and found that fine-tuning on harmless data also weakens safety, though less (<a href="https://arxiv.org/abs/2310.03693">arXiv:2310.03693</a>).</li>
+      <li><b>Little <span class="term" data-term="fine-tuning">fine-tuning</span>.</b> Lermen et al. (2023) undid Llama 2-Chat's safety training for under $200 on one GPU (<a href="https://arxiv.org/abs/2310.20624">arXiv:2310.20624</a>). Qi et al. (2023) did it to GPT-3.5 Turbo through OpenAI's fine-tuning API with 10 examples, and found that fine-tuning on harmless data also weakens safety, though less (<a href="https://arxiv.org/abs/2310.03693">arXiv:2310.03693</a>).</li>
     </ul>
     <p>This is also why a refusal score is a weak safety measure on its own. A benchmark like <a href="https://idvorkin-ai-tools.github.io/harmbench-field-map/">HarmBench</a> measures whether attacks get through a model as released, not whether the capability is still underneath.</p>
   </section>
@@ -135,9 +141,14 @@
   <section id="open-weights">
     <h2>Open weights and tamper-resistant safeguards</h2>
     <p>Each of these attacks needs the weights. Behind an API, the lab controls the weights and can filter inputs and outputs. Once weights are published, anyone can edit them, and no update or takedown reaches the copies already downloaded.</p>
-    <p>So the question for an open release changes. Instead of &ldquo;does the model refuse?&rdquo;, it becomes &ldquo;what could someone do with it once the refusals are stripped and it is fine-tuned for harm?&rdquo; Lermen et al. argue that &ldquo;evaluating risks from fine-tuning should be a core part of risk assessments for releasing model weights.&rdquo; OpenAI did that before releasing gpt-oss: it fine-tuned the model to be as capable as possible at biology and cybersecurity, found that the result still scored below o3, a model under its Preparedness &ldquo;High&rdquo; level, and says the results &ldquo;contributed to our decision to release the model&rdquo; (<a href="https://arxiv.org/abs/2508.03153">arXiv:2508.03153</a>). That worst-case testing is one reason <a href="bridge-preparedness-reports.html">preparedness reports</a> treat a release's risk as what the model can do, not what it will agree to do.</p>
+    <p>So the question for an <span class="term" data-term="open-weights">open release</span> changes. Instead of &ldquo;does the model refuse?&rdquo;, it becomes &ldquo;what could someone do with it once the refusals are stripped and it is fine-tuned for harm?&rdquo; Lermen et al. argue that &ldquo;evaluating risks from fine-tuning should be a core part of risk assessments for releasing model weights.&rdquo; OpenAI did that before releasing gpt-oss: it fine-tuned the model to be as capable as possible at biology and cybersecurity, found that the result still scored below o3, a model under its Preparedness &ldquo;High&rdquo; level, and says the results &ldquo;contributed to our decision to release the model&rdquo; (<a href="https://arxiv.org/abs/2508.03153">arXiv:2508.03153</a>). That worst-case testing is one reason <a href="bridge-preparedness-reports.html">preparedness reports</a> treat a release's risk as what the model can do, not what it will agree to do.</p>
     <p>Some researchers try to make safeguards survive tampering. Tamirisa et al. (2024) built TAR, which they report keeps safeguards in place &ldquo;even after hundreds of steps of fine-tuning&rdquo; (<a href="https://arxiv.org/abs/2408.00761">arXiv:2408.00761</a>). A later review urges caution: Qi et al. (2024) show that evaluating these defenses &ldquo;can easily mislead audiences into thinking that safeguards are more durable than they really are&rdquo; (<a href="https://arxiv.org/abs/2412.07097">arXiv:2412.07097</a>). Tamper-resistance is an open problem.</p>
     <p class="more">Deeper: <a href="bridge-preparedness-reports.html">preparedness reports, compared</a> · <a href="https://idvorkin-ai-tools.github.io/harmbench-field-map/">HarmBench, mapped</a> · <a href="https://idvorkin-ai-tools.github.io/red-teaming-ramp-up/">red teaming ramp-up</a> · <a href="bridge-capability-alignment.html">capability versus alignment</a></p>
+  </section>
+
+  <section id="definitions">
+    <h2>Definitions</h2>
+    <div data-terms-list></div>
   </section>
 
   <section id="sources">
@@ -161,6 +172,7 @@
   </section>
 </main>
 <footer>idvorkin-ai-tools · safety and alignment bridge · <a href="safety.html">safety hub</a> · <a href="./">all maps</a> · <a href="https://github.com/idvorkin-ai-tools/idvorkin-ai-tools.github.io">source</a></footer>
+<script src="https://idvorkin-ai-tools.github.io/assets/terms.js" defer></script>
 <script src="https://idvorkin-ai-tools.github.io/assets/annotate.js" data-repo="idvorkin-ai-tools/idvorkin-ai-tools.github.io" defer></script>
 </body>
 </html>

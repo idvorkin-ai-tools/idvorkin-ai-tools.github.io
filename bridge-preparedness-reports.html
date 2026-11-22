@@ -21,6 +21,7 @@
   .bar nav{display:flex;gap:16px}
   .bar a.home{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-dim)}
   @media(max-width:420px){.bar-in{padding:12px 16px}.bar nav{gap:10px;flex-wrap:wrap;justify-content:flex-end}.bar a.home{font-size:11px}.brand{letter-spacing:.08em}}
+  @media(max-width:560px){.bar-in{flex-wrap:wrap;row-gap:8px}.bar-in .modesel{margin-left:auto}}
   main{max-width:900px;margin:0 auto;padding:56px 20px 80px}
   @media(max-width:420px){main{padding:40px 16px 64px}}
   h1{font-size:clamp(30px,5vw,46px);line-height:1.1;margin:0 0 14px;letter-spacing:-.01em}
@@ -65,7 +66,26 @@
   ul.read li b{color:var(--ink)}
   ol.src{padding-left:1.4em;margin:0;color:var(--ink-dim);font-size:14px}
   ol.src li{margin:0 0 8px}
+  .lab [hidden]{display:none}
+  .lab .lab-pre button[aria-pressed="true"]{border-color:var(--def);color:var(--ink);background:rgba(95,211,230,.12)}
+  .lab select{font:inherit;font-size:14px;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:6px 8px;min-height:36px;max-width:100%}
+  .lab .lab-sl.eo-pick,.lab .lab-sl.tr-pick{grid-template-columns:minmax(0,1fr);max-width:420px}
+  .eo-key,.eo-note,.tr-note{font-size:12.5px;color:var(--ink-dim);margin:6px 0;max-width:none}
+  .eo-list{list-style:none;margin:6px 0;padding:0;font-size:14px}
+  .eo-list li{display:grid;grid-template-columns:6.4em minmax(0,1fr);align-items:baseline;gap:0 8px;padding:5px 0;border-bottom:1px solid var(--line-soft)}
+  .eo-list .eo-dim{color:var(--ink-dim)}
+  .eo-strip{font-family:'IBM Plex Mono',monospace;font-size:13px;white-space:nowrap}
+  .eo-strip span{display:inline-block;width:1.2em;text-align:center}
+  .eo-result{color:var(--def)}.eo-other{color:var(--off)}.eo-none{color:var(--line)}
+  [data-widget="threshold-reader"] svg{max-width:520px}
+  .lab svg .tr-track{fill:var(--line-soft)}.lab svg .tr-side{fill:var(--line)}
+  .lab.tr-met svg .tr-side{fill:var(--off);fill-opacity:.55}
+  .lab svg .tr-bar{stroke:var(--off);stroke-width:2}
+  .lab svg .tr-dot{fill:var(--def);stroke:var(--paper);stroke-width:2}
+  .lab svg .tr-lbl{fill:var(--ink-dim);font-size:11px}
 </style>
+<script>try{var m=localStorage.getItem('aitools-mode')||localStorage.getItem('llm-judges-mode');if(m==='tech'||m==='eli5')document.documentElement.setAttribute('data-'+m,'on')}catch(e){}</script>
+<style>html:is([data-tech="on"],[data-eli5="on"]) .plain-only,html:not([data-tech="on"]) .tech-only,html:not([data-eli5="on"]) .eli5-only,html[data-tech="on"] .no-tech{display:none!important}</style>
 </head>
 <body>
 <header class="bar"><div class="bar-in">
@@ -74,14 +94,16 @@
 </div></header>
 <main class="prose">
   <h1>Preparedness reports, compared</h1>
-  <p class="lead">Five labs now publish a document for each big model release that says how dangerous the model is. This page puts their frameworks and latest reports side by side: what they test, how they decide, who checks, what they hold back, and which evals they share. It starts from Meta's <a href="https://ai.meta.com/static-resource/muse-spark-safety-and-preparedness-report/">Muse Spark Safety &amp; Preparedness Report</a>. Back to <a href="safety.html">the safety hub</a>.</p>
+  <p class="lead plain-only">Five labs now publish a document for each big model release that says how dangerous the model is. This page puts their frameworks and latest reports side by side: what they test, how they decide, who checks, what they hold back, and which evals they share. It starts from Meta's <a href="https://ai.meta.com/static-resource/muse-spark-safety-and-preparedness-report/">Muse Spark Safety &amp; Preparedness Report</a>. Back to <a href="safety.html">the safety hub</a>.</p>
+  <p class="lead tech-only">Each frontier lab pairs a standing framework (risk areas, capability thresholds, required safeguards) with a per-model report that applies it. This page compares the current pair from Meta, OpenAI, Anthropic, Google DeepMind and xAI: risk areas, threshold style, verdicts before and after safeguards, outside evaluators, redactions, cadence, and a matrix of the named evals each report cites. Back to <a href="safety.html">the safety hub</a>.</p>
+  <p class="lead eli5-only">Before a company lets out a new, stronger AI, it checks whether the AI could help someone do something very dangerous, then writes a report card saying what it found and what locks it added. This page lays five companies' report cards side by side, so you can see how differently they grade. Back to <a href="safety.html">the safety hub</a>.</p>
   <p class="checked">Every claim checked against the lab's own documents on 2026-11-21. These documents change often; dates are given so you can tell when this page has gone stale.</p>
 
   <section id="what">
     <h2>Not a constitution</h2>
-    <p>A constitution or model spec, like <a href="https://idvorkin-ai-tools.github.io/claude-constitution-field-map/">Claude's constitution</a> or <a href="https://idvorkin-ai-tools.github.io/model-spec-field-map/">OpenAI's Model Spec</a>, describes the behaviour a lab is training toward: how the model should weigh helpfulness against harm, whose instructions win, when to refuse. It is a target, written once and revised now and then.</p>
-    <p>A preparedness report is a measurement. The lab tests a specific model for capabilities that could contribute to mass harm (weapons, cyberattacks, models escaping control), compares the results with thresholds set in a separate framework document, and records a decision: what safeguards the model needs, and whether it ships. A constitution says what the model should do; a preparedness report says what it can do and what the lab did about it.</p>
-    <p>So each lab has two documents: a standing framework that defines the risk areas, thresholds and required safeguards, and a per-model report (system card, model card or evaluation report) that applies it.</p>
+    <p>A <span class="term" data-term="constitution">constitution</span> or model spec, like <a href="https://idvorkin-ai-tools.github.io/claude-constitution-field-map/">Claude's constitution</a> or <a href="https://idvorkin-ai-tools.github.io/model-spec-field-map/">OpenAI's Model Spec</a>, describes the behaviour a lab is training toward: how the model should weigh helpfulness against harm, whose instructions win, when to refuse. It is a target, written once and revised now and then.</p>
+    <p>A preparedness report is a measurement. The lab tests a specific model for capabilities that could contribute to mass harm (weapons, cyberattacks, models escaping control), compares the results with <span class="term" data-term="capability-threshold">thresholds</span> set in a separate <span class="term" data-term="frontier-safety-framework">framework document</span>, and records a decision: what safeguards the model needs, and whether it ships. A constitution says what the model should do; a preparedness report says what it can do and what the lab did about it.</p>
+    <p>So each lab has two documents: a standing framework that defines the risk areas, thresholds and required safeguards, and a per-model report (<span class="term" data-term="system-card">system card</span>, model card or evaluation report) that applies it.</p>
     <p class="more">Background: <a href="https://idvorkin-ai-tools.github.io/ai-safety-field-map/evals/dangerous-capability-evals.html">dangerous-capability evals</a> · <a href="https://idvorkin-ai-tools.github.io/ai-safety-field-map/evals/responsible-scaling.html">responsible scaling</a> · <a href="bridge-capability-alignment.html">capability versus alignment</a> · <a href="https://idvorkin-ai-tools.github.io/technical-ai-safety-field-map/unit3/ch2.html">TAS: how companies test for safety</a></p>
   </section>
 
@@ -119,9 +141,9 @@
       <tr><th></th><th>Meta</th><th>OpenAI</th><th>Anthropic</th><th>Google DeepMind</th><th>xAI</th></tr>
       <tr><td>Risk areas</td>
         <td>Chemical &amp; biological, cyber, loss of control (which includes speeding up AI R&amp;D). Watching: radiological &amp; nuclear, physical autonomy. No persuasion.</td>
-        <td>Biological &amp; chemical, cyber, AI self-improvement. Research only: long-range autonomy, sandbagging, autonomous replication, undermining safeguards, nuclear &amp; radiological. Persuasion dropped in v2.</td>
+        <td>Biological &amp; chemical, cyber, AI self-improvement. Research only: long-range autonomy, <span class="term" data-term="sandbagging">sandbagging</span>, autonomous replication, undermining safeguards, nuclear &amp; radiological. Persuasion dropped in v2.</td>
         <td>Non-novel and novel chemical/biological weapons, misaligned AI in high-stakes settings, automated R&amp;D. Cyber and manipulation are handled under the compliance framework, not the RSP.</td>
-        <td>CBRN, cyber, harmful manipulation (exploratory), ML R&amp;D and misalignment.</td>
+        <td><span class="term" data-term="cbrn">CBRN</span>, cyber, harmful manipulation (exploratory), ML R&amp;D and misalignment.</td>
         <td>CBRN, offensive cyber, loss of control, harmful manipulation (added June 2026).</td></tr>
       <tr><td>Threshold style</td>
         <td>Three levels (critical, high, moderate or lower), defined by whether the model could "substantially contribute to" a threat scenario. Some numbers, as illustrations: at least 80% refusal on BioTIER, at least 40% on MASK, at most 50% on Agentic Misalignment.</td>
@@ -139,11 +161,11 @@
         <td>Residual risk "moderate or lower" after system-level mitigations; shipped in Muse and the Meta API.</td>
         <td>Shipped externally with "our strongest safeguards yet"; reduced cyber refusals only for a separately approved group.</td>
         <td>Same weights shipped twice: Fable 5.2 for general use with extra safeguards, Mythos 5.2 with looser ones for vetted organizations. The Risk Report rates every risk "Low".</td>
-        <td>Safety cases argue the remaining risk is below the bio and cyber CCLs; shipped.</td>
+        <td><span class="term" data-term="safety-case">Safety cases</span> argue the remaining risk is below the bio and cyber CCLs; shipped.</td>
         <td>No explicit decision in the card. The framework makes acceptance evaluations "a precondition for release".</td></tr>
       <tr><td>Outside evaluators</td>
         <td>Irregular, Scale AI, Handshake AI, Gray Swan; Apollo Research in the first Muse Spark report. No government evaluator named.</td>
-        <td>UK AISI, SecureBio, Irregular, Epoch AI, Vals AI, Sequitur Research, four unnamed red-team firms.</td>
+        <td>UK AISI, SecureBio, Irregular, Epoch AI, Vals AI, Sequitur Research, four unnamed <span class="term" data-term="red-teaming">red-team</span> firms.</td>
         <td>METR, UK AISI, NIST CAISSI (formerly CAISI), SecureBio, Irregular, Gray Swan, Trajectory Labs and others.</td>
         <td>UK AISI, NIST CAISSI, Faculty, Apollo, pattrn.ai, Irregular, Gray Swan. Outside evaluators "do not directly comment on risk thresholds".</td>
         <td>Unnamed third-party cyber evaluators who "corroborated the results"; Cathedral, LatchBio. No government evaluator named.</td></tr>
@@ -163,19 +185,21 @@
         <td>Numbers, including scores for other labs' models on the same tests.</td>
         <td>Numbers, with each indicative cutoff.</td>
         <td>Numbers in the card; the Risk Report is mostly argument.</td>
-        <td>Numbers: red-team scores against web baselines, cost-uplift multiples.</td>
+        <td>Numbers: red-team scores against web baselines, cost-<span class="term" data-term="uplift">uplift</span> multiples.</td>
         <td>Numbers, with no thresholds shown.</td></tr>
     </table></div>
+    <p class="lab-try"><b>Try this</b>Pick a lab, then slide the score across a number its documents print: see which side of the bar it lands on, and how few bars are published at all.</p>
+    <div data-widget="threshold-reader"></div>
     <h3 class="sub">What stands out</h3>
     <p>The verdicts are not on a shared scale. For cyber, OpenAI calls GPT-6.2 Critical, DeepMind says Argon's CCL "cannot be ruled out", and Meta rates unmitigated Muse Spark 1.3 "moderate or lower". Part of that is a real capability gap (Meta's own table has Muse Spark 1.3 at 28.7 on ExploitBench capability coverage, against 73.5 for GPT-5.6 Sol), but each lab also defines its levels and chooses its tests differently, so the labels do not line up.</p>
     <p>OpenAI's v2 framework says that for a Critical cyber model, "until we have specified safeguards and security controls standards that would meet a Critical standard, halt further development". The GPT-6.2 card declares Critical, ships with its strongest safeguards, and still cites v2; we did not find where it addresses that line.</p>
     <p>Thresholds are moving in both directions. Meta's v2 changed critical risk from "Stop" to "Develop with Mitigations" but added numeric acceptance criteria. xAI deleted its numbers. Anthropic's v3 split its own commitments from industry-wide recommendations it "cannot commit to following ... unilaterally".</p>
-    <p>Persuasion is split: OpenAI dropped it, DeepMind and xAI track manipulation, Meta does not list it. The labs that measure evaluation awareness all report it: Apollo told Meta that Muse Spark had the highest rate it had seen, Anthropic saw it in up to 43% of audit transcripts, and DeepMind calls it pervasive in Argon's cyber and stealth tests.</p>
+    <p>Persuasion is split: OpenAI dropped it, DeepMind and xAI track manipulation, Meta does not list it. The labs that measure <span class="term" data-term="evaluation-awareness">evaluation awareness</span> all report it: Apollo told Meta that Muse Spark had the highest rate it had seen, Anthropic saw it in up to 43% of audit transcripts, and DeepMind calls it pervasive in Argon's cyber and stealth tests.</p>
   </section>
 
   <section id="evals">
     <h2>The evals they cite</h2>
-    <p>The named tests in each lab's latest report, for the catastrophic-risk domains plus the jailbreak benchmarks. ● means the report gives a result; ○ means the name appears but is used another way, explained in the cell note. Columns: Meta = Muse Spark 1.3 report, OpenAI = GPT-6.2 card, Anthropic = Fable/Mythos 5.2 card, DeepMind = Gemini 4 Argon FSF report (C = its Carbon report), xAI = Grok 4.7 card.</p>
+    <p>The named tests in each lab's latest report, for the catastrophic-risk domains plus the <span class="term" data-term="jailbreak">jailbreak</span> benchmarks. ● means the report gives a result; ○ means the name appears but is used another way, explained in the cell note. Columns: Meta = Muse Spark 1.3 report, OpenAI = GPT-6.2 card, Anthropic = Fable/Mythos 5.2 card, DeepMind = Gemini 4 Argon FSF report (C = its Carbon report), xAI = Grok 4.7 card.</p>
     <div class="scroll"><table class="kv evals">
       <tr><th>Eval</th><th>Measures · source</th><th>Meta</th><th>OpenAI</th><th>Anthr.</th><th>GDM</th><th>xAI</th></tr>
       <tr class="grp"><td>Bio &amp; chem</td><td colspan="6"></td></tr>
@@ -200,11 +224,13 @@
       <tr><td><a href="https://arxiv.org/abs/2505.01420">Stealth &amp; situational awareness</a></td><td class="what">DeepMind's challenges for evading oversight and knowing one's situation. Open-source.</td><td class="c">●</td><td class="c n">–</td><td class="c n">–</td><td class="c">●</td><td class="c n">–</td></tr>
       <tr><td><a href="https://arxiv.org/abs/2503.03750">MASK</a></td><td class="what">Honesty under pressure to lie. Public.</td><td class="c">●</td><td class="c n">–</td><td class="c">●</td><td class="c n">–</td><td class="c">●</td></tr>
       <tr class="grp"><td>Jailbreaks</td><td colspan="6"></td></tr>
-      <tr><td><a href="https://arxiv.org/abs/2402.10260">StrongREJECT</a></td><td class="what">Jailbreak success, graded by an LLM judge. Public.</td><td class="c">●</td><td class="c n">–</td><td class="c n">–</td><td class="c n">–</td><td class="c">●</td></tr>
+      <tr><td><a href="https://arxiv.org/abs/2402.10260">StrongREJECT</a></td><td class="what">Jailbreak success, graded by an <span class="term" data-term="llm-judge">LLM judge</span>. Public.</td><td class="c">●</td><td class="c n">–</td><td class="c n">–</td><td class="c n">–</td><td class="c">●</td></tr>
       <tr><td><a href="https://arxiv.org/abs/2506.14922">FORTRESS</a></td><td class="what">Adversarial national-security prompts. Public (Scale AI).</td><td class="c">●</td><td class="c n">–</td><td class="c n">–</td><td class="c n">–</td><td class="c">● RN</td></tr>
       <tr><td>Gray Swan</td><td class="what">Agent red-teaming and <a href="https://arxiv.org/abs/2603.15714">prompt-injection arena</a>. Partly public.</td><td class="c">●</td><td class="c n">○ held-out</td><td class="c">●</td><td class="c">●</td><td class="c n">–</td></tr>
     </table></div>
     <p class="hint">Notes: ○ sandbagging = used to test whether the model underperforms on purpose, not as a capability score. ○ retired = named as dropped (saturated or near the maximum). ○ honeypot = OpenAI uses ExploitGym tasks believed impossible to see whether an agent cheats. ○ held-out = Gray Swan scenarios as a held-out test set. ○ earlier report = Meta's checkpoint result from the first Muse Spark report.</p>
+    <p class="lab-try"><b>Try this</b>Pick a lab to list the evals its latest report scores and who else scores them; pick an eval to see which labs use it. It reads the table above.</p>
+    <div data-widget="eval-overlap"></div>
     <p><b>Shared most:</b> ExploitBench and CyScenarioBench (results from four labs each, everyone but xAI), VCT (four, everyone but DeepMind) and ExploitGym (three, plus OpenAI's honeypot use). xAI's cyber tests overlap with the others' only on CyberGym, shared with Meta. The same name is not the same number: labs run different subsets, harnesses and attempt counts, and Meta's first Muse Spark report flags such mismatches when it quotes other labs' Cybench and CyScenarioBench scores.</p>
     <p><b>Internal or undisclosed, by lab:</b> Meta: BioDesign Tools, high-risk bottleneck tests, PostTrainBench's siblings ResearchTasteBench and OptimBench. OpenAI: AAV, SHP2 and other bio-design tasks, NanoGPT, Sandbox Bench, FrontierCyber. Anthropic: Dyno sequence-design tasks, CoBench (results not reported), Binary Exploitation Benchmark. DeepMind: expert bio red teaming, the 22-attack cyber uplift model, Google RE-Bench. xAI: HackerBench, Biosecurity VCT, BioUseBench, Autointent.</p>
     <p><b>Benchmarks wear out:</b> Meta says Muse Spark 1.1 saturated Cybench, Anthropic retired CyberGym "due to saturation", and DeepMind calls CyScenarioBench saturated after Argon solved every end-to-end challenge. Each lab then moves to harder, often private, tests.</p>
@@ -223,6 +249,11 @@
     </ul>
   </section>
 
+  <section id="definitions">
+    <h2>Definitions</h2>
+    <div data-terms-list></div>
+  </section>
+
   <section id="sources">
     <h2>Sources</h2>
     <ol class="src">
@@ -235,6 +266,12 @@
   </section>
 </main>
 <footer>idvorkin-ai-tools · safety and alignment comparison · <a href="safety.html">safety hub</a> · <a href="./">all maps</a> · <a href="https://github.com/idvorkin-ai-tools/idvorkin-ai-tools.github.io">source</a></footer>
+<script src="https://idvorkin-ai-tools.github.io/assets/terms.js" defer></script>
+<script src="https://idvorkin-ai-tools.github.io/assets/widgets.js" defer></script>
+<script src="lab/eval-overlap.js" defer></script>
+<script src="lab/threshold-reader.js" defer></script>
+<script src="widgets/eval-overlap.js" defer></script>
+<script src="widgets/threshold-reader.js" defer></script>
 <script src="https://idvorkin-ai-tools.github.io/assets/annotate.js" data-repo="idvorkin-ai-tools/idvorkin-ai-tools.github.io" defer></script>
 </body>
 </html>
