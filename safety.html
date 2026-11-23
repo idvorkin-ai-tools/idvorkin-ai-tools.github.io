@@ -72,8 +72,10 @@
   <p class="modes-note">Every map here shares one Plain / Technical / ELI5 setting, which follows you from map to map, and one <a href="glossary.html">glossary of terms</a>.</p>
 
   <section id="start">
-    <h2>Start here</h2>
-    <div class="map start"><div class="kicker">BRIDGE PAGE</div><h3><a href="bridge-capability-alignment.html">Capability versus alignment</a></h3><div class="q">Isn&#39;t a smarter model a safer one?</div><p>What capability, alignment and <span class="term" data-term="capability-vs-propensity">propensity</span> mean, with an example of each, then a measured case of skill and goal coming apart, the alignment tax, the two kinds of eval, and safety-washing. One short page, with links into the maps below.</p></div>
+    <h2>Three questions, one map each</h2>
+    <div class="map start"><h3>What should a model value?</h3><p>The lab writes its values down and trains the model on them. Start with <a href="https://idvorkin-ai-tools.github.io/constitutional-ai-field-map/">Constitutional AI</a>, then <a href="https://idvorkin-ai-tools.github.io/claude-constitution-field-map/">Claude&#39;s constitution</a> and <a href="https://idvorkin-ai-tools.github.io/model-spec-field-map/">OpenAI&#39;s Model Spec</a>.</p></div>
+    <div class="map start"><h3>Whose orders count?</h3><p>When instructions conflict, the system prompt beats the user, and the user beats text from tools. Start with <a href="https://idvorkin-ai-tools.github.io/instruction-hierarchy-field-map/">Instruction hierarchy</a>; <a href="https://idvorkin-ai-tools.github.io/agentic-privacy-field-map/">Agentic privacy</a> covers what the model may do with what it learns.</p></div>
+    <div class="map start"><h3>How do we check?</h3><p>Attack the model, count what gets through, and test the grader too. Start with <a href="https://idvorkin-ai-tools.github.io/harmbench-field-map/">HarmBench</a>, then <a href="https://idvorkin-ai-tools.github.io/red-teaming-ramp-up/">red teaming</a> and <a href="https://idvorkin-ai-tools.github.io/llm-judges-field-map/">LLM Judges</a>; <a href="bridge-ablations.html">interpretability</a> looks inside the model instead.</p></div>
   </section>
 
   <section id="graph">
@@ -134,7 +136,7 @@
   <section id="order">
     <h2>A reading order</h2>
     <ol class="order">
-      <li><b>Get the lay of the land:</b> the <a href="bridge-capability-alignment.html">capability versus alignment</a> bridge, then AI Safety, then Technical AI Safety for the course-length version.</li>
+      <li><b>Get the lay of the land:</b> the <a href="bridge-capability-alignment.html">capability versus alignment</a> bridge for whether a smarter model is a safer one, then AI Safety, then Technical AI Safety for the course-length version.</li>
       <li><b>Constitutions and model specs, as one stop:</b> Constitutional AI for the 2022 paper and how it grew into Claude's 2026 constitution; the <a href="https://idvorkin-ai-tools.github.io/claude-constitution-field-map/">constitution ladder</a> for that document in depth; <a href="https://idvorkin-ai-tools.github.io/model-spec-field-map/">OpenAI's Model Spec</a> and its <a href="https://idvorkin-ai-tools.github.io/model-spec-field-map/delta.html">delta with Claude's constitution</a>; then Instruction hierarchy for whose instructions count, which bridges back to the constitution.</li>
       <li><b>What an agent may do with information:</b> Agentic privacy, then CIMemories for the memory case, then the <a href="https://idvorkin-ai-tools.github.io/agentic-privacy-field-map/guide/bridge.html">bridge between them</a>.</li>
       <li><b>Evaluations and red teaming, how to test all of it:</b> HarmBench for the benchmark, then the <span class="term" data-term="red-teaming">red-teaming</span> ramp-up for how the field does it, then LLM Judges for when to believe the model that grades the results, then <a href="bridge-preparedness-reports.html">preparedness reports compared</a> for how the labs test their own models before release.</li>
