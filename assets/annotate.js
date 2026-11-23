@@ -1076,6 +1076,10 @@
       "#blog-annot-chat .bac-msg[data-mark]::after{content:attr(data-mark);display:block;",
       "text-align:right;font-size:11px;line-height:1;margin-top:3px}",
       "#blog-annot-chat .bac-msg a{color:inherit;text-decoration:underline}",
+      "#blog-annot-chat .bac-day{display:flex;align-items:center;gap:8px;",
+      "color:#868e96;font-size:10px}",
+      "#blog-annot-chat .bac-day::before,#blog-annot-chat .bac-day::after{",
+      "content:'';flex:1;border-top:1px solid #dee2e6}",
       "#blog-annot-chat-status{padding:0 12px 4px;font-size:12px;color:#868e96}",
       "#blog-annot-chat-status:empty{display:none}",
       "#blog-annot-chat .bac-row{display:flex;gap:6px;padding:8px 12px;",
@@ -1091,6 +1095,7 @@
       "color:#e9ecef;border-color:#3a3d42}",
       "#blog-annot-chat .bac-head,#blog-annot-chat .bac-row{border-color:#3a3d42}",
       "#blog-annot-chat .bac-msg[data-who='larry']{background:#2c2f33;color:#e9ecef}",
+      "#blog-annot-chat .bac-day::before,#blog-annot-chat .bac-day::after{border-color:#495057}",
       "#blog-annot-chat textarea{background:#2c2f33;color:#e9ecef;border-color:#495057}}",
       ".blog-annot-off #blog-annot-btn,.blog-annot-off #blog-annot-pill,",
       ".blog-annot-off #blog-annot-modal,.blog-annot-off #blog-annot-chat{display:none!important}",
@@ -1965,6 +1970,7 @@
     var chatTimer = null;
     var chatLastId = null; // the newest message id the panel has from a poll
     var chatSeen = {}; // message id -> its bubble
+    var chatDayLast = ""; // the last "N days ago" line drawn, so one per day
     var chatBusy = false;
 
     // The receipt on each of Igor's messages, the Cockpit's own ladder
@@ -2047,9 +2053,36 @@
     }
 
     // One bubble per message id, text only (never HTML).
+    // How old a message is in whole local calendar days: "" for today, the
+    // future or no stamp, else "1 day ago" / "N days ago". The Cockpit's own
+    // chat draws the same thin line (its chatDaysAgo, story 281): one over
+    // each older day's run of messages, none over today's.
+    function chatDaysAgo(ts) {
+      var t = Date.parse(ts);
+      if (!(t > 0)) return "";
+      var a = new Date(t),
+        b = new Date();
+      var days = Math.round(
+        (new Date(b.getFullYear(), b.getMonth(), b.getDate()) -
+          new Date(a.getFullYear(), a.getMonth(), a.getDate())) /
+          86400000,
+      );
+      if (!(days >= 1)) return "";
+      return days === 1 ? "1 day ago" : days + " days ago";
+    }
+
     function chatAdd(m, state) {
       var el = m.id ? chatSeen[m.id] : null;
       if (!el) {
+        var day = chatDaysAgo(m.ts);
+        if (day && day !== chatDayLast) {
+          var line = document.createElement("div");
+          line.className = "bac-day";
+          line.setAttribute("role", "separator");
+          line.textContent = day;
+          chatLog.appendChild(line);
+        }
+        if (day) chatDayLast = day;
         el = document.createElement("div");
         el.className = "bac-msg";
         chatLog.appendChild(el);
@@ -2096,6 +2129,7 @@
             if (!has) return;
             chatLog.textContent = "";
             chatSeen = {};
+            chatDayLast = "";
             chatLastId = null;
           }
           msgs.forEach(function (m) {
