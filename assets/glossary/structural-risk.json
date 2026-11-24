@@ -2,6 +2,6 @@
  "term": "Structural risk",
  "plain": "Harm that comes from how AI changes the incentives and institutions around it, with no misuser and no malfunctioning model to blame.",
  "eli5": "Every car on the road works fine and every driver is careful, and the town still ends up stuck in one giant traffic jam.",
- "technical": "Risk arising from multi-agent dynamics, incentives and institutional change in a world with AI, where no single actor or system is at fault; the fourth category in Shah et al. (2025), after misuse, mistakes and misalignment, and the &ldquo;structure&rdquo; in Zwetsloot and Dafoe&rsquo;s accident, misuse and structure split (2019).",
+ "technical": "Risk arising from multi-agent dynamics, incentives and institutional change in a world with AI, where no single actor or system is at fault; the fourth risk area in Shah et al. (2025), alongside misuse, mistakes and misalignment, and the &ldquo;structure&rdquo; in Zwetsloot and Dafoe&rsquo;s accident, misuse and structure split (2019).",
  "see": "https://idvorkin-ai-tools.github.io/structural-risk-field-map/parts/p01.html"
 }
