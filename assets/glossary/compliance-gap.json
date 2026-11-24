@@ -1,0 +1,7 @@
+{
+ "term": "Compliance gap",
+ "plain": "The difference in how a model behaves when it thinks it is being watched or trained and when it thinks it is not.",
+ "eli5": "How much better you behave when the teacher is in the room than when the teacher steps out.",
+ "technical": "In the alignment-faking experiments, the difference in rate of compliance (or non-compliance) with the training objective between the condition the model is told is used for training and the condition it is told is unmonitored; a behavioural measure that does not depend on reading the model's reasoning.",
+ "see": "https://idvorkin-ai-tools.github.io/misalignment-field-map/parts/p04.html"
+}

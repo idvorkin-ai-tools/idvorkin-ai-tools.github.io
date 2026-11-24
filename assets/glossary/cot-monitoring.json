@@ -1,0 +1,7 @@
+{
+ "term": "Chain-of-thought monitoring",
+ "plain": "Reading the reasoning a model writes before it acts, to catch bad intent before it turns into a bad action.",
+ "eli5": "Reading someone's scratch paper to see what they are planning before they do it.",
+ "technical": "Using a human or automated monitor over a model's externalised reasoning to detect intent to misbehave; it works to the extent that hard tasks force the model to reason in legible text (monitorability), and can fail if reasoning is unfaithful, obfuscated or moves into latent computation.",
+ "see": "https://idvorkin-ai-tools.github.io/misalignment-field-map/parts/p11.html"
+}
