@@ -1,0 +1,7 @@
+{
+ "term": "Compute threshold",
+ "plain": "A line, measured in how much computing was used to train a model, above which extra rules apply.",
+ "eli5": "Small cakes need no inspection. Once a cake needed a whole truck of flour, the inspector comes.",
+ "technical": "A regulatory trigger defined by training compute, usually in floating-point operations: for example the EU AI Act presumes systemic risk above 10<sup>25</sup> FLOP. It is a proxy for capability, used as a first filter for which models get scrutiny.",
+ "see": "https://idvorkin-ai-tools.github.io/structural-risk-field-map/parts/p09.html"
+}

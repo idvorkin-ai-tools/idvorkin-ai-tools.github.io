@@ -1,0 +1,7 @@
+{
+ "term": "Race dynamics",
+ "plain": "Competitors each cutting safety corners because they fear a rival will get there first, so everyone ends up less careful than any of them wanted.",
+ "eli5": "Two kids racing to the slide both run on the wet floor, even though both know running there is how you fall.",
+ "technical": "A competitive equilibrium among AI developers or states in which each reduces safety investment to avoid falling behind, producing a collectively worse outcome; formalised in Armstrong, Bostrom and Shulman's &ldquo;Racing to the Precipice&rdquo; (2016).",
+ "see": "https://idvorkin-ai-tools.github.io/structural-risk-field-map/parts/p06.html"
+}

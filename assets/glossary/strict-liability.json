@@ -1,0 +1,7 @@
+{
+ "term": "Strict liability",
+ "plain": "A rule that whoever does a dangerous thing pays for the harm it causes, even if they were careful.",
+ "eli5": "If your pet tiger bites someone you pay, even if you built a good fence.",
+ "technical": "Liability without proof of fault or negligence, applied in tort law to abnormally dangerous activities; proposed for frontier AI developers so that they internalise catastrophic risks they cannot fully control.",
+ "see": "https://idvorkin-ai-tools.github.io/structural-risk-field-map/parts/p11.html"
+}

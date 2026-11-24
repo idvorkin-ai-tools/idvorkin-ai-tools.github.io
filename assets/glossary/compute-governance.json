@@ -1,0 +1,7 @@
+{
+ "term": "Compute governance",
+ "plain": "Steering AI by controlling the specialised chips it needs, since chips can be counted and tracked in a way that data and algorithms cannot.",
+ "eli5": "You can't stop people having ideas, but you can count who has the really big ovens.",
+ "technical": "Using computing hardware as a governance lever for AI: gaining visibility into who holds compute, allocating it, and enforcing rules through it. Sastry et al. (2024) argue compute suits this because it is detectable, excludable, quantifiable and made by a concentrated supply chain.",
+ "see": "https://idvorkin-ai-tools.github.io/structural-risk-field-map/parts/p07.html"
+}
