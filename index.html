@@ -39,6 +39,9 @@
   .card .d{color:var(--ink-dim);font-size:14px;line-height:1.5;display:block}
   .card .m{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--ink-dim);margin-top:12px;display:flex;justify-content:space-between}
   .card .m b{font-weight:500;color:var(--def)}
+  .card.hub-box{margin:0 0 18px;padding:22px 22px 20px;border:2px solid var(--def);background:linear-gradient(135deg,rgba(95,211,230,.10),var(--panel) 60%)}
+  .card.hub-box .t{font-size:21px;color:var(--def)}
+  .card.hub-box .d{font-size:15px;color:var(--ink)}
   .card.off .m b{color:var(--off)}
   .card.pink .m b{color:var(--pink)}
   h3.sub{font-size:16px;margin:22px 0 10px}h3.sub span{font-weight:400;color:var(--ink-dim);font-size:13px;margin-left:6px}
@@ -99,7 +102,7 @@
 
   <section id="safety" data-tab>
     <h2><a href="safety.html">Safety and alignment &rarr;</a> <span>12 maps + bridges</span></h2>
-    <p class="sec-note">Maps that link into each other; start with the capability-versus-alignment bridge. <a href="safety.html">The safety hub</a> says what question each answers, in what order to read them, and how they connect.</p>
+    <a class="card hub-box" href="safety.html"><span class="t">Start at the Safety Hub &rarr;</span><span class="d">Twelve maps that link into each other. The hub says what question each one answers, which order to read them in, and how they connect, starting with the capability-versus-alignment bridge.</span></a>
     <div class="grid">
       <a class="card" href="bridge-capability-alignment.html"><span class="t">Capability versus Alignment &mdash; Start Here</span><span class="d">The first question a reader brings: isn&#39;t a smarter model a safer one? What capability, alignment and propensity mean, with an example of each, then the alignment tax, the two kinds of eval, and safety-washing, with links into the maps.</span><span class="m"><b>BRIDGE</b><span>2026-11</span></span></a>
       <a class="card" href="https://idvorkin-ai-tools.github.io/ai-safety-field-map/"><span class="t">AI Safety — A Field Map</span><span class="d">A technical explainer for engineers entering alignment, interpretability, evals and governance: what the subfields are, who works on what, where to start.</span><span class="m"><b>FIELD MAP</b><span>2026-07</span></span></a>
