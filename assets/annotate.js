@@ -346,9 +346,9 @@
 
   // The trace one recording builds: `targets` (each block once) and
   // `samples` ({t, k, p, x, y, i, w}: ms since the recorder started, kind,
-  // pointer type, viewport point, target index or null, word). A move that
-  // changes neither target nor word is dropped within TALK_MOVE_MS: the
-  // target in force at any moment is the last sample's either way.
+  // pointer type, viewport point, target index or null, word). A move or
+  // scroll that changes neither target nor word is dropped within
+  // TALK_MOVE_MS: the target in force is the last sample's either way.
   function pointTrace() {
     var els = [];
     var targets = [];
@@ -371,7 +371,7 @@
         i = i < 0 ? null : i;
         w = w || "";
         if (
-          (k === "move" || k === "hover") &&
+          (k === "move" || k === "hover" || k === "scroll") &&
           last &&
           last.i === i &&
           last.w === w &&
@@ -2522,6 +2522,12 @@
 
     function talkPoint(e, kind) {
       if (!talk || !talk.trace) return;
+      if (kind === "cancel") {
+        // the browser took the gesture (a touch or Pencil scroll): the finger
+        // is not pointing at what scrolls under it, so scroll stops resolving
+        talk.x = talk.y = null;
+        return;
+      }
       // the event clock; made relative to the recorder's start in talkFinish
       var t = e.timeStamp || performance.now();
       if (e.clientX !== undefined) {
@@ -2530,7 +2536,8 @@
       }
       var el = e.target;
       if (kind === "scroll") {
-        // the page moved under a still pointer: what is under it now
+        // the page moved under a still pointer (a mouse, a hovering pen): what
+        // is under it now
         if (talk.x === null || !document.elementFromPoint) return;
         el = document.elementFromPoint(talk.x, talk.y);
       }
@@ -2547,6 +2554,8 @@
         talkWordAt(talk.x, talk.y, el)
       );
       if (s) talkOutline(talk.trace.elementOf(s.i));
+      // a lifted finger points at nothing new; its last target stays in force
+      if (kind === "up" && p === "touch") talk.x = talk.y = null;
     }
 
     // The block under the pointer gets a faint red outline while recording,
@@ -2563,6 +2572,7 @@
       pointermove: "move",
       pointerdown: "down",
       pointerup: "up",
+      pointercancel: "cancel",
     };
     var talkHandlers = {};
     Object.keys(TALK_EVENTS).forEach(function (type) {
