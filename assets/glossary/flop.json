@@ -1,0 +1,7 @@
+{
+ "term": "FLOP (floating-point operation)",
+ "plain": "One basic arithmetic step by a computer. The total number used in training is a rough measure of how big a model's training run was.",
+ "eli5": "One tiny sum. Counting all the sums a computer did tells you how hard it worked.",
+ "technical": "A single floating-point arithmetic operation; cumulative training compute is expressed as a count of FLOP (for example 10<sup>25</sup>), not to be confused with FLOP/s, a rate that measures hardware speed.",
+ "see": "https://idvorkin-ai-tools.github.io/structural-risk-field-map/parts/p09.html"
+}
