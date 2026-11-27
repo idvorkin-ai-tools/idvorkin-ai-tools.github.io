@@ -26,7 +26,7 @@
   fill say it is on; the tooltip names the page path). Building them is DOM
   only: no request until the reader opens search (one GET of search.json)
   or sends something, and none ever to a Cockpit this browser has not
-  saved, except when the reader clicks Connect.
+  saved, except when the reader clicks Connect or Check.
 
   SEARCH (explainer-only, Igor 2026-11-21): the 🔍 button, or `/` when
   focus is not in a field and the page has not bound `/` itself (the org
@@ -100,6 +100,25 @@
       for a browser that has the Cockpit open. DEFAULT_COCKPIT names the Cockpit
       Connect pairs with (published with Igor's OK); the address box shows it
       and takes another if that one can't be reached.
+    * Check (blog-qxt7, Igor 2026-11-27: "maybe add a debug button"): the
+      pill's Check opens a CONNECTION CHECK card that says, line by line,
+      where the link to the Cockpit breaks. (1) The address: this host on
+      the tailnet, else the saved `blogLarryCockpit`, a saved value the
+      validator rejects (shown raw), or "not paired", in which case it tests
+      DEFAULT_COCKPIT as Connect would. (2) GET `/larry/status` with its
+      time: an HTTP status, no answer within COCKPIT_TIMEOUT_MS (off the
+      tailnet), or a fetch the browser refused, which it never explains (not
+      on Tailscale, DNS, certificate, CORS or a Local Network Access block).
+      Then Chrome's Local Network Access permission for this site, from
+      `navigator.permissions` (granted, denied, prompt or unknown): a public
+      page needs it to fetch a tailnet address, and a denied or dismissed
+      prompt fails as that same bare network error. (3) GET `/page-chat` for this page, the poll's query without `after`:
+      status and message count only. (4) The page origin, whether storage
+      is persistent (`navigator.storage.persisted()`), and the user agent.
+      "Copy report" copies the lines; "Send report to Larry" posts them to
+      this page's chat thread, only to the saved (or same-host) Cockpit and
+      only when its status answered. The report never carries message text,
+      the token or the buffer. Pairing itself is unchanged.
     * If the POST fails, errors or hangs past COCKPIT_TIMEOUT_MS: one SECRET
       gist per batch (token asked for only then), description
       `blog-review: <path>`, file review.json. The review card also offers
@@ -221,6 +240,259 @@
       /* keep it encoded */
     }
     return { repo: repo, path: path };
+  }
+
+  // ---------------------------------------------------- connection check
+  // See CONNECTION CHECK. One GET with a timeout, sorted into what the
+  // browser lets us tell apart: an HTTP answer, no answer in time, or a
+  // fetch the browser refused (it never says why).
+  function checkGet(env, url) {
+    var t0 = env.now();
+    var ctl =
+      typeof AbortController === "function" ? new AbortController() : null;
+    var timedOut = false;
+    var timer = setTimeout(function () {
+      timedOut = true;
+      if (ctl) ctl.abort();
+    }, env.timeoutMs);
+    return env
+      .fetch(url, { cache: "no-store", signal: ctl ? ctl.signal : undefined })
+      .then(
+        function (res) {
+          return res.json().then(
+            function (j) {
+              return { status: res.status, ok: res.ok, body: j || {} };
+            },
+            function () {
+              return { status: res.status, ok: res.ok, body: {} };
+            }
+          );
+        },
+        function (err) {
+          return {
+            status: 0,
+            kind: timedOut ? "timeout" : "network",
+            error: String((err && err.message) || err),
+          };
+        }
+      )
+      .then(function (r) {
+        clearTimeout(timer);
+        r.ms = Math.round(env.now() - t0);
+        return r;
+      });
+  }
+
+  function checkFailText(r, timeoutMs) {
+    if (r.kind === "timeout")
+      return (
+        "no answer in " +
+        timeoutMs / 1000 +
+        " s (the usual sign of being off Tailscale)"
+      );
+    if (r.kind === "network")
+      return (
+        "network error after " +
+        r.ms +
+        " ms: " +
+        r.error +
+        ". The browser does not say which: not on Tailscale, DNS, " +
+        "certificate, CORS, or a Local Network Access block"
+      );
+    return "HTTP " + r.status + " in " + r.ms + " ms";
+  }
+
+  // Chrome asks before a public page may fetch a private (tailnet) address,
+  // and a refused or dismissed prompt surfaces only as "Failed to fetch".
+  // The Permissions API is the one place that says so; other browsers
+  // don't know the name and reject, which reads as "unknown".
+  function localNetworkState(permissions) {
+    if (!permissions || typeof permissions.query !== "function")
+      return Promise.resolve("unknown");
+    return Promise.resolve()
+      .then(function () {
+        return permissions.query({ name: "local-network-access" });
+      })
+      .then(
+        function (p) {
+          return (p && p.state) || "unknown";
+        },
+        function () {
+          return "unknown";
+        }
+      );
+  }
+
+  var LOCAL_NETWORK = {
+    granted: ["pass", "granted"],
+    denied: [
+      "fail",
+      "denied, so this page cannot reach a tailnet address. Allow " +
+        "Local network access in this site's settings (the icon left of the address)",
+    ],
+    prompt: [
+      "info",
+      "not decided yet: the browser asks on the first Cockpit request, " +
+        "and a dismissed prompt fails as a network error",
+    ],
+    unknown: ["info", "not reported by this browser"],
+  };
+
+  // The steps, in order: {name, status: pass|fail|info, detail}. env:
+  // stored (raw localStorage value or null), sameHost, host, fallback
+  // (DEFAULT_COCKPIT), page (the page-chat key), pageOrigin, userAgent,
+  // storage (navigator.storage or null), permissions (navigator.permissions
+  // or null), fetch, now, timeoutMs, and an
+  // optional onStep called as each line lands. Resolves to {steps,
+  // cockpit (the address tested), answered (any HTTP status), statusOk}.
+  function connectionCheck(env) {
+    var steps = [];
+    function add(name, status, detail) {
+      var s = { name: name, status: status, detail: detail };
+      steps.push(s);
+      if (env.onStep) env.onStep(s);
+    }
+
+    var stored =
+      env.stored === null || env.stored === undefined
+        ? ""
+        : String(env.stored);
+    var valid = cockpitOrigin(stored);
+    var target;
+    if (env.sameHost) {
+      target = "https://" + env.host;
+      add(
+        "Cockpit address",
+        "pass",
+        "this host, " +
+          target +
+          (stored ? " (saved address " + stored + " is not used here)" : "")
+      );
+    } else if (valid) {
+      target = valid;
+      add("Cockpit address", "pass", "saved: " + valid);
+    } else {
+      target = cockpitOrigin(env.fallback);
+      add(
+        "Cockpit address",
+        "fail",
+        (stored
+          ? 'saved value "' +
+            stored +
+            '" is not a Cockpit address (https on a .ts.net name or localhost)'
+          : "not paired") +
+          "; testing the published address " +
+          target
+      );
+    }
+
+    var answered = false; // any HTTP status at all
+    var statusOk = false;
+    var lna = "unknown";
+    return localNetworkState(env.permissions)
+      .then(function (state) {
+        lna = LOCAL_NETWORK[state] ? state : "unknown";
+        return checkGet(env, target + "/larry/status");
+      })
+      .then(function (r) {
+        answered = r.status > 0;
+        statusOk = !!r.ok;
+        if (r.ok) {
+          add(
+            "Cockpit status",
+            "pass",
+            "HTTP " +
+              r.status +
+              " in " +
+              r.ms +
+              " ms, Larry " +
+              (r.body.state || "state unknown")
+          );
+        } else {
+          add("Cockpit status", "fail", checkFailText(r, env.timeoutMs));
+        }
+        add(
+          "Local network access",
+          LOCAL_NETWORK[lna][0],
+          LOCAL_NETWORK[lna][1]
+        );
+        if (!answered) {
+          add("Page chat", "info", "skipped: the Cockpit did not answer");
+          return;
+        }
+        return checkGet(
+          env,
+          target + "/page-chat?page=" + encodeURIComponent(env.page)
+        ).then(function (c) {
+          if (c.ok) {
+            var n = (c.body.messages || []).length;
+            add(
+              "Page chat",
+              "pass",
+              "HTTP " +
+                c.status +
+                " in " +
+                c.ms +
+                " ms, " +
+                (c.body.thread || n
+                  ? n +
+                    " message" +
+                    (n === 1 ? "" : "s") +
+                    " on this page's thread"
+                  : "no thread for this page yet")
+            );
+          } else if (c.status === 404) {
+            add(
+              "Page chat",
+              "fail",
+              "HTTP 404: this Cockpit has no page chat"
+            );
+          } else {
+            add("Page chat", "fail", checkFailText(c, env.timeoutMs));
+          }
+        });
+      })
+      .then(function () {
+        add("Page origin", "info", env.pageOrigin);
+        var st = env.storage;
+        if (!st || typeof st.persisted !== "function") return "unknown";
+        return Promise.resolve(st.persisted()).then(
+          function (p) {
+            return p
+              ? "persistent"
+              : "not persistent (the browser may clear the saved address)";
+          },
+          function () {
+            return "unknown";
+          }
+        );
+      })
+      .then(function (storage) {
+        add("Storage", "info", storage);
+        add("Browser", "info", env.userAgent || "unknown");
+        return {
+          steps: steps,
+          cockpit: target,
+          answered: answered,
+          statusOk: statusOk,
+        };
+      });
+  }
+
+  var CHECK_MARK = { pass: "✓", fail: "✗", info: "·" };
+
+  // The report Copy and Send carry: when, then one line per step. Never
+  // message text, the token or the buffer, so it is safe to paste anywhere.
+  function connectionReport(result, at) {
+    return ["Connection check, " + at]
+      .concat(
+        result.steps.map(function (s) {
+          return (
+            (CHECK_MARK[s.status] || "·") + " " + s.name + ": " + s.detail
+          );
+        })
+      )
+      .join("\n");
   }
 
   // ---------------------------------------------------------------- flag
@@ -402,6 +674,8 @@
     noteEnterStep: noteEnterStep,
     enterOpensComposer: enterOpensComposer,
     cockpitOrigin: cockpitOrigin,
+    connectionCheck: connectionCheck,
+    connectionReport: connectionReport,
     pageSource: pageSource,
     searchRank: searchRank,
     search: {
@@ -1049,6 +1323,7 @@
       "font:600 13px/1.2 system-ui,sans-serif;cursor:pointer}",
       "#blog-annot-card .blog-annot-primary{background:#0b5ed7;color:#fff}",
       "#blog-annot-card .blog-annot-ghost{background:#e9ecef;color:#212529}",
+      "#blog-annot-card button:disabled{opacity:.45;cursor:default}",
       "#blog-annot-list{margin:10px 0 0;padding:0;list-style:none;",
       "font-size:13px}",
       "#blog-annot-list li{padding:6px 0;border-top:1px solid #e9ecef}",
@@ -1118,6 +1393,7 @@
         : "") +
       '<button type="button" id="blog-annot-send">Send to Larry</button>' +
       '<button type="button" id="blog-annot-chat-toggle">Chat</button>' +
+      '<button type="button" id="blog-annot-check" title="Connection check">Check</button>' +
       (LARRY || SAME_HOST
         ? ""
         : '<button type="button" id="blog-annot-connect">Connect to Larry</button>');
@@ -1973,6 +2249,112 @@
     var connectBtn = document.getElementById("blog-annot-connect");
     if (connectBtn) connectBtn.onclick = connectOpen;
     window.blogAnnotate.connect = connectOpen;
+
+    // ---------------------------------------------------- connection check
+    // See CONNECTION CHECK. Each step lands as a line as it finishes; the
+    // report goes to the clipboard, or to this page's chat thread when the
+    // saved Cockpit answered.
+    function checkOpen() {
+      showModal(
+        "<b>Connection check</b>" +
+          '<ul id="blog-annot-check-list" style="margin:10px 0 0;padding:0;' +
+          'list-style:none;font-size:13px;overflow-wrap:anywhere"></ul>' +
+          '<div class="blog-annot-row">' +
+          '<button type="button" class="blog-annot-ghost" id="blog-annot-check-copy" disabled>Copy report</button>' +
+          '<button type="button" class="blog-annot-primary" id="blog-annot-check-send" disabled>Send report to Larry</button>' +
+          '<button type="button" class="blog-annot-ghost" id="blog-annot-check-close">Close</button>' +
+          "</div>" +
+          '<div id="blog-annot-note" aria-live="polite">Checking…</div>'
+      );
+      var list = document.getElementById("blog-annot-check-list");
+      var copyBtn = document.getElementById("blog-annot-check-copy");
+      var sendBtn = document.getElementById("blog-annot-check-send");
+      var note = document.getElementById("blog-annot-note");
+      document.getElementById("blog-annot-check-close").onclick = hideModal;
+      var report = "";
+      return connectionCheck({
+        stored: lsGet(COCKPIT_KEY),
+        sameHost: SAME_HOST,
+        host: HOST,
+        fallback: DEFAULT_COCKPIT,
+        page: CHAT_PAGE.permalink || CHAT_PAGE.page_url,
+        pageOrigin: ORIGIN,
+        userAgent: navigator.userAgent,
+        storage: navigator.storage || null,
+        permissions: navigator.permissions || null,
+        fetch: function (url, init) {
+          return fetch(url, init);
+        },
+        now: function () {
+          return Date.now();
+        },
+        timeoutMs: COCKPIT_TIMEOUT_MS,
+        onStep: function (s) {
+          if (!list.isConnected) return;
+          var li = document.createElement("li");
+          li.setAttribute("data-status", s.status);
+          li.style.cssText =
+            "padding:5px 0;border-top:1px solid #e9ecef;color:" +
+            (s.status === "fail" ? "#c92a2a" : "inherit");
+          var b = document.createElement("b");
+          b.textContent = CHECK_MARK[s.status] + " " + s.name + ": ";
+          li.appendChild(b);
+          li.appendChild(document.createTextNode(s.detail));
+          list.appendChild(li);
+        },
+      }).then(function (result) {
+        report = connectionReport(result, new Date().toISOString());
+        if (!list.isConnected) return result;
+        copyBtn.disabled = false;
+        // Only to the address Send and Chat already use, and only when it answered.
+        var canSend = result.statusOk && !!LARRY && result.cockpit === LARRY;
+        sendBtn.disabled = !canSend;
+        note.textContent = canSend
+          ? ""
+          : "Send needs a paired Cockpit that answers. Copy the report and paste it to Larry.";
+        copyBtn.onclick = function () {
+          copyText(report).then(
+            function () {
+              note.textContent = "Report copied.";
+            },
+            function () {
+              note.textContent = "Copy failed. Select the lines by hand.";
+            }
+          );
+        };
+        sendBtn.onclick = function () {
+          sendBtn.disabled = true;
+          note.textContent = "Sending…";
+          var body = {
+            id:
+              "pc-check-" +
+              Date.now().toString(36) +
+              Math.random().toString(36).slice(2, 8),
+            text: report,
+            page_url: CHAT_PAGE.page_url,
+          };
+          if (CHAT_PAGE.permalink) body.permalink = CHAT_PAGE.permalink;
+          if (CHAT_PAGE.title) body.title = CHAT_PAGE.title;
+          return chatFetch("/page-chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body),
+          }).then(
+            function () {
+              note.textContent = "Sent to this page's thread.";
+            },
+            function (err) {
+              sendBtn.disabled = false;
+              note.textContent =
+                "Not sent (" + (err.message || err) + "). Copy it instead.";
+            }
+          );
+        };
+        return result;
+      });
+    }
+    document.getElementById("blog-annot-check").onclick = checkOpen;
+    window.blogAnnotate.check = checkOpen;
 
     // The page as the chat names it: this url, and the repo and file.
     var CHAT_PAGE = {
